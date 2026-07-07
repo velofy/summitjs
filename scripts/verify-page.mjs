@@ -29,8 +29,13 @@ console.error = (...args) => {
 };
 
 win.document.body.innerHTML = body;
+// Load the palette component first: it registers on `summit:init`, so it must
+// be present before the bundle boots and dispatches that event.
+const searchJs = readFileSync("docs/assets/search.js", "utf8");
+(0, eval)(searchJs);
 const code = readFileSync("dist/summit.min.js", "utf8");
 (0, eval)(code);
+win.Summit.start(win.document.body);
 win.Summit.initTree(win.document.body);
 
 function assert(cond, msg) {

@@ -27,3 +27,7 @@ jobs:
         run: npm run smoke
       - name: Docs page verification
         run: npm run verify
+      - name: Generate docs
+        run: npm run docs
+      - name: Docs pages verification
+        run: npm run verify:docs

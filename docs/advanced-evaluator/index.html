@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The CSP-safe evaluator — Summit.js</title>
+<meta name="description" content="How Summit evaluates expressions without eval, safe under CSP."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Crect x='21' y='3' width='9' height='9' rx='1.5' transform='rotate(45 25.5 7.5)' fill='%230d9488'/%3E%3Cpath d='M2 28 L13 10 L20 22 L26 14 L38 28 Z' fill='%230f172a'/%3E%3C/svg%3E"/>
+<script>(function(){var t=localStorage.getItem("summit-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t;})();</script>
+<link rel="stylesheet" href="../assets/docs.css"/>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../"><span class="brand-mark"><svg viewBox="0 0 40 32" aria-hidden="true"><rect x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)" fill="var(--accent)"/><path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="var(--logo)"/></svg></span><span class="brand-word">Summit<span class="dot">.js</span></span></a>
+  <div class="top-spacer"></div>
+  <button class="search-trigger" s-data @click="$dispatch('open-search')" aria-label="Search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
+    <span>Search</span><kbd class="cmdk">⌘K</kbd>
+  </button>
+  <a class="top-link" href="https://github.com/velofy/summit" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.26 3.4.96.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.28 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+  <button class="top-icon" title="Toggle theme" aria-label="Toggle theme" s-data @click="document.documentElement.dataset.theme=(document.documentElement.dataset.theme==='dark'?'light':'dark');localStorage.setItem('summit-theme',document.documentElement.dataset.theme)"><span s-text="document.documentElement.dataset.theme==='dark'?'☀':'☾'">☾</span></button>
+  <button class="menu-toggle" s-data="{ o:false }" @click="o=!o; document.body.classList.toggle('nav-open', o)" aria-label="Menu">☰</button>
+</header>
+<div class="layout">
+  <aside class="sidebar"><nav><div class="side-group"><div class="side-label">Getting Started</div><ul><li><a href="../start/">Introduction</a></li></ul></div><div class="side-group"><div class="side-label">Essentials</div><ul><li><a href="../installation/">Installation</a></li><li><a href="../reactivity-state/">Reactivity &amp; State</a></li><li><a href="../templating/">Templating</a></li><li><a href="../events/">Events</a></li><li><a href="../forms/">Forms</a></li><li><a href="../lifecycle/">Lifecycle</a></li></ul></div><div class="side-group"><div class="side-label">Directives</div><ul><li><a href="../s-data/">s-data</a></li><li><a href="../s-bind/">s-bind</a></li><li><a href="../s-on/">s-on</a></li><li><a href="../s-text/">s-text</a></li><li><a href="../s-html/">s-html</a></li><li><a href="../s-model/">s-model</a></li><li><a href="../s-show/">s-show</a></li><li><a href="../s-if/">s-if</a></li><li><a href="../s-for/">s-for</a></li><li><a href="../s-effect/">s-effect</a></li><li><a href="../s-init/">s-init</a></li><li><a href="../s-ref/">s-ref</a></li><li><a href="../s-cloak/">s-cloak</a></li><li><a href="../s-ignore/">s-ignore</a></li><li><a href="../s-teleport/">s-teleport</a></li><li><a href="../s-transition/">s-transition</a></li></ul></div><div class="side-group"><div class="side-label">Magic Properties</div><ul><li><a href="../magic-el/">$el</a></li><li><a href="../magic-refs/">$refs</a></li><li><a href="../magic-store/">$store</a></li><li><a href="../magic-watch/">$watch</a></li><li><a href="../magic-dispatch/">$dispatch</a></li><li><a href="../magic-nextTick/">$nextTick</a></li><li><a href="../magic-root/">$root</a></li><li><a href="../magic-id/">$id</a></li><li><a href="../magic-data/">$data</a></li></ul></div><div class="side-group"><div class="side-label">Globals & API</div><ul><li><a href="../globals-data/">Summit.data</a></li><li><a href="../globals-store/">Summit.store</a></li><li><a href="../globals-bind/">Summit.bind</a></li><li><a href="../globals-directive/">Summit.directive</a></li><li><a href="../globals-magic/">Summit.magic</a></li><li><a href="../globals-plugin/">Summit.plugin</a></li><li><a href="../globals-start/">Summit.start</a></li></ul></div><div class="side-group"><div class="side-label">Reactivity</div><ul><li><a href="../reactive-signal/">signal</a></li><li><a href="../reactive-computed/">computed</a></li><li><a href="../reactive-effect/">effect</a></li><li><a href="../reactive-reactive/">reactive</a></li><li><a href="../reactive-batch/">batch</a></li><li><a href="../reactive-nexttick/">nextTick</a></li></ul></div><div class="side-group"><div class="side-label">Advanced</div><ul><li><a href="../advanced-reactivity/">How reactivity works</a></li><li><a href="../advanced-evaluator/" class="active" aria-current="page">CSP-safe evaluator</a></li><li><a href="../advanced-extending/">Extending Summit</a></li><li><a href="../advanced-migrating/">Migrating from Alpine</a></li></ul></div></nav></aside>
+  <main id="content" class="content">
+    <article class="prose">
+      <div class="crumbs">Advanced</div>
+      <h1>The CSP-safe evaluator</h1>
+      <p>Every Summit directive contains a JavaScript expression: <code>s-text=&quot;count&quot;</code>,
+<code>@click=&quot;open = !open&quot;</code>, <code>:class=&quot;{ active: selected }&quot;</code>. Most HTML-first
+frameworks turn those strings into functions with <code>new Function</code> or <code>eval</code>. That
+requires <code>unsafe-eval</code> in your Content-Security-Policy, which is exactly the
+thing a strict policy is meant to forbid.</p>
+<p>Summit takes a different path. It ships its own small JavaScript engine and never
+calls <code>eval</code> or <code>new Function</code>, so it runs under a strict CSP with the standard
+build and nothing to configure.</p>
+<h2 id="why-no-eval"><a class="anchor" href="#why-no-eval" aria-hidden="true">#</a>Why no eval</h2><p>A Content-Security-Policy that omits <code>unsafe-eval</code> blocks <code>eval</code>, <code>new Function</code>,
+and the string forms of <code>setTimeout</code>/<code>setInterval</code> at runtime, in the browser.
+Any framework that compiles expressions with those APIs simply stops working
+under such a policy unless you either loosen the policy or ship a separate,
+restricted build.</p>
+<p>Because Summit interprets expressions itself, there is nothing for the policy to
+block. The same script tag works whether or not your site sets a strict CSP, and
+you never maintain two builds.</p>
+<h2 id="the-pipeline"><a class="anchor" href="#the-pipeline" aria-hidden="true">#</a>The pipeline</h2><p>An expression string travels through three stages before it produces a value.</p>
+<ol>
+<li><strong>Lexer.</strong> <code>tokenize</code> scans the string into a flat list of tokens: numbers,
+strings, template literals, identifiers, and a fixed set of operators and
+punctuators.</li>
+<li><strong>Parser.</strong> <code>parse</code> reads those tokens into an abstract syntax tree, a
+structured description of the expression. The set of node shapes the parser
+can produce is the whole language: anything it cannot build is a parse error.</li>
+<li><strong>Interpreter.</strong> <code>Interpreter.run</code> walks the tree and computes a value,
+resolving names against your component&#39;s scope. It is a plain tree walk, no
+code generation of any kind.</li>
+</ol>
+<p>Parsed trees are cached by their source and mode, so an expression that a
+directive re-evaluates on every state change is parsed once and interpreted many
+times.</p>
+<p>There are two parse modes, and the caller chooses based on what it wants:</p>
+<ul>
+<li><strong>Expression mode</strong> parses a single value expression, used by value directives
+like <code>s-data</code>, <code>s-text</code>, <code>:bind</code>, and <code>s-show</code>. Here a leading <code>{</code> is an object
+literal.</li>
+<li><strong>Program mode</strong> parses a list of statements, used by action directives like
+<code>s-on</code> handlers and <code>s-init</code>. Here a leading <code>{</code> is a block.</li>
+</ul>
+<p>That split is how Summit resolves the classic ambiguity of <code>{ }</code> without
+guessing. The directive already knows whether it wants a value or an action.</p>
+<h2 id="what-syntax-is-supported"><a class="anchor" href="#what-syntax-is-supported" aria-hidden="true">#</a>What syntax is supported</h2><p>The parser and interpreter implement a broad, practical subset of JavaScript
+expression syntax. All of the following work inside directives:</p>
+<ul>
+<li><strong>Literals:</strong> numbers (including floats, exponents, and hex like <code>0xff</code>),
+single- and double-quoted strings with escapes, template literals with
+<code>${...}</code> interpolation, <code>true</code>, <code>false</code>, <code>null</code>, <code>undefined</code>, and <code>this</code>.</li>
+<li><strong>Objects and arrays,</strong> including shorthand properties, computed keys, method
+shorthand, getters and setters, array holes, and spread (<code>{ ...a }</code>,
+<code>[ ...xs ]</code>).</li>
+<li><strong>Member access</strong> with <code>.</code> and <code>[ ]</code>, and optional chaining <code>?.</code> for property
+reads, computed reads, and calls.</li>
+<li><strong>Function calls</strong> with spread arguments and optional calls (<code>fn?.()</code>).</li>
+<li><strong>Operators:</strong> <code>! - +</code>, <code>typeof</code>, <code>void</code>, prefix and postfix <code>++</code>/<code>--</code>,
+arithmetic <code>+ - * / % **</code>, comparison <code>&lt; &gt; &lt;= &gt;=</code>, equality <code>== != === !==</code>,
+<code>in</code>, <code>instanceof</code>, logical <code>&amp;&amp; || ??</code>, the ternary <code>?:</code>, and assignment in all
+its forms (<code>= += -= *= /= %= **= &amp;&amp;= ||= ??=</code>).</li>
+<li><strong>Arrow functions,</strong> with expression or block bodies, default parameters,
+destructuring parameters, and rest parameters.</li>
+</ul>
+<p>In program mode (action directives) you additionally get statements: <code>if</code>/<code>else</code>,
+<code>return</code>, <code>let</code>/<code>const</code>/<code>var</code> with destructuring, <code>for</code>, <code>for...of</code>, <code>while</code>,
+<code>break</code>, <code>continue</code>, and blocks. This is why <code>@click</code> handlers can hold real
+multi-statement logic.</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>
+  let next = count + 1;
+  if (next > max) next = 0;
+  count = next
+<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>step<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre></div><h2 id="what-is-not-supported"><a class="anchor" href="#what-is-not-supported" aria-hidden="true">#</a>What is not supported</h2><p>The subset stops where an expression language should. If you write any of these
+in a directive, you get a parse error, which Summit catches and logs to the
+console rather than executing:</p>
+<ul>
+<li>The <code>new</code> operator. Constructors are not callable from expressions, so use a
+static method or a global that returns a value. Reach for <code>Date.now()</code> rather
+than <code>new Date()</code>, and build the object in a <code>Summit.data</code> provider if you need
+a constructed instance.</li>
+<li>Bitwise operators (<code>&amp; | ^ ~ &lt;&lt; &gt;&gt; &gt;&gt;&gt;</code>).</li>
+<li>The <code>function</code> keyword and function declarations. Use arrow functions.</li>
+<li>Classes, <code>try</code>/<code>catch</code>, <code>throw</code>, <code>switch</code>, <code>do...while</code>, <code>async</code>/<code>await</code>, and
+generators.</li>
+<li>Comments, regex literals (use the <code>RegExp</code> global), and tagged template
+literals.</li>
+</ul>
+<p>Keeping the surface bounded is not only about safety. It also keeps directive
+expressions readable. Anything more involved belongs in a <code>Summit.data</code> method,
+where you write ordinary JavaScript that your bundler and CSP already trust.</p>
+<h2 id="how-names-resolve"><a class="anchor" href="#how-names-resolve" aria-hidden="true">#</a>How names resolve</h2><p>When the interpreter meets an identifier, it looks in three places, in order:</p>
+<ol>
+<li><strong>Interpreter-local bindings:</strong> arrow-function parameters and any <code>let</code>/<code>const</code>
+declared in the same expression.</li>
+<li><strong>The component scope:</strong> the merged <code>s-data</code> stack, innermost first, so an
+inner component shadows an outer one, plus the <code>$</code>-prefixed magics.</li>
+<li><strong>The global allowlist:</strong> a fixed set of safe globals (below). Names in the
+allowlist resolve to the real global; anything else resolves to <code>undefined</code>.</li>
+</ol>
+<p>Reads are deliberately tolerant. Accessing a property of <code>null</code> or <code>undefined</code>
+yields <code>undefined</code> instead of throwing, and calling a method that does not exist
+is a no-op that returns <code>undefined</code>. This keeps templates resilient to
+half-loaded data. Assigning to a property of <code>null</code> or calling a value that is
+present but not a function still throws, because those are real mistakes.</p>
+<p>Arrow functions capture <code>this</code> lexically from the surrounding component, while
+methods and getters defined in an object literal receive the usual dynamic
+<code>this</code>, matching how the same code behaves in a normal engine.</p>
+<h2 id="the-global-allowlist"><a class="anchor" href="#the-global-allowlist" aria-hidden="true">#</a>The global allowlist</h2><p>An expression can only name a global if it is on the allowlist. The default set
+covers the common, safe surface:</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-markup"><code>Math, JSON, Date, Object, Array, Number, String, Boolean,
+parseInt, parseFloat, isNaN, isFinite, RegExp,
+Map, Set, WeakMap, WeakSet, Promise, Intl, console,
+window, document, location, navigator, history,
+localStorage, sessionStorage,
+setTimeout, clearTimeout, setInterval, clearInterval,
+requestAnimationFrame, cancelAnimationFrame,
+fetch, alert, confirm, prompt, structuredClone,
+URL, URLSearchParams, encodeURIComponent, decodeURIComponent,
+NaN, Infinity</code></pre></div><p>To let expressions reach a global you provide, add it:</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-javascript"><code>Summit<span class="token punctuation">.</span><span class="token function">addGlobals</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"gsap"</span><span class="token punctuation">,</span> <span class="token string">"dayjs"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div><p>Now <code>dayjs()</code> resolves inside any directive. The allowlist is a scoping and
+ergonomics boundary: it controls which names an expression may mention, and it
+keeps a typo from silently reaching an unrelated global. It is not a full
+sandbox, because allowlisted globals expose their whole surface. The point that
+matters for CSP is narrower and firmer: Summit itself never needs <code>unsafe-eval</code>.</p>
+<h2 id="under-a-strict-csp"><a class="anchor" href="#under-a-strict-csp" aria-hidden="true">#</a>Under a strict CSP</h2><p>Because the evaluator uses no dynamic code, Summit is happy with a policy that
+forbids it entirely:</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-markup"><code>Content-Security-Policy: default-src 'self'; script-src 'self'</code></pre></div><p>Load Summit as a normal script under that header and every directive works.
+There is no <code>unsafe-eval</code>, no <code>unsafe-inline</code> required for the framework, and no
+alternate build to swap in. The browser is still the ultimate enforcer: even the
+allowlisted <code>window</code> cannot be used to smuggle in <code>window.eval(...)</code>, because the
+browser blocks eval at runtime regardless of who calls it. Summit&#39;s contribution
+is that it never asks you to open that door in the first place.</p>
+<h2 id="see-also"><a class="anchor" href="#see-also" aria-hidden="true">#</a>See also</h2><ul>
+<li><a href="../advanced-reactivity/">Reactivity</a> for how the values these expressions read
+are tracked.</li>
+<li><a href="../advanced-extending/">Extending Summit</a> to reach the evaluator from your own
+directives with <code>utils.evaluate</code> and <code>utils.evaluateAction</code>.</li>
+</ul>
+
+    </article>
+    <nav class="pager"><a class="pg prev" href="../advanced-reactivity/"><span>Previous</span><strong>How reactivity works</strong></a><a class="pg next" href="../advanced-extending/"><span>Next</span><strong>Writing directives and plugins</strong></a></nav>
+  </main>
+  <aside class="toc"><nav><div class="toc-label">On this page</div><ul><li class="lvl-2"><a href="#why-no-eval">Why no eval</a></li><li class="lvl-2"><a href="#the-pipeline">The pipeline</a></li><li class="lvl-2"><a href="#what-syntax-is-supported">What syntax is supported</a></li><li class="lvl-2"><a href="#what-is-not-supported">What is not supported</a></li><li class="lvl-2"><a href="#how-names-resolve">How names resolve</a></li><li class="lvl-2"><a href="#the-global-allowlist">The global allowlist</a></li><li class="lvl-2"><a href="#under-a-strict-csp">Under a strict CSP</a></li><li class="lvl-2"><a href="#see-also">See also</a></li></ul></nav></aside>
+</div>
+<footer class="site-foot"><div class="foot-inner">
+  <span class="foot-brand"><svg viewBox="0 0 40 32" aria-hidden="true"><rect x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)" fill="var(--accent)"/><path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="var(--logo)"/></svg><span>Summit<span class="dot">.js</span></span></span>
+  <span class="foot-motto">Open Source. <span class="nat">by Nature.</span></span>
+  <span>MIT · <a href="https://github.com/velofy/summit">github.com/velofy/summit</a></span>
+</div></footer>
+<div class="search-root" s-data="search" data-base="../"
+    @open-search.window="open()"
+    @keydown.window.cmd.k.prevent="open()" @keydown.window.ctrl.k.prevent="open()">
+    <div class="search-overlay" s-show="isOpen" @click="close()"></div>
+    <div class="search-panel" s-show="isOpen" @keydown.escape.window="close()" @keydown.down.prevent="move(1)" @keydown.up.prevent="move(-1)" @keydown.enter.prevent="go()">
+      <div class="search-input-row">
+        <svg class="si" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
+        <input s-ref="input" class="search-input" placeholder="Search the docs" s-model="query" @input="run()" />
+        <kbd class="esc">Esc</kbd>
+      </div>
+      <div class="search-results" s-ref="list">
+        <template s-if="query && results.length === 0">
+          <div class="search-empty">No results for "<span s-text="query"></span>".</div>
+        </template>
+        <template s-if="!query && recent.length">
+          <div class="search-section">Recent</div>
+          <template s-for="(r, i) in recent" :key="'r'+i">
+            <a class="search-hit" :href="r.url" @mouseenter="active = i" @click="remember(r)">
+              <span class="hit-icon">↩</span>
+              <span class="hit-main"><span class="hit-title" s-text="r.heading"></span><span class="hit-page" s-text="r.page"></span></span>
+            </a>
+          </template>
+        </template>
+        <template s-for="(r, i) in results" :key="r.url + i">
+          <a class="search-hit" :class="{ active: i === active }" :href="r.url" @mouseenter="active = i" @click="remember(r)">
+            <span class="hit-icon">#</span>
+            <span class="hit-main">
+              <span class="hit-title" s-html="r.titleHtml"></span>
+              <span class="hit-snippet" s-html="r.snippetHtml"></span>
+              <span class="hit-page" s-text="r.page"></span>
+            </span>
+          </a>
+        </template>
+      </div>
+      <div class="search-foot">
+        <span><kbd>↑</kbd><kbd>↓</kbd> to navigate</span>
+        <span><kbd>↵</kbd> to select</span>
+        <span><kbd>esc</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+<script src="../assets/search.js" defer></script>
+<script src="../summit.min.js" defer></script>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-copy]");if(!b)return;var c=b.parentElement.querySelector("code");navigator.clipboard.writeText(c.innerText);b.textContent="Copied";setTimeout(function(){b.textContent="Copy";},1200);});</script>
+</body>
+</html>

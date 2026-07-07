@@ -1,25 +1,24 @@
 /**
- * Generate a self-contained preview of the docs site with Summit inlined, for
- * publishing as an Artifact (external scripts are blocked there). Strips the
- * document wrapper so the content drops into the Artifact skeleton, and adds a
- * prefers-color-scheme fallback so both themes render before any toggle.
+ * Generate a self-contained preview of the homepage with Summit, the command
+ * palette, and the search index all inlined, for publishing as an Artifact
+ * (external requests are blocked there). Strips the document wrapper so the
+ * content drops into the Artifact skeleton.
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 
 const html = readFileSync("docs/index.html", "utf8");
 const bundle = readFileSync("dist/summit.min.js", "utf8");
+const searchJs = readFileSync("docs/assets/search.js", "utf8");
+const index = existsSync("docs/search-index.json") ? readFileSync("docs/search-index.json", "utf8") : "[]";
 
 const styles = html.match(/<style>([\s\S]*?)<\/style>/)[1];
 let bodyInner = html.match(/<body>([\s\S]*?)<\/body>/)[1];
 
-// The Artifact frame provides its own theme control, so drop the in-page toggle
-// and the external loader script; we inline the bundle instead. The page's own
-// CSS already handles both light and dark themes.
-bodyInner = bodyInner
-  .replace(/<button\s+class="ghost-btn"[\s\S]*?<\/button>/, "")
-  .replace(/<script src="\.\/summit\.min\.js"[\s\S]*?<\/script>/, "");
+// Drop every script tag; we inline the runtime, the palette, and the index
+// ourselves below so the preview needs no network at all.
+bodyInner = bodyInner.replace(/<script[\s\S]*?<\/script>/g, "");
 
-const out = `<style>\n${styles}\n</style>\n${bodyInner}\n<script>\n${bundle}\n</script>\n`;
+const out = `<style>\n${styles}\n</style>\n${bodyInner}\n<script>\nwindow.__SUMMIT_SEARCH_INDEX__ = ${index};\n</script>\n<script>\n${searchJs}\n</script>\n<script>\n${bundle}\n</script>\n`;
 
 const target = process.argv[2] || "docs/preview.html";
 writeFileSync(target, out);

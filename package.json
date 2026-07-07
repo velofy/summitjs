@@ -47,12 +47,16 @@
     "size": "node scripts/size.mjs",
     "smoke": "node scripts/smoke.mjs",
     "verify": "node scripts/verify-page.mjs",
-    "check": "npm run typecheck && npm test && npm run build && npm run size && npm run smoke && npm run verify",
+    "docs": "node scripts/build-docs.mjs",
+    "verify:docs": "node scripts/verify-docs.mjs",
+    "check": "npm run typecheck && npm test && npm run build && npm run size && npm run smoke && npm run verify && npm run docs && npm run verify:docs",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
     "happy-dom": "^15.11.0",
+    "marked": "^14.1.4",
+    "prismjs": "^1.29.0",
     "tsup": "^8.3.5",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8"

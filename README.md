@@ -2,6 +2,10 @@
 
 A rugged, signal-powered framework for composing behavior directly in your HTML. Drop in one script and go. No build step, no virtual DOM, no `eval`.
 
+**Open Source. by Nature.**
+
+Started by [anishfyi](https://github.com/anishfyi), so that AI agents can make beautiful frontends.
+
 Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed further where it counts: a fine-grained signal engine, a CSP-safe expression evaluator, keyed list rendering, cached computed getters, and full TypeScript types, all in about 13KB gzipped.
 
 ```html
@@ -76,7 +80,7 @@ Prefix `s-`, with `@` shorthand for `s-on:` and `:` for `s-bind:`.
 
 ### `s-model` modifiers
 
-`.lazy .change .blur .number .boolean .debounce .throttle .fill`.
+`.lazy .change .blur .number .boolean .debounce .fill`.
 
 ## Magics
 

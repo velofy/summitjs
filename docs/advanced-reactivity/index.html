@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>How reactivity works — Summit.js</title>
+<meta name="description" content="How Summit tracks dependencies and updates the DOM."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Crect x='21' y='3' width='9' height='9' rx='1.5' transform='rotate(45 25.5 7.5)' fill='%230d9488'/%3E%3Cpath d='M2 28 L13 10 L20 22 L26 14 L38 28 Z' fill='%230f172a'/%3E%3C/svg%3E"/>
+<script>(function(){var t=localStorage.getItem("summit-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t;})();</script>
+<link rel="stylesheet" href="../assets/docs.css"/>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../"><span class="brand-mark"><svg viewBox="0 0 40 32" aria-hidden="true"><rect x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)" fill="var(--accent)"/><path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="var(--logo)"/></svg></span><span class="brand-word">Summit<span class="dot">.js</span></span></a>
+  <div class="top-spacer"></div>
+  <button class="search-trigger" s-data @click="$dispatch('open-search')" aria-label="Search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
+    <span>Search</span><kbd class="cmdk">⌘K</kbd>
+  </button>
+  <a class="top-link" href="https://github.com/velofy/summit" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.26 3.4.96.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.28 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+  <button class="top-icon" title="Toggle theme" aria-label="Toggle theme" s-data @click="document.documentElement.dataset.theme=(document.documentElement.dataset.theme==='dark'?'light':'dark');localStorage.setItem('summit-theme',document.documentElement.dataset.theme)"><span s-text="document.documentElement.dataset.theme==='dark'?'☀':'☾'">☾</span></button>
+  <button class="menu-toggle" s-data="{ o:false }" @click="o=!o; document.body.classList.toggle('nav-open', o)" aria-label="Menu">☰</button>
+</header>
+<div class="layout">
+  <aside class="sidebar"><nav><div class="side-group"><div class="side-label">Getting Started</div><ul><li><a href="../start/">Introduction</a></li></ul></div><div class="side-group"><div class="side-label">Essentials</div><ul><li><a href="../installation/">Installation</a></li><li><a href="../reactivity-state/">Reactivity &amp; State</a></li><li><a href="../templating/">Templating</a></li><li><a href="../events/">Events</a></li><li><a href="../forms/">Forms</a></li><li><a href="../lifecycle/">Lifecycle</a></li></ul></div><div class="side-group"><div class="side-label">Directives</div><ul><li><a href="../s-data/">s-data</a></li><li><a href="../s-bind/">s-bind</a></li><li><a href="../s-on/">s-on</a></li><li><a href="../s-text/">s-text</a></li><li><a href="../s-html/">s-html</a></li><li><a href="../s-model/">s-model</a></li><li><a href="../s-show/">s-show</a></li><li><a href="../s-if/">s-if</a></li><li><a href="../s-for/">s-for</a></li><li><a href="../s-effect/">s-effect</a></li><li><a href="../s-init/">s-init</a></li><li><a href="../s-ref/">s-ref</a></li><li><a href="../s-cloak/">s-cloak</a></li><li><a href="../s-ignore/">s-ignore</a></li><li><a href="../s-teleport/">s-teleport</a></li><li><a href="../s-transition/">s-transition</a></li></ul></div><div class="side-group"><div class="side-label">Magic Properties</div><ul><li><a href="../magic-el/">$el</a></li><li><a href="../magic-refs/">$refs</a></li><li><a href="../magic-store/">$store</a></li><li><a href="../magic-watch/">$watch</a></li><li><a href="../magic-dispatch/">$dispatch</a></li><li><a href="../magic-nextTick/">$nextTick</a></li><li><a href="../magic-root/">$root</a></li><li><a href="../magic-id/">$id</a></li><li><a href="../magic-data/">$data</a></li></ul></div><div class="side-group"><div class="side-label">Globals & API</div><ul><li><a href="../globals-data/">Summit.data</a></li><li><a href="../globals-store/">Summit.store</a></li><li><a href="../globals-bind/">Summit.bind</a></li><li><a href="../globals-directive/">Summit.directive</a></li><li><a href="../globals-magic/">Summit.magic</a></li><li><a href="../globals-plugin/">Summit.plugin</a></li><li><a href="../globals-start/">Summit.start</a></li></ul></div><div class="side-group"><div class="side-label">Reactivity</div><ul><li><a href="../reactive-signal/">signal</a></li><li><a href="../reactive-computed/">computed</a></li><li><a href="../reactive-effect/">effect</a></li><li><a href="../reactive-reactive/">reactive</a></li><li><a href="../reactive-batch/">batch</a></li><li><a href="../reactive-nexttick/">nextTick</a></li></ul></div><div class="side-group"><div class="side-label">Advanced</div><ul><li><a href="../advanced-reactivity/" class="active" aria-current="page">How reactivity works</a></li><li><a href="../advanced-evaluator/">CSP-safe evaluator</a></li><li><a href="../advanced-extending/">Extending Summit</a></li><li><a href="../advanced-migrating/">Migrating from Alpine</a></li></ul></div></nav></aside>
+  <main id="content" class="content">
+    <article class="prose">
+      <div class="crumbs">Advanced</div>
+      <h1>How reactivity works</h1>
+      <p>Everything reactive in Summit rests on one small engine. A handful of primitives,
+a few hundred lines, decide what re-runs when a value changes. This page walks
+that engine end to end so you can reason about updates, write your own effects,
+and understand exactly why a directive fires when it does.</p>
+<p>If you just want to use signals, computeds, and effects, the
+<a href="../reactive-signal/">Reactivity</a> reference pages cover the public API. This page
+is about the machinery underneath them.</p>
+<h2 id="the-signal-the-atom-of-state"><a class="anchor" href="#the-signal-the-atom-of-state" aria-hidden="true">#</a>The signal, the atom of state</h2><p>A signal holds one value. Reading it subscribes whoever is currently watching.
+Writing it wakes those watchers, but only if the value actually changed.</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-javascript"><code><span class="token keyword">const</span> count <span class="token operator">=</span> Summit<span class="token punctuation">.</span><span class="token function">signal</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// read: returns 0 and subscribes the active effect</span>
+count<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// write: notifies subscribers</span>
+count<span class="token punctuation">.</span><span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// read the value WITHOUT subscribing</span></code></pre></div><p>Internally each signal owns a <code>dep</code>, a set of the effects that read it. A read
+calls <code>track(dep)</code>, which adds the active effect to that set. A write compares
+the new value to the old one with <code>Object.is</code> and, only if they differ, calls
+<code>trigger(dep)</code> to wake every effect in the set. Setting a signal to its current
+value does nothing, so no downstream work happens for a no-op write. <code>.peek()</code>
+skips <code>track</code>, so you can read a value without becoming dependent on it.</p>
+<h2 id="effects-and-dependency-tracking"><a class="anchor" href="#effects-and-dependency-tracking" aria-hidden="true">#</a>Effects and dependency tracking</h2><p>An effect is a function that re-runs whenever any value it read last time
+changes. It is the other half of the signal: signals are read inside effects,
+and effects are what signals wake.</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-javascript"><code><span class="token keyword">const</span> name <span class="token operator">=</span> Summit<span class="token punctuation">.</span><span class="token function">signal</span><span class="token punctuation">(</span><span class="token string">"Ada"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Summit<span class="token punctuation">.</span><span class="token function">effect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"name is"</span><span class="token punctuation">,</span> <span class="token function">name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+name<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">"Grace"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// logs "name is Grace"</span></code></pre></div><p>The link is built by running the function. Before an effect runs, Summit sets it
+as the current active effect. Any signal read during that run calls <code>track</code>,
+which records the dependency in both directions: the effect is added to the
+signal&#39;s dep set, and the dep is pushed onto the effect&#39;s own <code>deps</code> list.</p>
+<p>Dependencies are re-collected on every run. The first thing an effect does when
+it re-runs is <code>cleanupDeps</code>, which unsubscribes it from every dep it currently
+holds. It then runs the function and re-subscribes only to what it reads this
+time. That is why tracking is fine-grained and dynamic: if an effect takes a
+different branch and stops reading a value, it stops depending on it. Nothing
+you no longer read can wake you.</p>
+<p>Because a dep is one set per value, a change wakes only the effects that read
+that exact value. When you click a button that increments <code>count</code>, the only
+effects that re-run are the ones that read <code>count</code>. Every other text node,
+attribute, and list on the page is untouched.</p>
+<h2 id="the-active-effect-stack"><a class="anchor" href="#the-active-effect-stack" aria-hidden="true">#</a>The active-effect stack</h2><p>Only one effect can be &quot;active&quot; at a time, but effects nest: an effect can run
+code that creates or runs another effect. Summit tracks this with a stack. When
+an effect starts it is pushed on and becomes active; when it finishes it is
+popped and the previous effect on the stack becomes active again. Reads always
+attribute to the effect at the top of the stack, so a nested effect captures its
+own dependencies without stealing the outer effect&#39;s.</p>
+<p>The stack also powers the self-write guard. An effect that both reads and writes
+the same value could otherwise trigger itself forever. Two checks prevent that.
+First, if an effect is already on the stack when it is asked to run again, the
+re-entrant call returns immediately. Second, <code>trigger</code> never re-runs the effect
+that is currently active. So an effect can safely write a value it also reads
+without spinning into an infinite loop.</p>
+<h2 id="computed-values-are-cached"><a class="anchor" href="#computed-values-are-cached" aria-hidden="true">#</a>Computed values are cached</h2><p>A computed is a derived value that memoizes its result. Unlike a plain getter,
+which recomputes on every read, a computed recomputes only when one of its own
+dependencies changes, and it stays lazy: the getter does not run until something
+reads the computed.</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-javascript"><code><span class="token keyword">const</span> first <span class="token operator">=</span> Summit<span class="token punctuation">.</span><span class="token function">signal</span><span class="token punctuation">(</span><span class="token string">"Ada"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> last <span class="token operator">=</span> Summit<span class="token punctuation">.</span><span class="token function">signal</span><span class="token punctuation">(</span><span class="token string">"Lovelace"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> full <span class="token operator">=</span> Summit<span class="token punctuation">.</span><span class="token function">computed</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">first</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token function">last</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">full</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// runs the getter once, caches "Ada Lovelace"</span>
+<span class="token function">full</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// returns the cached value, no recompute</span>
+last<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">"Byron"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// marks full stale, but does not recompute yet</span>
+<span class="token function">full</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// now recomputes and caches "Ada Byron"</span></code></pre></div><p>A computed is built on a lazy effect plus a <code>dirty</code> flag. Reading the computed
+runs the getter only when <code>dirty</code> is set, stores the result, and clears the
+flag. When a dependency changes, the computed&#39;s scheduler marks it dirty again
+and notifies the computed&#39;s own subscribers so they re-read on demand. This is
+why a computed is both a consumer (it subscribes to whatever its getter reads)
+and a producer (it has its own dep that effects can subscribe to). The getters
+you write in <code>s-data</code> are backed by this, so reading a derived value twice in one
+render does the work at most once.</p>
+<h2 id="batching-writes"><a class="anchor" href="#batching-writes" aria-hidden="true">#</a>Batching writes</h2><p>Sometimes you change several values at once and want dependent effects to run a
+single time at the end, not once per write. That is what <code>batch</code> does.</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-javascript"><code>Summit<span class="token punctuation">.</span><span class="token function">batch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  first<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">"Grace"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  last<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">"Hopper"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// effects that read first or last run once, after both writes</span></code></pre></div><p>While a batch is open, triggered effects are collected into a pending set
+instead of running. When the outermost batch closes, that set is flushed once.
+Batches nest, and only the outermost flush runs anything, so helper functions
+that each open a batch compose cleanly.</p>
+<h2 id="the-scheduler-and-the-dom"><a class="anchor" href="#the-scheduler-and-the-dom" aria-hidden="true">#</a>The scheduler and the DOM</h2><p>Batching groups writes you make yourself. The scheduler solves a different
+problem: keeping DOM updates cheap regardless of how the writes arrive.</p>
+<p>Plain effects run synchronously the moment a dependency changes. DOM-facing
+effects do not. They are created with a scheduler, so instead of re-running
+inline they queue themselves onto a microtask. The queue is a set, so an effect
+that is triggered many times in one tick is only queued once, and the whole
+queue flushes together on the next microtask. A burst of state changes therefore
+produces a single coalesced DOM update, even without an explicit <code>batch</code>.</p>
+<p><code>nextTick</code> sits on top of this queue. It resolves after the current flush, which
+is how you read the freshly updated DOM.</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-javascript"><code>count<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>count<span class="token punctuation">.</span><span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">await</span> Summit<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// the DOM reflecting the new count has now been painted</span></code></pre></div><p>The primitive that ties effects to this scheduler is <code>domEffect</code>. It creates a
+lazy effect whose scheduler enqueues it, runs it once immediately to establish
+its dependencies and paint the first result, and returns a disposer. Run once
+now, re-run on a microtask forever after, until stopped.</p>
+<h2 id="how-directives-sit-on-top"><a class="anchor" href="#how-directives-sit-on-top" aria-hidden="true">#</a>How directives sit on top</h2><p>Every reactive directive is a <code>domEffect</code>. When a directive calls
+<code>utils.effect(fn)</code>, Summit wraps <code>fn</code> in a <code>domEffect</code> and registers its disposer
+as element cleanup. That single mechanism explains the whole system:</p>
+<ul>
+<li><code>s-text</code> runs an effect that sets <code>textContent</code> from an expression. The effect
+reads whatever the expression reads, so it re-runs when any of those values
+change, and updates only that one text node.</li>
+<li><code>s-show</code>, <code>:bind</code>, and <code>s-model</code> are the same shape: an effect that reads state
+and writes one piece of the DOM.</li>
+<li><code>s-if</code> and <code>s-for</code> run effects that read a condition or a list and add or
+remove nodes in response.</li>
+</ul>
+<p>The component scope itself, the object you pass to <code>s-data</code>, is wrapped in a
+reactive proxy. Reading <code>count</code> inside a directive expression goes through that
+proxy, which calls <code>track</code> for the <code>count</code> property, subscribing the directive&#39;s
+effect to exactly that property. Writing <code>count</code> calls <code>trigger</code> for that
+property, waking exactly the directives that read it. When the element is
+removed, Summit runs its cleanups, which stop those effects and unsubscribe them
+from every dep.</p>
+<h2 id="reactive-objects"><a class="anchor" href="#reactive-objects" aria-hidden="true">#</a>Reactive objects</h2><p>The bridge between the low-level signal API and the object ergonomics of
+<code>s-data</code> is <code>reactive</code>. It wraps a plain object or array in a proxy that tracks
+property reads and triggers on writes, so <code>this.open = true</code> inside a method just
+works.</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-javascript"><code><span class="token keyword">const</span> state <span class="token operator">=</span> Summit<span class="token punctuation">.</span><span class="token function">reactive</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">open</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token literal-property property">items</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Summit<span class="token punctuation">.</span><span class="token function">effect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"open?"</span><span class="token punctuation">,</span> state<span class="token punctuation">.</span>open<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+state<span class="token punctuation">.</span>open <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// logs "open? true"</span></code></pre></div><p>Reactivity is deep and lazy: nested plain objects and arrays are wrapped the
+first time you access them. Only plain objects and arrays are wrapped, though.
+Class instances, DOM nodes, <code>Date</code>, <code>Map</code>, <code>RegExp</code>, and other host objects are
+returned untouched, so storing a DOM element in reactive data never breaks it.
+The proxy is cached per object and idempotent, so wrapping the same object twice
+returns the same proxy, and <code>toRaw</code> unwraps it again when you need the plain
+value.</p>
+<h2 id="where-to-go-next"><a class="anchor" href="#where-to-go-next" aria-hidden="true">#</a>Where to go next</h2><ul>
+<li><a href="../reactive-signal/">signal</a> and <a href="../reactive-computed/">computed</a> for the
+value primitives.</li>
+<li><a href="../reactive-effect/">effect</a> for the tracking primitive, and
+<a href="../reactive-reactive/">reactive</a> for deep reactive objects.</li>
+<li><a href="../reactive-batch/">batch</a> and <a href="../reactive-nexttick/">nextTick</a> for
+controlling when work runs.</li>
+</ul>
+
+    </article>
+    <nav class="pager"><a class="pg prev" href="../reactive-nexttick/"><span>Previous</span><strong>nextTick()</strong></a><a class="pg next" href="../advanced-evaluator/"><span>Next</span><strong>The CSP-safe evaluator</strong></a></nav>
+  </main>
+  <aside class="toc"><nav><div class="toc-label">On this page</div><ul><li class="lvl-2"><a href="#the-signal-the-atom-of-state">The signal, the atom of state</a></li><li class="lvl-2"><a href="#effects-and-dependency-tracking">Effects and dependency tracking</a></li><li class="lvl-2"><a href="#the-active-effect-stack">The active-effect stack</a></li><li class="lvl-2"><a href="#computed-values-are-cached">Computed values are cached</a></li><li class="lvl-2"><a href="#batching-writes">Batching writes</a></li><li class="lvl-2"><a href="#the-scheduler-and-the-dom">The scheduler and the DOM</a></li><li class="lvl-2"><a href="#how-directives-sit-on-top">How directives sit on top</a></li><li class="lvl-2"><a href="#reactive-objects">Reactive objects</a></li><li class="lvl-2"><a href="#where-to-go-next">Where to go next</a></li></ul></nav></aside>
+</div>
+<footer class="site-foot"><div class="foot-inner">
+  <span class="foot-brand"><svg viewBox="0 0 40 32" aria-hidden="true"><rect x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)" fill="var(--accent)"/><path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="var(--logo)"/></svg><span>Summit<span class="dot">.js</span></span></span>
+  <span class="foot-motto">Open Source. <span class="nat">by Nature.</span></span>
+  <span>MIT · <a href="https://github.com/velofy/summit">github.com/velofy/summit</a></span>
+</div></footer>
+<div class="search-root" s-data="search" data-base="../"
+    @open-search.window="open()"
+    @keydown.window.cmd.k.prevent="open()" @keydown.window.ctrl.k.prevent="open()">
+    <div class="search-overlay" s-show="isOpen" @click="close()"></div>
+    <div class="search-panel" s-show="isOpen" @keydown.escape.window="close()" @keydown.down.prevent="move(1)" @keydown.up.prevent="move(-1)" @keydown.enter.prevent="go()">
+      <div class="search-input-row">
+        <svg class="si" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
+        <input s-ref="input" class="search-input" placeholder="Search the docs" s-model="query" @input="run()" />
+        <kbd class="esc">Esc</kbd>
+      </div>
+      <div class="search-results" s-ref="list">
+        <template s-if="query && results.length === 0">
+          <div class="search-empty">No results for "<span s-text="query"></span>".</div>
+        </template>
+        <template s-if="!query && recent.length">
+          <div class="search-section">Recent</div>
+          <template s-for="(r, i) in recent" :key="'r'+i">
+            <a class="search-hit" :href="r.url" @mouseenter="active = i" @click="remember(r)">
+              <span class="hit-icon">↩</span>
+              <span class="hit-main"><span class="hit-title" s-text="r.heading"></span><span class="hit-page" s-text="r.page"></span></span>
+            </a>
+          </template>
+        </template>
+        <template s-for="(r, i) in results" :key="r.url + i">
+          <a class="search-hit" :class="{ active: i === active }" :href="r.url" @mouseenter="active = i" @click="remember(r)">
+            <span class="hit-icon">#</span>
+            <span class="hit-main">
+              <span class="hit-title" s-html="r.titleHtml"></span>
+              <span class="hit-snippet" s-html="r.snippetHtml"></span>
+              <span class="hit-page" s-text="r.page"></span>
+            </span>
+          </a>
+        </template>
+      </div>
+      <div class="search-foot">
+        <span><kbd>↑</kbd><kbd>↓</kbd> to navigate</span>
+        <span><kbd>↵</kbd> to select</span>
+        <span><kbd>esc</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+<script src="../assets/search.js" defer></script>
+<script src="../summit.min.js" defer></script>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-copy]");if(!b)return;var c=b.parentElement.querySelector("code");navigator.clipboard.writeText(c.innerText);b.textContent="Copied";setTimeout(function(){b.textContent="Copy";},1200);});</script>
+</body>
+</html>
