@@ -29,6 +29,7 @@ const OUT = join(root, "docs");
 
 const CATEGORIES = [
   { key: "start", label: "Getting Started" },
+  { key: "components", label: "Components" },
   { key: "essentials", label: "Essentials" },
   { key: "directives", label: "Directives" },
   { key: "magics", label: "Magic Properties" },
@@ -237,17 +238,19 @@ function layout(page, contentHtml, toc, sidebar, prev, next) {
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>${escapeHtml(page.title)} — Summit.js</title>
+<title>${escapeHtml(page.title)} · Summit.js</title>
 <meta name="description" content="${escapeHtml(page.description || "Summit.js documentation")}"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Crect x='21' y='3' width='9' height='9' rx='1.5' transform='rotate(45 25.5 7.5)' fill='%230d9488'/%3E%3Cpath d='M2 28 L13 10 L20 22 L26 14 L38 28 Z' fill='%230f172a'/%3E%3C/svg%3E"/>
 <script>(function(){var t=localStorage.getItem("summit-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t;})();</script>
 <link rel="stylesheet" href="../assets/docs.css"/>
+<link rel="stylesheet" href="../assets/components.css"/>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
 <header class="topbar">
   <a class="brand" href="../"><span class="brand-mark">${LOGO}</span><span class="brand-word">Summit<span class="dot">.js</span></span></a>
   <div class="top-spacer"></div>
+  <a class="top-navlink" href="../components/">UI Library</a>
   <button class="search-trigger" s-data @click="$dispatch('open-search')" aria-label="Search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
     <span>Search</span><kbd class="cmdk">⌘K</kbd>
