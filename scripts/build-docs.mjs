@@ -253,6 +253,7 @@ function layout(page, contentHtml, toc, sidebar, prev, next) {
   <a class="brand" href="../"><span class="brand-mark">${LOGO}</span><span class="brand-word">Summit<span class="dot">.js</span></span></a>
   <div class="top-spacer"></div>
   <a class="top-navlink" href="../components/">UI Library</a>
+  <a class="top-navlink" href="../techniques/">Techniques</a>
   <button class="search-trigger" s-data @click="$dispatch('open-search')" aria-label="Search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
     <span>Search</span><kbd class="cmdk">⌘K</kbd>
