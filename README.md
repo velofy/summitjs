@@ -16,6 +16,7 @@ Summit is designed so that an AI agent can write a working, good-looking fronten
 - **Predictable vocabulary.** A small, closed set of `s-` directives and `$` magics. There is one obvious way to do most things, which is exactly what a model does best.
 - **Safe by construction.** Expressions are interpreted, never `eval`ed, so generated markup runs under a strict CSP and cannot reach outside its allowlist.
 - **A UI library, included.** Accessible, token-themed components an agent (or a person) drops in and themes with CSS variables. See the [UI Library](https://velofy.github.io/summit/components/).
+- **Built to be read by machines.** The whole framework is discoverable in one fetch: [`llms.txt`](https://velofy.github.io/summit/llms.txt) indexes every page, [`llms-full.txt`](https://velofy.github.io/summit/llms-full.txt) is the entire corpus as markdown, any page is available as markdown (append `index.md` to its URL) with a one-click "Copy for AI" button, and [`AGENTS.md`](./AGENTS.md) is a drop-in brief you can hand to your own agent.
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/summitjs/dist/summit.min.js" defer></script>

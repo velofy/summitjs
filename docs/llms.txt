@@ -1,0 +1,103 @@
+# Summit.js
+
+> The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 13KB.
+
+Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` magics, evaluated by a small CSP-safe interpreter. Every page below is also available as clean markdown: append `index.md` to any page URL, or load the full corpus in one request.
+
+## Getting Started
+
+- [Getting Started](https://velofy.github.io/summit/start/): Summit is a rugged, signal-powered JavaScript framework for composing behavior directly in your HTML. Learn what it is and write your first component.
+
+## Components
+
+- [UI Library](https://velofy.github.io/summit/components/): An accessible, token-themed component library you copy into your markup and theme with CSS variables. Built with Summit, for people and AI agents.
+- [Button](https://velofy.github.io/summit/comp-button/): Buttons with solid, outline, ghost, subtle, and danger variants, plus sizes and groups.
+- [Input](https://velofy.github.io/summit/comp-input/): Text inputs and textareas with labels, help text, addons, and validation state.
+- [Select](https://velofy.github.io/summit/comp-select/): A styled native select bound with s-model.
+- [Checkbox & Radio](https://velofy.github.io/summit/comp-checkbox/): Accessible checkboxes and radio groups bound with s-model.
+- [Switch](https://velofy.github.io/summit/comp-switch/): A toggle switch bound with s-model, for on/off settings.
+- [Card](https://velofy.github.io/summit/comp-card/): A surface for grouping content, with header, body, and footer.
+- [Badge & Tag](https://velofy.github.io/summit/comp-badge/): Small status labels and removable tags.
+- [Alert](https://velofy.github.io/summit/comp-alert/): Contextual feedback banners for info, success, warning, and danger.
+- [Avatar](https://velofy.github.io/summit/comp-avatar/): User avatars with initials or images, sizes, and stacked groups.
+- [Progress & Spinner](https://velofy.github.io/summit/comp-progress/): Progress bars, spinners, and skeleton placeholders for loading states.
+- [Tooltip](https://velofy.github.io/summit/comp-tooltip/): A CSS-only tooltip that appears on hover and focus.
+- [Dialog](https://velofy.github.io/summit/comp-dialog/): A modal dialog for confirmations and focused tasks, with overlay and Escape to close.
+- [Dropdown Menu](https://velofy.github.io/summit/comp-menu/): A button-triggered menu that closes on outside click or Escape.
+- [Popover](https://velofy.github.io/summit/comp-popover/): A click-triggered floating panel for rich content, dismissed on outside click or Escape.
+- [Toast](https://velofy.github.io/summit/comp-toast/): Transient notifications that stack and auto-dismiss.
+- [Tabs](https://velofy.github.io/summit/comp-tabs/): Switch between panels with an underlined or soft tab bar.
+- [Accordion](https://velofy.github.io/summit/comp-accordion/): Collapsible sections, single or multiple open.
+- [Breadcrumb](https://velofy.github.io/summit/comp-breadcrumb/): Show the path to the current page.
+- [Pagination](https://velofy.github.io/summit/comp-pagination/): Navigate through pages of results.
+
+## Essentials
+
+- [Installation](https://velofy.github.io/summit/installation/): Add Summit with a single script tag, or install it from npm for use with a bundler.
+- [Reactivity and State](https://velofy.github.io/summit/reactivity-state/): Declare state with s-data, derive values with getters, and add behavior with methods. Summit tracks reads and updates only what changed.
+- [Templating](https://velofy.github.io/summit/templating/): Put state on the screen with s-text and s-html, and drive attributes, classes, and styles with s-bind.
+- [Events](https://velofy.github.io/summit/events/): Respond to user input with s-on and its @ shorthand, including a full set of modifiers for keys, timing, and event control.
+- [Forms](https://velofy.github.io/summit/forms/): Bind form controls to state in both directions with s-model, covering text, numbers, checkboxes, radios, and selects.
+- [Lifecycle](https://velofy.github.io/summit/lifecycle/): Run code when a component initializes, react to DOM changes automatically, and clean up when elements leave.
+
+## Directives
+
+- [s-data](https://velofy.github.io/summit/s-data/): Declare a reactive component and its state.
+- [s-bind](https://velofy.github.io/summit/s-bind/): Bind attributes, classes, and styles, with the colon shorthand.
+- [s-on](https://velofy.github.io/summit/s-on/): Listen for events with the @ shorthand and a full set of modifiers.
+- [s-text](https://velofy.github.io/summit/s-text/): Set an element's text content from an expression.
+- [s-html](https://velofy.github.io/summit/s-html/): Set an element's innerHTML from an expression.
+- [s-model](https://velofy.github.io/summit/s-model/): Two-way binding for form controls.
+- [s-show](https://velofy.github.io/summit/s-show/): Toggle an element's visibility with display.
+- [s-if](https://velofy.github.io/summit/s-if/): Conditionally render an element in the DOM.
+- [s-for](https://velofy.github.io/summit/s-for/): Render a list, reconciled by key.
+- [s-effect](https://velofy.github.io/summit/s-effect/): Run a side effect that re-runs when its reactive dependencies change.
+- [s-init](https://velofy.github.io/summit/s-init/): Run an expression when the element initializes.
+- [s-ref](https://velofy.github.io/summit/s-ref/): Name an element so you can reach it through $refs.
+- [s-cloak](https://velofy.github.io/summit/s-cloak/): Hide markup until Summit has initialized it.
+- [s-ignore](https://velofy.github.io/summit/s-ignore/): Skip Summit initialization for an element and its children.
+- [s-teleport](https://velofy.github.io/summit/s-teleport/): Render an element at a different place in the DOM.
+- [s-transition](https://velofy.github.io/summit/s-transition/): Animate elements as they enter and leave.
+
+## Magic Properties
+
+- [$el](https://velofy.github.io/summit/magic-el/): The current DOM element.
+- [$refs](https://velofy.github.io/summit/magic-refs/): Elements in this component marked with s-ref.
+- [$store](https://velofy.github.io/summit/magic-store/): The reactive global store.
+- [$watch](https://velofy.github.io/summit/magic-watch/): Run a callback when a watched expression changes.
+- [$dispatch](https://velofy.github.io/summit/magic-dispatch/): Dispatch a custom DOM event.
+- [$nextTick](https://velofy.github.io/summit/magic-nextTick/): Run code after the next DOM update.
+- [$root](https://velofy.github.io/summit/magic-root/): The root element of the nearest component.
+- [$id](https://velofy.github.io/summit/magic-id/): Generate stable, scoped unique ids.
+- [$data](https://velofy.github.io/summit/magic-data/): The current component's reactive state object.
+
+## Globals & API
+
+- [Summit.data](https://velofy.github.io/summit/globals-data/): Register a reusable named component.
+- [Summit.store](https://velofy.github.io/summit/globals-store/): Create and read global reactive state.
+- [Summit.bind](https://velofy.github.io/summit/globals-bind/): Register a reusable set of bindings.
+- [Summit.directive](https://velofy.github.io/summit/globals-directive/): Register a custom directive.
+- [Summit.magic](https://velofy.github.io/summit/globals-magic/): Register a custom magic property.
+- [Summit.plugin](https://velofy.github.io/summit/globals-plugin/): Install a plugin that registers features in bulk.
+- [Summit.start](https://velofy.github.io/summit/globals-start/): Start Summit and initialize the DOM.
+
+## Reactivity
+
+- [signal()](https://velofy.github.io/summit/reactive-signal/): A single reactive value you read by calling it and update with set().
+- [computed()](https://velofy.github.io/summit/reactive-computed/): A cached value derived from other reactive state.
+- [effect()](https://velofy.github.io/summit/reactive-effect/): Run a function reactively whenever its dependencies change.
+- [reactive()](https://velofy.github.io/summit/reactive-reactive/): A deeply reactive object or array.
+- [batch()](https://velofy.github.io/summit/reactive-batch/): Group writes so effects run once.
+- [nextTick()](https://velofy.github.io/summit/reactive-nexttick/): Wait for pending reactive updates to flush.
+
+## Advanced
+
+- [How reactivity works](https://velofy.github.io/summit/advanced-reactivity/): How Summit tracks dependencies and updates the DOM.
+- [The CSP-safe evaluator](https://velofy.github.io/summit/advanced-evaluator/): How Summit evaluates expressions without eval, safe under CSP.
+- [Writing directives and plugins](https://velofy.github.io/summit/advanced-extending/): Build custom directives, magics, and plugins.
+- [Migrating from Alpine](https://velofy.github.io/summit/advanced-migrating/): A guide for developers coming from Alpine.js.
+
+## Optional
+
+- [Full documentation corpus](https://velofy.github.io/summit/llms-full.txt): every page concatenated as markdown
+- [Source on GitHub](https://github.com/velofy/summit)

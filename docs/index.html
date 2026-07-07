@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,8 +14,7 @@
     />
     <script>
       (function () {
-        var t = localStorage.getItem("summit-theme") ||
-          (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        var t = localStorage.getItem("summit-theme") || "dark";
         document.documentElement.dataset.theme = t;
       })();
     </script>
