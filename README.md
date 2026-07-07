@@ -1,12 +1,21 @@
 # Summit.js
 
-A rugged, signal-powered framework for composing behavior directly in your HTML. Drop in one script and go. No build step, no virtual DOM, no `eval`.
+The open source, AI Agent Native JavaScript framework for composing behavior directly in your HTML. Drop in one script and go. No build step, no virtual DOM, no `eval`.
 
 **Open Source. by Nature.**
 
 Started by [anishfyi](https://github.com/anishfyi), so that AI agents can make beautiful frontends.
 
-Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed further where it counts: a fine-grained signal engine, a CSP-safe expression evaluator, keyed list rendering, cached computed getters, and full TypeScript types, all in about 13KB gzipped.
+Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed further where it counts: a fine-grained signal engine, a CSP-safe expression evaluator, keyed list rendering, cached computed getters, a copy-in UI library, and full TypeScript types, all in about 13KB gzipped.
+
+## AI Agent Native
+
+Summit is designed so that an AI agent can write a working, good-looking frontend on the first try:
+
+- **HTML-first and local.** Behavior lives on the element it affects, so an agent edits one place and sees the result. No file graph to hold in context.
+- **Predictable vocabulary.** A small, closed set of `s-` directives and `$` magics. There is one obvious way to do most things, which is exactly what a model does best.
+- **Safe by construction.** Expressions are interpreted, never `eval`ed, so generated markup runs under a strict CSP and cannot reach outside its allowlist.
+- **A UI library, included.** Accessible, token-themed components an agent (or a person) drops in and themes with CSS variables. See the [UI Library](https://velofy.github.io/summit/components/).
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/summitjs/dist/summit.min.js" defer></script>

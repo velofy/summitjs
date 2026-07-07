@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Progress &amp; Spinner · Summit.js</title>
+<meta name="description" content="Progress bars, spinners, and skeleton placeholders for loading states."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Crect x='21' y='3' width='9' height='9' rx='1.5' transform='rotate(45 25.5 7.5)' fill='%230d9488'/%3E%3Cpath d='M2 28 L13 10 L20 22 L26 14 L38 28 Z' fill='%230f172a'/%3E%3C/svg%3E"/>
+<script>(function(){var t=localStorage.getItem("summit-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t;})();</script>
+<link rel="stylesheet" href="../assets/docs.css"/>
+<link rel="stylesheet" href="../assets/components.css"/>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../"><span class="brand-mark"><svg viewBox="0 0 40 32" aria-hidden="true"><rect x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)" fill="var(--accent)"/><path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="var(--logo)"/></svg></span><span class="brand-word">Summit<span class="dot">.js</span></span></a>
+  <div class="top-spacer"></div>
+  <a class="top-navlink" href="../components/">UI Library</a>
+  <button class="search-trigger" s-data @click="$dispatch('open-search')" aria-label="Search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
+    <span>Search</span><kbd class="cmdk">⌘K</kbd>
+  </button>
+  <a class="top-link" href="https://github.com/velofy/summit" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.26 3.4.96.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.28 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+  <button class="top-icon theme-toggle" title="Toggle theme" aria-label="Toggle theme" s-data @click="document.documentElement.dataset.theme=(document.documentElement.dataset.theme==='dark'?'light':'dark');localStorage.setItem('summit-theme',document.documentElement.dataset.theme)"><svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg><svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  <button class="menu-toggle" s-data="{ o:false }" @click="o=!o; document.body.classList.toggle('nav-open', o)" aria-label="Menu">☰</button>
+</header>
+<div class="layout">
+  <aside class="sidebar"><nav><div class="side-group"><div class="side-label">Getting Started</div><ul><li><a href="../start/">Introduction</a></li></ul></div><div class="side-group"><div class="side-label">Components</div><ul><li><a href="../components/">Overview</a></li><li><a href="../comp-button/">Button</a></li><li><a href="../comp-input/">Input</a></li><li><a href="../comp-select/">Select</a></li><li><a href="../comp-checkbox/">Checkbox &amp; Radio</a></li><li><a href="../comp-switch/">Switch</a></li><li><a href="../comp-card/">Card</a></li><li><a href="../comp-badge/">Badge &amp; Tag</a></li><li><a href="../comp-alert/">Alert</a></li><li><a href="../comp-avatar/">Avatar</a></li><li><a href="../comp-progress/" class="active" aria-current="page">Progress &amp; Spinner</a></li><li><a href="../comp-tooltip/">Tooltip</a></li><li><a href="../comp-dialog/">Dialog</a></li><li><a href="../comp-menu/">Dropdown Menu</a></li><li><a href="../comp-popover/">Popover</a></li><li><a href="../comp-toast/">Toast</a></li><li><a href="../comp-tabs/">Tabs</a></li><li><a href="../comp-accordion/">Accordion</a></li><li><a href="../comp-breadcrumb/">Breadcrumb</a></li><li><a href="../comp-pagination/">Pagination</a></li></ul></div><div class="side-group"><div class="side-label">Essentials</div><ul><li><a href="../installation/">Installation</a></li><li><a href="../reactivity-state/">Reactivity &amp; State</a></li><li><a href="../templating/">Templating</a></li><li><a href="../events/">Events</a></li><li><a href="../forms/">Forms</a></li><li><a href="../lifecycle/">Lifecycle</a></li></ul></div><div class="side-group"><div class="side-label">Directives</div><ul><li><a href="../s-data/">s-data</a></li><li><a href="../s-bind/">s-bind</a></li><li><a href="../s-on/">s-on</a></li><li><a href="../s-text/">s-text</a></li><li><a href="../s-html/">s-html</a></li><li><a href="../s-model/">s-model</a></li><li><a href="../s-show/">s-show</a></li><li><a href="../s-if/">s-if</a></li><li><a href="../s-for/">s-for</a></li><li><a href="../s-effect/">s-effect</a></li><li><a href="../s-init/">s-init</a></li><li><a href="../s-ref/">s-ref</a></li><li><a href="../s-cloak/">s-cloak</a></li><li><a href="../s-ignore/">s-ignore</a></li><li><a href="../s-teleport/">s-teleport</a></li><li><a href="../s-transition/">s-transition</a></li></ul></div><div class="side-group"><div class="side-label">Magic Properties</div><ul><li><a href="../magic-el/">$el</a></li><li><a href="../magic-refs/">$refs</a></li><li><a href="../magic-store/">$store</a></li><li><a href="../magic-watch/">$watch</a></li><li><a href="../magic-dispatch/">$dispatch</a></li><li><a href="../magic-nextTick/">$nextTick</a></li><li><a href="../magic-root/">$root</a></li><li><a href="../magic-id/">$id</a></li><li><a href="../magic-data/">$data</a></li></ul></div><div class="side-group"><div class="side-label">Globals & API</div><ul><li><a href="../globals-data/">Summit.data</a></li><li><a href="../globals-store/">Summit.store</a></li><li><a href="../globals-bind/">Summit.bind</a></li><li><a href="../globals-directive/">Summit.directive</a></li><li><a href="../globals-magic/">Summit.magic</a></li><li><a href="../globals-plugin/">Summit.plugin</a></li><li><a href="../globals-start/">Summit.start</a></li></ul></div><div class="side-group"><div class="side-label">Reactivity</div><ul><li><a href="../reactive-signal/">signal</a></li><li><a href="../reactive-computed/">computed</a></li><li><a href="../reactive-effect/">effect</a></li><li><a href="../reactive-reactive/">reactive</a></li><li><a href="../reactive-batch/">batch</a></li><li><a href="../reactive-nexttick/">nextTick</a></li></ul></div><div class="side-group"><div class="side-label">Advanced</div><ul><li><a href="../advanced-reactivity/">How reactivity works</a></li><li><a href="../advanced-evaluator/">CSP-safe evaluator</a></li><li><a href="../advanced-extending/">Extending Summit</a></li><li><a href="../advanced-migrating/">Migrating from Alpine</a></li></ul></div></nav></aside>
+  <main id="content" class="content">
+    <article class="prose">
+      <div class="crumbs">Components</div>
+      <h1>Progress &amp; Spinner</h1>
+      <p>Loading states tell people the app is still working. Summit gives you three
+primitives for them: a progress bar you drive from state, a spinner for waits
+whose length you cannot predict, and a skeleton that stands in for content that
+has not arrived yet. The bar is the only interactive one, so it reads its width
+straight off a value in <code>s-data</code>.</p>
+<div class="demo">
+  <div class="demo-result"><div s-data="{ pct: 40 }" role="progressbar" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="pct">
+  <div class="s-progress"><span :style="{ width: pct + '%' }"></span></div>
+  <div class="s-row" style="margin-top:.75rem">
+    <button class="s-btn s-btn-sm s-btn-outline" @click="pct = Math.max(0, pct - 10)">-10%</button>
+    <button class="s-btn s-btn-sm s-btn-outline" @click="pct = Math.min(100, pct + 10)">+10%</button>
+    <button class="s-btn s-btn-sm" @click="pct = 100">Finish</button>
+    <span s-text="pct + '%'"></span>
+  </div>
+</div></div>
+  <details class="demo-code"><summary>Source</summary><div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">s-data</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{ pct: 40 }<span class="token punctuation">"</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>progressbar<span class="token punctuation">"</span></span> <span class="token attr-name">aria-valuemin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span> <span class="token attr-name">aria-valuemax</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>100<span class="token punctuation">"</span></span> <span class="token attr-name">:aria-valuenow</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pct<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-progress<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">:style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{ width: pct + '%' }<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-row<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">margin-top</span><span class="token punctuation">:</span>.75rem</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-btn s-btn-sm s-btn-outline<span class="token punctuation">"</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pct = Math.max(0, pct - 10)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>-10%<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-btn s-btn-sm s-btn-outline<span class="token punctuation">"</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pct = Math.min(100, pct + 10)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>+10%<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-btn s-btn-sm<span class="token punctuation">"</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pct = 100<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Finish<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">s-text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pct + '%'<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></details>
+</div><h2 id="driving-the-width"><a class="anchor" href="#driving-the-width" aria-hidden="true">#</a>Driving the width</h2><p>The bar is a <code>.s-progress</code> track with a single inner <code>&lt;span&gt;</code>. You never set a
+value attribute; you set the span&#39;s width, and the CSS transition animates the
+fill. Bind it with <code>:style</code> so the width tracks whatever number lives in state.</p>
+<div class="demo">
+  <div class="demo-result"><div s-data="{ pct: 65 }">
+  <div class="s-progress"><span :style="{ width: pct + '%' }"></span></div>
+</div></div>
+  <details class="demo-code"><summary>Source</summary><div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">s-data</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{ pct: 65 }<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-progress<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">:style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{ width: pct + '%' }<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></details>
+</div><p>Keep the number inside <code>0</code> to <code>100</code>. Clamping with <code>Math.max</code> and <code>Math.min</code>
+when you change it, as the demo above does, means a stray click can never push
+the fill past either end.</p>
+<h2 id="spinner"><a class="anchor" href="#spinner" aria-hidden="true">#</a>Spinner</h2><p><code>.s-spinner</code> is a standalone element for indeterminate waits, when you know work
+is happening but not how far along it is. It needs no state and no inner markup,
+just the class. Pair it with a label so the reason for the wait is clear.</p>
+<div class="demo">
+  <div class="demo-result"><div class="s-row">
+  <span class="s-spinner"></span>
+  <span>Loading your workspace</span>
+</div></div>
+  <details class="demo-code"><summary>Source</summary><div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-row<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-spinner<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Loading your workspace<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></details>
+</div><h2 id="skeleton"><a class="anchor" href="#skeleton" aria-hidden="true">#</a>Skeleton</h2><p><code>.s-skeleton</code> is a shimmering placeholder block. Give it an inline width and
+height so it matches the shape of the content it is standing in for, then stack
+several to preview a whole card or list row.</p>
+<div class="demo">
+  <div class="demo-result"><div class="s-stack" style="max-width:280px">
+  <div class="s-skeleton" style="height:1rem;width:80%"></div>
+  <div class="s-skeleton" style="height:1rem;width:60%"></div>
+  <div class="s-skeleton" style="height:1rem;width:70%"></div>
+</div></div>
+  <details class="demo-code"><summary>Source</summary><div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-stack<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">max-width</span><span class="token punctuation">:</span>280px</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-skeleton<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">height</span><span class="token punctuation">:</span>1rem<span class="token punctuation">;</span><span class="token property">width</span><span class="token punctuation">:</span>80%</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-skeleton<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">height</span><span class="token punctuation">:</span>1rem<span class="token punctuation">;</span><span class="token property">width</span><span class="token punctuation">:</span>60%</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-skeleton<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">height</span><span class="token punctuation">:</span>1rem<span class="token punctuation">;</span><span class="token property">width</span><span class="token punctuation">:</span>70%</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></details>
+</div><h2 id="copy-and-paste"><a class="anchor" href="#copy-and-paste" aria-hidden="true">#</a>Copy and paste</h2><div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-markup"><code><span class="token comment">&lt;!-- Progress bar: width comes from state, not an attribute --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">s-data</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{ pct: 40 }<span class="token punctuation">"</span></span>
+     <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>progressbar<span class="token punctuation">"</span></span> <span class="token attr-name">aria-valuemin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span> <span class="token attr-name">aria-valuemax</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>100<span class="token punctuation">"</span></span> <span class="token attr-name">:aria-valuenow</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pct<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-progress<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">:style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{ width: pct + '%' }<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-btn s-btn-sm<span class="token punctuation">"</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pct = Math.min(100, pct + 10)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Advance<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!-- Spinner: indeterminate wait --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-spinner<span class="token punctuation">"</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>status<span class="token punctuation">"</span></span> <span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Loading<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!-- Skeleton: size it to match the missing content --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-skeleton<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">height</span><span class="token punctuation">:</span>1rem<span class="token punctuation">;</span><span class="token property">width</span><span class="token punctuation">:</span>60%</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div><h2 id="notes"><a class="anchor" href="#notes" aria-hidden="true">#</a>Notes</h2><ul>
+<li>The bar carries no semantics on its own. Add <code>role=&quot;progressbar&quot;</code> with
+<code>aria-valuemin</code>, <code>aria-valuemax</code>, and a bound <code>:aria-valuenow</code> so screen
+readers announce the position, as the top demo does.</li>
+<li>Give the spinner <code>role=&quot;status&quot;</code> and an <code>aria-label</code> so its purpose reaches
+people who cannot see it turn.</li>
+<li>Both the spinner&#39;s spin and the skeleton&#39;s shimmer stop under
+<code>prefers-reduced-motion</code>, so you do not need to disable them yourself.</li>
+<li>Once a load finishes, a <a href="../comp-toast/">Toast</a> or an <a href="../comp-alert/">Alert</a>
+is a good way to confirm the result. See all the pieces on the
+<a href="../components/">UI Library overview</a>.</li>
+</ul>
+
+    </article>
+    <nav class="pager"><a class="pg prev" href="../comp-avatar/"><span>Previous</span><strong>Avatar</strong></a><a class="pg next" href="../comp-tooltip/"><span>Next</span><strong>Tooltip</strong></a></nav>
+  </main>
+  <aside class="toc"><nav><div class="toc-label">On this page</div><ul><li class="lvl-2"><a href="#driving-the-width">Driving the width</a></li><li class="lvl-2"><a href="#spinner">Spinner</a></li><li class="lvl-2"><a href="#skeleton">Skeleton</a></li><li class="lvl-2"><a href="#copy-and-paste">Copy and paste</a></li><li class="lvl-2"><a href="#notes">Notes</a></li></ul></nav></aside>
+</div>
+<footer class="site-foot"><div class="foot-inner">
+  <span class="foot-brand"><svg viewBox="0 0 40 32" aria-hidden="true"><rect x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)" fill="var(--accent)"/><path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="var(--logo)"/></svg><span>Summit<span class="dot">.js</span></span></span>
+  <span class="foot-motto">Open Source. <span class="nat">by Nature.</span></span>
+  <span>MIT · <a href="https://github.com/velofy/summit">github.com/velofy/summit</a></span>
+</div></footer>
+<div class="search-root" s-cloak s-data="search" data-base="../"
+    @open-search.window="open()"
+    @keydown.window.cmd.k.prevent="open()" @keydown.window.ctrl.k.prevent="open()">
+    <div class="search-overlay" s-show="isOpen" @click="close()"></div>
+    <div class="search-panel" s-show="isOpen" @keydown.escape.window="close()" @keydown.down.prevent="move(1)" @keydown.up.prevent="move(-1)" @keydown.enter.prevent="go()">
+      <div class="search-input-row">
+        <svg class="si" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
+        <input s-ref="input" class="search-input" placeholder="Search the docs" s-model="query" @input="run()" />
+        <kbd class="esc">Esc</kbd>
+      </div>
+      <div class="search-results" s-ref="list">
+        <div class="search-loading" s-show="isLoading"><span class="spinner" aria-hidden="true"></span>Loading search...</div>
+        <div s-show="!isLoading && !query">
+          <div class="search-section" s-show="recent.length">Recent</div>
+          <template s-for="(r, i) in recent" :key="'r' + i">
+            <a class="search-hit" :class="{ active: active === i }" :href="r.url" @mouseenter="active = i" @click="remember(r)">
+              <span class="hit-icon">↩</span>
+              <span class="hit-main"><span class="hit-title" s-text="r.heading"></span><span class="hit-page" s-text="r.page"></span></span>
+            </a>
+          </template>
+          <div class="search-section" s-show="suggested.length">Suggested</div>
+          <template s-for="(r, j) in suggested" :key="'s' + j">
+            <a class="search-hit" :class="{ active: active === recent.length + j }" :href="r.url" @mouseenter="active = recent.length + j" @click="remember(r)">
+              <span class="hit-icon">→</span>
+              <span class="hit-main"><span class="hit-title" s-text="r.heading"></span><span class="hit-page" s-text="r.page"></span></span>
+            </a>
+          </template>
+        </div>
+        <div class="search-empty" s-show="!isLoading && query && results.length === 0">No results for "<span s-text="query"></span>".</div>
+        <template s-for="(r, i) in results" :key="r.url + i">
+          <a class="search-hit" :class="{ active: active === i }" :href="r.url" @mouseenter="active = i" @click="remember(r)">
+            <span class="hit-icon">#</span>
+            <span class="hit-main">
+              <span class="hit-title" s-html="r.titleHtml"></span>
+              <span class="hit-snippet" s-html="r.snippetHtml"></span>
+              <span class="hit-page" s-text="r.page"></span>
+            </span>
+          </a>
+        </template>
+      </div>
+      <div class="search-foot">
+        <span><kbd>↑</kbd><kbd>↓</kbd> to navigate</span>
+        <span><kbd>↵</kbd> to select</span>
+        <span><kbd>esc</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+<script src="../assets/search.js" defer></script>
+<script src="../summit.min.js" defer></script>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-copy]");if(!b)return;var c=b.parentElement.querySelector("code");navigator.clipboard.writeText(c.innerText);b.textContent="Copied";setTimeout(function(){b.textContent="Copy";},1200);});</script>
+</body>
+</html>
