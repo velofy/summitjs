@@ -142,6 +142,25 @@ describe("s-if", () => {
     await tick();
     expect(el.querySelector("p")).toBeNull();
   });
+
+  it("renders every root of a multi-child template, in order", async () => {
+    const el = mount(
+      `<div s-data="{ open: false }"><template s-if="open"><div class="overlay"></div><div class="dialog">Hi</div></template><button @click="open = !open"></button></div>`,
+    );
+    expect(el.querySelector(".overlay")).toBeNull();
+    expect(el.querySelector(".dialog")).toBeNull();
+    el.querySelector("button")!.click();
+    await tick();
+    expect(el.querySelector(".overlay")).not.toBeNull();
+    expect(el.querySelector(".dialog")?.textContent).toBe("Hi");
+    // overlay comes before dialog in document order
+    const pos = el.querySelector(".overlay")!.compareDocumentPosition(el.querySelector(".dialog")!);
+    expect(pos & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    el.querySelector("button")!.click();
+    await tick();
+    expect(el.querySelector(".overlay")).toBeNull();
+    expect(el.querySelector(".dialog")).toBeNull();
+  });
 });
 
 describe("s-for", () => {
