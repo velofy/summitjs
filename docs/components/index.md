@@ -38,7 +38,7 @@ Components read the same design tokens as the rest of Summit. Override them on
 
 ```css
 :root {
-  --accent: #7c3aed;      /* primary / brand color */
+  --accent: #ea580c;      /* primary / brand color */
   --s-radius: 12px;       /* corner rounding */
   --s-danger: #e11d48;    /* destructive actions */
 }

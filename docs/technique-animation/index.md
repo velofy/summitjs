@@ -15,7 +15,7 @@ Ring-shaped loaders, from a plain ring to a masked conic sweep.
   <div><div style="height:44px;display:grid;place-items:center"><span class="s-spinner"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Ring</p></div>
   <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-dual"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Dual ring</p></div>
   <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-dash"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Dashed</p></div>
-  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-conic"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Conic</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-arc"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Arc</p></div>
   <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-orbit"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Orbit</p></div>
 </div>
 ```
@@ -102,7 +102,7 @@ not jump when it arrives. Drive the swap with a boolean in `s-data`.
 | Ring | `<span class="s-spinner"></span>` |
 | Dual ring | `<span class="s-load-dual"></span>` |
 | Dashed | `<span class="s-load-dash"></span>` |
-| Conic | `<span class="s-load-conic"></span>` |
+| Arc | `<span class="s-load-arc"></span>` |
 | Orbit | `<span class="s-load-orbit"></span>` |
 | Bouncing dots | `<div class="s-dots"><span></span>×3</div>` |
 | Wave | `<div class="s-load-wave"><span></span>×5</div>` |

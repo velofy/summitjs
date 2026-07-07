@@ -100,7 +100,7 @@ Components read the same design tokens as the rest of Summit. Override them on
 
 ```css
 :root {
-  --accent: #7c3aed;      /* primary / brand color */
+  --accent: #ea580c;      /* primary / brand color */
   --s-radius: 12px;       /* corner rounding */
   --s-danger: #e11d48;    /* destructive actions */
 }
@@ -1946,7 +1946,7 @@ Load the stylesheet once, then use any `s-` prefixed class from the pages below.
 - [Matte Glassmorphism](../technique-glassmorphism/): frosted, low-gloss surfaces that stay legible over anything.
 - [Neumorphism](../technique-neumorphism/): soft, extruded UI built from twin light and dark shadows.
 - [Claymorphism](../technique-claymorphism/): puffy, rounded, playful clay surfaces.
-- [Retro UI](../technique-retro/): hard shadows, neon text, and scanlines.
+- [Retro UI](../technique-retro/): hard shadows and neon text.
 - [Brutalism](../technique-brutalism/): stark borders, loud type, and blunt offset shadows.
 - [Aurora Backgrounds](../technique-aurora/): slow, glowing color fields behind your content.
 - [Glow & Spotlight](../technique-glow/): a highlight that follows the cursor across a card.
@@ -1975,7 +1975,7 @@ Ring-shaped loaders, from a plain ring to a masked conic sweep.
   <div><div style="height:44px;display:grid;place-items:center"><span class="s-spinner"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Ring</p></div>
   <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-dual"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Dual ring</p></div>
   <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-dash"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Dashed</p></div>
-  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-conic"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Conic</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-arc"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Arc</p></div>
   <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-orbit"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Orbit</p></div>
 </div>
 ```
@@ -2062,7 +2062,7 @@ not jump when it arrives. Drive the swap with a boolean in `s-data`.
 | Ring | `<span class="s-spinner"></span>` |
 | Dual ring | `<span class="s-load-dual"></span>` |
 | Dashed | `<span class="s-load-dash"></span>` |
-| Conic | `<span class="s-load-conic"></span>` |
+| Arc | `<span class="s-load-arc"></span>` |
 | Orbit | `<span class="s-load-orbit"></span>` |
 | Bouncing dots | `<div class="s-dots"><span></span>×3</div>` |
 | Wave | `<div class="s-load-wave"><span></span>×5</div>` |
@@ -2257,7 +2257,7 @@ clay. It suits friendly, consumer, and onboarding interfaces.
 
 # Retro UI
 
-> Hard offset shadows, neon text, and scanlines for a retro, terminal, or arcade look.
+> Hard offset shadows and neon text for a retro, terminal, or arcade look.
 
 Sometimes you want the opposite of soft and frosted: chunky borders, hard
 shadows, monospace type, and a little glow. These classes give an interface a
@@ -2286,13 +2286,12 @@ The button presses into its own shadow when you click it.
 </div>
 ```
 
-## Neon and scanlines
+## Neon glow
 
-`.s-neon` adds a soft glow to text. `.s-scanlines` lays faint horizontal lines
-over a surface for a CRT feel.
+`.s-neon` adds a soft glow to text, built from the accent color.
 
 ```summit
-<div class="s-retro s-scanlines" style="text-align:center; padding:1.6rem">
+<div class="s-retro" style="text-align:center; padding:1.6rem">
   <span class="s-neon" style="font-size:1.6rem">GAME OVER</span>
   <p style="margin:.6rem 0 0; font-family:var(--mono); color:var(--muted)">Insert coin to continue</p>
 </div>
@@ -2310,8 +2309,8 @@ over a surface for a CRT feel.
 ```
 
 The classes are `.s-retro` (card), `.s-retro-btn` (button), `.s-retro-tag`
-(label), `.s-neon` (glow text), and `.s-scanlines` (overlay). They read the same
-design tokens as everything else, so they recolor with your accent.
+(label), and `.s-neon` (glow text). They read the same design tokens as
+everything else, so they recolor with your accent.
 
 ---
 

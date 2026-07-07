@@ -38,7 +38,7 @@ Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` m
 - [Matte Glassmorphism](https://velofy.github.io/summit/technique-glassmorphism/): Frosted, low-gloss glass surfaces that blur what is behind them while staying legible in both themes.
 - [Neumorphism](https://velofy.github.io/summit/technique-neumorphism/): Soft, extruded UI built from twin light and dark shadows on a matching surface.
 - [Claymorphism](https://velofy.github.io/summit/technique-claymorphism/): Puffy, rounded, playful clay surfaces with soft inner and outer shadows.
-- [Retro UI](https://velofy.github.io/summit/technique-retro/): Hard offset shadows, neon text, and scanlines for a retro, terminal, or arcade look.
+- [Retro UI](https://velofy.github.io/summit/technique-retro/): Hard offset shadows and neon text for a retro, terminal, or arcade look.
 - [Brutalism](https://velofy.github.io/summit/technique-brutalism/): Stark borders, loud uppercase type, and blunt offset shadows for a raw, confident look.
 - [Aurora Backgrounds](https://velofy.github.io/summit/technique-aurora/): Slow, glowing color fields that drift behind your content for a premium hero look.
 - [Glow & Spotlight](https://velofy.github.io/summit/technique-glow/): A soft highlight that follows the cursor across a card, driven by a tiny Summit handler.

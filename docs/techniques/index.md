@@ -22,7 +22,7 @@ Load the stylesheet once, then use any `s-` prefixed class from the pages below.
 - [Matte Glassmorphism](../technique-glassmorphism/): frosted, low-gloss surfaces that stay legible over anything.
 - [Neumorphism](../technique-neumorphism/): soft, extruded UI built from twin light and dark shadows.
 - [Claymorphism](../technique-claymorphism/): puffy, rounded, playful clay surfaces.
-- [Retro UI](../technique-retro/): hard shadows, neon text, and scanlines.
+- [Retro UI](../technique-retro/): hard shadows and neon text.
 - [Brutalism](../technique-brutalism/): stark borders, loud type, and blunt offset shadows.
 - [Aurora Backgrounds](../technique-aurora/): slow, glowing color fields behind your content.
 - [Glow & Spotlight](../technique-glow/): a highlight that follows the cursor across a card.

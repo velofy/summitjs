@@ -410,7 +410,7 @@
     },
     {
       "name": "Retro UI",
-      "summary": "Hard offset shadows, neon text, and scanlines for a retro, terminal, or arcade look.",
+      "summary": "Hard offset shadows and neon text for a retro, terminal, or arcade look.",
       "doc": "https://velofy.github.io/summit/technique-retro/"
     },
     {

@@ -1,6 +1,6 @@
 # Retro UI
 
-> Hard offset shadows, neon text, and scanlines for a retro, terminal, or arcade look.
+> Hard offset shadows and neon text for a retro, terminal, or arcade look.
 
 Sometimes you want the opposite of soft and frosted: chunky borders, hard
 shadows, monospace type, and a little glow. These classes give an interface a
@@ -29,13 +29,12 @@ The button presses into its own shadow when you click it.
 </div>
 ```
 
-## Neon and scanlines
+## Neon glow
 
-`.s-neon` adds a soft glow to text. `.s-scanlines` lays faint horizontal lines
-over a surface for a CRT feel.
+`.s-neon` adds a soft glow to text, built from the accent color.
 
 ```summit
-<div class="s-retro s-scanlines" style="text-align:center; padding:1.6rem">
+<div class="s-retro" style="text-align:center; padding:1.6rem">
   <span class="s-neon" style="font-size:1.6rem">GAME OVER</span>
   <p style="margin:.6rem 0 0; font-family:var(--mono); color:var(--muted)">Insert coin to continue</p>
 </div>
@@ -53,5 +52,5 @@ over a surface for a CRT feel.
 ```
 
 The classes are `.s-retro` (card), `.s-retro-btn` (button), `.s-retro-tag`
-(label), `.s-neon` (glow text), and `.s-scanlines` (overlay). They read the same
-design tokens as everything else, so they recolor with your accent.
+(label), and `.s-neon` (glow text). They read the same design tokens as
+everything else, so they recolor with your accent.

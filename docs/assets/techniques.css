@@ -65,7 +65,7 @@
 .s-glass-stage { position: relative; overflow: hidden; border-radius: 16px; padding: 2.2rem 1.5rem; background: var(--surface-2); isolation: isolate; }
 .s-glass-stage .blob { position: absolute; border-radius: 50%; filter: blur(2px); z-index: -1; opacity: 0.85; }
 .s-glass-stage .b1 { width: 140px; height: 140px; background: #0d9488; top: -30px; left: -20px; }
-.s-glass-stage .b2 { width: 120px; height: 120px; background: #6366f1; bottom: -30px; right: 10px; }
+.s-glass-stage .b2 { width: 120px; height: 120px; background: #e11d48; bottom: -30px; right: 10px; }
 .s-glass-stage .b3 { width: 90px; height: 90px; background: #f59e0b; top: 20px; right: 30%; opacity: 0.7; }
 
 /* ---- Retro -------------------------------------------------------- */
@@ -78,9 +78,6 @@
 .s-retro-tag { display: inline-block; font-family: var(--mono); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
   padding: 0.15rem 0.5rem; border: 2px solid var(--text); border-radius: 4px; background: var(--surface); }
 .s-neon { color: var(--accent-2); text-shadow: 0 0 6px color-mix(in srgb, var(--accent) 70%, transparent), 0 0 16px color-mix(in srgb, var(--accent) 40%, transparent); font-family: var(--mono); font-weight: 700; }
-.s-scanlines { position: relative; overflow: hidden; }
-.s-scanlines::after { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: repeating-linear-gradient(to bottom, transparent 0 2px, color-mix(in srgb, var(--text) 8%, transparent) 2px 3px); }
 
 /* ---- Navbar patterns ------------------------------------------------ */
 .s-navbar { display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
@@ -106,8 +103,8 @@
 .s-load-dual { width: 40px; height: 40px; border-radius: 50%; border: 4px solid var(--surface-2); border-top-color: var(--accent); border-bottom-color: var(--accent); animation: s-spin 1s linear infinite; }
 /* Dashed ring */
 .s-load-dash { width: 38px; height: 38px; border-radius: 50%; border: 3px dashed var(--accent); animation: s-spin 3s linear infinite; }
-/* Conic ring (masked gradient) */
-.s-load-conic { width: 40px; height: 40px; border-radius: 50%; background: conic-gradient(from 0deg, transparent, var(--accent)); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0); mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0); animation: s-spin 0.9s linear infinite; }
+/* Arc ring (solid half-accent border) */
+.s-load-arc { width: 40px; height: 40px; border-radius: 50%; border: 4px solid var(--surface-2); border-top-color: var(--accent); border-right-color: var(--accent); animation: s-spin 0.85s linear infinite; }
 /* Equalizer bars */
 .s-load-bars { display: inline-flex; align-items: flex-end; gap: 3px; height: 32px; }
 .s-load-bars span { width: 5px; height: 100%; background: var(--accent); border-radius: 2px; transform-origin: bottom; animation: s-eq 1s ease-in-out infinite; }
@@ -182,17 +179,17 @@
 .s-brutal-btn:active { transform: translate(5px, 5px); box-shadow: 0 0 0 var(--text); }
 .s-brutal-tag { display: inline-block; border: 2px solid var(--text); background: var(--accent); color: #06211d; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.72rem; padding: 0.15rem 0.5rem; }
 
-/* ---- Aurora background ---------------------------------------------- */
+/* ---- Aurora background (solid blurred shapes, no gradient) ----------- */
 .s-aurora { position: relative; overflow: hidden; border-radius: 16px; padding: 2rem 1.6rem; background: var(--ink); color: var(--ink-contrast); isolation: isolate; }
-.s-aurora::before, .s-aurora::after { content: ""; position: absolute; width: 70%; height: 150%; border-radius: 50%; filter: blur(45px); opacity: 0.55; z-index: -1; animation: s-aurora-move 9s ease-in-out infinite alternate; }
-.s-aurora::before { background: radial-gradient(circle, #0d9488, transparent 70%); top: -50%; left: -10%; }
-.s-aurora::after { background: radial-gradient(circle, #6366f1, transparent 70%); bottom: -50%; right: -10%; animation-delay: -4.5s; }
+.s-aurora::before, .s-aurora::after { content: ""; position: absolute; width: 60%; height: 130%; border-radius: 50%; filter: blur(55px); opacity: 0.5; z-index: -1; animation: s-aurora-move 9s ease-in-out infinite alternate; }
+.s-aurora::before { background: #0d9488; top: -45%; left: -8%; }
+.s-aurora::after { background: #f59e0b; bottom: -45%; right: -8%; animation-delay: -4.5s; }
 @keyframes s-aurora-move { from { transform: translate(0, 0) scale(1); } to { transform: translate(25%, 18%) scale(1.15); } }
 
-/* ---- Glow / spotlight card ------------------------------------------ */
+/* ---- Glow / spotlight card (solid blurred blob follows cursor) ------- */
 .s-glow-card { position: relative; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); padding: 1.5rem; overflow: hidden; }
-.s-glow-card::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 0.25s ease;
-  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%); }
+.s-glow-card::before { content: ""; position: absolute; top: 0; left: 0; width: 300px; height: 300px; margin: -150px 0 0 -150px; border-radius: 50%; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 0.25s ease;
+  background: color-mix(in srgb, var(--accent) 24%, transparent); filter: blur(55px); transform: translate(var(--mx, 0), var(--my, 0)); }
 .s-glow-card:hover::before { opacity: 1; }
 .s-glow-card > * { position: relative; z-index: 1; }
 
@@ -200,7 +197,7 @@
   .s-logo-pulse .peak, .s-logo-pulse .sun, .s-logo-draw .peak-outline, .s-logo-draw .sun,
   .s-logo-orbit::after, .s-dots span, .s-bar::after,
   .s-skel-text, .s-skel-title, .s-skel-avatar, .s-skel-block,
-  .s-load-dual, .s-load-dash, .s-load-conic, .s-load-bars span, .s-load-pulse, .s-load-ripple span,
+  .s-load-dual, .s-load-dash, .s-load-arc, .s-load-bars span, .s-load-pulse, .s-load-ripple span,
   .s-load-orbit, .s-load-grid span, .s-load-wave span, .s-load-flip, .s-load-bounce span, .s-load-typing span,
   .s-aurora::before, .s-aurora::after { animation: none; }
 }
