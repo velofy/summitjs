@@ -6,12 +6,15 @@
  * external service. Registered on `summit:init` so it exists before Summit
  * initializes the page, regardless of script order.
  *
- * The search-root element carries a `data-base` attribute (the path prefix back
- * to the docs root: "" on the homepage, "../" on a docs page). Result URLs are
- * built from that base plus each entry's slug, so one index serves every page.
+ * The index is prefetched on load, so opening is instant. If it has not arrived
+ * yet the palette shows a loader; otherwise it shows Recent + Suggested pages so
+ * it is never blank. The search-root element carries a `data-base` attribute
+ * (the path prefix back to the docs root: "" on the homepage, "../" on a docs
+ * page); result URLs are built from that base plus each entry's slug.
  */
 (function () {
   var RECENT_KEY = "summit-recent";
+  var SUGGESTED = ["start", "installation", "reactivity-state", "s-data", "events", "advanced-migrating"];
 
   function escapeHtml(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -40,21 +43,31 @@
     window.Summit.data("search", function () {
       return {
         isOpen: false,
+        isLoading: true,
         query: "",
         results: [],
         active: 0,
         recent: [],
+        suggested: [],
         index: null,
 
         base: function () {
-          // data-base may be "" (homepage) which is meaningful, so distinguish
-          // an absent attribute (null) from a present empty one.
           var b = this.$el ? this.$el.getAttribute("data-base") : null;
           return b == null ? "../" : b;
         },
 
         url: function (slug, anchor) {
           return this.base() + slug + "/" + (anchor ? "#" + anchor : "");
+        },
+
+        buildSuggested: function () {
+          var self = this;
+          var idx = this.index || [];
+          this.suggested = SUGGESTED.map(function (slug) {
+            var e = idx.find(function (x) { return x.slug === slug && !x.anchor; }) ||
+              idx.find(function (x) { return x.slug === slug; });
+            return e ? { heading: e.page, page: e.category, slug: e.slug, anchor: "", url: self.url(e.slug, "") } : null;
+          }).filter(Boolean);
         },
 
         hydrateRecent: function () {
@@ -64,28 +77,49 @@
           });
         },
 
-        init: function () {
-          this.load();
-          this.hydrateRecent();
+        // The flat list the keyboard navigates: results when searching, else
+        // Recent followed by Suggested.
+        current: function () {
+          return this.query ? this.results : this.recent.concat(this.suggested);
         },
 
+        init: function () {
+          this.hydrateRecent();
+          this.load();
+        },
+
+        // Populates `index` (prefetched on load). `isLoading` stays true until
+        // both the index and the Suggested list are ready, then flips to false,
+        // which is what reveals the results, so they never render half-built.
         load: function () {
           var self = this;
-          if (this._loading || this.index) return this._loading;
-          // A self-contained preview (Artifact) can inline the index as a global
-          // to avoid a blocked fetch.
+          if (this.index) {
+            this.buildSuggested();
+            this.isLoading = false;
+            return Promise.resolve();
+          }
+          if (this._loading) return this._loading;
           if (typeof window !== "undefined" && window.__SUMMIT_SEARCH_INDEX__) {
             this.index = window.__SUMMIT_SEARCH_INDEX__;
+            this.buildSuggested();
+            this.isLoading = false;
             this._loading = Promise.resolve();
             return this._loading;
           }
+          this.isLoading = true;
+          var done = function (data) {
+            self.index = data;
+            self.buildSuggested();
+            self.isLoading = false;
+          };
           try {
             this._loading = fetch(this.base() + "search-index.json")
               .then(function (r) { return r.json(); })
-              .then(function (data) { self.index = data; })
-              .catch(function () { self.index = []; });
+              .then(done)
+              .catch(function () { self.index = []; self.isLoading = false; });
           } catch (e) {
             self.index = [];
+            self.isLoading = false;
             this._loading = Promise.resolve();
           }
           return this._loading;
@@ -93,16 +127,16 @@
 
         open: function () {
           var self = this;
-          Promise.resolve(this.load()).then(function () {
-            self.isOpen = true;
-            self.query = "";
-            self.results = [];
-            self.active = 0;
-            self.hydrateRecent();
-            self.$nextTick(function () {
-              var el = self.$refs.input;
-              if (el) el.focus();
-            });
+          // Open instantly; the loader covers the (usually already finished) fetch.
+          this.isOpen = true;
+          this.query = "";
+          this.results = [];
+          this.active = 0;
+          this.hydrateRecent();
+          this.load();
+          this.$nextTick(function () {
+            var el = self.$refs.input;
+            if (el) el.focus();
           });
         },
 
@@ -147,14 +181,13 @@
         },
 
         move: function (dir) {
-          var list = this.query ? this.results : this.recent;
+          var list = this.current();
           if (!list.length) return;
           this.active = (this.active + dir + list.length) % list.length;
         },
 
         go: function () {
-          var list = this.query ? this.results : this.recent;
-          var r = list[this.active];
+          var r = this.current()[this.active];
           if (r) {
             this.remember(r);
             location.href = r.url;
