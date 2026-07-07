@@ -1,0 +1,188 @@
+/**
+ * initTree / destroyTree: the DOM engine.
+ *
+ * initTree walks an element and its descendants, establishing s-data scopes and
+ * running directives in priority order. Structural directives (s-if, s-for,
+ * s-teleport) take over their own subtree. destroyTree runs every teardown
+ * callback so effects stop, listeners detach, and component `destroy()` fires.
+ */
+
+import { addCleanup, meta, nextMarker, resolveScopes, runCleanups, type Scope } from "../dom.js";
+import { attachMagics, createScope, makeEnv } from "../scope/index.js";
+import { domEffect } from "../reactivity/index.js";
+import { getData, getDirective, DEFAULT_PRIORITY } from "../registry/registry.js";
+import type { DirectiveMeta, DirectiveUtils, SummitGlobalLike } from "../types.js";
+import { parseAttribute } from "./attributes.js";
+
+const STRUCTURAL = new Set(["if", "for", "teleport"]);
+
+let summitGlobal: SummitGlobalLike;
+export function setSummitGlobal(g: SummitGlobalLike): void {
+  summitGlobal = g;
+}
+
+// --- Observer suppression -------------------------------------------------
+
+let suppressDepth = 0;
+export function isSuppressed(): boolean {
+  return suppressDepth > 0;
+}
+/** Run a DOM mutation that Summit itself performs, hidden from the observer. */
+export function mutateDom<T>(fn: () => T): T {
+  suppressDepth++;
+  try {
+    return fn();
+  } finally {
+    suppressDepth--;
+  }
+}
+
+// --- Directive collection -------------------------------------------------
+
+function collectDirectives(el: Element): DirectiveMeta[] {
+  const out: DirectiveMeta[] = [];
+  for (const attr of Array.from(el.attributes)) {
+    const parsed = parseAttribute(attr.name, attr.value);
+    if (!parsed) continue;
+    if (parsed.name === "data" || STRUCTURAL.has(parsed.name) || getDirective(parsed.name)) {
+      out.push(parsed);
+    }
+  }
+  return out;
+}
+
+function priorityOf(name: string): number {
+  return getDirective(name)?.priority ?? DEFAULT_PRIORITY;
+}
+
+// --- Utilities handed to directives --------------------------------------
+
+function makeUtils(el: Element, scopes: Scope[]): DirectiveUtils {
+  const handle = makeEnv(el);
+  return {
+    evaluate: (expression: string) => handle.evaluate(expression),
+    evaluateAction: (expression: string, locals?: Scope) => handle.evaluateAction(expression, locals),
+    effect: (fn: () => void) => {
+      const dispose = domEffect(fn);
+      addCleanup(el, dispose);
+    },
+    cleanup: (fn: () => void) => addCleanup(el, fn),
+    initTree,
+    destroyTree,
+    scopes,
+    makeEnv: (e: Element, locals?: Scope) => makeEnv(e, locals).env,
+    Summit: summitGlobal,
+  };
+}
+
+function runDirective(el: Element, dmeta: DirectiveMeta, scopes: Scope[]): void {
+  const entry = getDirective(dmeta.name);
+  if (!entry) return;
+  try {
+    entry.handler(el, dmeta, makeUtils(el, scopes));
+  } catch (err) {
+    console.error(`[summit] error in s-${dmeta.name}`, err);
+  }
+}
+
+// --- s-data ---------------------------------------------------------------
+
+const DATA_PROVIDER_RE = /^([A-Za-z_$][\w$]*)\s*(\(([\s\S]*)\))?$/;
+
+function initData(el: Element, dmeta: DirectiveMeta, parentScopes: Scope[]): Scope[] {
+  // The data expression is evaluated in the parent scope.
+  const parentEnv = makeEnv(el);
+  const expr = dmeta.expression.trim();
+
+  let raw: unknown;
+  const match = expr.match(DATA_PROVIDER_RE);
+  if (match && getData(match[1]!)) {
+    const provider = getData(match[1]!)!;
+    const args = match[2] ? (parentEnv.evaluate("[" + (match[3] ?? "") + "]") as unknown[]) : [];
+    raw = provider(...args);
+  } else if (expr === "") {
+    raw = {};
+  } else {
+    raw = parentEnv.evaluate("(" + expr + ")");
+  }
+  if (raw === null || typeof raw !== "object") raw = {};
+
+  const scope = createScope(raw as Record<PropertyKey, unknown>);
+  const newScopes = [...parentScopes, scope];
+  const m = meta(el);
+  m.scopes = newScopes;
+  m.isRoot = true;
+  m.refs = {};
+
+  // Make $-magics reachable as this.$watch, this.$refs, etc. inside methods.
+  attachMagics(raw as Record<PropertyKey, unknown>, el, newScopes);
+
+  const initFn = (scope as Record<string, unknown>)["init"];
+  if (typeof initFn === "function") {
+    try {
+      (initFn as () => void)();
+    } catch (err) {
+      console.error("[summit] error in data init()", err);
+    }
+  }
+  const destroyFn = (scope as Record<string, unknown>)["destroy"];
+  if (typeof destroyFn === "function") {
+    addCleanup(el, () => {
+      try {
+        (destroyFn as () => void)();
+      } catch (err) {
+        console.error("[summit] error in data destroy()", err);
+      }
+    });
+  }
+
+  return newScopes;
+}
+
+// --- initTree / destroyTree ----------------------------------------------
+
+export function initTree(el: Element, scopesArg?: Scope[]): void {
+  const m = meta(el);
+  if (m.initialized || m.ignore) return;
+  if (el.hasAttribute("s-ignore")) {
+    m.ignore = true;
+    m.initialized = true;
+    return;
+  }
+
+  let scopes = scopesArg ?? resolveScopes(el);
+  m.scopes = scopes;
+  m.marker = nextMarker();
+
+  const dirs = collectDirectives(el);
+
+  const dataDir = dirs.find((d) => d.name === "data");
+  if (dataDir) scopes = initData(el, dataDir, scopes);
+
+  const structural = dirs.find((d) => STRUCTURAL.has(d.name));
+  if (structural) {
+    m.initialized = true;
+    runDirective(el, structural, scopes);
+    return; // structural directives own their subtree
+  }
+
+  const rest = dirs.filter((d) => d.name !== "data").sort((a, b) => priorityOf(a.name) - priorityOf(b.name));
+  for (const d of rest) runDirective(el, d, scopes);
+  m.initialized = true;
+
+  // Descend into element children with the (possibly extended) scope stack.
+  // Snapshot the children first: it survives sibling mutations during init
+  // (structural directives insert/remove nodes) and sidesteps host quirks
+  // where nextElementSibling is unreliable.
+  for (const child of Array.from(el.children)) {
+    initTree(child, scopes);
+  }
+}
+
+export function destroyTree(el: Element): void {
+  runCleanups(el);
+  for (const child of Array.from(el.children)) {
+    destroyTree(child);
+  }
+  meta(el).initialized = false;
+}

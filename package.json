@@ -1,0 +1,60 @@
+{
+  "name": "summitjs",
+  "version": "0.1.0",
+  "description": "A rugged, signal-powered framework for composing behavior directly in your HTML. Drop in a script and go.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Velofy",
+  "homepage": "https://velofy.github.io/summit/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/velofy/summit"
+  },
+  "keywords": [
+    "summit",
+    "signals",
+    "reactivity",
+    "html",
+    "directives",
+    "progressive-enhancement",
+    "csp-safe"
+  ],
+  "main": "./dist/summit.cjs",
+  "module": "./dist/summit.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/summit.min.js",
+  "jsdelivr": "./dist/summit.min.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/summit.js",
+      "require": "./dist/summit.cjs"
+    },
+    "./cdn": "./dist/summit.min.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup && node scripts/rename-cdn.mjs",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "size": "node scripts/size.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "verify": "node scripts/verify-page.mjs",
+    "check": "npm run typecheck && npm test && npm run build && npm run size && npm run smoke && npm run verify",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "happy-dom": "^15.11.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

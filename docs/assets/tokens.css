@@ -1,0 +1,67 @@
+/*
+ * Summit design tokens.
+ *
+ * The foundation of Summit's own-the-source component layer: a small set of
+ * CSS custom properties for color, space, radius, type, and elevation, themed
+ * for light and dark. Copy this file into your project and reskin by editing
+ * the values. Components read only these variables, never hard-coded colors.
+ */
+
+:root {
+  /* Neutrals */
+  --s-bg: #ffffff;
+  --s-surface: #f7f8fa;
+  --s-surface-2: #eef1f5;
+  --s-border: #e3e7ee;
+  --s-text: #0b1020;
+  --s-muted: #58616f;
+
+  /* Accent */
+  --s-accent: #0891b2;
+  --s-accent-strong: #0e7490;
+  --s-accent-2: #6d28d9;
+  --s-accent-contrast: #ffffff;
+
+  /* Radius */
+  --s-radius-sm: 6px;
+  --s-radius: 10px;
+  --s-radius-lg: 16px;
+  --s-radius-full: 999px;
+
+  /* Space (4px base) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-6: 1.5rem;
+  --s-8: 2rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+
+  /* Type */
+  --s-font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --s-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+
+  /* Elevation */
+  --s-shadow: 0 1px 2px rgba(11, 16, 32, 0.06), 0 8px 24px rgba(11, 16, 32, 0.06);
+  --s-shadow-lg: 0 12px 40px rgba(11, 16, 32, 0.12);
+
+  --s-ring: 0 0 0 3px color-mix(in srgb, var(--s-accent) 35%, transparent);
+}
+
+:root[data-theme="dark"] {
+  --s-bg: #0a0e1a;
+  --s-surface: #111726;
+  --s-surface-2: #182031;
+  --s-border: #232c40;
+  --s-text: #e8ecf4;
+  --s-muted: #97a1b4;
+
+  --s-accent: #22d3ee;
+  --s-accent-strong: #67e8f9;
+  --s-accent-2: #a78bfa;
+  --s-accent-contrast: #06121a;
+
+  --s-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.35);
+  --s-shadow-lg: 0 16px 50px rgba(0, 0, 0, 0.5);
+}

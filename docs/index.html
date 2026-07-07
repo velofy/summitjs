@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Summit.js — the rugged, signal-powered JavaScript framework</title>
+    <meta
+      name="description"
+      content="Summit is a rugged, signal-powered JavaScript framework for composing behavior directly in your HTML. Drop in one script. CSP-safe, about 13KB."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Crect x='21' y='3' width='9' height='9' rx='1.5' transform='rotate(45 25.5 7.5)' fill='%230d9488'/%3E%3Cpath d='M2 28 L13 10 L20 22 L26 14 L38 28 Z' fill='%230f172a'/%3E%3C/svg%3E"
+    />
+    <script>
+      (function () {
+        var t = localStorage.getItem("summit-theme") ||
+          (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --surface: #ffffff;
+        --surface-2: #f7f9fc;
+        --border: #e6e9ef;
+        --text: #0f172a;
+        --muted: #475569;
+        --faint: #64748b;
+        --accent: #0d9488;
+        --accent-2: #0f766e;
+        --ink: #0f172a;
+        --ink-contrast: #ffffff;
+        --logo: #0f172a;
+        --code-bg: #f7f9fc;
+        --c-tag: #0f766e;
+        --c-attr: #475569;
+        --c-str: #b45309;
+        --c-com: #94a3b8;
+        --shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 10px 30px rgba(15, 23, 42, 0.06);
+        --shadow-lg: 0 20px 55px rgba(15, 23, 42, 0.1);
+        --radius-sm: 8px;
+        --radius: 12px;
+        --radius-lg: 18px;
+        --font: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        --body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0b1120; --surface: #0e1728; --surface-2: #0e1728; --border: #1e293b;
+          --text: #e6ebf4; --muted: #9aa7bd; --faint: #7c8aa0;
+          --accent: #2dd4bf; --accent-2: #5eead4;
+          --ink: #e6ebf4; --ink-contrast: #0b1120; --logo: #e6ebf4;
+          --code-bg: #0e1728; --c-tag: #5eead4; --c-attr: #94a3b8; --c-str: #fbbf24; --c-com: #64748b;
+          --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 34px rgba(0, 0, 0, 0.4);
+          --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.5);
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #0b1120; --surface: #0e1728; --surface-2: #0e1728; --border: #1e293b;
+        --text: #e6ebf4; --muted: #9aa7bd; --faint: #7c8aa0;
+        --accent: #2dd4bf; --accent-2: #5eead4;
+        --ink: #e6ebf4; --ink-contrast: #0b1120; --logo: #e6ebf4;
+        --code-bg: #0e1728; --c-tag: #5eead4; --c-attr: #94a3b8; --c-str: #fbbf24; --c-com: #64748b;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 34px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0; background: var(--bg); color: var(--text); font-family: var(--body);
+        line-height: 1.6; -webkit-font-smoothing: antialiased;
+      }
+      [s-cloak] { display: none !important; }
+      a { color: var(--accent-2); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+      .wrap { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
+      code, pre { font-family: var(--mono); }
+
+      /* Nav */
+      nav { position: sticky; top: 0; z-index: 30;
+        background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(10px);
+        border-bottom: 1px solid transparent; }
+      nav.scrolled { border-bottom-color: var(--border); }
+      nav .wrap { display: flex; align-items: center; justify-content: flex-end; gap: 1.35rem; height: 66px; }
+      .nav-a { color: var(--muted); font-weight: 550; font-size: 0.95rem; }
+      .nav-a:hover { color: var(--text); text-decoration: none; }
+      .search { display: inline-flex; align-items: center; gap: 0.5rem; height: 38px; padding: 0 0.65rem;
+        border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2);
+        color: var(--faint); font-size: 0.9rem; cursor: text; min-width: 220px; }
+      .search .kbd { margin-left: auto; display: inline-flex; gap: 2px; }
+      .search .kbd span { border: 1px solid var(--border); border-radius: 5px; padding: 0 5px; font-size: 0.72rem;
+        color: var(--faint); background: var(--bg); }
+      .ghost-btn { display: grid; place-items: center; width: 38px; height: 38px; border-radius: var(--radius);
+        border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
+      .ghost-btn:hover { border-color: var(--accent); }
+      .gh { color: var(--text); display: inline-flex; }
+
+      /* Hero */
+      .hero { text-align: center; padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(2rem, 5vw, 3.5rem); }
+      .logo { display: inline-flex; align-items: center; gap: 1rem; }
+      .logo svg { width: clamp(48px, 8vw, 64px); height: auto; }
+      .logo .word { font-family: var(--font); font-weight: 800; letter-spacing: -0.04em;
+        font-size: clamp(2.8rem, 9vw, 5rem); line-height: 1; color: var(--text); }
+      .logo .word .dot { color: var(--accent); }
+      .tagline { font-size: clamp(1.05rem, 2.6vw, 1.4rem); color: var(--muted); margin: 1.6rem auto 0;
+        max-width: 34ch; font-weight: 450; }
+      .cta { margin-top: 2.2rem; }
+      .btn-ink { display: inline-flex; align-items: center; gap: 0.55rem; background: var(--ink);
+        color: var(--ink-contrast); font-family: var(--font); font-weight: 650; font-size: 1.02rem;
+        padding: 0.85rem 1.5rem; border-radius: var(--radius); border: none; cursor: pointer;
+        box-shadow: var(--shadow); transition: transform 0.12s ease, opacity 0.12s ease; }
+      .btn-ink:hover { text-decoration: none; transform: translateY(-1px); opacity: 0.92; }
+
+      /* Stacked code card */
+      .code-wrap { position: relative; max-width: 760px; margin: clamp(3rem, 7vw, 5rem) auto 0; }
+      .code-wrap::before, .code-wrap::after {
+        content: ""; position: absolute; inset: 0; border: 1px solid var(--border);
+        border-radius: var(--radius-lg); background: var(--surface); z-index: 0;
+      }
+      .code-wrap::before { transform: translate(9px, 12px); opacity: 0.85; }
+      .code-wrap::after { transform: translate(18px, 24px); opacity: 0.55; }
+      .code-card { position: relative; z-index: 1; background: var(--code-bg); border: 1px solid var(--border);
+        border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); overflow: hidden; }
+      .code-head { display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1rem;
+        border-bottom: 1px solid var(--border); }
+      .dot3 { width: 11px; height: 11px; border-radius: 50%; background: var(--border); }
+      .code-card pre { margin: 0; padding: 1.4rem 1.5rem; overflow-x: auto; font-size: 0.95rem; line-height: 1.75;
+        color: var(--text); }
+      .t { color: var(--c-tag); } .at { color: var(--c-attr); } .s { color: var(--c-str); } .cm { color: var(--c-com); }
+
+      /* Sections */
+      section { padding: clamp(3rem, 7vw, 5rem) 0; }
+      .sec-head { text-align: center; margin-bottom: 2.75rem; }
+      .sec-head h2 { font-family: var(--font); font-size: clamp(1.6rem, 4vw, 2.1rem); letter-spacing: -0.03em;
+        margin: 0 0 0.5rem; color: var(--text); }
+      .sec-head p { color: var(--muted); margin: 0 auto; max-width: 52ch; }
+
+      .grid { display: grid; gap: 1rem; }
+      .cards3 { grid-template-columns: repeat(3, 1fr); }
+      @media (max-width: 780px) { .cards3 { grid-template-columns: 1fr; } }
+      .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+      .feature h3 { font-family: var(--font); margin: 0 0 0.4rem; font-size: 1.08rem; color: var(--text); }
+      .feature p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+      .feature .mark { display: inline-block; width: 26px; height: 3px; border-radius: 3px; background: var(--accent); margin-bottom: 0.9rem; }
+
+      .demos { grid-template-columns: repeat(2, 1fr); }
+      @media (max-width: 780px) { .demos { grid-template-columns: 1fr; } }
+      .demo-title { font-family: var(--font); font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.06em; color: var(--faint); margin: 0 0 1rem; }
+      .ui-btn { padding: 0.5rem 0.9rem; border-radius: var(--radius-sm); border: 1px solid var(--border);
+        background: var(--bg); color: var(--text); font-weight: 600; cursor: pointer; font-size: 0.9rem; font-family: var(--body); }
+      .ui-btn:hover { border-color: var(--accent); }
+      .ui-btn.primary { background: var(--accent); color: #fff; border-color: transparent; }
+      :root[data-theme="dark"] .ui-btn.primary { color: #06211d; }
+      .ui-input { width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border);
+        background: var(--bg); color: var(--text); font-size: 0.92rem; font-family: var(--body); }
+      .ui-input:focus { outline: none; border-color: var(--accent); }
+      .counter { display: flex; align-items: center; justify-content: center; gap: 1.25rem; padding: 0.5rem 0; }
+      .counter output { font-family: var(--font); font-size: 2.6rem; font-weight: 800; min-width: 3ch;
+        text-align: center; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+      .round { width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem; display: grid; place-items: center; }
+      .note { color: var(--faint); font-size: 0.88rem; margin: 1rem 0 0; text-align: center; }
+
+      ul.todo { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.4rem; }
+      ul.todo li { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+        padding: 0.5rem 0.7rem; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+      .x { border: none; background: transparent; color: var(--faint); cursor: pointer; font-size: 1.15rem; line-height: 1; }
+      .x:hover { color: #ef4444; }
+
+      .tabs { display: flex; gap: 0.25rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
+      .tab { padding: 0.5rem 0.85rem; border: none; background: transparent; color: var(--faint); font-weight: 650;
+        cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: var(--body); font-size: 0.92rem; }
+      .tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+      .dropdown { position: relative; display: inline-block; }
+      .menu { position: absolute; top: calc(100% + 6px); left: 0; min-width: 190px; background: var(--surface);
+        border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-lg); padding: 0.35rem; z-index: 5; }
+      .menu a { display: block; padding: 0.5rem 0.65rem; border-radius: var(--radius-sm); color: var(--text); font-size: 0.9rem; }
+      .menu a:hover { background: var(--surface-2); text-decoration: none; }
+      .t-enter { transition: opacity 0.16s ease, transform 0.16s ease; }
+      .t-enter-start { opacity: 0; transform: translateY(-6px); }
+      .t-enter-end { opacity: 1; transform: none; }
+      .t-leave { transition: opacity 0.12s ease, transform 0.12s ease; }
+      .t-leave-start { opacity: 1; transform: none; }
+      .t-leave-end { opacity: 0; transform: translateY(-6px); }
+
+      pre.out { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+        padding: 0.85rem; margin: 1rem 0 0; overflow-x: auto; color: var(--accent-2); font-size: 0.85rem; }
+      .field { margin-bottom: 0.85rem; }
+      .field label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--faint); margin-bottom: 0.3rem; }
+
+      .dirs { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      .dchip { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.6rem 0.75rem; }
+      .dchip code { color: var(--accent-2); font-weight: 650; }
+      .dchip span { display: block; color: var(--faint); font-size: 0.78rem; margin-top: 0.15rem; }
+
+      .compare { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+      .compare th, .compare td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+      .compare thead th { background: var(--surface-2); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--faint); }
+      .compare td.yes { color: var(--accent-2); font-weight: 650; }
+      .compare td.mid { color: var(--muted); }
+      .compare tbody tr:last-child td { border-bottom: none; }
+      .table-scroll { overflow-x: auto; }
+
+      .install { max-width: 720px; margin: 0 auto; }
+      pre.install-code { background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius);
+        padding: 1.25rem 1.4rem; overflow-x: auto; color: var(--text); font-size: 0.92rem; line-height: 1.7; }
+
+      footer { border-top: 1px solid var(--border); padding: 2.25rem 0; color: var(--faint); font-size: 0.9rem; }
+      footer .wrap { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
+      .foot-brand { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font); font-weight: 750; color: var(--text); }
+      @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto; } }
+    </style>
+  </head>
+  <body>
+    <nav id="nav">
+      <div class="wrap">
+        <div class="search" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4-4" /></svg>
+          Search
+          <span class="kbd"><span>⌘</span><span>K</span></span>
+        </div>
+        <a class="nav-a" href="#start">Docs</a>
+        <a class="nav-a" href="#demos">Demos</a>
+        <a class="gh" href="https://github.com/velofy/summit" aria-label="GitHub">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.26 3.4.96.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.28 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z" /></svg>
+        </a>
+        <button class="ghost-btn" title="Toggle theme" aria-label="Toggle theme" s-data
+          @click="document.documentElement.dataset.theme = (document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'); localStorage.setItem('summit-theme', document.documentElement.dataset.theme)">
+          <span s-text="document.documentElement.dataset.theme === 'dark' ? '☀' : '☾'">☾</span>
+        </button>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="wrap">
+        <div class="logo">
+          <svg viewBox="0 0 40 32" aria-hidden="true">
+            <rect x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)" fill="var(--accent)" />
+            <path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="var(--logo)" />
+          </svg>
+          <span class="word">Summit<span class="dot">.js</span></span>
+        </div>
+        <p class="tagline">Your rugged, signal-powered JavaScript framework.</p>
+        <div class="cta">
+          <a class="btn-ink" href="#start">Get started →</a>
+        </div>
+
+        <div class="code-wrap">
+          <div class="code-card">
+            <div class="code-head" aria-hidden="true">
+              <span class="dot3"></span><span class="dot3"></span><span class="dot3"></span>
+            </div>
+            <pre><code><span class="t">&lt;script</span> <span class="at">src</span>=<span class="s">"//cdn.jsdelivr.net/npm/summitjs"</span> <span class="at">defer</span><span class="t">&gt;&lt;/script&gt;</span>
+
+<span class="t">&lt;div</span> <span class="at">s-data</span>=<span class="s">"{ open: false }"</span><span class="t">&gt;</span>
+    <span class="t">&lt;button</span> <span class="at">@click</span>=<span class="s">"open = true"</span><span class="t">&gt;</span>Expand<span class="t">&lt;/button&gt;</span>
+
+    <span class="t">&lt;span</span> <span class="at">s-show</span>=<span class="s">"open"</span><span class="t">&gt;</span>
+        Content...
+    <span class="t">&lt;/span&gt;</span>
+<span class="t">&lt;/div&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>Small tool, sharp edges</h2>
+          <p>Everything that makes HTML-first behavior lovable, rebuilt on a modern core.</p>
+        </div>
+        <div class="grid cards3">
+          <div class="card feature"><span class="mark"></span><h3>Fine-grained signals</h3><p>A real signal engine updates only the exact DOM that changed. Big lists and busy pages stay fast.</p></div>
+          <div class="card feature"><span class="mark"></span><h3>CSP-safe by default</h3><p>Expressions run through a hand-written interpreter. No <code>eval</code>, no <code>unsafe-eval</code>.</p></div>
+          <div class="card feature"><span class="mark"></span><h3>About 13KB, no build</h3><p>One script tag and you are live. Authored in TypeScript, shipped with full types.</p></div>
+          <div class="card feature"><span class="mark"></span><h3>Keyed lists</h3><p><code>s-for</code> reconciles by key, moving nodes instead of rebuilding them. State stays put.</p></div>
+          <div class="card feature"><span class="mark"></span><h3>Familiar directives</h3><p>15 directives, 9 magics, the <code>@</code> and <code>:</code> shorthands. Know the idiom, know Summit.</p></div>
+          <div class="card feature"><span class="mark"></span><h3>Headless components</h3><p>An accessible, token-themed component layer is next. Own the markup, keep the behavior.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demos">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>See it work</h2>
+          <p>Every widget below is powered by the same script this page loads.</p>
+        </div>
+        <div class="grid demos">
+          <div class="card" data-demo="counter" s-cloak s-data="{ count: 0 }">
+            <p class="demo-title">Counter · s-data</p>
+            <div class="counter">
+              <button class="ui-btn round" @click="count--" aria-label="decrement">−</button>
+              <output s-text="count">0</output>
+              <button class="ui-btn round primary" @click="count++" aria-label="increment">+</button>
+            </div>
+            <p class="note" s-show="count !== 0" s-text="'Clicked to ' + count + '.'"></p>
+          </div>
+
+          <div class="card" data-demo="todo" s-cloak s-data="{ items: ['Summit the peak', 'Ship mvp1'], draft: '' }">
+            <p class="demo-title">To-do · s-for + s-model</p>
+            <form style="display:flex; gap:0.5rem" @submit.prevent="draft.trim() && (items.push(draft.trim()), draft = '')">
+              <input class="ui-input" s-model="draft" placeholder="Add a task, press Enter" />
+              <button class="ui-btn primary" type="submit">Add</button>
+            </form>
+            <p class="note" s-show="items.length === 0">Nothing left to climb.</p>
+            <ul class="todo">
+              <template s-for="(item, i) in items" :key="i">
+                <li><span s-text="item"></span><button class="x" @click="items.splice(i, 1)" aria-label="remove">×</button></li>
+              </template>
+            </ul>
+          </div>
+
+          <div class="card" data-demo="tabs" s-cloak s-data="{ tab: 'signals' }">
+            <p class="demo-title">Tabs · s-show + :class</p>
+            <div class="tabs" role="tablist">
+              <button class="tab" :class="{ active: tab === 'signals' }" @click="tab = 'signals'">Signals</button>
+              <button class="tab" :class="{ active: tab === 'csp' }" @click="tab = 'csp'">CSP-safe</button>
+              <button class="tab" :class="{ active: tab === 'size' }" @click="tab = 'size'">Size</button>
+            </div>
+            <div s-show="tab === 'signals'"><p style="margin:0;color:var(--muted)">Reads track, writes trigger, and only the effects that touched a value re-run.</p></div>
+            <div s-show="tab === 'csp'"><p style="margin:0;color:var(--muted)">Expressions are parsed and interpreted, so a strict Content-Security-Policy just works.</p></div>
+            <div s-show="tab === 'size'"><p style="margin:0;color:var(--muted)">The whole runtime, interpreter included, is about 13KB gzipped.</p></div>
+          </div>
+
+          <div class="card" data-demo="form" s-cloak s-data="{ name: 'Ada', size: 'M', agree: true }">
+            <p class="demo-title">Form · two-way binding, live</p>
+            <div class="field"><label>Name</label><input class="ui-input" s-model="name" /></div>
+            <div class="field"><label>Size</label><select class="ui-input" s-model="size"><option>S</option><option>M</option><option>L</option></select></div>
+            <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;color:var(--muted)"><input type="checkbox" s-model="agree" /> Ship it</label>
+            <pre class="out" s-text="JSON.stringify({ name, size, agree }, null, 2)"></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>The vocabulary</h2>
+          <p>Prefix <code>s-</code>, with <code>@</code> for events and <code>:</code> for binding.</p>
+        </div>
+        <div class="grid dirs">
+          <div class="dchip"><code>s-data</code><span>component scope</span></div>
+          <div class="dchip"><code>s-text</code><span>text content</span></div>
+          <div class="dchip"><code>s-html</code><span>inner HTML</span></div>
+          <div class="dchip"><code>:bind</code><span>attributes</span></div>
+          <div class="dchip"><code>@on</code><span>events</span></div>
+          <div class="dchip"><code>s-model</code><span>two-way</span></div>
+          <div class="dchip"><code>s-show</code><span>visibility</span></div>
+          <div class="dchip"><code>s-if</code><span>conditional</span></div>
+          <div class="dchip"><code>s-for</code><span>keyed lists</span></div>
+          <div class="dchip"><code>s-effect</code><span>reactive run</span></div>
+          <div class="dchip"><code>s-transition</code><span>enter/leave</span></div>
+          <div class="dchip"><code>s-teleport</code><span>move in DOM</span></div>
+          <div class="dchip"><code>s-ref</code><span>element handle</span></div>
+          <div class="dchip"><code>s-init</code><span>on init</span></div>
+          <div class="dchip"><code>s-cloak</code><span>anti-flicker</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>Why Summit</h2>
+          <p>Built in the spirit of Alpine's HTML-first ergonomics, then pushed further where it counts.</p>
+        </div>
+        <div class="table-scroll">
+          <table class="compare">
+            <thead><tr><th>Capability</th><th>Summit</th><th>Classic HTML-sprinkle runtimes</th></tr></thead>
+            <tbody>
+              <tr><td>Reactivity</td><td class="yes">Fine-grained signals</td><td class="mid">Effect re-runs, coarser</td></tr>
+              <tr><td>Strict CSP (no unsafe-eval)</td><td class="yes">Default</td><td class="mid">Separate limited build</td></tr>
+              <tr><td>Keyed list reconciliation</td><td class="yes">Built in</td><td class="mid">Limited</td></tr>
+              <tr><td>Cached computed getters</td><td class="yes">Yes</td><td class="mid">Recomputed each read</td></tr>
+              <tr><td><code>s-if</code> on any element</td><td class="yes">Yes</td><td class="mid">Template tag only</td></tr>
+              <tr><td>TypeScript types shipped</td><td class="yes">Yes</td><td class="mid">Partial</td></tr>
+              <tr><td>Bundle size (gzip)</td><td class="yes">~13KB</td><td class="mid">~15-16KB</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="start">
+      <div class="wrap install">
+        <div class="sec-head">
+          <h2>Get started in ten seconds</h2>
+          <p>Add the script, write the markup. That is the whole setup.</p>
+        </div>
+        <pre class="install-code"><code><span class="cm"># Drop-in, no build. It auto-starts.</span>
+<span class="t">&lt;script</span> <span class="at">src</span>=<span class="s">"//cdn.jsdelivr.net/npm/summitjs/dist/summit.min.js"</span> <span class="at">defer</span><span class="t">&gt;&lt;/script&gt;</span>
+
+<span class="cm"># Or with a bundler</span>
+npm install summitjs</code></pre>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <span class="foot-brand">
+          <svg viewBox="0 0 40 32" width="22" height="18" aria-hidden="true"><path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="currentColor" /></svg>
+          Summit.js
+        </span>
+        <span>Built by Velofy · MIT · <a href="https://github.com/velofy/summit">github.com/velofy/summit</a></span>
+      </div>
+    </footer>
+
+    <script>
+      addEventListener("scroll", function () {
+        document.getElementById("nav").classList.toggle("scrolled", scrollY > 8);
+      }, { passive: true });
+    </script>
+    <script src="./summit.min.js" defer></script>
+  </body>
+</html>
