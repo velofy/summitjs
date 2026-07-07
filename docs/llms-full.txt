@@ -1922,6 +1922,395 @@ To show where the current page sits in your site hierarchy instead, see
 
 ---
 
+# Techniques
+
+> Presentational recipes you compose with Summit's directives and classes: animated loaders, matte glassmorphism, retro interfaces, navbar patterns, and using Tailwind.
+
+Techniques are recipes that sit on top of the core: small, self-contained
+patterns you copy in and compose with the directives and components you already
+use. They are pure markup plus a class, token-themed, and they work in both
+light and dark.
+
+Load the stylesheet once, then use any `s-` prefixed class from the pages below.
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summitjs/dist/techniques.css" />
+```
+
+## In this section
+
+- [Animated Loaders](../technique-animation/): breathing logo marks, dot and bar loaders, and skeleton screens.
+- [Matte Glassmorphism](../technique-glassmorphism/): frosted, low-gloss surfaces that stay legible over anything.
+- [Retro UI](../technique-retro/): hard shadows, neon text, and scanlines.
+- [Navbar Patterns](../technique-navbars/): active links, a responsive mobile menu, and a glass bar.
+- [Using Tailwind CSS](../technique-tailwind/): Summit for behavior, Tailwind for styling, no build step.
+
+---
+
+# Animated Loaders
+
+> Animated Summit logo marks, dot and bar loaders, and skeleton screens for loading states.
+
+Loading states set the tone for how fast an app feels. These are all CSS: no
+JavaScript runs the animation, so they are cheap and smooth. Pair any of them
+with Summit state to swap a placeholder for real content.
+
+## Animated logo marks
+
+Three ways to bring the Summit mark to life while something loads. The mark
+breathes, redraws its outline, or rests inside a sweeping ring.
+
+```summit
+<div class="s-row" style="gap:2.5rem; align-items:center">
+  <span class="s-logo-loader s-lg s-logo-pulse"><svg viewBox="0 0 40 32"><rect class="sun" x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)"/><path class="peak" d="M2 28 L13 10 L20 22 L26 14 L38 28 Z"/></svg></span>
+  <span class="s-logo-loader s-lg s-logo-draw"><svg viewBox="0 0 40 32"><rect class="sun" x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)"/><path class="peak-outline" d="M2 28 L13 10 L20 22 L26 14 L38 28"/></svg></span>
+  <span class="s-logo-loader s-lg s-logo-orbit"><svg viewBox="0 0 40 32"><rect class="sun" x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)"/><path class="peak" d="M2 28 L13 10 L20 22 L26 14 L38 28 Z"/></svg></span>
+</div>
+```
+
+The mark is a two-part SVG: a `.sun` diamond and a `.peak` mountain (or
+`.peak-outline` for the draw variant). Swap in your own logo and the same
+classes animate it.
+
+```html
+<span class="s-logo-loader s-logo-pulse">
+  <svg viewBox="0 0 40 32">
+    <rect class="sun" x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)"/>
+    <path class="peak" d="M2 28 L13 10 L20 22 L26 14 L38 28 Z"/>
+  </svg>
+</span>
+```
+
+## Dots, bar, and spinner
+
+For inline or indeterminate loading, reach for a smaller loader.
+
+```summit
+<div class="s-stack" style="gap:1.3rem; max-width:300px">
+  <div class="s-dots"><span></span><span></span><span></span></div>
+  <div class="s-bar"></div>
+  <span class="s-spinner"></span>
+</div>
+```
+
+## Skeleton screens
+
+A skeleton mirrors the shape of the content that is coming, so the layout does
+not jump when it arrives. Drive the swap with a boolean in `s-data`.
+
+```summit
+<div s-data="{ loading: true }">
+  <button class="s-btn s-btn-sm" @click="loading = !loading">Toggle loading</button>
+  <div style="margin-top:1.1rem">
+    <div s-show="loading" class="s-row" style="align-items:flex-start; gap:.8rem">
+      <div class="s-skel-avatar"></div>
+      <div class="s-stack" style="flex:1; gap:.5rem">
+        <div class="s-skel-title" style="width:45%"></div>
+        <div class="s-skel-text" style="width:92%"></div>
+        <div class="s-skel-text" style="width:70%"></div>
+      </div>
+    </div>
+    <div s-show="!loading" class="s-row" style="align-items:flex-start; gap:.8rem">
+      <div class="s-avatar">AL</div>
+      <div>
+        <p style="margin:0; font-weight:650">Ada Lovelace</p>
+        <p style="margin:.2rem 0 0; color:var(--muted)">Wrote the first algorithm, long before the hardware existed to run it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+The skeleton helpers are `.s-skel-text`, `.s-skel-title`, `.s-skel-avatar`, and
+`.s-skel-block`. Set a width inline to vary the lines. See also the base
+[Progress & Spinner](../comp-progress/) component.
+
+## Accessibility
+
+Animations here respect `prefers-reduced-motion` and stop for users who ask for
+less motion. For screen readers, mark a loading region with `aria-busy="true"`
+while it is pending.
+
+---
+
+# Matte Glassmorphism
+
+> Frosted, low-gloss glass surfaces that blur what is behind them while staying legible in both themes.
+
+Glassmorphism is a surface that blurs and tints whatever sits behind it. The
+glossy version can wash out text; the matte version dials down the shine and
+saturation so content stays readable over any background. Both are one class.
+
+## Matte over a busy background
+
+`.s-glass-matte` is a heavier frost with low gloss. Here it floats over a stage
+of solid color shapes so you can see the blur at work.
+
+```summit
+<div class="s-glass-stage">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  <div class="s-glass-matte" style="padding:1.3rem 1.5rem; max-width:340px; margin:0 auto">
+    <p style="margin:0 0 .3rem; font-weight:700">Matte glass</p>
+    <p style="margin:0; color:var(--muted); font-size:.92rem">Frosted, low-gloss, and legible over anything behind it. No gradient, no glare.</p>
+  </div>
+</div>
+```
+
+## Glossy vs matte
+
+The plain `.s-glass` keeps more transparency and saturation for a brighter,
+glassier look. Choose it for accents and `.s-glass-matte` for anything holding
+text.
+
+```summit
+<div class="s-glass-stage" style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center">
+  <span class="blob b1"></span><span class="blob b2"></span>
+  <div class="s-glass" style="padding:1rem 1.2rem; flex:1; min-width:150px">
+    <p style="margin:0; font-weight:700">.s-glass</p>
+    <p style="margin:.2rem 0 0; font-size:.85rem; color:var(--muted)">Bright and glossy.</p>
+  </div>
+  <div class="s-glass-matte" style="padding:1rem 1.2rem; flex:1; min-width:150px">
+    <p style="margin:0; font-weight:700">.s-glass-matte</p>
+    <p style="margin:.2rem 0 0; font-size:.85rem; color:var(--muted)">Soft and legible.</p>
+  </div>
+</div>
+```
+
+## Copy it in
+
+Put a glass surface over any positioned background: an image, a photo, or the
+solid color blobs used here.
+
+```html
+<div class="s-glass-stage">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  <div class="s-glass-matte" style="padding:1.3rem 1.5rem">
+    Your content here.
+  </div>
+</div>
+```
+
+## Notes
+
+- The effect uses `backdrop-filter`, supported in all current browsers. Where it
+  is unavailable the surface degrades to a solid panel, which is still legible.
+- Keep body text on `.s-glass-matte`, not `.s-glass`, for contrast.
+- A glass bar makes a great sticky header. See [Navbar Patterns](../technique-navbars/).
+
+---
+
+# Retro UI
+
+> Hard offset shadows, neon text, and scanlines for a retro, terminal, or arcade look.
+
+Sometimes you want the opposite of soft and frosted: chunky borders, hard
+shadows, monospace type, and a little glow. These classes give an interface a
+retro, terminal, or arcade feel while staying token-themed.
+
+## Retro card and tag
+
+A thick border and a hard offset shadow, in the accent color.
+
+```summit
+<div class="s-retro" style="max-width:360px">
+  <span class="s-retro-tag">New</span>
+  <p style="margin:.7rem 0 0"><span class="s-neon">SUMMIT.EXE</span> loaded successfully.</p>
+  <p style="margin:.4rem 0 0; color:var(--muted); font-size:.88rem">Ready for input.</p>
+</div>
+```
+
+## Retro buttons
+
+The button presses into its own shadow when you click it.
+
+```summit
+<div class="s-row">
+  <button class="s-retro-btn">Start</button>
+  <button class="s-retro-btn" style="background:var(--surface); color:var(--text)">Options</button>
+</div>
+```
+
+## Neon and scanlines
+
+`.s-neon` adds a soft glow to text. `.s-scanlines` lays faint horizontal lines
+over a surface for a CRT feel.
+
+```summit
+<div class="s-retro s-scanlines" style="text-align:center; padding:1.6rem">
+  <span class="s-neon" style="font-size:1.6rem">GAME OVER</span>
+  <p style="margin:.6rem 0 0; font-family:var(--mono); color:var(--muted)">Insert coin to continue</p>
+</div>
+```
+
+## Copy it in
+
+```html
+<div class="s-retro">
+  <span class="s-retro-tag">New</span>
+  <p><span class="s-neon">Hello</span>, world.</p>
+</div>
+
+<button class="s-retro-btn">Press me</button>
+```
+
+The classes are `.s-retro` (card), `.s-retro-btn` (button), `.s-retro-tag`
+(label), `.s-neon` (glow text), and `.s-scanlines` (overlay). They read the same
+design tokens as everything else, so they recolor with your accent.
+
+---
+
+# Navbar Patterns
+
+> Navigation bars with active links, a responsive mobile menu, and a glass variant, wired with Summit state.
+
+A navbar is mostly layout plus a little state: which link is active, and whether
+the mobile menu is open. Summit handles the state; these classes handle the
+look.
+
+## Active link
+
+Track the current section in `s-data` and mark the matching link.
+
+```summit
+<nav class="s-navbar" s-data="{ active: 'home' }">
+  <span class="s-navbar-brand">Summit<span class="dot">.js</span></span>
+  <div class="s-navbar-links">
+    <a class="s-navbar-link" :class="{ 'is-active': active === 'home' }" @click="active = 'home'">Home</a>
+    <a class="s-navbar-link" :class="{ 'is-active': active === 'docs' }" @click="active = 'docs'">Docs</a>
+    <a class="s-navbar-link" :class="{ 'is-active': active === 'pricing' }" @click="active = 'pricing'">Pricing</a>
+  </div>
+  <div class="s-navbar-actions"><button class="s-btn s-btn-sm">Sign in</button></div>
+</nav>
+```
+
+## Responsive with a mobile menu
+
+Below a narrow width the inline links hide and a toggle appears. The toggle
+flips an `open` flag that reveals a stacked menu. Resize the window to see it
+switch.
+
+```summit
+<nav s-data="{ open: false }">
+  <div class="s-navbar">
+    <span class="s-navbar-brand">Summit<span class="dot">.js</span></span>
+    <div class="s-navbar-links">
+      <a class="s-navbar-link">Home</a>
+      <a class="s-navbar-link">Docs</a>
+      <a class="s-navbar-link">Pricing</a>
+    </div>
+    <div class="s-navbar-actions">
+      <button class="s-navbar-toggle" @click="open = !open" aria-label="Toggle menu" :aria-expanded="open">&#9776;</button>
+    </div>
+  </div>
+  <div class="s-navbar-mobile" :class="{ 'is-open': open }">
+    <a class="s-navbar-link" @click="open = false">Home</a>
+    <a class="s-navbar-link" @click="open = false">Docs</a>
+    <a class="s-navbar-link" @click="open = false">Pricing</a>
+  </div>
+</nav>
+```
+
+## Glass navbar
+
+Drop [matte glass](../technique-glassmorphism/) onto the bar for a header that
+floats over the page.
+
+```summit
+<div class="s-glass-stage" style="padding:1.5rem">
+  <span class="blob b1"></span><span class="blob b2"></span>
+  <nav class="s-navbar s-glass-matte">
+    <span class="s-navbar-brand">Summit<span class="dot">.js</span></span>
+    <div class="s-navbar-links">
+      <a class="s-navbar-link is-active">Home</a>
+      <a class="s-navbar-link">Docs</a>
+    </div>
+    <div class="s-navbar-actions"><button class="s-btn s-btn-sm">Get started</button></div>
+  </nav>
+</div>
+```
+
+## Notes
+
+- Make it sticky with `position: sticky; top: 0` on the `.s-navbar`.
+- The classes are `.s-navbar`, `.s-navbar-brand`, `.s-navbar-links`,
+  `.s-navbar-link` (`.is-active`), `.s-navbar-actions`, `.s-navbar-toggle`, and
+  `.s-navbar-mobile` (`.is-open`).
+
+---
+
+# Using Tailwind CSS
+
+> Summit for behavior, Tailwind for styling. They compose cleanly because Summit lives in attributes and Tailwind lives in classes.
+
+Summit and Tailwind solve different problems and never collide. Tailwind styles
+your markup through the `class` attribute; Summit adds behavior through `s-`
+attributes. You can add, toggle, and compute Tailwind classes with Summit's
+reactivity, and neither needs a build step.
+
+## Toggle utilities reactively
+
+Bind Tailwind classes with `:class`. Summit merges the reactive object with any
+static `class` you already have.
+
+```html
+<div s-data="{ open: false }">
+  <button class="rounded-md bg-teal-600 px-4 py-2 font-semibold text-white"
+          @click="open = !open">
+    Toggle
+  </button>
+
+  <p class="mt-3 text-slate-600" :class="open ? 'block' : 'hidden'">
+    Now you see me.
+  </p>
+</div>
+```
+
+## Compute classes from state
+
+Because `:class` takes an object, you can drive whole variants from a value.
+
+```html
+<div s-data="{ status: 'ok' }">
+  <span class="rounded px-2 py-1 text-sm font-medium"
+        :class="{
+          'bg-green-100 text-green-700': status === 'ok',
+          'bg-red-100 text-red-700': status === 'error'
+        }">
+    <span s-text="status"></span>
+  </span>
+  <button class="ml-2 underline" @click="status = status === 'ok' ? 'error' : 'ok'">flip</button>
+</div>
+```
+
+## No build, both from a CDN
+
+For a quick page, load Tailwind's browser build and Summit together. Nothing to
+compile.
+
+```html
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs" defer></script>
+
+<div s-data="{ count: 0 }" class="flex items-center gap-3 p-4">
+  <button class="rounded bg-slate-900 px-3 py-1.5 text-white" @click="count++">Add</button>
+  <span class="text-lg font-bold" s-text="count"></span>
+</div>
+```
+
+For production, use Tailwind's CLI or a framework integration to purge unused
+classes, then load `summitjs` alongside your bundle exactly as above.
+
+## Why it composes
+
+- Summit reads only `s-`, `@`, and `:` attributes, so it never touches your
+  `class` list except where you ask it to with `:class`.
+- Tailwind's classes are static strings, which is exactly what Summit's
+  [s-bind](../s-bind/) is best at toggling.
+- The [UI Library](../components/) and [Techniques](../techniques/) are optional:
+  use them, use Tailwind, or mix both in the same page.
+
+---
+
 # Installation
 
 > Add Summit with a single script tag, or install it from npm for use with a bundler.

@@ -1,0 +1,108 @@
+/*
+ * Summit Techniques: animated loaders, matte glassmorphism, retro, and navbar
+ * patterns. These build on the design tokens in docs.css and the `s-` component
+ * classes in components.css. Everything is token-themed and works in both
+ * light and dark.
+ */
+
+/* ---- Animated logo loaders ------------------------------------------ */
+.s-logo-loader { display: inline-grid; place-items: center; }
+.s-logo-loader svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.s-logo-loader { width: 48px; height: 48px; }
+.s-logo-loader.s-lg { width: 72px; height: 72px; }
+.s-logo-loader.s-sm { width: 32px; height: 32px; }
+
+/* Pulse: the mountain breathes while the peak star bobs. */
+.s-logo-pulse .peak { fill: var(--logo); animation: s-peak-pulse 1.5s ease-in-out infinite; transform-origin: center bottom; }
+.s-logo-pulse .sun { fill: var(--accent); animation: s-sun-bob 1.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes s-peak-pulse { 0%, 100% { opacity: 1; transform: scaleY(1); } 50% { opacity: 0.55; transform: scaleY(0.94); } }
+@keyframes s-sun-bob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-2.5px) rotate(8deg); } }
+
+/* Draw: the mountain outline redraws itself on a loop. */
+.s-logo-draw .peak-outline { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 66; animation: s-draw 2.4s ease-in-out infinite; }
+.s-logo-draw .sun { fill: var(--accent); opacity: 0; animation: s-sun-blink 2.4s ease-in-out infinite; }
+@keyframes s-draw { 0% { stroke-dashoffset: 66; } 55%, 100% { stroke-dashoffset: -66; } }
+@keyframes s-sun-blink { 0%, 45% { opacity: 0; transform: scale(0.4); } 60% { opacity: 1; transform: scale(1); } 100% { opacity: 1; transform: scale(1); } }
+
+/* Orbit: a ring sweeps around the resting mark. */
+.s-logo-orbit { position: relative; }
+.s-logo-orbit .peak { fill: var(--logo); }
+.s-logo-orbit .sun { fill: var(--accent); }
+.s-logo-orbit::after { content: ""; position: absolute; inset: -6px; border-radius: 50%;
+  border: 2px solid var(--border); border-top-color: var(--accent); animation: s-spin 0.9s linear infinite; }
+@keyframes s-spin { to { transform: rotate(360deg); } }
+
+/* ---- Dot and bar loaders -------------------------------------------- */
+.s-dots { display: inline-flex; gap: 0.35rem; align-items: center; }
+.s-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: s-dot-bounce 1.2s ease-in-out infinite; }
+.s-dots span:nth-child(2) { animation-delay: 0.15s; }
+.s-dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes s-dot-bounce { 0%, 80%, 100% { transform: translateY(0); opacity: 0.5; } 40% { transform: translateY(-6px); opacity: 1; } }
+
+.s-bar { position: relative; width: 100%; height: 6px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.s-bar::after { content: ""; position: absolute; top: 0; left: 0; height: 100%; width: 40%; border-radius: 999px;
+  background: var(--accent); animation: s-bar-slide 1.3s ease-in-out infinite; }
+@keyframes s-bar-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(300%); } }
+
+/* ---- Skeleton helpers (pulse, no gradient) -------------------------- */
+.s-skel-text { height: 0.8rem; border-radius: 6px; background: var(--surface-2); animation: s-skel 1.5s ease-in-out infinite; }
+.s-skel-title { height: 1.15rem; border-radius: 7px; background: var(--surface-2); animation: s-skel 1.5s ease-in-out infinite; }
+.s-skel-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--surface-2); animation: s-skel 1.5s ease-in-out infinite; flex: none; }
+.s-skel-block { height: 120px; border-radius: 12px; background: var(--surface-2); animation: s-skel 1.5s ease-in-out infinite; }
+@keyframes s-skel { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+
+/* ---- Matte glassmorphism -------------------------------------------- */
+.s-glass { background: color-mix(in srgb, var(--surface) 55%, transparent); backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4); border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  border-radius: 16px; box-shadow: 0 12px 40px rgba(15, 23, 42, 0.18); }
+/* Matte: heavier frost, lower saturation, a faint top hairline. No gloss. */
+.s-glass-matte { background: color-mix(in srgb, var(--surface) 80%, transparent); backdrop-filter: blur(22px) saturate(1.05) brightness(1.02);
+  -webkit-backdrop-filter: blur(22px) saturate(1.05) brightness(1.02); border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  border-radius: 16px; box-shadow: 0 1px 0 color-mix(in srgb, #fff 25%, transparent) inset, 0 16px 44px rgba(15, 23, 42, 0.16); }
+:root[data-theme="dark"] .s-glass-matte { box-shadow: 0 1px 0 color-mix(in srgb, #fff 8%, transparent) inset, 0 16px 44px rgba(0, 0, 0, 0.45); }
+/* A stage to show the blur against: solid color blobs, no gradients. */
+.s-glass-stage { position: relative; overflow: hidden; border-radius: 16px; padding: 2.2rem 1.5rem; background: var(--surface-2); isolation: isolate; }
+.s-glass-stage .blob { position: absolute; border-radius: 50%; filter: blur(2px); z-index: -1; opacity: 0.85; }
+.s-glass-stage .b1 { width: 140px; height: 140px; background: #0d9488; top: -30px; left: -20px; }
+.s-glass-stage .b2 { width: 120px; height: 120px; background: #6366f1; bottom: -30px; right: 10px; }
+.s-glass-stage .b3 { width: 90px; height: 90px; background: #f59e0b; top: 20px; right: 30%; opacity: 0.7; }
+
+/* ---- Retro -------------------------------------------------------- */
+.s-retro { border: 2px solid var(--text); border-radius: 6px; background: var(--surface); box-shadow: 6px 6px 0 var(--accent);
+  padding: 1.1rem 1.25rem; font-family: var(--mono); }
+.s-retro-btn { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-weight: 700; font-size: 0.9rem;
+  padding: 0.5rem 1rem; border: 2px solid var(--text); border-radius: 6px; background: var(--accent); color: #06211d; cursor: pointer;
+  box-shadow: 4px 4px 0 var(--text); transition: transform 0.05s ease, box-shadow 0.05s ease; }
+.s-retro-btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--text); }
+.s-retro-tag { display: inline-block; font-family: var(--mono); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem; border: 2px solid var(--text); border-radius: 4px; background: var(--surface); }
+.s-neon { color: var(--accent-2); text-shadow: 0 0 6px color-mix(in srgb, var(--accent) 70%, transparent), 0 0 16px color-mix(in srgb, var(--accent) 40%, transparent); font-family: var(--mono); font-weight: 700; }
+.s-scanlines { position: relative; overflow: hidden; }
+.s-scanlines::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, transparent 0 2px, color-mix(in srgb, var(--text) 8%, transparent) 2px 3px); }
+
+/* ---- Navbar patterns ------------------------------------------------ */
+.s-navbar { display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
+.s-navbar-brand { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font); font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+.s-navbar-brand svg { width: 22px; height: 18px; }
+.s-navbar-brand .dot { color: var(--accent); }
+.s-navbar-links { display: flex; align-items: center; gap: 0.3rem; margin-left: 0.5rem; }
+.s-navbar-link, a.s-navbar-link { padding: 0.35rem 0.6rem; border-radius: 8px; color: var(--muted); font-size: 0.9rem; font-weight: 550; cursor: pointer; }
+.s-navbar-link:hover, a.s-navbar-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+.s-navbar-link.is-active, a.s-navbar-link.is-active { color: var(--accent-2); background: var(--accent-soft); }
+.s-navbar-actions { margin-left: auto; display: inline-flex; align-items: center; gap: 0.5rem; }
+.s-navbar-toggle { display: none; border: 1px solid var(--border); background: var(--surface); border-radius: 8px; width: 34px; height: 34px; cursor: pointer; color: var(--text); }
+.s-navbar-mobile { display: none; flex-direction: column; gap: 0.2rem; padding: 0.5rem; margin-top: 0.4rem; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.s-navbar-mobile.is-open { display: flex; }
+/* Collapse into a mobile menu on narrow screens. */
+@media (max-width: 560px) {
+  .s-navbar-links { display: none; }
+  .s-navbar-toggle { display: inline-grid; place-items: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s-logo-pulse .peak, .s-logo-pulse .sun, .s-logo-draw .peak-outline, .s-logo-draw .sun,
+  .s-logo-orbit::after, .s-dots span, .s-bar::after,
+  .s-skel-text, .s-skel-title, .s-skel-avatar, .s-skel-block { animation: none; }
+}

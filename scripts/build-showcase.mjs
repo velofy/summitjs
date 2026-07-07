@@ -62,16 +62,20 @@ a:hover { text-decoration: underline; }
 @media (prefers-reduced-motion: reduce) { .gx-pulse { animation: none; } }`;
 
 const components = readFileSync(join(root, "docs/assets/components.css"), "utf8");
+const techniques = readFileSync(join(root, "docs/assets/techniques.css"), "utf8");
 const bundle = readFileSync(join(root, "dist/summit.min.js"), "utf8");
 const body = readFileSync(process.argv[3] || join(root, "showcase-body.html"), "utf8");
+const title = process.argv[4] || "Summit UI Library";
 
-const html = `<title>Summit UI Library</title>
+const html = `<title>${title}</title>
 <style>
 ${tokens}
 
 ${gallery}
 
 ${components}
+
+${techniques}
 </style>
 
 ${body}

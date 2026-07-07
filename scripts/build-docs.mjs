@@ -30,6 +30,7 @@ const OUT = join(root, "docs");
 const CATEGORIES = [
   { key: "start", label: "Getting Started" },
   { key: "components", label: "Components" },
+  { key: "techniques", label: "Techniques" },
   { key: "essentials", label: "Essentials" },
   { key: "directives", label: "Directives" },
   { key: "magics", label: "Magic Properties" },
@@ -244,6 +245,7 @@ function layout(page, contentHtml, toc, sidebar, prev, next) {
 <script>(function(){var t=localStorage.getItem("summit-theme")||"dark";document.documentElement.dataset.theme=t;})();</script>
 <link rel="stylesheet" href="../assets/docs.css"/>
 <link rel="stylesheet" href="../assets/components.css"/>
+<link rel="stylesheet" href="../assets/techniques.css"/>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -412,6 +414,9 @@ function buildManifest(ordered, version) {
     components: ordered
       .filter((p) => p.slug.startsWith("comp-"))
       .map((p) => ({ name: p.title, class: COMPONENT_CLASS[p.slug] || null, summary: p.description, doc: doc(p.slug) })),
+    techniques: ordered
+      .filter((p) => p.category === "techniques" && p.slug !== "techniques")
+      .map((p) => ({ name: p.title, summary: p.description, doc: doc(p.slug) })),
   };
 }
 

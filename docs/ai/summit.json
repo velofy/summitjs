@@ -386,5 +386,32 @@
       "summary": "Navigate through pages of results.",
       "doc": "https://velofy.github.io/summit/comp-pagination/"
     }
+  ],
+  "techniques": [
+    {
+      "name": "Animated Loaders",
+      "summary": "Animated Summit logo marks, dot and bar loaders, and skeleton screens for loading states.",
+      "doc": "https://velofy.github.io/summit/technique-animation/"
+    },
+    {
+      "name": "Matte Glassmorphism",
+      "summary": "Frosted, low-gloss glass surfaces that blur what is behind them while staying legible in both themes.",
+      "doc": "https://velofy.github.io/summit/technique-glassmorphism/"
+    },
+    {
+      "name": "Retro UI",
+      "summary": "Hard offset shadows, neon text, and scanlines for a retro, terminal, or arcade look.",
+      "doc": "https://velofy.github.io/summit/technique-retro/"
+    },
+    {
+      "name": "Navbar Patterns",
+      "summary": "Navigation bars with active links, a responsive mobile menu, and a glass variant, wired with Summit state.",
+      "doc": "https://velofy.github.io/summit/technique-navbars/"
+    },
+    {
+      "name": "Using Tailwind CSS",
+      "summary": "Summit for behavior, Tailwind for styling. They compose cleanly because Summit lives in attributes and Tailwind lives in classes.",
+      "doc": "https://velofy.github.io/summit/technique-tailwind/"
+    }
   ]
 }
