@@ -3,7 +3,7 @@ slug: technique-navbars
 title: Navbar Patterns
 nav: Navbar Patterns
 category: techniques
-order: 4
+order: 9
 description: Navigation bars with active links, a responsive mobile menu, and a glass variant, wired with Summit state.
 ---
 

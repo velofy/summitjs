@@ -389,8 +389,8 @@
   ],
   "techniques": [
     {
-      "name": "Animated Loaders",
-      "summary": "Animated Summit logo marks, dot and bar loaders, and skeleton screens for loading states.",
+      "name": "Loaders & Spinners",
+      "summary": "A gallery of pure-CSS loaders: rings, dots, bars, shapes, animated logo marks, and skeleton screens.",
       "doc": "https://velofy.github.io/summit/technique-animation/"
     },
     {
@@ -399,9 +399,34 @@
       "doc": "https://velofy.github.io/summit/technique-glassmorphism/"
     },
     {
+      "name": "Neumorphism",
+      "summary": "Soft, extruded UI built from twin light and dark shadows on a matching surface.",
+      "doc": "https://velofy.github.io/summit/technique-neumorphism/"
+    },
+    {
+      "name": "Claymorphism",
+      "summary": "Puffy, rounded, playful clay surfaces with soft inner and outer shadows.",
+      "doc": "https://velofy.github.io/summit/technique-claymorphism/"
+    },
+    {
       "name": "Retro UI",
       "summary": "Hard offset shadows, neon text, and scanlines for a retro, terminal, or arcade look.",
       "doc": "https://velofy.github.io/summit/technique-retro/"
+    },
+    {
+      "name": "Brutalism",
+      "summary": "Stark borders, loud uppercase type, and blunt offset shadows for a raw, confident look.",
+      "doc": "https://velofy.github.io/summit/technique-brutalism/"
+    },
+    {
+      "name": "Aurora Backgrounds",
+      "summary": "Slow, glowing color fields that drift behind your content for a premium hero look.",
+      "doc": "https://velofy.github.io/summit/technique-aurora/"
+    },
+    {
+      "name": "Glow & Spotlight",
+      "summary": "A soft highlight that follows the cursor across a card, driven by a tiny Summit handler.",
+      "doc": "https://velofy.github.io/summit/technique-glow/"
     },
     {
       "name": "Navbar Patterns",

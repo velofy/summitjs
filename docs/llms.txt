@@ -34,9 +34,14 @@ Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` m
 ## Techniques
 
 - [Techniques](https://velofy.github.io/summit/techniques/): Presentational recipes you compose with Summit's directives and classes: animated loaders, matte glassmorphism, retro interfaces, navbar patterns, and using Tailwind.
-- [Animated Loaders](https://velofy.github.io/summit/technique-animation/): Animated Summit logo marks, dot and bar loaders, and skeleton screens for loading states.
+- [Loaders & Spinners](https://velofy.github.io/summit/technique-animation/): A gallery of pure-CSS loaders: rings, dots, bars, shapes, animated logo marks, and skeleton screens.
 - [Matte Glassmorphism](https://velofy.github.io/summit/technique-glassmorphism/): Frosted, low-gloss glass surfaces that blur what is behind them while staying legible in both themes.
+- [Neumorphism](https://velofy.github.io/summit/technique-neumorphism/): Soft, extruded UI built from twin light and dark shadows on a matching surface.
+- [Claymorphism](https://velofy.github.io/summit/technique-claymorphism/): Puffy, rounded, playful clay surfaces with soft inner and outer shadows.
 - [Retro UI](https://velofy.github.io/summit/technique-retro/): Hard offset shadows, neon text, and scanlines for a retro, terminal, or arcade look.
+- [Brutalism](https://velofy.github.io/summit/technique-brutalism/): Stark borders, loud uppercase type, and blunt offset shadows for a raw, confident look.
+- [Aurora Backgrounds](https://velofy.github.io/summit/technique-aurora/): Slow, glowing color fields that drift behind your content for a premium hero look.
+- [Glow & Spotlight](https://velofy.github.io/summit/technique-glow/): A soft highlight that follows the cursor across a card, driven by a tiny Summit handler.
 - [Navbar Patterns](https://velofy.github.io/summit/technique-navbars/): Navigation bars with active links, a responsive mobile menu, and a glass variant, wired with Summit state.
 - [Using Tailwind CSS](https://velofy.github.io/summit/technique-tailwind/): Summit for behavior, Tailwind for styling. They compose cleanly because Summit lives in attributes and Tailwind lives in classes.
 

@@ -3,7 +3,7 @@ slug: technique-retro
 title: Retro UI
 nav: Retro UI
 category: techniques
-order: 3
+order: 5
 description: Hard offset shadows, neon text, and scanlines for a retro, terminal, or arcade look.
 ---
 

@@ -1,15 +1,57 @@
-# Animated Loaders
+# Loaders & Spinners
 
-> Animated Summit logo marks, dot and bar loaders, and skeleton screens for loading states.
+> A gallery of pure-CSS loaders: rings, dots, bars, shapes, animated logo marks, and skeleton screens.
 
-Loading states set the tone for how fast an app feels. These are all CSS: no
-JavaScript runs the animation, so they are cheap and smooth. Pair any of them
-with Summit state to swap a placeholder for real content.
+Loading states set the tone for how fast an app feels. Every loader here is
+pure CSS, so nothing runs on the main thread to animate it. Pick one, drop in
+the markup, and it inherits your accent color and both themes.
+
+## Spinners
+
+Ring-shaped loaders, from a plain ring to a masked conic sweep.
+
+```summit
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:1.6rem; text-align:center">
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-spinner"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Ring</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-dual"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Dual ring</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-dash"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Dashed</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-conic"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Conic</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-orbit"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Orbit</p></div>
+</div>
+```
+
+## Dots and bars
+
+Good for inline or indeterminate loading, and for chat "typing" states.
+
+```summit
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:1.6rem; text-align:center">
+  <div><div style="height:44px;display:grid;place-items:center"><div class="s-dots"><span></span><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Bouncing dots</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><div class="s-load-wave"><span></span><span></span><span></span><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Wave</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><div class="s-load-bars"><span></span><span></span><span></span><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Equalizer</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><div class="s-load-typing"><span></span><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Typing</p></div>
+</div>
+```
+
+## Shapes
+
+Squares, grids, and ripples for a bit more personality.
+
+```summit
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:1.6rem; text-align:center">
+  <div><div style="height:48px;display:grid;place-items:center"><span class="s-load-pulse"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Pulse</p></div>
+  <div><div style="height:48px;display:grid;place-items:center"><div class="s-load-ripple"><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Ripple</p></div>
+  <div><div style="height:48px;display:grid;place-items:center"><div class="s-load-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Grid</p></div>
+  <div><div style="height:48px;display:grid;place-items:center"><span class="s-load-flip"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Flip</p></div>
+  <div><div style="height:48px;display:grid;place-items:center"><div class="s-load-bounce"><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Bounce</p></div>
+</div>
+```
 
 ## Animated logo marks
 
-Three ways to bring the Summit mark to life while something loads. The mark
-breathes, redraws its outline, or rests inside a sweeping ring.
+Three ways to bring the Summit mark to life while something loads: it breathes,
+redraws its outline, or rests inside a sweeping ring. The mark is a two-part SVG
+(`.sun` and `.peak`), so the same classes animate your own logo.
 
 ```summit
 <div class="s-row" style="gap:2.5rem; align-items:center">
@@ -19,29 +61,10 @@ breathes, redraws its outline, or rests inside a sweeping ring.
 </div>
 ```
 
-The mark is a two-part SVG: a `.sun` diamond and a `.peak` mountain (or
-`.peak-outline` for the draw variant). Swap in your own logo and the same
-classes animate it.
-
-```html
-<span class="s-logo-loader s-logo-pulse">
-  <svg viewBox="0 0 40 32">
-    <rect class="sun" x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)"/>
-    <path class="peak" d="M2 28 L13 10 L20 22 L26 14 L38 28 Z"/>
-  </svg>
-</span>
-```
-
-## Dots, bar, and spinner
-
-For inline or indeterminate loading, reach for a smaller loader.
+## Indeterminate bar
 
 ```summit
-<div class="s-stack" style="gap:1.3rem; max-width:300px">
-  <div class="s-dots"><span></span><span></span><span></span></div>
-  <div class="s-bar"></div>
-  <span class="s-spinner"></span>
-</div>
+<div class="s-bar" style="max-width:320px"></div>
 ```
 
 ## Skeleton screens
@@ -72,12 +95,28 @@ not jump when it arrives. Drive the swap with a boolean in `s-data`.
 </div>
 ```
 
-The skeleton helpers are `.s-skel-text`, `.s-skel-title`, `.s-skel-avatar`, and
-`.s-skel-block`. Set a width inline to vary the lines. See also the base
-[Progress & Spinner](../comp-progress/) component.
+## Class reference
+
+| Loader | Markup |
+| --- | --- |
+| Ring | `<span class="s-spinner"></span>` |
+| Dual ring | `<span class="s-load-dual"></span>` |
+| Dashed | `<span class="s-load-dash"></span>` |
+| Conic | `<span class="s-load-conic"></span>` |
+| Orbit | `<span class="s-load-orbit"></span>` |
+| Bouncing dots | `<div class="s-dots"><span></span>×3</div>` |
+| Wave | `<div class="s-load-wave"><span></span>×5</div>` |
+| Equalizer | `<div class="s-load-bars"><span></span>×5</div>` |
+| Typing | `<div class="s-load-typing"><span></span>×3</div>` |
+| Pulse | `<span class="s-load-pulse"></span>` |
+| Ripple | `<div class="s-load-ripple"><span></span><span></span></div>` |
+| Grid | `<div class="s-load-grid"><span></span>×9</div>` |
+| Flip | `<span class="s-load-flip"></span>` |
+| Bounce | `<div class="s-load-bounce"><span></span><span></span></div>` |
+| Bar | `<div class="s-bar"></div>` |
+| Skeleton | `.s-skel-text`, `.s-skel-title`, `.s-skel-avatar`, `.s-skel-block` |
 
 ## Accessibility
 
-Animations here respect `prefers-reduced-motion` and stop for users who ask for
-less motion. For screen readers, mark a loading region with `aria-busy="true"`
-while it is pending.
+All of these respect `prefers-reduced-motion` and stop for users who ask for
+less motion. Mark a pending region with `aria-busy="true"` for screen readers.

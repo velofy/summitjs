@@ -13,10 +13,21 @@ Load the stylesheet once, then use any `s-` prefixed class from the pages below.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summitjs/dist/techniques.css" />
 ```
 
-## In this section
+## Loaders
 
-- [Animated Loaders](../technique-animation/): breathing logo marks, dot and bar loaders, and skeleton screens.
+- [Loaders & Spinners](../technique-animation/): fifteen pure-CSS loaders, animated logo marks, and skeleton screens.
+
+## Style families
+
 - [Matte Glassmorphism](../technique-glassmorphism/): frosted, low-gloss surfaces that stay legible over anything.
+- [Neumorphism](../technique-neumorphism/): soft, extruded UI built from twin light and dark shadows.
+- [Claymorphism](../technique-claymorphism/): puffy, rounded, playful clay surfaces.
 - [Retro UI](../technique-retro/): hard shadows, neon text, and scanlines.
+- [Brutalism](../technique-brutalism/): stark borders, loud type, and blunt offset shadows.
+- [Aurora Backgrounds](../technique-aurora/): slow, glowing color fields behind your content.
+- [Glow & Spotlight](../technique-glow/): a highlight that follows the cursor across a card.
+
+## Patterns
+
 - [Navbar Patterns](../technique-navbars/): active links, a responsive mobile menu, and a glass bar.
 - [Using Tailwind CSS](../technique-tailwind/): Summit for behavior, Tailwind for styling, no build step.

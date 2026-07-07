@@ -3,7 +3,7 @@ slug: technique-tailwind
 title: Using Tailwind CSS
 nav: Using Tailwind CSS
 category: techniques
-order: 5
+order: 10
 description: Summit for behavior, Tailwind for styling. They compose cleanly because Summit lives in attributes and Tailwind lives in classes.
 ---
 

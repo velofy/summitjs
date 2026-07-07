@@ -1937,28 +1937,81 @@ Load the stylesheet once, then use any `s-` prefixed class from the pages below.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summitjs/dist/techniques.css" />
 ```
 
-## In this section
+## Loaders
 
-- [Animated Loaders](../technique-animation/): breathing logo marks, dot and bar loaders, and skeleton screens.
+- [Loaders & Spinners](../technique-animation/): fifteen pure-CSS loaders, animated logo marks, and skeleton screens.
+
+## Style families
+
 - [Matte Glassmorphism](../technique-glassmorphism/): frosted, low-gloss surfaces that stay legible over anything.
+- [Neumorphism](../technique-neumorphism/): soft, extruded UI built from twin light and dark shadows.
+- [Claymorphism](../technique-claymorphism/): puffy, rounded, playful clay surfaces.
 - [Retro UI](../technique-retro/): hard shadows, neon text, and scanlines.
+- [Brutalism](../technique-brutalism/): stark borders, loud type, and blunt offset shadows.
+- [Aurora Backgrounds](../technique-aurora/): slow, glowing color fields behind your content.
+- [Glow & Spotlight](../technique-glow/): a highlight that follows the cursor across a card.
+
+## Patterns
+
 - [Navbar Patterns](../technique-navbars/): active links, a responsive mobile menu, and a glass bar.
 - [Using Tailwind CSS](../technique-tailwind/): Summit for behavior, Tailwind for styling, no build step.
 
 ---
 
-# Animated Loaders
+# Loaders & Spinners
 
-> Animated Summit logo marks, dot and bar loaders, and skeleton screens for loading states.
+> A gallery of pure-CSS loaders: rings, dots, bars, shapes, animated logo marks, and skeleton screens.
 
-Loading states set the tone for how fast an app feels. These are all CSS: no
-JavaScript runs the animation, so they are cheap and smooth. Pair any of them
-with Summit state to swap a placeholder for real content.
+Loading states set the tone for how fast an app feels. Every loader here is
+pure CSS, so nothing runs on the main thread to animate it. Pick one, drop in
+the markup, and it inherits your accent color and both themes.
+
+## Spinners
+
+Ring-shaped loaders, from a plain ring to a masked conic sweep.
+
+```summit
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:1.6rem; text-align:center">
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-spinner"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Ring</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-dual"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Dual ring</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-dash"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Dashed</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-conic"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Conic</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><span class="s-load-orbit"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Orbit</p></div>
+</div>
+```
+
+## Dots and bars
+
+Good for inline or indeterminate loading, and for chat "typing" states.
+
+```summit
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:1.6rem; text-align:center">
+  <div><div style="height:44px;display:grid;place-items:center"><div class="s-dots"><span></span><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Bouncing dots</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><div class="s-load-wave"><span></span><span></span><span></span><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Wave</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><div class="s-load-bars"><span></span><span></span><span></span><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Equalizer</p></div>
+  <div><div style="height:44px;display:grid;place-items:center"><div class="s-load-typing"><span></span><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Typing</p></div>
+</div>
+```
+
+## Shapes
+
+Squares, grids, and ripples for a bit more personality.
+
+```summit
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:1.6rem; text-align:center">
+  <div><div style="height:48px;display:grid;place-items:center"><span class="s-load-pulse"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Pulse</p></div>
+  <div><div style="height:48px;display:grid;place-items:center"><div class="s-load-ripple"><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Ripple</p></div>
+  <div><div style="height:48px;display:grid;place-items:center"><div class="s-load-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Grid</p></div>
+  <div><div style="height:48px;display:grid;place-items:center"><span class="s-load-flip"></span></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Flip</p></div>
+  <div><div style="height:48px;display:grid;place-items:center"><div class="s-load-bounce"><span></span><span></span></div></div><p style="margin:.55rem 0 0;font-size:.78rem;color:var(--faint)">Bounce</p></div>
+</div>
+```
 
 ## Animated logo marks
 
-Three ways to bring the Summit mark to life while something loads. The mark
-breathes, redraws its outline, or rests inside a sweeping ring.
+Three ways to bring the Summit mark to life while something loads: it breathes,
+redraws its outline, or rests inside a sweeping ring. The mark is a two-part SVG
+(`.sun` and `.peak`), so the same classes animate your own logo.
 
 ```summit
 <div class="s-row" style="gap:2.5rem; align-items:center">
@@ -1968,29 +2021,10 @@ breathes, redraws its outline, or rests inside a sweeping ring.
 </div>
 ```
 
-The mark is a two-part SVG: a `.sun` diamond and a `.peak` mountain (or
-`.peak-outline` for the draw variant). Swap in your own logo and the same
-classes animate it.
-
-```html
-<span class="s-logo-loader s-logo-pulse">
-  <svg viewBox="0 0 40 32">
-    <rect class="sun" x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)"/>
-    <path class="peak" d="M2 28 L13 10 L20 22 L26 14 L38 28 Z"/>
-  </svg>
-</span>
-```
-
-## Dots, bar, and spinner
-
-For inline or indeterminate loading, reach for a smaller loader.
+## Indeterminate bar
 
 ```summit
-<div class="s-stack" style="gap:1.3rem; max-width:300px">
-  <div class="s-dots"><span></span><span></span><span></span></div>
-  <div class="s-bar"></div>
-  <span class="s-spinner"></span>
-</div>
+<div class="s-bar" style="max-width:320px"></div>
 ```
 
 ## Skeleton screens
@@ -2021,15 +2055,31 @@ not jump when it arrives. Drive the swap with a boolean in `s-data`.
 </div>
 ```
 
-The skeleton helpers are `.s-skel-text`, `.s-skel-title`, `.s-skel-avatar`, and
-`.s-skel-block`. Set a width inline to vary the lines. See also the base
-[Progress & Spinner](../comp-progress/) component.
+## Class reference
+
+| Loader | Markup |
+| --- | --- |
+| Ring | `<span class="s-spinner"></span>` |
+| Dual ring | `<span class="s-load-dual"></span>` |
+| Dashed | `<span class="s-load-dash"></span>` |
+| Conic | `<span class="s-load-conic"></span>` |
+| Orbit | `<span class="s-load-orbit"></span>` |
+| Bouncing dots | `<div class="s-dots"><span></span>×3</div>` |
+| Wave | `<div class="s-load-wave"><span></span>×5</div>` |
+| Equalizer | `<div class="s-load-bars"><span></span>×5</div>` |
+| Typing | `<div class="s-load-typing"><span></span>×3</div>` |
+| Pulse | `<span class="s-load-pulse"></span>` |
+| Ripple | `<div class="s-load-ripple"><span></span><span></span></div>` |
+| Grid | `<div class="s-load-grid"><span></span>×9</div>` |
+| Flip | `<span class="s-load-flip"></span>` |
+| Bounce | `<div class="s-load-bounce"><span></span><span></span></div>` |
+| Bar | `<div class="s-bar"></div>` |
+| Skeleton | `.s-skel-text`, `.s-skel-title`, `.s-skel-avatar`, `.s-skel-block` |
 
 ## Accessibility
 
-Animations here respect `prefers-reduced-motion` and stop for users who ask for
-less motion. For screen readers, mark a loading region with `aria-busy="true"`
-while it is pending.
+All of these respect `prefers-reduced-motion` and stop for users who ask for
+less motion. Mark a pending region with `aria-busy="true"` for screen readers.
 
 ---
 
@@ -2099,6 +2149,112 @@ solid color blobs used here.
 
 ---
 
+# Neumorphism
+
+> Soft, extruded UI built from twin light and dark shadows on a matching surface.
+
+Neumorphism, or soft UI, makes elements look pressed out of, or into, the
+surface behind them. The trick is two shadows: a dark one below-right and a
+light one above-left, on a surface that matches the element. It reads best on a
+neutral background, so place these inside a `.s-neu-surface`.
+
+## Raised and inset
+
+```summit
+<div class="s-neu-surface">
+  <div class="s-row" style="gap:1.2rem; flex-wrap:wrap">
+    <div class="s-neu" style="flex:1; min-width:150px">
+      <p style="margin:0; font-weight:650">Raised</p>
+      <p style="margin:.25rem 0 0; color:var(--muted); font-size:.88rem">Extruded from the surface.</p>
+    </div>
+    <div class="s-neu-inset" style="flex:1; min-width:150px">
+      <p style="margin:0; font-weight:650">Inset</p>
+      <p style="margin:.25rem 0 0; color:var(--muted); font-size:.88rem">Pressed into the surface.</p>
+    </div>
+  </div>
+</div>
+```
+
+## Buttons that press
+
+The button sinks into an inset shadow while held.
+
+```summit
+<div class="s-neu-surface">
+  <div class="s-row">
+    <button class="s-neu-btn">Save</button>
+    <button class="s-neu-btn">Cancel</button>
+  </div>
+</div>
+```
+
+## Copy it in
+
+```html
+<div class="s-neu-surface">
+  <div class="s-neu">Raised card</div>
+  <div class="s-neu-inset">Inset well</div>
+  <button class="s-neu-btn">Press me</button>
+</div>
+```
+
+## Notes
+
+- Neumorphism needs low contrast between the element and its background, which
+  can hurt legibility and focus visibility. Use it for accents, not for dense
+  or critical controls.
+- The classes are `.s-neu-surface` (the backing), `.s-neu` (raised),
+  `.s-neu-inset` (pressed in), and `.s-neu-btn`. Shadows adapt in dark mode.
+
+---
+
+# Claymorphism
+
+> Puffy, rounded, playful clay surfaces with soft inner and outer shadows.
+
+Claymorphism is soft and toylike: big corner radii, a drop shadow for lift, and
+two inner shadows that make a surface look inflated, like a pressed piece of
+clay. It suits friendly, consumer, and onboarding interfaces.
+
+## Clay card
+
+```summit
+<div class="s-clay" style="max-width:340px">
+  <div class="s-row" style="gap:.8rem; align-items:center">
+    <div class="s-avatar s-avatar-lg">SJ</div>
+    <div>
+      <p style="margin:0; font-weight:700">Streak: 7 days</p>
+      <p style="margin:.2rem 0 0; color:var(--muted); font-size:.9rem">Keep it going tomorrow.</p>
+    </div>
+  </div>
+</div>
+```
+
+## Clay buttons
+
+```summit
+<div class="s-row">
+  <button class="s-clay-btn">Claim reward</button>
+  <button class="s-clay-btn" style="background:var(--surface); color:var(--text)">Later</button>
+</div>
+```
+
+## Copy it in
+
+```html
+<div class="s-clay">A soft, inflated card.</div>
+<button class="s-clay-btn">Tap me</button>
+```
+
+## Notes
+
+- The puffed look comes from an outer drop shadow plus inner top and bottom
+  shadows. It recolors with your accent through `.s-clay-btn`.
+- Pair it with the [Claymorphism](../technique-claymorphism/) accent and rounded
+  [components](../components/) for a consistent, playful set.
+
+---
+
 # Retro UI
 
 > Hard offset shadows, neon text, and scanlines for a retro, terminal, or arcade look.
@@ -2156,6 +2312,150 @@ over a surface for a CRT feel.
 The classes are `.s-retro` (card), `.s-retro-btn` (button), `.s-retro-tag`
 (label), `.s-neon` (glow text), and `.s-scanlines` (overlay). They read the same
 design tokens as everything else, so they recolor with your accent.
+
+---
+
+# Brutalism
+
+> Stark borders, loud uppercase type, and blunt offset shadows for a raw, confident look.
+
+Neo-brutalism is loud and honest: sharp corners, thick borders, hard offset
+shadows in solid black, and type that shouts. Where glass and clay are soft,
+brutalism is blunt. It reads as confident and a little punk.
+
+## Brutal card
+
+```summit
+<div class="s-brutal" style="max-width:360px">
+  <span class="s-brutal-tag">Ship it</span>
+  <p style="margin:.7rem 0 0; font-weight:700; font-size:1.05rem">No gradients. No apologies.</p>
+  <p style="margin:.35rem 0 0; color:var(--muted)">Just borders, shadows, and nerve.</p>
+</div>
+```
+
+## Brutal buttons
+
+The button slams into its shadow when pressed.
+
+```summit
+<div class="s-row">
+  <button class="s-brutal-btn s-brutal-accent">Deploy</button>
+  <button class="s-brutal-btn">Cancel</button>
+</div>
+```
+
+## Accent panel
+
+```summit
+<div class="s-brutal s-brutal-accent" style="max-width:360px">
+  <p style="margin:0; font-weight:800; text-transform:uppercase; letter-spacing:.03em">Limited drop</p>
+  <p style="margin:.3rem 0 0">Bold blocks of color, framed hard.</p>
+</div>
+```
+
+## Copy it in
+
+```html
+<div class="s-brutal">
+  <span class="s-brutal-tag">New</span>
+  <p>Raw and framed.</p>
+</div>
+
+<button class="s-brutal-btn s-brutal-accent">Go</button>
+```
+
+The classes are `.s-brutal` (card), `.s-brutal-accent` (fill it with the accent),
+`.s-brutal-btn`, and `.s-brutal-tag`. For a softer take on hard shadows, see
+[Retro UI](../technique-retro/).
+
+---
+
+# Aurora Backgrounds
+
+> Slow, glowing color fields that drift behind your content for a premium hero look.
+
+An aurora is a soft field of colored light that drifts slowly behind your
+content. It gives heroes and feature panels a premium, ambient feel without a
+busy image. The glow lives on pseudo-elements, so your content sits cleanly on
+top.
+
+## Aurora panel
+
+```summit
+<div class="s-aurora" style="text-align:center">
+  <p style="margin:0; font-family:var(--font); font-size:1.6rem; font-weight:800; letter-spacing:-.02em">Reach the summit</p>
+  <p style="margin:.5rem auto 0; max-width:34ch; opacity:.85">A calm, drifting glow behind a clear message.</p>
+  <button class="s-btn" style="margin-top:1.1rem">Get started</button>
+</div>
+```
+
+## As a hero background
+
+Put anything inside: a headline, a form, a call to action. The color field moves
+on its own.
+
+```html
+<section class="s-aurora">
+  <h1>Your headline here</h1>
+  <p>Supporting copy that stays crisp on top of the glow.</p>
+  <button class="s-btn">Primary action</button>
+</section>
+```
+
+## Notes
+
+- The glow uses two blurred, animated radial shapes on `::before` and `::after`.
+  It runs on the compositor and pauses under `prefers-reduced-motion`.
+- The panel uses your `--ink` background so text stays high contrast in both
+  themes. Recolor the two shapes in `techniques.css` to match your brand.
+- For a foreground surface over a busy backdrop, use
+  [Matte Glassmorphism](../technique-glassmorphism/) instead.
+
+---
+
+# Glow & Spotlight
+
+> A soft highlight that follows the cursor across a card, driven by a tiny Summit handler.
+
+A spotlight card puts a soft highlight under the cursor and moves it as you go.
+The highlight is pure CSS; Summit's only job is to feed the pointer position
+into two CSS variables. Move your cursor across the card below.
+
+## Spotlight card
+
+```summit
+<div class="s-glow-card" s-data
+     @mousemove="$el.style.setProperty('--mx', $event.offsetX + 'px'); $el.style.setProperty('--my', $event.offsetY + 'px')"
+     style="max-width:380px">
+  <p style="margin:0; font-weight:700">Spotlight</p>
+  <p style="margin:.35rem 0 0; color:var(--muted)">A highlight follows your cursor across this card, then fades when you leave.</p>
+  <div class="s-row" style="margin-top:1rem">
+    <button class="s-btn s-btn-sm">Action</button>
+    <button class="s-btn s-btn-sm s-btn-ghost">Dismiss</button>
+  </div>
+</div>
+```
+
+## How it works
+
+The card's `::before` draws a radial highlight at `var(--mx) var(--my)` and fades
+in on hover. A `@mousemove` handler writes the pointer's position, taken from
+`$event`, onto the element with `$el`.
+
+```html
+<div class="s-glow-card"
+     @mousemove="$el.style.setProperty('--mx', $event.offsetX + 'px');
+                 $el.style.setProperty('--my', $event.offsetY + 'px')">
+  Your content here.
+</div>
+```
+
+## Notes
+
+- No state is needed: the handler reads [$event](../s-on/) and writes to
+  [$el](../magic-el/) directly, so there is nothing to store.
+- The highlight only appears on hover, so touch users see a clean card.
+- Tint the glow by changing the accent mix in the `.s-glow-card::before` rule.
 
 ---
 
