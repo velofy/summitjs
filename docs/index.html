@@ -89,9 +89,9 @@
       nav.scrolled { border-bottom-color: var(--border); }
       nav .wrap { display: flex; align-items: center; gap: 1rem; height: 64px; }
       .brand { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--font);
-        font-weight: 800; letter-spacing: -0.03em; font-size: 1.2rem; color: var(--text); }
+        font-weight: 800; letter-spacing: -0.03em; font-size: 1.2rem; color: var(--text); flex: none; }
       .brand:hover { text-decoration: none; }
-      .brand svg { width: 26px; height: 21px; }
+      .brand svg { width: 26px; height: 21px; flex: none; }
       .brand .dot { color: var(--accent); }
       .nav-right { margin-left: auto; display: inline-flex; align-items: center; gap: 0.55rem; }
       .nav-a { color: var(--muted); font-weight: 550; font-size: 0.95rem; padding: 0 0.4rem; }
@@ -105,9 +105,11 @@
       .search-trigger .kbd span { border: 1px solid var(--border); border-radius: 5px; padding: 0 5px;
         font-size: 0.72rem; color: var(--faint); background: var(--bg); font-family: var(--mono); }
       .icon-btn { display: grid; place-items: center; width: 38px; height: 38px; border-radius: var(--radius);
-        border: 1px solid transparent; background: transparent; color: var(--text); cursor: pointer; }
+        border: 1px solid transparent; background: transparent; color: var(--text); cursor: pointer; flex: none; }
       .icon-btn:hover { border-color: var(--border); background: var(--surface-2); text-decoration: none; }
       .icon-btn svg { display: block; }
+      .search-trigger { flex: 0 1 auto; }
+      .search-trigger svg { flex: none; }
       .theme-toggle .sun { display: none; }
       :root[data-theme="dark"] .theme-toggle .sun { display: block; }
       :root[data-theme="dark"] .theme-toggle .moon { display: none; }
@@ -124,6 +126,9 @@
       .search-results { max-height: 56vh; overflow-y: auto; padding: 0.4rem; }
       .search-section { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); padding: 0.6rem 0.7rem 0.35rem; }
       .search-empty { padding: 2rem 1rem; text-align: center; color: var(--faint); }
+      .search-loading { display: flex; align-items: center; gap: 0.6rem; padding: 1.4rem 1rem; color: var(--faint); font-size: 0.92rem; }
+      .spinner { width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.6s linear infinite; flex: none; }
+      @keyframes spin { to { transform: rotate(360deg); } }
       .search-hit { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.65rem 0.75rem; border-radius: var(--radius); color: var(--text); }
       .search-hit:hover { text-decoration: none; }
       .search-hit.active { background: var(--accent-soft); }
@@ -136,7 +141,15 @@
       .search-hit mark { background: transparent; color: var(--accent-2); font-weight: 700; }
       .search-foot { display: flex; gap: 1.1rem; padding: 0.6rem 1rem; border-top: 1px solid var(--border); font-size: 0.76rem; color: var(--faint); }
       .search-foot kbd { border: 1px solid var(--border); border-radius: 5px; padding: 1px 5px; margin-right: 0.2rem; }
-      @media (max-width: 640px) { .search-trigger .st-label, .search-trigger .kbd { display: none; } .search-trigger { min-width: 0; } .brand-word { display: none; } }
+      @media (max-width: 640px) {
+        nav .wrap { gap: 0.5rem; }
+        .nav-right { gap: 0.3rem; }
+        .nav-a { padding: 0 0.3rem; font-size: 0.9rem; }
+        .search-trigger { min-width: 0; padding: 0; width: 38px; justify-content: center; }
+        .search-trigger .st-label, .search-trigger .kbd { display: none; }
+        .brand-word { display: none; }
+      }
+      @media (max-width: 400px) { .nav-demos { display: none; } }
 
       /* Hero */
       .hero { text-align: center; padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(2rem, 5vw, 3.5rem); }
@@ -271,7 +284,7 @@
             <span class="kbd"><span>⌘</span><span>K</span></span>
           </button>
           <a class="nav-a" href="./start/">Docs</a>
-          <a class="nav-a" href="#demos">Demos</a>
+          <a class="nav-a nav-demos" href="#demos">Demos</a>
           <a class="icon-btn" href="https://github.com/velofy/summit" aria-label="GitHub">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.26 3.4.96.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.28 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z" /></svg>
           </a>
@@ -462,7 +475,7 @@ npm install summitjs</code></pre>
       </div>
     </footer>
 
-    <div class="search-root" s-data="search" data-base=""
+    <div class="search-root" s-cloak s-data="search" data-base=""
       @open-search.window="open()"
       @keydown.window.cmd.k.prevent="open()" @keydown.window.ctrl.k.prevent="open()">
       <div class="search-overlay" s-show="isOpen" @click="close()"></div>
@@ -473,20 +486,26 @@ npm install summitjs</code></pre>
           <kbd class="esc">Esc</kbd>
         </div>
         <div class="search-results">
-          <template s-if="query && results.length === 0">
-            <div class="search-empty">No results for "<span s-text="query"></span>".</div>
-          </template>
-          <template s-if="!query && recent.length">
-            <div class="search-section">Recent</div>
+          <div class="search-loading" s-show="isLoading"><span class="spinner" aria-hidden="true"></span>Loading search...</div>
+          <div s-show="!isLoading && !query">
+            <div class="search-section" s-show="recent.length">Recent</div>
             <template s-for="(r, i) in recent" :key="'r' + i">
-              <a class="search-hit" :href="r.url" @mouseenter="active = i" @click="remember(r)">
+              <a class="search-hit" :class="{ active: active === i }" :href="r.url" @mouseenter="active = i" @click="remember(r)">
                 <span class="hit-icon">↩</span>
                 <span class="hit-main"><span class="hit-title" s-text="r.heading"></span><span class="hit-page" s-text="r.page"></span></span>
               </a>
             </template>
-          </template>
+            <div class="search-section" s-show="suggested.length">Suggested</div>
+            <template s-for="(r, j) in suggested" :key="'s' + j">
+              <a class="search-hit" :class="{ active: active === recent.length + j }" :href="r.url" @mouseenter="active = recent.length + j" @click="remember(r)">
+                <span class="hit-icon">→</span>
+                <span class="hit-main"><span class="hit-title" s-text="r.heading"></span><span class="hit-page" s-text="r.page"></span></span>
+              </a>
+            </template>
+          </div>
+          <div class="search-empty" s-show="!isLoading && query && results.length === 0">No results for "<span s-text="query"></span>".</div>
           <template s-for="(r, i) in results" :key="r.url + i">
-            <a class="search-hit" :class="{ active: i === active }" :href="r.url" @mouseenter="active = i" @click="remember(r)">
+            <a class="search-hit" :class="{ active: active === i }" :href="r.url" @mouseenter="active = i" @click="remember(r)">
               <span class="hit-icon">#</span>
               <span class="hit-main">
                 <span class="hit-title" s-html="r.titleHtml"></span>
