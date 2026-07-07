@@ -1,8 +1,15 @@
-# Summit.js
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
+    <img alt="Summit.js" src="docs/assets/logo-light.svg" width="104">
+  </picture>
+</p>
 
-The open source, AI Agent Native JavaScript framework for composing behavior directly in your HTML. Drop in one script and go. No build step, no virtual DOM, no `eval`.
+<h1 align="center">Summit.js</h1>
 
-**Open Source. by Nature.**
+<p align="center">The open source, AI Agent Native JavaScript framework for composing behavior directly in your HTML.<br>Drop in one script and go. No build step, no virtual DOM, no <code>eval</code>.</p>
+
+<p align="center"><strong>Open Source. by Nature.</strong></p>
 
 Started by [anishfyi](https://github.com/anishfyi), so that AI agents can make beautiful frontends.
 

@@ -8,16 +8,21 @@
  */
 
 import type { DirectiveHandler } from "../types.js";
+import { warn } from "../errors.js";
 
 export const teleport: DirectiveHandler = (el, meta, utils) => {
   if (el.tagName !== "TEMPLATE") {
-    console.warn("[summit] s-teleport requires a <template> element");
+    warn("E501", "s-teleport must be used on a <template> element.", { el, doc: "s-teleport" });
     return;
   }
   const selector = meta.expression || meta.value || "";
   const target = selector ? document.querySelector(selector) : null;
   if (!target) {
-    console.warn(`[summit] s-teleport target not found: ${selector}`);
+    warn("E502", `s-teleport target not found: "${selector}".`, {
+      el,
+      doc: "s-teleport",
+      hint: "The target must be a CSS selector that already exists in the DOM, e.g. body.",
+    });
     return;
   }
 

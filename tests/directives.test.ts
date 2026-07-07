@@ -163,6 +163,30 @@ describe("s-if", () => {
   });
 });
 
+describe("diagnostics", () => {
+  it("warns with a 'did you mean' suggestion for an unknown directive", () => {
+    const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
+    mount(`<div s-data="{ n: 1 }"><span s-txt="n"></span></div>`);
+    const msg = spy.mock.calls.map((c) => c.join(" ")).join("\n");
+    spy.mockRestore();
+    expect(msg).toContain("[summit]");
+    expect(msg).toContain("E201");
+    expect(msg).toContain("s-text");
+  });
+
+  it("reports a coded error with the expression when a directive throws", async () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+    mount(`<div s-data="{ n: 5 }"><button @click="n()"></button></div>`);
+    document.querySelector("button")!.click();
+    await tick();
+    const msg = spy.mock.calls.map((c) => c.join(" ")).join("\n");
+    spy.mockRestore();
+    expect(msg).toContain("[summit]");
+    expect(msg).toContain("E301");
+    expect(msg).toContain("n()");
+  });
+});
+
 describe("s-for", () => {
   it("renders a keyed list and reconciles updates", async () => {
     const el = mount(`

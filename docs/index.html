@@ -88,7 +88,11 @@
       nav.scrolled { border-bottom-color: var(--border); }
       nav .wrap { display: flex; align-items: center; gap: 1rem; height: 64px; }
       .brand { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--font);
-        font-weight: 800; letter-spacing: -0.03em; font-size: 1.2rem; color: var(--text); flex: none; }
+        font-weight: 800; letter-spacing: -0.03em; font-size: 1.2rem; color: var(--text); flex: none;
+        opacity: 0; transform: translateY(-4px); pointer-events: none;
+        transition: opacity 0.45s ease, transform 0.45s ease; }
+      .brand.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+      @media (prefers-reduced-motion: reduce) { .brand { transform: none; transition: opacity 0.25s ease; } }
       .brand:hover { text-decoration: none; }
       .brand svg { width: 26px; height: 21px; flex: none; }
       .brand .dot { color: var(--accent); }
@@ -178,6 +182,12 @@
         padding: 0.85rem 1.4rem; border-radius: var(--radius); border: 1px solid var(--border); cursor: pointer;
         transition: transform 0.12s ease, border-color 0.12s ease; }
       .btn-outline:hover { text-decoration: none; transform: translateY(-1px); border-color: var(--accent); }
+      .ai-native { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.45rem; margin-top: 1.6rem; }
+      .ai-native-label { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 650; color: var(--faint); }
+      .ai-native-label svg { color: var(--accent); }
+      .ai-chip { display: inline-flex; align-items: center; font-size: 0.82rem; font-weight: 550; color: var(--muted);
+        background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 0.28rem 0.72rem; }
+      a.ai-chip:hover { border-color: var(--accent); color: var(--text); text-decoration: none; }
 
       /* Stacked code card */
       .code-wrap { position: relative; max-width: 760px; margin: clamp(3rem, 7vw, 5rem) auto 0; }
@@ -323,6 +333,17 @@
         <div class="cta">
           <a class="btn-ink" href="#start">Get started →</a>
           <a class="btn-outline" href="./components/">Explore UI Library</a>
+        </div>
+
+        <div class="ai-native">
+          <span class="ai-native-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M5 12H2M22 12h-3M6.3 6.3 4.6 4.6M19.4 19.4l-1.7-1.7M17.7 6.3l1.7-1.7M4.6 19.4l1.7-1.7"/></svg>
+            Built for AI agents
+          </span>
+          <a class="ai-chip" href="./ai/summit.json">Machine-readable manifest</a>
+          <span class="ai-chip">Self-explaining errors</span>
+          <a class="ai-chip" href="./llms.txt">llms.txt</a>
+          <a class="ai-chip" href="https://github.com/velofy/summit/blob/main/AGENTS.md">AGENTS.md</a>
         </div>
 
         <div class="code-wrap">
@@ -541,6 +562,17 @@ npm install summitjs</code></pre>
       addEventListener("scroll", function () {
         document.getElementById("nav").classList.toggle("scrolled", scrollY > 8);
       }, { passive: true });
+      // The nav brand stays hidden while the hero (with its big wordmark) is on
+      // screen, then fades in once you scroll past it.
+      (function () {
+        var hero = document.querySelector(".hero");
+        var brand = document.querySelector("#nav .brand");
+        if (!brand) return;
+        if (!hero || !("IntersectionObserver" in window)) { brand.classList.add("is-visible"); return; }
+        new IntersectionObserver(function (entries) {
+          brand.classList.toggle("is-visible", !entries[0].isIntersecting);
+        }, { threshold: 0 }).observe(hero);
+      })();
     </script>
     <script src="./assets/search.js" defer></script>
     <script src="./summit.min.js" defer></script>
