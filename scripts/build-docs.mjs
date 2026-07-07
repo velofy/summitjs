@@ -317,6 +317,8 @@ function buildLlmsIndex(ordered) {
   }
   out += `## Optional\n\n`;
   out += `- [Full documentation corpus](${SITE}/llms-full.txt): every page concatenated as markdown\n`;
+  out += `- [Machine-readable API manifest](${SITE}/ai/summit.json): directives, magics, modifiers, error codes, and components as JSON\n`;
+  out += `- [AGENTS.md](https://github.com/velofy/summit/blob/main/AGENTS.md): a drop-in brief for coding agents\n`;
   out += `- [Source on GitHub](https://github.com/velofy/summit)\n`;
   return out;
 }
@@ -327,6 +329,90 @@ function buildLlmsFull(ordered) {
   out += `Every documentation page, concatenated as markdown in reading order. Source: ${SITE}\n\n---\n\n`;
   out += ordered.map((p) => pageMarkdown(p)).join("\n---\n\n");
   return out;
+}
+
+/**
+ * summit.json: a machine-readable manifest of the whole surface area, for
+ * tool-calling agents that want structured grounding instead of prose. Every
+ * directive, magic, modifier, error code, and component with a docs link.
+ */
+const DIRECTIVES = [
+  ["s-data", null, "Declare reactive state on an element; descendants read and write it.", `<div s-data="{ count: 0 }">`],
+  ["s-text", null, "Set the element's textContent from an expression.", `<span s-text="count"></span>`],
+  ["s-html", null, "Set innerHTML from an expression (trusted content only).", `<div s-html="markup"></div>`],
+  ["s-bind", ":", "Bind an attribute; :class and :style accept objects.", `<a :href="url" :class="{ on: active }">`],
+  ["s-on", "@", "Run an expression on a DOM event; supports modifiers.", `<button @click="count++">`],
+  ["s-model", null, "Two-way bind a form control to state.", `<input s-model="name">`],
+  ["s-show", null, "Toggle visibility with the display property.", `<p s-show="open">`],
+  ["s-if", null, "Add or remove from the DOM; a <template s-if> may hold multiple roots.", `<template s-if="open">...</template>`],
+  ["s-for", null, "Render a keyed list.", `<template s-for="item in items" :key="item.id">`],
+  ["s-ref", null, "Name an element; read it via $refs.", `<input s-ref="field">`],
+  ["s-init", null, "Run an expression once when the element initializes.", `<div s-init="load()">`],
+  ["s-effect", null, "Re-run an expression whenever its reactive dependencies change.", `<div s-effect="document.title = title">`],
+  ["s-transition", null, "Animate enter and leave.", `<div s-show="open" s-transition>`],
+  ["s-teleport", null, "Render a template's content elsewhere in the DOM.", `<template s-teleport="body">...</template>`],
+  ["s-cloak", null, "Hide until initialized; pair with [s-cloak]{display:none}.", `<div s-cloak>`],
+  ["s-ignore", null, "Skip a subtree during initialization.", `<div s-ignore>`],
+];
+const MAGICS = [
+  ["$el", "The current DOM element.", "magic-el"],
+  ["$refs", "Elements named with s-ref, by name.", "magic-refs"],
+  ["$root", "The nearest enclosing s-data root element.", "magic-root"],
+  ["$id", "A stable unique id, scoped for pairing labels and controls.", "magic-id"],
+  ["$store", "Global reactive stores shared across components.", "magic-store"],
+  ["$watch", "Run a callback when a reactive expression changes.", "magic-watch"],
+  ["$nextTick", "Run a callback after the next DOM update.", "magic-nextTick"],
+  ["$dispatch", "Dispatch a custom DOM event that bubbles.", "magic-dispatch"],
+  ["$data", "The reactive state object of the current scope.", "magic-data"],
+];
+const MODIFIERS = {
+  event: ["prevent", "stop", "self", "outside", "once", "capture", "passive", "window", "document", "debounce", "throttle", "camel", "dot", "enter", "escape", "tab", "space", "up", "down", "left", "right", "cmd", "ctrl", "meta", "alt", "shift"],
+  model: ["number", "trim", "lazy"],
+};
+const ERROR_CODES = [
+  ["E101", "s-data init() threw."],
+  ["E102", "s-data destroy() threw."],
+  ["E103", "A store init() threw."],
+  ["E201", "Unknown directive; the message suggests the closest real one."],
+  ["E301", "A directive or event handler failed while evaluating its expression."],
+  ["E401", "s-for must be used on a <template> element."],
+  ["E402", "s-for <template> needs exactly one root element."],
+  ["E501", "s-teleport must be used on a <template> element."],
+  ["E502", "s-teleport target selector was not found in the DOM."],
+  ["E601", "A cleanup callback threw during teardown."],
+  ["E602", "A destroy() callback threw during teardown."],
+];
+const COMPONENT_CLASS = {
+  "comp-button": "s-btn", "comp-input": "s-input", "comp-select": "s-select", "comp-checkbox": "s-check",
+  "comp-switch": "s-switch", "comp-card": "s-card", "comp-badge": "s-badge", "comp-alert": "s-alert",
+  "comp-avatar": "s-avatar", "comp-progress": "s-progress", "comp-tooltip": "s-tooltip", "comp-dialog": "s-dialog",
+  "comp-menu": "s-menu", "comp-popover": "s-popover", "comp-toast": "s-toast", "comp-tabs": "s-tabs-list",
+  "comp-accordion": "s-accordion", "comp-breadcrumb": "s-breadcrumb", "comp-pagination": "s-pagination",
+};
+
+function buildManifest(ordered, version) {
+  const doc = (slug) => `${SITE}/${slug}/`;
+  return {
+    $schema: "https://json-schema.org/draft/2020-12/schema",
+    name: "summitjs",
+    version,
+    description: SUMMARY,
+    homepage: `${SITE}/`,
+    docs: `${SITE}/`,
+    llms: `${SITE}/llms.txt`,
+    llmsFull: `${SITE}/llms-full.txt`,
+    agents: "https://github.com/velofy/summit/blob/main/AGENTS.md",
+    allowedGlobals: ["Math", "JSON", "Date", "Object", "Array", "Number", "String", "Boolean", "console", "window", "document", "location", "localStorage", "sessionStorage", "setTimeout", "setInterval", "fetch", "URL", "structuredClone"],
+    directives: DIRECTIVES.map(([name, shorthand, summary, example]) => ({
+      name, shorthand, summary, example, doc: doc(name),
+    })),
+    magics: MAGICS.map(([name, summary, slug]) => ({ name, summary, doc: doc(slug) })),
+    modifiers: MODIFIERS,
+    errors: ERROR_CODES.map(([code, summary]) => ({ code, summary })),
+    components: ordered
+      .filter((p) => p.slug.startsWith("comp-"))
+      .map((p) => ({ name: p.title, class: COMPONENT_CLASS[p.slug] || null, summary: p.description, doc: doc(p.slug) })),
+  };
 }
 
 // --- Main ----------------------------------------------------------------
@@ -398,8 +484,13 @@ function main() {
   writeFileSync(join(OUT, "llms.txt"), buildLlmsIndex(ordered));
   writeFileSync(join(OUT, "llms-full.txt"), buildLlmsFull(ordered));
 
+  // A machine-readable manifest for tool-calling agents.
+  const version = JSON.parse(readFileSync(join(root, "package.json"), "utf8")).version;
+  mkdirSync(join(OUT, "ai"), { recursive: true });
+  writeFileSync(join(OUT, "ai", "summit.json"), JSON.stringify(buildManifest(ordered, version), null, 2));
+
   console.log(`Built ${pages.length} docs pages + search index (${searchIndex.length} entries).`);
-  console.log(`Wrote per-page index.md, llms.txt, and llms-full.txt.`);
+  console.log(`Wrote per-page index.md, llms.txt, llms-full.txt, and ai/summit.json.`);
   if (broken.length) {
     console.warn(`\n${broken.length} broken internal link(s):`);
     broken.forEach((b) => console.warn("  " + b));

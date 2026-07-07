@@ -1,0 +1,390 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "summitjs",
+  "version": "0.1.0",
+  "description": "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 13KB.",
+  "homepage": "https://velofy.github.io/summit/",
+  "docs": "https://velofy.github.io/summit/",
+  "llms": "https://velofy.github.io/summit/llms.txt",
+  "llmsFull": "https://velofy.github.io/summit/llms-full.txt",
+  "agents": "https://github.com/velofy/summit/blob/main/AGENTS.md",
+  "allowedGlobals": [
+    "Math",
+    "JSON",
+    "Date",
+    "Object",
+    "Array",
+    "Number",
+    "String",
+    "Boolean",
+    "console",
+    "window",
+    "document",
+    "location",
+    "localStorage",
+    "sessionStorage",
+    "setTimeout",
+    "setInterval",
+    "fetch",
+    "URL",
+    "structuredClone"
+  ],
+  "directives": [
+    {
+      "name": "s-data",
+      "shorthand": null,
+      "summary": "Declare reactive state on an element; descendants read and write it.",
+      "example": "<div s-data=\"{ count: 0 }\">",
+      "doc": "https://velofy.github.io/summit/s-data/"
+    },
+    {
+      "name": "s-text",
+      "shorthand": null,
+      "summary": "Set the element's textContent from an expression.",
+      "example": "<span s-text=\"count\"></span>",
+      "doc": "https://velofy.github.io/summit/s-text/"
+    },
+    {
+      "name": "s-html",
+      "shorthand": null,
+      "summary": "Set innerHTML from an expression (trusted content only).",
+      "example": "<div s-html=\"markup\"></div>",
+      "doc": "https://velofy.github.io/summit/s-html/"
+    },
+    {
+      "name": "s-bind",
+      "shorthand": ":",
+      "summary": "Bind an attribute; :class and :style accept objects.",
+      "example": "<a :href=\"url\" :class=\"{ on: active }\">",
+      "doc": "https://velofy.github.io/summit/s-bind/"
+    },
+    {
+      "name": "s-on",
+      "shorthand": "@",
+      "summary": "Run an expression on a DOM event; supports modifiers.",
+      "example": "<button @click=\"count++\">",
+      "doc": "https://velofy.github.io/summit/s-on/"
+    },
+    {
+      "name": "s-model",
+      "shorthand": null,
+      "summary": "Two-way bind a form control to state.",
+      "example": "<input s-model=\"name\">",
+      "doc": "https://velofy.github.io/summit/s-model/"
+    },
+    {
+      "name": "s-show",
+      "shorthand": null,
+      "summary": "Toggle visibility with the display property.",
+      "example": "<p s-show=\"open\">",
+      "doc": "https://velofy.github.io/summit/s-show/"
+    },
+    {
+      "name": "s-if",
+      "shorthand": null,
+      "summary": "Add or remove from the DOM; a <template s-if> may hold multiple roots.",
+      "example": "<template s-if=\"open\">...</template>",
+      "doc": "https://velofy.github.io/summit/s-if/"
+    },
+    {
+      "name": "s-for",
+      "shorthand": null,
+      "summary": "Render a keyed list.",
+      "example": "<template s-for=\"item in items\" :key=\"item.id\">",
+      "doc": "https://velofy.github.io/summit/s-for/"
+    },
+    {
+      "name": "s-ref",
+      "shorthand": null,
+      "summary": "Name an element; read it via $refs.",
+      "example": "<input s-ref=\"field\">",
+      "doc": "https://velofy.github.io/summit/s-ref/"
+    },
+    {
+      "name": "s-init",
+      "shorthand": null,
+      "summary": "Run an expression once when the element initializes.",
+      "example": "<div s-init=\"load()\">",
+      "doc": "https://velofy.github.io/summit/s-init/"
+    },
+    {
+      "name": "s-effect",
+      "shorthand": null,
+      "summary": "Re-run an expression whenever its reactive dependencies change.",
+      "example": "<div s-effect=\"document.title = title\">",
+      "doc": "https://velofy.github.io/summit/s-effect/"
+    },
+    {
+      "name": "s-transition",
+      "shorthand": null,
+      "summary": "Animate enter and leave.",
+      "example": "<div s-show=\"open\" s-transition>",
+      "doc": "https://velofy.github.io/summit/s-transition/"
+    },
+    {
+      "name": "s-teleport",
+      "shorthand": null,
+      "summary": "Render a template's content elsewhere in the DOM.",
+      "example": "<template s-teleport=\"body\">...</template>",
+      "doc": "https://velofy.github.io/summit/s-teleport/"
+    },
+    {
+      "name": "s-cloak",
+      "shorthand": null,
+      "summary": "Hide until initialized; pair with [s-cloak]{display:none}.",
+      "example": "<div s-cloak>",
+      "doc": "https://velofy.github.io/summit/s-cloak/"
+    },
+    {
+      "name": "s-ignore",
+      "shorthand": null,
+      "summary": "Skip a subtree during initialization.",
+      "example": "<div s-ignore>",
+      "doc": "https://velofy.github.io/summit/s-ignore/"
+    }
+  ],
+  "magics": [
+    {
+      "name": "$el",
+      "summary": "The current DOM element.",
+      "doc": "https://velofy.github.io/summit/magic-el/"
+    },
+    {
+      "name": "$refs",
+      "summary": "Elements named with s-ref, by name.",
+      "doc": "https://velofy.github.io/summit/magic-refs/"
+    },
+    {
+      "name": "$root",
+      "summary": "The nearest enclosing s-data root element.",
+      "doc": "https://velofy.github.io/summit/magic-root/"
+    },
+    {
+      "name": "$id",
+      "summary": "A stable unique id, scoped for pairing labels and controls.",
+      "doc": "https://velofy.github.io/summit/magic-id/"
+    },
+    {
+      "name": "$store",
+      "summary": "Global reactive stores shared across components.",
+      "doc": "https://velofy.github.io/summit/magic-store/"
+    },
+    {
+      "name": "$watch",
+      "summary": "Run a callback when a reactive expression changes.",
+      "doc": "https://velofy.github.io/summit/magic-watch/"
+    },
+    {
+      "name": "$nextTick",
+      "summary": "Run a callback after the next DOM update.",
+      "doc": "https://velofy.github.io/summit/magic-nextTick/"
+    },
+    {
+      "name": "$dispatch",
+      "summary": "Dispatch a custom DOM event that bubbles.",
+      "doc": "https://velofy.github.io/summit/magic-dispatch/"
+    },
+    {
+      "name": "$data",
+      "summary": "The reactive state object of the current scope.",
+      "doc": "https://velofy.github.io/summit/magic-data/"
+    }
+  ],
+  "modifiers": {
+    "event": [
+      "prevent",
+      "stop",
+      "self",
+      "outside",
+      "once",
+      "capture",
+      "passive",
+      "window",
+      "document",
+      "debounce",
+      "throttle",
+      "camel",
+      "dot",
+      "enter",
+      "escape",
+      "tab",
+      "space",
+      "up",
+      "down",
+      "left",
+      "right",
+      "cmd",
+      "ctrl",
+      "meta",
+      "alt",
+      "shift"
+    ],
+    "model": [
+      "number",
+      "trim",
+      "lazy"
+    ]
+  },
+  "errors": [
+    {
+      "code": "E101",
+      "summary": "s-data init() threw."
+    },
+    {
+      "code": "E102",
+      "summary": "s-data destroy() threw."
+    },
+    {
+      "code": "E103",
+      "summary": "A store init() threw."
+    },
+    {
+      "code": "E201",
+      "summary": "Unknown directive; the message suggests the closest real one."
+    },
+    {
+      "code": "E301",
+      "summary": "A directive or event handler failed while evaluating its expression."
+    },
+    {
+      "code": "E401",
+      "summary": "s-for must be used on a <template> element."
+    },
+    {
+      "code": "E402",
+      "summary": "s-for <template> needs exactly one root element."
+    },
+    {
+      "code": "E501",
+      "summary": "s-teleport must be used on a <template> element."
+    },
+    {
+      "code": "E502",
+      "summary": "s-teleport target selector was not found in the DOM."
+    },
+    {
+      "code": "E601",
+      "summary": "A cleanup callback threw during teardown."
+    },
+    {
+      "code": "E602",
+      "summary": "A destroy() callback threw during teardown."
+    }
+  ],
+  "components": [
+    {
+      "name": "Button",
+      "class": "s-btn",
+      "summary": "Buttons with solid, outline, ghost, subtle, and danger variants, plus sizes and groups.",
+      "doc": "https://velofy.github.io/summit/comp-button/"
+    },
+    {
+      "name": "Input",
+      "class": "s-input",
+      "summary": "Text inputs and textareas with labels, help text, addons, and validation state.",
+      "doc": "https://velofy.github.io/summit/comp-input/"
+    },
+    {
+      "name": "Select",
+      "class": "s-select",
+      "summary": "A styled native select bound with s-model.",
+      "doc": "https://velofy.github.io/summit/comp-select/"
+    },
+    {
+      "name": "Checkbox & Radio",
+      "class": "s-check",
+      "summary": "Accessible checkboxes and radio groups bound with s-model.",
+      "doc": "https://velofy.github.io/summit/comp-checkbox/"
+    },
+    {
+      "name": "Switch",
+      "class": "s-switch",
+      "summary": "A toggle switch bound with s-model, for on/off settings.",
+      "doc": "https://velofy.github.io/summit/comp-switch/"
+    },
+    {
+      "name": "Card",
+      "class": "s-card",
+      "summary": "A surface for grouping content, with header, body, and footer.",
+      "doc": "https://velofy.github.io/summit/comp-card/"
+    },
+    {
+      "name": "Badge & Tag",
+      "class": "s-badge",
+      "summary": "Small status labels and removable tags.",
+      "doc": "https://velofy.github.io/summit/comp-badge/"
+    },
+    {
+      "name": "Alert",
+      "class": "s-alert",
+      "summary": "Contextual feedback banners for info, success, warning, and danger.",
+      "doc": "https://velofy.github.io/summit/comp-alert/"
+    },
+    {
+      "name": "Avatar",
+      "class": "s-avatar",
+      "summary": "User avatars with initials or images, sizes, and stacked groups.",
+      "doc": "https://velofy.github.io/summit/comp-avatar/"
+    },
+    {
+      "name": "Progress & Spinner",
+      "class": "s-progress",
+      "summary": "Progress bars, spinners, and skeleton placeholders for loading states.",
+      "doc": "https://velofy.github.io/summit/comp-progress/"
+    },
+    {
+      "name": "Tooltip",
+      "class": "s-tooltip",
+      "summary": "A CSS-only tooltip that appears on hover and focus.",
+      "doc": "https://velofy.github.io/summit/comp-tooltip/"
+    },
+    {
+      "name": "Dialog",
+      "class": "s-dialog",
+      "summary": "A modal dialog for confirmations and focused tasks, with overlay and Escape to close.",
+      "doc": "https://velofy.github.io/summit/comp-dialog/"
+    },
+    {
+      "name": "Dropdown Menu",
+      "class": "s-menu",
+      "summary": "A button-triggered menu that closes on outside click or Escape.",
+      "doc": "https://velofy.github.io/summit/comp-menu/"
+    },
+    {
+      "name": "Popover",
+      "class": "s-popover",
+      "summary": "A click-triggered floating panel for rich content, dismissed on outside click or Escape.",
+      "doc": "https://velofy.github.io/summit/comp-popover/"
+    },
+    {
+      "name": "Toast",
+      "class": "s-toast",
+      "summary": "Transient notifications that stack and auto-dismiss.",
+      "doc": "https://velofy.github.io/summit/comp-toast/"
+    },
+    {
+      "name": "Tabs",
+      "class": "s-tabs-list",
+      "summary": "Switch between panels with an underlined or soft tab bar.",
+      "doc": "https://velofy.github.io/summit/comp-tabs/"
+    },
+    {
+      "name": "Accordion",
+      "class": "s-accordion",
+      "summary": "Collapsible sections, single or multiple open.",
+      "doc": "https://velofy.github.io/summit/comp-accordion/"
+    },
+    {
+      "name": "Breadcrumb",
+      "class": "s-breadcrumb",
+      "summary": "Show the path to the current page.",
+      "doc": "https://velofy.github.io/summit/comp-breadcrumb/"
+    },
+    {
+      "name": "Pagination",
+      "class": "s-pagination",
+      "summary": "Navigate through pages of results.",
+      "doc": "https://velofy.github.io/summit/comp-pagination/"
+    }
+  ]
+}

@@ -22,6 +22,7 @@ import { registerBuiltinDirectives } from "./directives/index.js";
 import { registerBuiltinMagics } from "./magics/index.js";
 import { signal, computed, effect, reactive, batch, nextTick } from "./reactivity/index.js";
 import { addGlobals } from "./evaluator/index.js";
+import { fail } from "./errors.js";
 import type { DataProvider, BindProvider, DirectiveHandler, MagicFactory } from "./types.js";
 
 export const version = "0.1.0";
@@ -101,7 +102,7 @@ export const Summit: SummitGlobal = {
         try {
           (initFn as () => void)();
         } catch (err) {
-          console.error("[summit] error in store init()", err);
+          fail("E103", `store "${name}" init() threw.`, { doc: "globals-store", cause: err });
         }
       }
       return scoped;

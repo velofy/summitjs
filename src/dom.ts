@@ -7,6 +7,8 @@
  * onto the DOM and everything is collected when a node is dropped.
  */
 
+import { fail } from "./errors.js";
+
 export type Scope = Record<PropertyKey, unknown>;
 
 export interface SummitMeta {
@@ -60,7 +62,7 @@ export function runCleanups(el: Node): void {
       try {
         fn();
       } catch (err) {
-        console.error("[summit] cleanup error", err);
+        fail("E601", "a cleanup callback threw during teardown.", { doc: "lifecycle", cause: err });
       }
     }
     m.cleanups = [];
@@ -70,7 +72,7 @@ export function runCleanups(el: Node): void {
       try {
         fn();
       } catch (err) {
-        console.error("[summit] destroy error", err);
+        fail("E602", "a destroy() callback threw during teardown.", { doc: "lifecycle", cause: err });
       }
     }
     m.destroyCallbacks = [];

@@ -17,6 +17,7 @@ import { reactive } from "../reactivity/index.js";
 import { makeEnv } from "../scope/index.js";
 import { evaluateExpression } from "../evaluator/index.js";
 import type { Scope } from "../dom.js";
+import { warn } from "../errors.js";
 
 interface Block {
   node: Element;
@@ -60,7 +61,11 @@ function normalize(source: unknown): Item[] {
 
 export const sFor: DirectiveHandler = (el, meta, utils) => {
   if (el.tagName !== "TEMPLATE") {
-    console.warn("[summit] s-for requires a <template> element");
+    warn("E401", "s-for must be used on a <template> element.", {
+      el,
+      doc: "s-for",
+      hint: `Wrap the repeated markup: <template s-for="${meta.expression}"><li>...</li></template>`,
+    });
     return;
   }
   const parent = el.parentNode;
@@ -68,7 +73,7 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
 
   const blueprint = (el as HTMLTemplateElement).content.firstElementChild;
   if (!blueprint) {
-    console.warn("[summit] s-for <template> needs exactly one root element");
+    warn("E402", "s-for <template> needs exactly one root element.", { el, doc: "s-for" });
     return;
   }
 

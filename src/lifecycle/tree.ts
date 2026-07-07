@@ -10,11 +10,15 @@
 import { addCleanup, meta, nextMarker, resolveScopes, runCleanups, type Scope } from "../dom.js";
 import { attachMagics, createScope, makeEnv } from "../scope/index.js";
 import { domEffect } from "../reactivity/index.js";
-import { getData, getDirective, DEFAULT_PRIORITY } from "../registry/registry.js";
+import { getData, getDirective, directiveNames, DEFAULT_PRIORITY } from "../registry/registry.js";
 import type { DirectiveMeta, DirectiveUtils, SummitGlobalLike } from "../types.js";
 import { parseAttribute } from "./attributes.js";
+import { warnOnce, fail, suggest } from "../errors.js";
 
 const STRUCTURAL = new Set(["if", "for", "teleport"]);
+// Valid directive names that are not in the directive registry: s-data creates
+// scope, s-ignore is read directly off the element.
+const SPECIAL = new Set(["data", "ignore"]);
 
 let summitGlobal: SummitGlobalLike;
 export function setSummitGlobal(g: SummitGlobalLike): void {
@@ -44,8 +48,22 @@ function collectDirectives(el: Element): DirectiveMeta[] {
   for (const attr of Array.from(el.attributes)) {
     const parsed = parseAttribute(attr.name, attr.value);
     if (!parsed) continue;
-    if (parsed.name === "data" || STRUCTURAL.has(parsed.name) || getDirective(parsed.name)) {
+    if (SPECIAL.has(parsed.name) || getDirective(parsed.name)) {
       out.push(parsed);
+    } else {
+      // Looks like a directive (s-*, @*, :*) but nothing handles it. A typo like
+      // s-clik or s-modle is a common first-try mistake; point at the right one.
+      const hit = suggest(parsed.name, [...directiveNames(), ...SPECIAL]);
+      warnOnce(
+        `dir:${parsed.name}`,
+        "E201",
+        `unknown directive "${attr.name}".`,
+        {
+          el,
+          doc: hit ? `s-${hit}` : "start",
+          hint: hit ? `Did you mean "s-${hit}"?` : "See the directive reference.",
+        },
+      );
     }
   }
   return out;
@@ -81,7 +99,13 @@ function runDirective(el: Element, dmeta: DirectiveMeta, scopes: Scope[]): void 
   try {
     entry.handler(el, dmeta, makeUtils(el, scopes));
   } catch (err) {
-    console.error(`[summit] error in s-${dmeta.name}`, err);
+    fail("E301", `s-${dmeta.name} failed while evaluating its expression.`, {
+      el,
+      expression: dmeta.expression,
+      doc: `s-${dmeta.name}`,
+      hint: "Every name in the expression must be state from an enclosing s-data, or an allowed global.",
+      cause: err,
+    });
   }
 }
 
@@ -122,7 +146,7 @@ function initData(el: Element, dmeta: DirectiveMeta, parentScopes: Scope[]): Sco
     try {
       (initFn as () => void)();
     } catch (err) {
-      console.error("[summit] error in data init()", err);
+      fail("E101", "s-data init() threw.", { el, doc: "s-data", cause: err });
     }
   }
   const destroyFn = (scope as Record<string, unknown>)["destroy"];
@@ -131,7 +155,7 @@ function initData(el: Element, dmeta: DirectiveMeta, parentScopes: Scope[]): Sco
       try {
         (destroyFn as () => void)();
       } catch (err) {
-        console.error("[summit] error in data destroy()", err);
+        fail("E102", "s-data destroy() threw.", { el, doc: "s-data", cause: err });
       }
     });
   }

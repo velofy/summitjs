@@ -36,6 +36,9 @@ export function getDirective(name: string): DirectiveEntry | undefined {
 export function hasDirective(name: string): boolean {
   return directives.has(name);
 }
+export function directiveNames(): string[] {
+  return [...directives.keys()];
+}
 
 export function registerMagic(name: string, factory: MagicFactory): void {
   magics.set(name, factory);

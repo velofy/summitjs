@@ -10,6 +10,7 @@
 
 import type { DirectiveHandler } from "../types.js";
 import { camelCase, kebabCase } from "./shared.js";
+import { fail } from "../errors.js";
 
 const SYSTEM = new Set(["shift", "ctrl", "alt", "cmd", "meta"]);
 const BEHAVIOR = new Set([
@@ -142,8 +143,18 @@ export const on: DirectiveHandler = (el, meta, utils) => {
     if (mods.includes("prevent")) e.preventDefault();
     if (mods.includes("stop")) e.stopPropagation();
 
-    const result = utils.evaluateAction(meta.expression, { $event: e });
-    if (typeof result === "function") (result as (e: Event) => void)(e);
+    try {
+      const result = utils.evaluateAction(meta.expression, { $event: e });
+      if (typeof result === "function") (result as (e: Event) => void)(e);
+    } catch (err) {
+      fail("E301", `@${event} handler failed while evaluating its expression.`, {
+        el,
+        expression: meta.expression,
+        doc: "s-on",
+        hint: "Names must be state from an enclosing s-data, a $magic, or an allowed global.",
+        cause: err,
+      });
+    }
   };
 
   const debounceMs = durationFor(mods, "debounce");
