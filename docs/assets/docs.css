@@ -44,9 +44,11 @@ a:hover { text-decoration: underline; }
 kbd { font-family: var(--mono); font-size: 0.75rem; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 5px; padding: 1px 5px; color: var(--faint); background: var(--surface); }
 
 /* Top bar */
+/* Opaque, non-blurred bar: a sticky backdrop-filter re-composites its blur on
+   every scroll frame, which is the biggest cause of scroll jank on mobile. */
 .topbar { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; gap: 0.75rem;
-  height: 60px; padding: 0 1.1rem; background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  height: 60px; padding: 0 1.1rem; background: var(--bg);
+  border-bottom: 1px solid var(--border); }
 .brand { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font); font-weight: 800; letter-spacing: -0.03em; font-size: 1.2rem; color: var(--text); flex: none; }
 .brand:hover { text-decoration: none; }
 .brand-mark svg { width: 26px; height: 21px; display: block; flex: none; }

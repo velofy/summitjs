@@ -82,8 +82,10 @@
       code, pre { font-family: var(--mono); }
 
       /* Nav */
+      /* Opaque, non-blurred bar: a sticky backdrop-filter re-composites the blur
+         every scroll frame, which is the main source of scroll jank on mobile. */
       nav { position: sticky; top: 0; z-index: 30;
-        background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(10px);
+        background: var(--bg);
         border-bottom: 1px solid transparent; }
       nav.scrolled { border-bottom-color: var(--border); }
       nav .wrap { display: flex; align-items: center; gap: 1rem; height: 64px; }
@@ -306,7 +308,7 @@
     </style>
   </head>
   <body>
-    <div class="app" s-data="{ scrolled: false, atTop: true }" @scroll.window="scrolled = window.scrollY > 8">
+    <div class="app" s-data="{ scrolled: false, atTop: true }" @scroll.window.passive="scrolled = window.scrollY > 8">
     <nav id="nav" :class="{ scrolled: scrolled }">
       <div class="wrap">
         <a class="brand" :class="{ 'is-visible': !atTop }" href="./" aria-label="Summit.js home">

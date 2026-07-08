@@ -85,7 +85,17 @@
 
         init: function () {
           this.hydrateRecent();
-          this.load();
+          // Prefetch the search index during idle time instead of eagerly on
+          // load: the index is ~62KB gzip + a big JSON parse, and most landing
+          // visitors never search. Idle prefetch keeps "open" instant without
+          // competing with first paint; open() also loads on demand as a fallback.
+          var self = this;
+          var prefetch = function () { self.load(); };
+          if (typeof requestIdleCallback === "function") {
+            requestIdleCallback(prefetch, { timeout: 3000 });
+          } else {
+            setTimeout(prefetch, 1500);
+          }
         },
 
         // Populates `index` (prefetched on load). `isLoading` stays true until
