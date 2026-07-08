@@ -78,6 +78,10 @@ expression syntax. All of the following work inside directives:
   its forms (`= += -= *= /= %= **= &&= ||= ??=`).
 - **Arrow functions,** with expression or block bodies, default parameters,
   destructuring parameters, and rest parameters.
+- **The `new` operator,** for constructing allowlisted built-ins and your own
+  functions: `new Date(0)`, `new Map()`, `new Set([1, 2])`, `new RegExp('\\d')`.
+  Only names your scope or the global allowlist expose are reachable, so it stays
+  CSP-safe.
 
 In program mode (action directives) you additionally get statements: `if`/`else`,
 `return`, `let`/`const`/`var` with destructuring, `for`, `for...of`, `while`,
@@ -98,10 +102,6 @@ The subset stops where an expression language should. If you write any of these
 in a directive, you get a parse error, which Summit catches and logs to the
 console rather than executing:
 
-- The `new` operator. Constructors are not callable from expressions, so use a
-  static method or a global that returns a value. Reach for `Date.now()` rather
-  than `new Date()`, and build the object in a `Summit.data` provider if you need
-  a constructed instance.
 - Bitwise operators (`& | ^ ~ << >> >>>`).
 - The `function` keyword and function declarations. Use arrow functions.
 - Classes, `try`/`catch`, `throw`, `switch`, `do...while`, `async`/`await`, and

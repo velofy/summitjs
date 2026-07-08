@@ -92,6 +92,10 @@ arithmetic <code>+ - * / % **</code>, comparison <code>&lt; &gt; &lt;= &gt;=</co
 its forms (<code>= += -= *= /= %= **= &amp;&amp;= ||= ??=</code>).</li>
 <li><strong>Arrow functions,</strong> with expression or block bodies, default parameters,
 destructuring parameters, and rest parameters.</li>
+<li><strong>The <code>new</code> operator,</strong> for constructing allowlisted built-ins and your own
+functions: <code>new Date(0)</code>, <code>new Map()</code>, <code>new Set([1, 2])</code>, <code>new RegExp(&#39;\\d&#39;)</code>.
+Only names your scope or the global allowlist expose are reachable, so it stays
+CSP-safe.</li>
 </ul>
 <p>In program mode (action directives) you additionally get statements: <code>if</code>/<code>else</code>,
 <code>return</code>, <code>let</code>/<code>const</code>/<code>var</code> with destructuring, <code>for</code>, <code>for...of</code>, <code>while</code>,
@@ -105,10 +109,6 @@ multi-statement logic.</p>
 in a directive, you get a parse error, which Summit catches and logs to the
 console rather than executing:</p>
 <ul>
-<li>The <code>new</code> operator. Constructors are not callable from expressions, so use a
-static method or a global that returns a value. Reach for <code>Date.now()</code> rather
-than <code>new Date()</code>, and build the object in a <code>Summit.data</code> provider if you need
-a constructed instance.</li>
 <li>Bitwise operators (<code>&amp; | ^ ~ &lt;&lt; &gt;&gt; &gt;&gt;&gt;</code>).</li>
 <li>The <code>function</code> keyword and function declarations. Use arrow functions.</li>
 <li>Classes, <code>try</code>/<code>catch</code>, <code>throw</code>, <code>switch</code>, <code>do...while</code>, <code>async</code>/<code>await</code>, and

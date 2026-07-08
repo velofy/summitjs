@@ -311,6 +311,17 @@ export class Interpreter {
       }
       case "CallExpression":
         return this.evalCall(node, scope, thisVal);
+      case "NewExpression": {
+        // The callee resolves through the same scope/allowlist as any other
+        // reference, so only allowlisted constructors (Date, Map, Set, RegExp,
+        // Promise, ...) or user-provided ones are reachable. Still no eval.
+        const ctor = this.evalExpr(node.callee, scope, thisVal);
+        const args = this.evalArguments(node.arguments, scope, thisVal);
+        if (typeof ctor !== "function") {
+          throw new TypeError("Expression value is not a constructor");
+        }
+        return Reflect.construct(ctor as new (...a: unknown[]) => unknown, args);
+      }
       case "ArrowFunction":
         return this.makeFunction(node, scope, /* lexicalThis */ thisVal, /* dynamic */ false);
       case "SequenceExpression": {

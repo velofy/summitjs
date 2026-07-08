@@ -354,8 +354,37 @@ class Parser {
     return node;
   }
 
+  private parseNewExpr(): Expression {
+    this.pos++; // consume 'new'
+    // The callee is a member expression, but not a call: in `new a.b()` the
+    // parens belong to `new`, and in `new a().b` the `.b` applies to the result.
+    let callee = this.parsePrimary();
+    for (;;) {
+      if (this.isPunc(".")) {
+        this.pos++;
+        const name = this.next();
+        callee = {
+          type: "MemberExpression",
+          object: callee,
+          property: { type: "Identifier", name: name.value },
+          computed: false,
+          optional: false,
+        };
+      } else if (this.isPunc("[")) {
+        this.pos++;
+        const property = this.parseExpression();
+        this.eatPunc("]");
+        callee = { type: "MemberExpression", object: callee, property, computed: true, optional: false };
+      } else {
+        break;
+      }
+    }
+    const args = this.isPunc("(") ? this.parseArguments() : [];
+    return { type: "NewExpression", callee, arguments: args };
+  }
+
   private parseCallMember(): Expression {
-    let node = this.parsePrimary();
+    let node = this.isKeyword("new") ? this.parseNewExpr() : this.parsePrimary();
     for (;;) {
       if (this.isPunc(".")) {
         this.pos++;

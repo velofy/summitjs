@@ -48,6 +48,37 @@ describe("literals + arithmetic", () => {
   });
 });
 
+describe("new operator", () => {
+  it("constructs allowlisted built-ins", () => {
+    expect(ev("new Date(0).getFullYear()")).toBe(1970);
+    expect(ev("new Map([['a', 1]]).get('a')")).toBe(1);
+    expect(ev("new Set([1, 2, 2]).size")).toBe(2);
+    expect(ev("new Array(3).length")).toBe(3);
+    expect(ev("new RegExp('\\\\d').test('5')")).toBe(true);
+  });
+
+  it("chains member/call after construction", () => {
+    expect(ev("new Date(0).getTime()")).toBe(0);
+    expect(ev("new URL('https://a.test/p?x=1').searchParams.get('x')")).toBe("1");
+  });
+
+  it("keeps division working (a slash is not a constructor)", () => {
+    expect(ev("10 / 2")).toBe(5);
+    expect(ev("new Date(2000).getTime() / 1000")).toBe(2);
+  });
+
+  it("constructs a user-provided function from state", () => {
+    const K = function (this: Record<string, unknown>, n: number) {
+      this.n = n;
+    };
+    expect(ev("new K(5).n", { K })).toBe(5);
+  });
+
+  it("throws on a non-constructor", () => {
+    expect(() => ev("new nope()")).toThrow();
+  });
+});
+
 describe("identifiers + scope", () => {
   it("reads data", () => {
     expect(ev("count", { count: 42 })).toBe(42);

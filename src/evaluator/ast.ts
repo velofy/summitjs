@@ -33,6 +33,7 @@ export type Expression =
   | AssignmentExpression
   | MemberExpression
   | CallExpression
+  | NewExpression
   | ArrowFunction
   | SequenceExpression
   | SpreadElement;
@@ -133,6 +134,11 @@ export interface CallExpression {
   callee: Expression;
   arguments: Expression[];
   optional: boolean;
+}
+export interface NewExpression {
+  type: "NewExpression";
+  callee: Expression;
+  arguments: Expression[];
 }
 export interface ArrowFunction {
   type: "ArrowFunction";

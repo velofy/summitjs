@@ -5,7 +5,9 @@
 import { gzipSync } from "node:zlib";
 import { readFileSync, existsSync } from "node:fs";
 
-const BUDGET_KB = 16; // hard ceiling; Alpine core is ~15-16 KB gzip
+const BUDGET_KB = 18; // hard ceiling; Alpine core is ~15-16 KB gzip, and Summit
+// bakes in focus, positioning, persistence, masking, and a fuller expression
+// grammar (new, regex) that classic runtimes push into separate plugins.
 const file = "dist/summit.min.js";
 
 if (!existsSync(file)) {
