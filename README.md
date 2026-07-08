@@ -13,7 +13,7 @@
 
 Started by [anishfyi](https://github.com/anishfyi), so that AI agents can make beautiful frontends.
 
-Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed further where it counts: a fine-grained signal engine, a CSP-safe expression evaluator, keyed list rendering, cached computed getters, a copy-in UI library, and full TypeScript types, all in about 13KB gzipped.
+Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed further where it counts: a fine-grained signal engine, a CSP-safe expression evaluator, keyed list rendering, cached computed getters, a copy-in UI library, and full TypeScript types, all in about 16KB gzipped.
 
 ## AI Agent Native
 
@@ -44,7 +44,8 @@ Summit is designed so that an AI agent can write a working, good-looking fronten
 | Cached computed getters | Yes | Recomputed on every read |
 | `s-if` on any element | Yes | `<template>` only |
 | TypeScript types shipped | Yes | Partial |
-| Bundle size (gzip) | ~13KB | ~15-16KB |
+| Focus trap, floating menus, persisted state, input masking | Built in | Separate plugins |
+| Bundle size (gzip) | ~16KB, batteries included | ~16KB core, plugins extra |
 | Build step required | Never | Never |
 
 The headline difference is the engine. Summit owns a real signal core, so a change updates only the DOM that read the value that changed. And because expressions run through a hand-written interpreter rather than `new Function`, a strict Content-Security-Policy works out of the box.

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "summitjs",
   "version": "0.1.0",
-  "description": "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 13KB.",
+  "description": "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.",
   "homepage": "https://velofy.github.io/summit/",
   "docs": "https://velofy.github.io/summit/",
   "llms": "https://velofy.github.io/summit/llms.txt",
@@ -129,6 +129,41 @@
       "doc": "https://velofy.github.io/summit/s-teleport/"
     },
     {
+      "name": "s-intersect",
+      "shorthand": ":leave",
+      "summary": "Run an expression when the element enters or leaves the viewport.",
+      "example": "<div s-intersect=\"load()\">",
+      "doc": "https://velofy.github.io/summit/s-intersect/"
+    },
+    {
+      "name": "s-trap",
+      "shorthand": null,
+      "summary": "Keep keyboard focus inside an element while an expression is truthy.",
+      "example": "<div s-trap=\"open\">",
+      "doc": "https://velofy.github.io/summit/s-trap/"
+    },
+    {
+      "name": "s-anchor",
+      "shorthand": null,
+      "summary": "Position an element next to a reference, flipping to stay in view.",
+      "example": "<div s-anchor=\"$refs.trigger\">",
+      "doc": "https://velofy.github.io/summit/s-anchor/"
+    },
+    {
+      "name": "s-collapse",
+      "shorthand": null,
+      "summary": "Animate an element open and closed by height.",
+      "example": "<div s-collapse=\"open\">",
+      "doc": "https://velofy.github.io/summit/s-collapse/"
+    },
+    {
+      "name": "s-mask",
+      "shorthand": null,
+      "summary": "Format an input as the user types against a pattern.",
+      "example": "<input s-mask=\"'(999) 999-9999'\">",
+      "doc": "https://velofy.github.io/summit/s-mask/"
+    },
+    {
       "name": "s-cloak",
       "shorthand": null,
       "summary": "Hide until initialized; pair with [s-cloak]{display:none}.",
@@ -188,6 +223,16 @@
       "name": "$data",
       "summary": "The reactive state object of the current scope.",
       "doc": "https://velofy.github.io/summit/magic-data/"
+    },
+    {
+      "name": "$persist",
+      "summary": "Reactive state backed by localStorage that survives reloads.",
+      "doc": "https://velofy.github.io/summit/magic-persist/"
+    },
+    {
+      "name": "$focus",
+      "summary": "Move keyboard focus around from an expression.",
+      "doc": "https://velofy.github.io/summit/magic-focus/"
     }
   ],
   "modifiers": {

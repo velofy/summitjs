@@ -41,7 +41,7 @@ with `count`. When you click, only that one number re-renders.
   re-rendering whole subtrees.
 - **CSP-safe by default.** Expressions run through a hand-written interpreter.
   No `eval`, no `new Function`, no `unsafe-eval` in your policy.
-- **Tiny and buildless.** The whole runtime is roughly 13KB gzipped. Drop in one
+- **Tiny and buildless.** The whole runtime is roughly 16KB gzipped. Drop in one
   script tag and it starts on its own.
 - **Familiar.** Fifteen directives, nine magic properties, and the `@` and `:`
   shorthands. If you have used an HTML-first framework before, this will feel

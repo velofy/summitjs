@@ -292,7 +292,7 @@ ${searchModal()}
 
 const SITE = "https://velofy.github.io/summit";
 const SUMMARY =
-  "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 13KB.";
+  "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.";
 
 /** A page rendered as a clean, self-contained markdown document. */
 function pageMarkdown(page) {
@@ -354,6 +354,11 @@ const DIRECTIVES = [
   ["s-effect", null, "Re-run an expression whenever its reactive dependencies change.", `<div s-effect="document.title = title">`],
   ["s-transition", null, "Animate enter and leave.", `<div s-show="open" s-transition>`],
   ["s-teleport", null, "Render a template's content elsewhere in the DOM.", `<template s-teleport="body">...</template>`],
+  ["s-intersect", ":leave", "Run an expression when the element enters or leaves the viewport.", `<div s-intersect="load()">`],
+  ["s-trap", null, "Keep keyboard focus inside an element while an expression is truthy.", `<div s-trap="open">`],
+  ["s-anchor", null, "Position an element next to a reference, flipping to stay in view.", `<div s-anchor="$refs.trigger">`],
+  ["s-collapse", null, "Animate an element open and closed by height.", `<div s-collapse="open">`],
+  ["s-mask", null, "Format an input as the user types against a pattern.", `<input s-mask="'(999) 999-9999'">`],
   ["s-cloak", null, "Hide until initialized; pair with [s-cloak]{display:none}.", `<div s-cloak>`],
   ["s-ignore", null, "Skip a subtree during initialization.", `<div s-ignore>`],
 ];
@@ -367,6 +372,8 @@ const MAGICS = [
   ["$nextTick", "Run a callback after the next DOM update.", "magic-nextTick"],
   ["$dispatch", "Dispatch a custom DOM event that bubbles.", "magic-dispatch"],
   ["$data", "The reactive state object of the current scope.", "magic-data"],
+  ["$persist", "Reactive state backed by localStorage that survives reloads.", "magic-persist"],
+  ["$focus", "Move keyboard focus around from an expression.", "magic-focus"],
 ];
 const MODIFIERS = {
   event: ["prevent", "stop", "self", "outside", "once", "capture", "passive", "window", "document", "debounce", "throttle", "camel", "dot", "enter", "escape", "tab", "space", "up", "down", "left", "right", "cmd", "ctrl", "meta", "alt", "shift"],

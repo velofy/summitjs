@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>$focus · Summit.js</title>
+<meta name="description" content="Move keyboard focus around from an expression."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Crect x='21' y='3' width='9' height='9' rx='1.5' transform='rotate(45 25.5 7.5)' fill='%230d9488'/%3E%3Cpath d='M2 28 L13 10 L20 22 L26 14 L38 28 Z' fill='%230f172a'/%3E%3C/svg%3E"/>
+<script>(function(){var t=localStorage.getItem("summit-theme")||"dark";document.documentElement.dataset.theme=t;})();</script>
+<link rel="stylesheet" href="../assets/docs.css"/>
+<link rel="stylesheet" href="../assets/components.css"/>
+<link rel="stylesheet" href="../assets/techniques.css"/>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../"><span class="brand-mark"><svg viewBox="0 0 40 32" aria-hidden="true"><rect x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)" fill="var(--accent)"/><path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="var(--logo)"/></svg></span><span class="brand-word">Summit<span class="dot">.js</span></span></a>
+  <div class="top-spacer"></div>
+  <a class="top-navlink" href="../components/">UI Library</a>
+  <a class="top-navlink" href="../techniques/">Techniques</a>
+  <button class="search-trigger" s-data @click="$dispatch('open-search')" aria-label="Search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
+    <span>Search</span><kbd class="cmdk">⌘K</kbd>
+  </button>
+  <button class="top-cta copy-md" title="Copy this page as Markdown, ready to paste into an AI agent" aria-label="Copy this page as Markdown for AI" s-data="{ done: false, copy() { fetch('index.md').then(r => r.text()).then(t => { navigator.clipboard.writeText(t); this.done = true; setTimeout(() => { this.done = false; }, 1500); }); } }" @click="copy()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span s-show="!done">Copy for AI</span><span s-show="done">Copied</span></button>
+  <a class="top-link" href="https://github.com/velofy/summit" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.26 3.4.96.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.28 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+  <button class="top-icon theme-toggle" title="Toggle theme" aria-label="Toggle theme" s-data @click="document.documentElement.dataset.theme=(document.documentElement.dataset.theme==='dark'?'light':'dark');localStorage.setItem('summit-theme',document.documentElement.dataset.theme)"><svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg><svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  <button class="menu-toggle" s-data="{ o:false }" @click="o=!o; document.body.classList.toggle('nav-open', o)" aria-label="Menu">☰</button>
+</header>
+<div class="layout">
+  <aside class="sidebar"><nav><div class="side-group"><div class="side-label">Getting Started</div><ul><li><a href="../start/">Introduction</a></li></ul></div><div class="side-group"><div class="side-label">Components</div><ul><li><a href="../components/">Overview</a></li><li><a href="../comp-button/">Button</a></li><li><a href="../comp-input/">Input</a></li><li><a href="../comp-select/">Select</a></li><li><a href="../comp-checkbox/">Checkbox &amp; Radio</a></li><li><a href="../comp-switch/">Switch</a></li><li><a href="../comp-card/">Card</a></li><li><a href="../comp-badge/">Badge &amp; Tag</a></li><li><a href="../comp-alert/">Alert</a></li><li><a href="../comp-avatar/">Avatar</a></li><li><a href="../comp-progress/">Progress &amp; Spinner</a></li><li><a href="../comp-tooltip/">Tooltip</a></li><li><a href="../comp-dialog/">Dialog</a></li><li><a href="../comp-menu/">Dropdown Menu</a></li><li><a href="../comp-popover/">Popover</a></li><li><a href="../comp-toast/">Toast</a></li><li><a href="../comp-tabs/">Tabs</a></li><li><a href="../comp-accordion/">Accordion</a></li><li><a href="../comp-breadcrumb/">Breadcrumb</a></li><li><a href="../comp-pagination/">Pagination</a></li></ul></div><div class="side-group"><div class="side-label">Techniques</div><ul><li><a href="../techniques/">Overview</a></li><li><a href="../technique-animation/">Loaders &amp; Spinners</a></li><li><a href="../technique-glassmorphism/">Matte Glassmorphism</a></li><li><a href="../technique-neumorphism/">Neumorphism</a></li><li><a href="../technique-claymorphism/">Claymorphism</a></li><li><a href="../technique-retro/">Retro UI</a></li><li><a href="../technique-brutalism/">Brutalism</a></li><li><a href="../technique-aurora/">Aurora Backgrounds</a></li><li><a href="../technique-glow/">Glow &amp; Spotlight</a></li><li><a href="../technique-navbars/">Navbar Patterns</a></li><li><a href="../technique-tailwind/">Using Tailwind CSS</a></li></ul></div><div class="side-group"><div class="side-label">Essentials</div><ul><li><a href="../installation/">Installation</a></li><li><a href="../reactivity-state/">Reactivity &amp; State</a></li><li><a href="../templating/">Templating</a></li><li><a href="../events/">Events</a></li><li><a href="../forms/">Forms</a></li><li><a href="../lifecycle/">Lifecycle</a></li></ul></div><div class="side-group"><div class="side-label">Directives</div><ul><li><a href="../s-data/">s-data</a></li><li><a href="../s-bind/">s-bind</a></li><li><a href="../s-on/">s-on</a></li><li><a href="../s-text/">s-text</a></li><li><a href="../s-html/">s-html</a></li><li><a href="../s-model/">s-model</a></li><li><a href="../s-show/">s-show</a></li><li><a href="../s-if/">s-if</a></li><li><a href="../s-for/">s-for</a></li><li><a href="../s-effect/">s-effect</a></li><li><a href="../s-init/">s-init</a></li><li><a href="../s-ref/">s-ref</a></li><li><a href="../s-cloak/">s-cloak</a></li><li><a href="../s-ignore/">s-ignore</a></li><li><a href="../s-teleport/">s-teleport</a></li><li><a href="../s-transition/">s-transition</a></li><li><a href="../s-intersect/">s-intersect</a></li><li><a href="../s-trap/">s-trap</a></li><li><a href="../s-anchor/">s-anchor</a></li><li><a href="../s-collapse/">s-collapse</a></li><li><a href="../s-mask/">s-mask</a></li></ul></div><div class="side-group"><div class="side-label">Magic Properties</div><ul><li><a href="../magic-el/">$el</a></li><li><a href="../magic-refs/">$refs</a></li><li><a href="../magic-store/">$store</a></li><li><a href="../magic-watch/">$watch</a></li><li><a href="../magic-dispatch/">$dispatch</a></li><li><a href="../magic-nextTick/">$nextTick</a></li><li><a href="../magic-root/">$root</a></li><li><a href="../magic-id/">$id</a></li><li><a href="../magic-data/">$data</a></li><li><a href="../magic-persist/">$persist</a></li><li><a href="../magic-focus/" class="active" aria-current="page">$focus</a></li></ul></div><div class="side-group"><div class="side-label">Globals & API</div><ul><li><a href="../globals-data/">Summit.data</a></li><li><a href="../globals-store/">Summit.store</a></li><li><a href="../globals-bind/">Summit.bind</a></li><li><a href="../globals-directive/">Summit.directive</a></li><li><a href="../globals-magic/">Summit.magic</a></li><li><a href="../globals-plugin/">Summit.plugin</a></li><li><a href="../globals-start/">Summit.start</a></li></ul></div><div class="side-group"><div class="side-label">Reactivity</div><ul><li><a href="../reactive-signal/">signal</a></li><li><a href="../reactive-computed/">computed</a></li><li><a href="../reactive-effect/">effect</a></li><li><a href="../reactive-reactive/">reactive</a></li><li><a href="../reactive-batch/">batch</a></li><li><a href="../reactive-nexttick/">nextTick</a></li></ul></div><div class="side-group"><div class="side-label">Advanced</div><ul><li><a href="../advanced-reactivity/">How reactivity works</a></li><li><a href="../advanced-evaluator/">CSP-safe evaluator</a></li><li><a href="../advanced-extending/">Extending Summit</a></li><li><a href="../advanced-migrating/">Migrating from Alpine</a></li></ul></div></nav></aside>
+  <main id="content" class="content">
+    <article class="prose">
+      <div class="crumbs">Magic Properties</div>
+      <h1>$focus</h1>
+      <p><code>$focus</code> is a small helper for moving keyboard focus. Use it to send focus to a
+field after an action, or to step through the focusable elements inside a region.</p>
+<div class="demo">
+  <div class="demo-result"><div s-data>
+  <button class="s-btn" @click="$focus.within($refs.box).first()">Focus first field</button>
+  <div s-ref="box" style="margin-top:0.6rem; display:flex; gap:0.5rem">
+    <input class="s-input" placeholder="First">
+    <input class="s-input" placeholder="Second">
+  </div>
+</div></div>
+  <details class="demo-code"><summary>Source</summary><div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">s-data</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-btn<span class="token punctuation">"</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$focus.within($refs.box).first()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Focus first field<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">s-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">margin-top</span><span class="token punctuation">:</span>0.6rem<span class="token punctuation">;</span> <span class="token property">display</span><span class="token punctuation">:</span>flex<span class="token punctuation">;</span> <span class="token property">gap</span><span class="token punctuation">:</span>0.5rem</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-input<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>First<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s-input<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Second<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></details>
+</div><h2 id="methods"><a class="anchor" href="#methods" aria-hidden="true">#</a>Methods</h2><ul>
+<li><code>$focus.focus(el)</code> focuses a specific element, e.g. <code>$focus.focus($refs.field)</code>.</li>
+<li><code>$focus.first()</code> / <code>$focus.last()</code> focus the first or last focusable element.</li>
+<li><code>$focus.next()</code> / <code>$focus.previous()</code> step through them, wrapping around.</li>
+<li><code>$focus.within(el)</code> returns a helper rooted at <code>el</code> instead of the current one.</li>
+</ul>
+<p>By default <code>$focus</code> looks inside the element it is used on. <code>within</code> lets you aim
+it at any other element, which pairs well with <a href="../magic-refs/">$refs</a>.</p>
+<div class="code-block"><button class="copy" data-copy aria-label="Copy code">Copy</button><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">s-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">@keydown.enter</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$focus.focus($refs.password)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre></div><p>For a full focus trap on a dialog or menu, reach for the <a href="../s-trap/">s-trap</a>
+directive, which builds on the same idea.</p>
+
+    </article>
+    <nav class="pager"><a class="pg prev" href="../magic-persist/"><span>Previous</span><strong>$persist</strong></a><a class="pg next" href="../globals-data/"><span>Next</span><strong>Summit.data</strong></a></nav>
+  </main>
+  <aside class="toc"><nav><div class="toc-label">On this page</div><ul><li class="lvl-2"><a href="#methods">Methods</a></li></ul></nav></aside>
+</div>
+<footer class="site-foot"><div class="foot-inner">
+  <span class="foot-brand"><svg viewBox="0 0 40 32" aria-hidden="true"><rect x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)" fill="var(--accent)"/><path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="var(--logo)"/></svg><span>Summit<span class="dot">.js</span></span></span>
+  <span class="foot-motto">Open Source. <span class="nat">by Nature.</span></span>
+  <span>MIT · <a href="https://github.com/velofy/summit">github.com/velofy/summit</a> · <a href="../llms.txt">llms.txt</a></span>
+</div></footer>
+<div class="search-root" s-cloak s-data="search" data-base="../"
+    @open-search.window="open()"
+    @keydown.window.cmd.k.prevent="open()" @keydown.window.ctrl.k.prevent="open()">
+    <div class="search-overlay" s-show="isOpen" @click="close()"></div>
+    <div class="search-panel" s-show="isOpen" @keydown.escape.window="close()" @keydown.down.prevent="move(1)" @keydown.up.prevent="move(-1)" @keydown.enter.prevent="go()">
+      <div class="search-input-row">
+        <svg class="si" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
+        <input s-ref="input" class="search-input" placeholder="Search the docs" s-model="query" @input="run()" />
+        <kbd class="esc">Esc</kbd>
+      </div>
+      <div class="search-results" s-ref="list">
+        <div class="search-loading" s-show="isLoading"><span class="spinner" aria-hidden="true"></span>Loading search...</div>
+        <div s-show="!isLoading && !query">
+          <div class="search-section" s-show="recent.length">Recent</div>
+          <template s-for="(r, i) in recent" :key="'r' + i">
+            <a class="search-hit" :class="{ active: active === i }" :href="r.url" @mouseenter="active = i" @click="remember(r)">
+              <span class="hit-icon">↩</span>
+              <span class="hit-main"><span class="hit-title" s-text="r.heading"></span><span class="hit-page" s-text="r.page"></span></span>
+            </a>
+          </template>
+          <div class="search-section" s-show="suggested.length">Suggested</div>
+          <template s-for="(r, j) in suggested" :key="'s' + j">
+            <a class="search-hit" :class="{ active: active === recent.length + j }" :href="r.url" @mouseenter="active = recent.length + j" @click="remember(r)">
+              <span class="hit-icon">→</span>
+              <span class="hit-main"><span class="hit-title" s-text="r.heading"></span><span class="hit-page" s-text="r.page"></span></span>
+            </a>
+          </template>
+        </div>
+        <div class="search-empty" s-show="!isLoading && query && results.length === 0">No results for "<span s-text="query"></span>".</div>
+        <template s-for="(r, i) in results" :key="r.url + i">
+          <a class="search-hit" :class="{ active: active === i }" :href="r.url" @mouseenter="active = i" @click="remember(r)">
+            <span class="hit-icon">#</span>
+            <span class="hit-main">
+              <span class="hit-title" s-html="r.titleHtml"></span>
+              <span class="hit-snippet" s-html="r.snippetHtml"></span>
+              <span class="hit-page" s-text="r.page"></span>
+            </span>
+          </a>
+        </template>
+      </div>
+      <div class="search-foot">
+        <span><kbd>↑</kbd><kbd>↓</kbd> to navigate</span>
+        <span><kbd>↵</kbd> to select</span>
+        <span><kbd>esc</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+<script src="../assets/search.js" defer></script>
+<script src="../summit.min.js" defer></script>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-copy]");if(!b)return;var c=b.parentElement.querySelector("code");navigator.clipboard.writeText(c.innerText);b.textContent="Copied";setTimeout(function(){b.textContent="Copy";},1200);});</script>
+</body>
+</html>

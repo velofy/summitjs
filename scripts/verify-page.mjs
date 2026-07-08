@@ -64,6 +64,27 @@ $('[data-demo="counter"] .ui-btn.round.primary').dispatchEvent(new win.Event("cl
 await win.Summit.nextTick();
 assert($('[data-demo="counter"] output').textContent === "1", "counter increments to 1");
 
+// The mobile nav menu is a Summit component (s-data + :class toggle).
+const burger = $(".nav-burger");
+assert(burger, "mobile nav burger present");
+assert(!$(".nav-menu").classList.contains("is-open"), "nav menu starts closed");
+burger.dispatchEvent(new win.Event("click"));
+await win.Summit.nextTick();
+assert($(".nav-menu").classList.contains("is-open"), "nav menu opens on burger click");
+burger.dispatchEvent(new win.Event("click"));
+await win.Summit.nextTick();
+assert(!$(".nav-menu").classList.contains("is-open"), "nav menu closes on second click");
+
+// The nav border is now driven by @scroll.window (was a vanilla script).
+assert(!$("#nav").classList.contains("scrolled"), "nav has no border at the top");
+Object.defineProperty(win, "scrollY", { value: 60, configurable: true });
+win.dispatchEvent(new win.Event("scroll"));
+await win.Summit.nextTick();
+assert($("#nav").classList.contains("scrolled"), "nav gains its border after scrolling");
+
+// The brand stays hidden while the hero is in view (atTop defaults true).
+assert(!$("#nav .brand").classList.contains("is-visible"), "brand hidden while hero is visible");
+
 assert(errors.length === 0, `no directive errors during page init (saw ${errors.length})`);
 
 console.log("\nPage verification passed: docs/index.html runs cleanly under Summit.");
