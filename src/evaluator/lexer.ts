@@ -7,15 +7,51 @@
  * fixed set of operators/punctuators.
  */
 
-export type TokenType = "num" | "str" | "tmpl" | "ident" | "punc" | "eof";
+export type TokenType = "num" | "str" | "tmpl" | "regex" | "ident" | "punc" | "eof";
 
 export interface Token {
   type: TokenType;
   value: string;
   /** For template literals: the raw inner source between the backticks. */
   raw?: string;
+  /** For regex literals: the flag string (e.g. "gi"). */
+  flags?: string;
   start: number;
   end: number;
+}
+
+// Keywords after which a `/` starts a regex, not a division. (Plain identifiers
+// and value keywords like `this`/`true` are operands, so `/` after them divides.)
+const REGEX_PRECEDING_KEYWORDS = new Set([
+  "return",
+  "typeof",
+  "void",
+  "in",
+  "instanceof",
+  "new",
+  "of",
+  "delete",
+  "do",
+  "else",
+]);
+
+/** Decide whether a `/` at this point begins a regex literal or is division. */
+function regexAllowed(prev: Token | undefined): boolean {
+  if (!prev) return true; // start of input
+  switch (prev.type) {
+    case "num":
+    case "str":
+    case "tmpl":
+    case "regex":
+      return false; // a value precedes -> division
+    case "ident":
+      return REGEX_PRECEDING_KEYWORDS.has(prev.value);
+    case "punc":
+      // A value ends with `)` or `]`; anything else expects an operand next.
+      return prev.value !== ")" && prev.value !== "]";
+    default:
+      return true;
+  }
 }
 
 // Multi-character punctuators, longest first so the scanner is greedy.
@@ -177,6 +213,39 @@ export function tokenize(input: string): Token[] {
       i++;
       while (i < n && isIdentPart(input[i]!)) i++;
       tokens.push({ type: "ident", value: input.slice(start, i), start, end: i });
+      continue;
+    }
+
+    // Regex literals: `/pattern/flags`, but only where a value is expected, so
+    // `a / b` and `a /= b` are still division. A `/` inside a `[...]` class does
+    // not end the pattern.
+    if (ch === "/" && regexAllowed(tokens[tokens.length - 1])) {
+      const start = i;
+      i++;
+      let body = "";
+      let inClass = false;
+      while (i < n) {
+        const c = input[i]!;
+        if (c === "\\") {
+          body += c + (input[i + 1] ?? "");
+          i += 2;
+          continue;
+        }
+        if (c === "\n") throw new LexError(`Unterminated regex in expression: ${input}`);
+        if (c === "[") inClass = true;
+        else if (c === "]") inClass = false;
+        else if (c === "/" && !inClass) break;
+        body += c;
+        i++;
+      }
+      if (input[i] !== "/") throw new LexError(`Unterminated regex in expression: ${input}`);
+      i++; // closing slash
+      let flags = "";
+      while (i < n && /[a-z]/i.test(input[i]!)) {
+        flags += input[i];
+        i++;
+      }
+      tokens.push({ type: "regex", value: body, flags, start, end: i });
       continue;
     }
 

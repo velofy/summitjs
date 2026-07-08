@@ -77,6 +77,8 @@ expression syntax. All of the following work inside directives:
   functions: `new Date(0)`, `new Map()`, `new Set([1, 2])`, `new RegExp('\\d')`.
   Only names your scope or the global allowlist expose are reachable, so it stays
   CSP-safe.
+- **Regex literals,** with flags: `/\d+/.test(v)`, `s.split(/,\s*/)`,
+  `s.replace(/@/g, ' at ')`. A `/` after a value is still division.
 
 In program mode (action directives) you additionally get statements: `if`/`else`,
 `return`, `let`/`const`/`var` with destructuring, `for`, `for...of`, `while`,
@@ -101,8 +103,7 @@ console rather than executing:
 - The `function` keyword and function declarations. Use arrow functions.
 - Classes, `try`/`catch`, `throw`, `switch`, `do...while`, `async`/`await`, and
   generators.
-- Comments, regex literals (use the `RegExp` global), and tagged template
-  literals.
+- Comments and tagged template literals.
 
 Keeping the surface bounded is not only about safety. It also keeps directive
 expressions readable. Anything more involved belongs in a `Summit.data` method,

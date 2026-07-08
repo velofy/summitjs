@@ -79,6 +79,29 @@ describe("new operator", () => {
   });
 });
 
+describe("regex literals", () => {
+  it("tests, splits, replaces, and matches with flags", () => {
+    expect(ev("/\\d+/.test('x5')")).toBe(true);
+    expect(ev("/[a-z]+/i.test('ABC')")).toBe(true);
+    expect(ev("/.+@.+/.test('a@b')")).toBe(true);
+    expect(ev("'a,b,c'.split(/,/).length")).toBe(3);
+    expect(ev("'x@y'.replace(/@/, ' at ')")).toBe("x at y");
+    expect(ev("'2026-07-08'.match(/\\d{4}/)[0]")).toBe("2026");
+  });
+
+  it("handles escaped slashes and character classes", () => {
+    expect(ev("/foo\\/bar/.test('foo/bar')")).toBe(true);
+    expect(ev("/a[/]b/.test('a/b')")).toBe(true);
+  });
+
+  it("still parses division, not a regex, after an operand", () => {
+    expect(ev("10 / 2")).toBe(5);
+    expect(ev("a / b", { a: 10, b: 2 })).toBe(5);
+    expect(ev("10 / 2 / 5")).toBe(1);
+    expect(ev("(6) / (2)")).toBe(3);
+  });
+});
+
 describe("identifiers + scope", () => {
   it("reads data", () => {
     expect(ev("count", { count: 42 })).toBe(42);

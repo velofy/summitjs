@@ -462,6 +462,10 @@ class Parser {
       this.pos++;
       return this.parseTemplate(t.raw ?? "");
     }
+    if (t.type === "regex") {
+      this.pos++;
+      return { type: "RegexLiteral", pattern: t.value, flags: t.flags ?? "" };
+    }
     if (t.type === "ident") {
       if (t.value === "true" || t.value === "false") {
         this.pos++;

@@ -238,6 +238,8 @@ export class Interpreter {
         return null;
       case "UndefinedLiteral":
         return undefined;
+      case "RegexLiteral":
+        return new RegExp(node.pattern, node.flags);
       case "ThisExpression":
         return thisVal;
       case "Identifier":

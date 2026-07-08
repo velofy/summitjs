@@ -96,6 +96,8 @@ destructuring parameters, and rest parameters.</li>
 functions: <code>new Date(0)</code>, <code>new Map()</code>, <code>new Set([1, 2])</code>, <code>new RegExp(&#39;\\d&#39;)</code>.
 Only names your scope or the global allowlist expose are reachable, so it stays
 CSP-safe.</li>
+<li><strong>Regex literals,</strong> with flags: <code>/\d+/.test(v)</code>, <code>s.split(/,\s*/)</code>,
+<code>s.replace(/@/g, &#39; at &#39;)</code>. A <code>/</code> after a value is still division.</li>
 </ul>
 <p>In program mode (action directives) you additionally get statements: <code>if</code>/<code>else</code>,
 <code>return</code>, <code>let</code>/<code>const</code>/<code>var</code> with destructuring, <code>for</code>, <code>for...of</code>, <code>while</code>,
@@ -113,8 +115,7 @@ console rather than executing:</p>
 <li>The <code>function</code> keyword and function declarations. Use arrow functions.</li>
 <li>Classes, <code>try</code>/<code>catch</code>, <code>throw</code>, <code>switch</code>, <code>do...while</code>, <code>async</code>/<code>await</code>, and
 generators.</li>
-<li>Comments, regex literals (use the <code>RegExp</code> global), and tagged template
-literals.</li>
+<li>Comments and tagged template literals.</li>
 </ul>
 <p>Keeping the surface bounded is not only about safety. It also keeps directive
 expressions readable. Anything more involved belongs in a <code>Summit.data</code> method,

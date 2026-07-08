@@ -18,6 +18,7 @@ export type Expression =
   | NumberLiteral
   | StringLiteral
   | TemplateLiteral
+  | RegexLiteral
   | BooleanLiteral
   | NullLiteral
   | UndefinedLiteral
@@ -50,6 +51,11 @@ export interface TemplateLiteral {
   type: "TemplateLiteral";
   quasis: string[];
   expressions: Expression[];
+}
+export interface RegexLiteral {
+  type: "RegexLiteral";
+  pattern: string;
+  flags: string;
 }
 export interface BooleanLiteral {
   type: "BooleanLiteral";
