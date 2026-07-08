@@ -1,6 +1,6 @@
 # Summit.js
 
-> The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 13KB.
+> The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.
 
 Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` magics, evaluated by a small CSP-safe interpreter. Every page below is also available as clean markdown: append `index.md` to any page URL, or load the full corpus in one request.
 
@@ -72,6 +72,11 @@ Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` m
 - [s-ignore](https://velofy.github.io/summit/s-ignore/): Skip Summit initialization for an element and its children.
 - [s-teleport](https://velofy.github.io/summit/s-teleport/): Render an element at a different place in the DOM.
 - [s-transition](https://velofy.github.io/summit/s-transition/): Animate elements as they enter and leave.
+- [s-intersect](https://velofy.github.io/summit/s-intersect/): Run an expression when an element enters or leaves the viewport.
+- [s-trap](https://velofy.github.io/summit/s-trap/): Keep keyboard focus inside an element while it is open.
+- [s-anchor](https://velofy.github.io/summit/s-anchor/): Position an element next to a reference, flipping to stay in view.
+- [s-collapse](https://velofy.github.io/summit/s-collapse/): Animate an element open and closed by height.
+- [s-mask](https://velofy.github.io/summit/s-mask/): Format an input as the user types against a pattern.
 
 ## Magic Properties
 
@@ -84,6 +89,8 @@ Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` m
 - [$root](https://velofy.github.io/summit/magic-root/): The root element of the nearest component.
 - [$id](https://velofy.github.io/summit/magic-id/): Generate stable, scoped unique ids.
 - [$data](https://velofy.github.io/summit/magic-data/): The current component's reactive state object.
+- [$persist](https://velofy.github.io/summit/magic-persist/): Reactive state backed by localStorage that survives reloads.
+- [$focus](https://velofy.github.io/summit/magic-focus/): Move keyboard focus around from an expression.
 
 ## Globals & API
 

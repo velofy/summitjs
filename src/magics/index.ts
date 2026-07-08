@@ -13,6 +13,8 @@ import { registerMagic, getStoreRoot } from "../registry/registry.js";
 import { closestRoot, refsFor } from "../dom.js";
 import { resolveId } from "../idstore.js";
 import { domEffect, nextTick } from "../reactivity/index.js";
+import { createPersist } from "./persist.js";
+import { makeFocus } from "./focus.js";
 
 export function registerBuiltinMagics(): void {
   registerMagic("el", (ctx) => ctx.el);
@@ -64,4 +66,10 @@ export function registerBuiltinMagics(): void {
   registerMagic("nextTick", () => (callback?: () => void) => nextTick(callback));
 
   registerMagic("id", (ctx) => (name: string, key?: string | number) => resolveId(ctx.el, name, key));
+
+  // localStorage-backed reactive state; resolved by s-data after the scope is reactive.
+  registerMagic("persist", () => (initial: unknown) => createPersist(initial));
+
+  // Keyboard focus helper, rooted at the element it is used on.
+  registerMagic("focus", (ctx) => makeFocus(ctx.el));
 }

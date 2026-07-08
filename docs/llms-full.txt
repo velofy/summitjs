@@ -1,6 +1,6 @@
 # Summit.js: Full Documentation
 
-> The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 13KB.
+> The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.
 
 Every documentation page, concatenated as markdown in reading order. Source: https://velofy.github.io/summit
 
@@ -44,7 +44,7 @@ with `count`. When you click, only that one number re-renders.
   re-rendering whole subtrees.
 - **CSP-safe by default.** Expressions run through a hand-written interpreter.
   No `eval`, no `new Function`, no `unsafe-eval` in your policy.
-- **Tiny and buildless.** The whole runtime is roughly 13KB gzipped. Drop in one
+- **Tiny and buildless.** The whole runtime is roughly 16KB gzipped. Drop in one
   script tag and it starts on its own.
 - **Familiar.** Fifteen directives, nine magic properties, and the `@` and `:`
   shorthands. If you have used an HTML-first framework before, this will feel
@@ -1210,7 +1210,7 @@ and the overlay, the close button, and the `Escape` key flip it back off.
   <button class="s-btn" @click="open = true">Open dialog</button>
   <template s-if="open">
     <div class="s-overlay" @click="open = false"></div>
-    <div class="s-dialog" role="dialog" aria-modal="true" @keydown.escape.window="open = false">
+    <div class="s-dialog" role="dialog" aria-modal="true" s-trap="open" @keydown.escape.window="open = false">
       <div class="s-dialog-header"><h3 class="s-dialog-title">Delete project</h3></div>
       <button class="s-dialog-close" @click="open = false" aria-label="Close">&times;</button>
       <div class="s-dialog-body">This action cannot be undone.</div>
@@ -1261,7 +1261,7 @@ The panel is built from a small set of slots you fill in:
   <button class="s-btn" @click="open = true">Open dialog</button>
   <template s-if="open">
     <div class="s-overlay" @click="open = false"></div>
-    <div class="s-dialog" role="dialog" aria-modal="true" @keydown.escape.window="open = false">
+    <div class="s-dialog" role="dialog" aria-modal="true" s-trap="open" @keydown.escape.window="open = false">
       <div class="s-dialog-header">
         <h3 class="s-dialog-title">Delete project</h3>
       </div>
@@ -1308,7 +1308,7 @@ parent, with [s-teleport](../s-teleport/):
   <template s-teleport="body">
     <template s-if="open">
       <div class="s-overlay" @click="open = false"></div>
-      <div class="s-dialog" role="dialog" aria-modal="true" @keydown.escape.window="open = false">
+      <div class="s-dialog" role="dialog" aria-modal="true" s-trap="open" @keydown.escape.window="open = false">
         <div class="s-dialog-body">I render at the end of body, clear of overflow.</div>
       </div>
     </template>
@@ -4383,6 +4383,227 @@ CSS to be visible.
 
 ---
 
+# s-intersect
+
+> Run an expression when an element enters or leaves the viewport.
+
+`s-intersect` runs an expression the moment its element scrolls into view. It
+wraps an `IntersectionObserver` so you can lazy-load, reveal on scroll, or fire
+analytics without writing observer boilerplate.
+
+```summit
+<div s-data="{ seen: false }">
+  <div s-intersect="seen = true" class="s-card" style="padding:1rem">
+    <p s-text="seen ? 'This block is in view.' : 'Scroll me into view.'"></p>
+  </div>
+</div>
+```
+
+## Enter and leave
+
+By default the expression runs when the element becomes visible. Add the `:leave`
+part to run when it goes out of view instead. You can use both on one element.
+
+```html
+<div s-intersect="playing = true" s-intersect:leave="playing = false"></div>
+```
+
+## Modifiers
+
+- `.once` stops observing after the first time it fires.
+- `.half` waits until the element is at least half visible.
+- `.full` waits until it is almost entirely visible.
+
+```html
+<img src="hero.jpg" s-intersect.once="loaded = true">
+<section s-intersect.half="active = true"></section>
+```
+
+## s-resize
+
+Its sibling `s-resize` runs an expression whenever the element changes size,
+exposing the new box as `$width` and `$height`.
+
+```html
+<div s-resize="w = $width" s-text="Math.round(w) + 'px wide'"></div>
+```
+
+Both directives detach their observers automatically when the element is
+removed, so there is nothing to clean up.
+
+---
+
+# s-trap
+
+> Keep keyboard focus inside an element while it is open.
+
+`s-trap` keeps keyboard focus inside an element for as long as an expression is
+truthy. This is what makes a modal dialog or a menu usable from the keyboard:
+`Tab` cycles within it, and when it closes, focus returns to whatever opened it.
+
+```summit
+<div s-data="{ open: false }">
+  <button class="s-btn" @click="open = true">Open dialog</button>
+  <div s-show="open" s-trap="open" class="s-card" style="padding:1rem; max-width:340px; display:grid; gap:0.6rem">
+    <p>Focus is trapped here. Tab stays inside; Shift+Tab wraps back.</p>
+    <input class="s-input" placeholder="First field">
+    <input class="s-input" placeholder="Second field">
+    <button class="s-btn" @click="open = false">Close</button>
+  </div>
+</div>
+```
+
+## What it does
+
+When the expression flips true, `s-trap`:
+
+- remembers the element that was focused,
+- moves focus to the first focusable child,
+- keeps `Tab` and `Shift+Tab` cycling within the element.
+
+When it flips false, focus returns to the remembered element. Removing the
+element also releases the trap, so there is nothing to tear down.
+
+## Pair it with Escape and a backdrop
+
+`s-trap` handles focus; you still wire up dismissal the usual way.
+
+```html
+<div s-show="open" s-trap="open" @keydown.escape="open = false">
+  ...
+</div>
+```
+
+The built-in [Dialog](../comp-dialog/) component already uses `s-trap`, so most
+of the time you get this for free.
+
+---
+
+# s-anchor
+
+> Position an element next to a reference, flipping to stay in view.
+
+`s-anchor` positions a floating element next to a reference element and keeps it
+on screen, flipping to the other side and shifting inward when it would overflow
+the viewport. It is the positioning behind menus, popovers, and tooltips.
+
+```summit
+<div s-data="{ open: false }">
+  <button class="s-btn" s-ref="trigger" @click="open = !open">Open menu</button>
+  <div s-show="open" s-anchor="$refs.trigger" class="s-menu" style="min-width:170px">
+    <button class="s-menu-item" @click="open = false">Profile</button>
+    <button class="s-menu-item" @click="open = false">Settings</button>
+    <button class="s-menu-item" @click="open = false">Sign out</button>
+  </div>
+</div>
+```
+
+The expression resolves to the reference element, usually through
+[$refs](../magic-refs/).
+
+## Placement
+
+Modifiers choose the side and alignment. The default is `bottom` and `start`.
+
+- Side: `.top` or `.bottom`
+- Alignment: `.start`, `.center`, or `.end`
+- Gap: `.offset.N` sets the distance in pixels (default 8)
+
+```html
+<div s-anchor.top.end="$refs.trigger">...</div>
+<div s-anchor.bottom.center.offset.12="$refs.trigger">...</div>
+```
+
+## Staying in view
+
+`s-anchor` re-positions on scroll and resize. If the preferred side would run off
+the screen it flips to the opposite side, and it clamps horizontally so the
+element never leaves the viewport. The [Menu](../comp-menu/) and
+[Popover](../comp-popover/) components use it out of the box.
+
+---
+
+# s-collapse
+
+> Animate an element open and closed by height.
+
+`s-collapse` smoothly animates an element's height as an expression toggles. It
+is a drop-in, animated alternative to [s-show](../s-show/) for accordions,
+disclosure panels, and expanding menus.
+
+```summit
+<div s-data="{ open: false }">
+  <button class="s-btn" @click="open = !open">Toggle details</button>
+  <div s-collapse="open">
+    <div style="padding:0.75rem 0">
+      <p>This region slides open and closed instead of snapping.</p>
+      <p>The height animates from 0 to its natural size.</p>
+    </div>
+  </div>
+</div>
+```
+
+## How it differs from s-show
+
+`s-show` flips `display` instantly. `s-collapse` keeps the element in flow and
+animates its height, so the content around it eases into place. On first render
+it sets the starting height with no animation, so there is no flash of motion on
+load.
+
+## Accessibility
+
+Because the collapsed element stays in the DOM, pair it with the toggle's state
+for assistive tech:
+
+```html
+<button @click="open = !open" :aria-expanded="open">Toggle</button>
+<div s-collapse="open">...</div>
+```
+
+---
+
+# s-mask
+
+> Format an input as the user types against a pattern.
+
+`s-mask` formats an input while you type it. Give it a pattern and Summit inserts
+the fixed characters and rejects anything that does not fit, so phone numbers,
+card numbers, and dates come out clean.
+
+```summit
+<div s-data>
+  <label class="s-field">
+    <span class="s-label">Phone</span>
+    <input class="s-input" s-mask="'(999) 999-9999'" placeholder="(555) 123-4567">
+  </label>
+</div>
+```
+
+## Pattern tokens
+
+The expression is a string of tokens:
+
+- `9` accepts a digit
+- `a` accepts a letter
+- `*` accepts a letter or a digit
+
+Every other character is a literal that the mask inserts for you as you reach it.
+
+```html
+<input s-mask="'9999-9999-9999-9999'">   <!-- card number -->
+<input s-mask="'99/99'">                 <!-- expiry MM/YY -->
+<input s-mask="'aaa-999'">               <!-- license plate -->
+```
+
+The pattern is an ordinary expression, so it can come from your state and change
+at runtime:
+
+```html
+<input s-mask="pattern">
+```
+
+---
+
 # $el
 
 > The current DOM element.
@@ -4819,6 +5040,84 @@ helper, or reset it in one assignment.
 [nested components](../reactivity-state/) the inner `s-data` wins, so `$data`
 inside a child gives the child's state, not the parent's. To reach shared state
 across components, use [$store](../magic-store/) instead.
+
+---
+
+# $persist
+
+> Reactive state backed by localStorage that survives reloads.
+
+`$persist` makes a piece of state stick around. Wrap a default value with it in
+your `s-data`, and Summit seeds the value from `localStorage`, then writes it
+back on every change. Reload the page and the value is still there.
+
+```summit
+<div s-data="{ count: $persist(0) }">
+  <button class="s-btn" @click="count++">Clicked <span s-text="count"></span> times</button>
+  <p style="color:var(--muted)">Reload the page: the count stays.</p>
+</div>
+```
+
+The storage key defaults to the property name, so `count` above is saved under
+`"count"`.
+
+## Choosing the key
+
+When two components both persist a `count`, give them distinct keys with `.as()`
+so they do not overwrite each other.
+
+```html
+<div s-data="{ count: $persist(0).as('cart-count') }"></div>
+```
+
+## What you can store
+
+`$persist` serializes with `JSON`, so strings, numbers, booleans, arrays, and
+plain objects all work. The value stays fully reactive after it is restored, so
+everything that reads it updates as usual.
+
+```html
+<div s-data="{ prefs: $persist({ theme: 'dark', density: 'cozy' }) }"></div>
+```
+
+If storage is unavailable (private mode, disabled), `$persist` quietly falls
+back to the default value so your component still runs.
+
+---
+
+# $focus
+
+> Move keyboard focus around from an expression.
+
+`$focus` is a small helper for moving keyboard focus. Use it to send focus to a
+field after an action, or to step through the focusable elements inside a region.
+
+```summit
+<div s-data>
+  <button class="s-btn" @click="$focus.within($refs.box).first()">Focus first field</button>
+  <div s-ref="box" style="margin-top:0.6rem; display:flex; gap:0.5rem">
+    <input class="s-input" placeholder="First">
+    <input class="s-input" placeholder="Second">
+  </div>
+</div>
+```
+
+## Methods
+
+- `$focus.focus(el)` focuses a specific element, e.g. `$focus.focus($refs.field)`.
+- `$focus.first()` / `$focus.last()` focus the first or last focusable element.
+- `$focus.next()` / `$focus.previous()` step through them, wrapping around.
+- `$focus.within(el)` returns a helper rooted at `el` instead of the current one.
+
+By default `$focus` looks inside the element it is used on. `within` lets you aim
+it at any other element, which pairs well with [$refs](../magic-refs/).
+
+```html
+<input s-ref="email" @keydown.enter="$focus.focus($refs.password)">
+```
+
+For a full focus trap on a dialog or menu, reach for the [s-trap](../s-trap/)
+directive, which builds on the same idea.
 
 ---
 

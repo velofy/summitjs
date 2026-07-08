@@ -52,14 +52,21 @@ Any page as markdown: append `index.md` to its URL.
 | `s-effect` | | re-run an expression when its dependencies change |
 | `s-transition` | | animate enter and leave |
 | `s-teleport` | | move an element elsewhere in the DOM (dialogs, toasts) |
+| `s-intersect` | `s-intersect:leave` | run an expression when the element enters or leaves the viewport (`.once`, `.half`, `.full`) |
+| `s-trap` | | keep keyboard focus inside an element while an expression is truthy |
+| `s-anchor` | | position next to a reference element, flipping to stay in view (`.top`, `.end`, `.offset.N`) |
+| `s-collapse` | | animate an element open and closed by height |
+| `s-mask` | | format an input as you type (`9` digit, `a` letter, `*` either) |
 | `s-cloak` | | hide until initialized; pair with `[s-cloak]{display:none}` |
 | `s-ignore` | | skip a subtree |
 
 ## Magics
 
 `$el`, `$refs`, `$root`, `$id`, `$store`, `$watch`, `$nextTick`, `$dispatch`,
-`$data`. Example: `@click="$dispatch('saved', { id: 3 })"` fires a custom event
-that a `@saved.window` handler can catch.
+`$data`, `$persist`, `$focus`. Example: `@click="$dispatch('saved', { id: 3 })"`
+fires a custom event that a `@saved.window` handler can catch. Use
+`$persist(0)` in `s-data` for localStorage-backed state, and `$focus` to move
+keyboard focus.
 
 ## Modifiers
 

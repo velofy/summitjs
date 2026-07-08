@@ -14,6 +14,7 @@ import { getData, getDirective, directiveNames, DEFAULT_PRIORITY } from "../regi
 import type { DirectiveMeta, DirectiveUtils, SummitGlobalLike } from "../types.js";
 import { parseAttribute } from "./attributes.js";
 import { warnOnce, fail, suggest } from "../errors.js";
+import { isPersistMarker } from "../magics/persist.js";
 
 const STRUCTURAL = new Set(["if", "for", "teleport"]);
 // Valid directive names that are not in the directive registry: s-data creates
@@ -113,6 +114,36 @@ function runDirective(el: Element, dmeta: DirectiveMeta, scopes: Scope[]): void 
 
 const DATA_PROVIDER_RE = /^([A-Za-z_$][\w$]*)\s*(\(([\s\S]*)\))?$/;
 
+/** Replace $persist() markers with their stored value and wire write-back. */
+function resolvePersist(scope: Scope, el: Element): void {
+  const hasLS = typeof localStorage !== "undefined";
+  for (const key of Object.keys(scope)) {
+    const marker = (scope as Record<string, unknown>)[key];
+    if (!isPersistMarker(marker)) continue;
+    const storeKey = marker.key ?? key;
+    let value = marker.initial;
+    if (hasLS) {
+      try {
+        const stored = localStorage.getItem(storeKey);
+        if (stored != null) value = JSON.parse(stored);
+      } catch {
+        /* ignore malformed storage */
+      }
+    }
+    (scope as Record<string, unknown>)[key] = value;
+    if (hasLS) {
+      const dispose = domEffect(() => {
+        try {
+          localStorage.setItem(storeKey, JSON.stringify((scope as Record<string, unknown>)[key]));
+        } catch {
+          /* storage full or unavailable */
+        }
+      });
+      addCleanup(el, dispose);
+    }
+  }
+}
+
 function initData(el: Element, dmeta: DirectiveMeta, parentScopes: Scope[]): Scope[] {
   // The data expression is evaluated in the parent scope.
   const parentEnv = makeEnv(el);
@@ -132,6 +163,7 @@ function initData(el: Element, dmeta: DirectiveMeta, parentScopes: Scope[]): Sco
   if (raw === null || typeof raw !== "object") raw = {};
 
   const scope = createScope(raw as Record<PropertyKey, unknown>);
+  resolvePersist(scope, el);
   const newScopes = [...parentScopes, scope];
   const m = meta(el);
   m.scopes = newScopes;

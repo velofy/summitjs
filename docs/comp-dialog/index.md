@@ -13,7 +13,7 @@ and the overlay, the close button, and the `Escape` key flip it back off.
   <button class="s-btn" @click="open = true">Open dialog</button>
   <template s-if="open">
     <div class="s-overlay" @click="open = false"></div>
-    <div class="s-dialog" role="dialog" aria-modal="true" @keydown.escape.window="open = false">
+    <div class="s-dialog" role="dialog" aria-modal="true" s-trap="open" @keydown.escape.window="open = false">
       <div class="s-dialog-header"><h3 class="s-dialog-title">Delete project</h3></div>
       <button class="s-dialog-close" @click="open = false" aria-label="Close">&times;</button>
       <div class="s-dialog-body">This action cannot be undone.</div>
@@ -64,7 +64,7 @@ The panel is built from a small set of slots you fill in:
   <button class="s-btn" @click="open = true">Open dialog</button>
   <template s-if="open">
     <div class="s-overlay" @click="open = false"></div>
-    <div class="s-dialog" role="dialog" aria-modal="true" @keydown.escape.window="open = false">
+    <div class="s-dialog" role="dialog" aria-modal="true" s-trap="open" @keydown.escape.window="open = false">
       <div class="s-dialog-header">
         <h3 class="s-dialog-title">Delete project</h3>
       </div>
@@ -111,7 +111,7 @@ parent, with [s-teleport](../s-teleport/):
   <template s-teleport="body">
     <template s-if="open">
       <div class="s-overlay" @click="open = false"></div>
-      <div class="s-dialog" role="dialog" aria-modal="true" @keydown.escape.window="open = false">
+      <div class="s-dialog" role="dialog" aria-modal="true" s-trap="open" @keydown.escape.window="open = false">
         <div class="s-dialog-body">I render at the end of body, clear of overflow.</div>
       </div>
     </template>
