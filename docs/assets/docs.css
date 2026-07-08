@@ -207,4 +207,10 @@ kbd { font-family: var(--mono); font-size: 0.75rem; border: 1px solid var(--bord
     border-right: 1px solid var(--border); padding: 1.5rem 1rem; transform: translateX(-102%); transition: transform 0.2s ease; z-index: 45; }
   body.nav-open .sidebar { transform: none; box-shadow: var(--shadow-lg); }
 }
+@media (max-width: 560px) {
+  /* On phones the wordmark eats the room the controls need; show just the mark. */
+  .brand-word { display: none; }
+  .topbar { gap: 0.3rem; padding: 0 0.75rem; }
+  .top-cta { padding: 0 0.5rem; }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto; } }
