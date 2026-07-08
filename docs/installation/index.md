@@ -11,7 +11,7 @@ The fastest path. Add one tag to your `<head>` and Summit starts on its own
 once the DOM is ready. Use `defer` so it runs after the document is parsed.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs/dist/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
 ```
 
 That is the entire setup. Any `s-` attributes already in the page come alive,
@@ -66,7 +66,7 @@ moment yourself, for example to register custom directives first, call
 `Summit.start()` and it will only run once:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs/dist/summit.min.js"></script>
+<script src="https://velofy.github.io/summit/summit.min.js"></script>
 <script>
   Summit.directive("sparkle", (el) => {
     el.style.transition = "opacity .3s";

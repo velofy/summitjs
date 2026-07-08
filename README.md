@@ -26,7 +26,7 @@ Summit is designed so that an AI agent can write a working, good-looking fronten
 - **Built to be read by machines.** The whole framework is discoverable in one fetch: [`llms.txt`](https://velofy.github.io/summit/llms.txt) indexes every page, [`llms-full.txt`](https://velofy.github.io/summit/llms-full.txt) is the entire corpus as markdown, any page is available as markdown (append `index.md` to its URL) with a one-click "Copy for AI" button, and [`AGENTS.md`](./AGENTS.md) is a drop-in brief you can hand to your own agent.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs/dist/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
 
 <div s-data="{ open: false }">
   <button @click="open = !open">Toggle</button>
@@ -55,7 +55,7 @@ The headline difference is the engine. Summit owns a real signal core, so a chan
 Zero-build, drop in a script (auto-starts, exposes `window.Summit`):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs/dist/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
 ```
 
 With a bundler:

@@ -218,7 +218,7 @@
         border-bottom: 1px solid var(--border); }
       .dot3 { width: 11px; height: 11px; border-radius: 50%; background: var(--border); }
       .code-card pre { margin: 0; padding: 1.4rem 1.5rem; overflow-x: auto; font-size: 0.95rem; line-height: 1.75;
-        color: var(--text); }
+        color: var(--text); text-align: left; }
       .t { color: var(--c-tag); } .at { color: var(--c-attr); } .s { color: var(--c-str); } .cm { color: var(--c-com); }
 
       /* Sections */
@@ -297,7 +297,7 @@
 
       .install { max-width: 720px; margin: 0 auto; }
       pre.install-code { background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius);
-        padding: 1.25rem 1.4rem; overflow-x: auto; color: var(--text); font-size: 0.92rem; line-height: 1.7; }
+        padding: 1.25rem 1.4rem; overflow-x: auto; color: var(--text); font-size: 0.92rem; line-height: 1.7; text-align: left; }
 
       footer { border-top: 1px solid var(--border); padding: 2.25rem 0; color: var(--faint); font-size: 0.9rem; }
       footer .wrap { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
@@ -381,7 +381,7 @@
             <div class="code-head" aria-hidden="true">
               <span class="dot3"></span><span class="dot3"></span><span class="dot3"></span>
             </div>
-            <pre><code><span class="t">&lt;script</span> <span class="at">src</span>=<span class="s">"//cdn.jsdelivr.net/npm/summitjs"</span> <span class="at">defer</span><span class="t">&gt;&lt;/script&gt;</span>
+            <pre><code><span class="t">&lt;script</span> <span class="at">src</span>=<span class="s">"https://velofy.github.io/summit/summit.min.js"</span> <span class="at">defer</span><span class="t">&gt;&lt;/script&gt;</span>
 
 <span class="t">&lt;div</span> <span class="at">s-data</span>=<span class="s">"{ open: false }"</span><span class="t">&gt;</span>
     <span class="t">&lt;button</span> <span class="at">@click</span>=<span class="s">"open = true"</span><span class="t">&gt;</span>Expand<span class="t">&lt;/button&gt;</span>
@@ -523,7 +523,7 @@
           <p>Add the script, write the markup. That is the whole setup.</p>
         </div>
         <pre class="install-code"><code><span class="cm"># Drop-in, no build. It auto-starts.</span>
-<span class="t">&lt;script</span> <span class="at">src</span>=<span class="s">"//cdn.jsdelivr.net/npm/summitjs/dist/summit.min.js"</span> <span class="at">defer</span><span class="t">&gt;&lt;/script&gt;</span>
+<span class="t">&lt;script</span> <span class="at">src</span>=<span class="s">"https://velofy.github.io/summit/summit.min.js"</span> <span class="at">defer</span><span class="t">&gt;&lt;/script&gt;</span>
 
 <span class="cm"># Or with a bundler</span>
 npm install summitjs</code></pre>

@@ -13,7 +13,7 @@ Any page as markdown: append `index.md` to its URL.
 ## Load it
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/summitjs" defer></script>
+<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
 ```
 
 ## The model
@@ -98,7 +98,7 @@ prefixed classes (`s-btn`, `s-input`, `s-card`, `s-alert`, `s-tabs`, `s-dialog`,
 and more). Theme everything by overriding CSS variables like `--accent`.
 
 ```html
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/summitjs/dist/components.css">
+<link rel="stylesheet" href="https://velofy.github.io/summit/assets/components.css">
 ```
 
 See https://velofy.github.io/summit/components/ for every component with live

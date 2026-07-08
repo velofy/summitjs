@@ -15,7 +15,7 @@ light and dark.
 Load the stylesheet once, then use any `s-` prefixed class from the pages below.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summitjs/dist/techniques.css" />
+<link rel="stylesheet" href="https://velofy.github.io/summit/assets/techniques.css" />
 ```
 
 ## Loaders
