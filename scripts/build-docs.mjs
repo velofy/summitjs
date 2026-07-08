@@ -383,6 +383,7 @@ const ERROR_CODES = [
   ["E101", "s-data init() threw."],
   ["E102", "s-data destroy() threw."],
   ["E103", "A store init() threw."],
+  ["E104", "An s-data expression could not be evaluated; the component starts empty and the rest of the page still initializes."],
   ["E201", "Unknown directive; the message suggests the closest real one."],
   ["E301", "A directive or event handler failed while evaluating its expression."],
   ["E401", "s-for must be used on a <template> element."],

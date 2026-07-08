@@ -552,6 +552,14 @@ class Parser {
   }
 
   private parseObjectProperty(): ObjectProperty {
+    // `async name() {}` methods are not supported; the synchronous interpreter
+    // has no await. Fail with an actionable message instead of misparsing.
+    if (this.isKeyword("async") && this.peek(1).type === "ident") {
+      throw new ParseError(
+        "async methods are not supported in Summit expressions. Use a regular method that returns a Promise and chain .then().",
+      );
+    }
+
     // getter / setter: `get name() {}` / `set name(v) {}`
     if (
       (this.isKeyword("get") || this.isKeyword("set")) &&

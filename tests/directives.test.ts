@@ -185,6 +185,24 @@ describe("diagnostics", () => {
     expect(msg).toContain("E301");
     expect(msg).toContain("n()");
   });
+
+  it("contains a bad s-data: clear error, empty state, siblings still init", () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const el = mount(`
+      <div>
+        <section s-data="{ s: 'idle', async go() { await 1 } }"><span class="broken" s-text="s || 'EMPTY'"></span></section>
+        <section s-data="{ ok: 'healthy' }"><span class="sibling" s-text="ok"></span></section>
+      </div>`);
+    const msg = spy.mock.calls.map((c) => c.join(" ")).join("\n");
+    spy.mockRestore();
+    // A clear, coded, actionable error naming the unsupported syntax...
+    expect(msg).toContain("E104");
+    expect(msg).toContain("async");
+    // ...the broken component degrades to empty state instead of throwing...
+    expect(el.querySelector(".broken")!.textContent).toBe("EMPTY");
+    // ...and the healthy sibling still initializes.
+    expect(el.querySelector(".sibling")!.textContent).toBe("healthy");
+  });
 });
 
 describe("s-for", () => {
