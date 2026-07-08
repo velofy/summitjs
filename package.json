@@ -1,41 +1,56 @@
 {
   "name": "summitjs",
   "version": "0.1.0",
-  "description": "A rugged, signal-powered framework for composing behavior directly in your HTML. Drop in a script and go.",
+  "description": "The open source, AI Agent Native JavaScript framework. Add reactive behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB.",
   "type": "module",
   "license": "MIT",
-  "author": "Velofy",
+  "author": "anishfyi (https://github.com/anishfyi)",
   "homepage": "https://velofy.github.io/summit/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/velofy/summit"
+    "url": "git+https://github.com/velofy/summit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/velofy/summit/issues"
   },
   "keywords": [
     "summit",
+    "summitjs",
     "signals",
     "reactivity",
     "html",
     "directives",
+    "alpine",
+    "frontend",
+    "framework",
+    "ai-agent",
     "progressive-enhancement",
     "csp-safe"
   ],
   "main": "./dist/summit.cjs",
   "module": "./dist/summit.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/summit.d.ts",
   "unpkg": "./dist/summit.min.js",
   "jsdelivr": "./dist/summit.min.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/summit.js",
-      "require": "./dist/summit.cjs"
+      "import": {
+        "types": "./dist/summit.d.ts",
+        "default": "./dist/summit.js"
+      },
+      "require": {
+        "types": "./dist/summit.d.cts",
+        "default": "./dist/summit.cjs"
+      }
     },
-    "./cdn": "./dist/summit.min.js"
+    "./cdn": "./dist/summit.min.js",
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "AGENTS.md"
   ],
   "sideEffects": false,
   "scripts": {
@@ -50,7 +65,7 @@
     "docs": "node scripts/build-docs.mjs",
     "verify:docs": "node scripts/verify-docs.mjs",
     "check": "npm run typecheck && npm test && npm run build && npm run size && npm run smoke && npm run verify && npm run docs && npm run verify:docs",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
-    <img alt="Summit.js" src="docs/assets/logo-light.svg" width="104">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/velofy/summit/main/docs/assets/logo-dark.svg">
+    <img alt="Summit.js" src="https://raw.githubusercontent.com/velofy/summit/main/docs/assets/logo-light.svg" width="104">
   </picture>
 </p>
 
