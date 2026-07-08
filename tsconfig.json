@@ -16,7 +16,11 @@
     "sourceMap": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
-    "types": ["node"]
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "summitjs": ["./src/index.ts"]
+    }
   },
   "include": ["src", "tests", "scripts"]
 }

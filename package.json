@@ -43,6 +43,16 @@
         "default": "./dist/summit.cjs"
       }
     },
+    "./net": {
+      "import": {
+        "types": "./dist/net.d.ts",
+        "default": "./dist/net.js"
+      },
+      "require": {
+        "types": "./dist/net.d.cts",
+        "default": "./dist/net.cjs"
+      }
+    },
     "./cdn": "./dist/summit.min.js",
     "./package.json": "./package.json"
   },

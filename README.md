@@ -141,6 +141,44 @@ effect(() => console.log(doubled()));
 count.set(5); // logs 10
 ```
 
+## Data fetching
+
+Summit ships an optional reactive data layer in `summitjs/net` (about 2.5KB gzip, separate from the core, so the base bundle stays lean). It is axios's essential parts, but a resource's `data`, `error`, `loading`, and `status` are signals, so the DOM updates itself. It also closes fetch's real-world footguns: non-2xx **throws**, out-of-order responses are discarded (latest wins), and in-flight requests **abort on unmount**.
+
+```js
+import Summit from "summitjs";
+import { net } from "summitjs/net";
+Summit.plugin(net); // adds the $fetch magic and s-resource directive
+Summit.start();
+```
+
+```html
+<div s-data="{ users: $fetch.resource('/api/users', { immediate: true }) }">
+  <p s-show="users.loading">Loading…</p>
+  <p s-show="users.error" s-text="users.error.message"></p>
+  <template s-for="u in users.data || []" :key="u.id"><li s-text="u.name"></li></template>
+</div>
+```
+
+For a configured client (base URL, auth headers, cross-cutting error handling), register `createNet`:
+
+```js
+import { createNet } from "summitjs/net";
+Summit.plugin(createNet({
+  baseURL: "/api",
+  headers: () => ({ authorization: "Bearer " + token }),
+  onError(e) { if (e.status === 401) location.href = "/login"; },
+}));
+```
+
+Or use it imperatively, no Summit required:
+
+```js
+import { createClient } from "summitjs/net";
+const api = createClient({ baseURL: "/api" });
+const todo = await api.post("/todos", { title: "Ship it" }); // JSON in/out, throws on non-2xx
+```
+
 ## Development
 
 ```bash
