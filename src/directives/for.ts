@@ -15,7 +15,7 @@
 import type { DirectiveHandler } from "../types.js";
 import { reactive } from "../reactivity/index.js";
 import { makeEnv } from "../scope/index.js";
-import { evaluateExpression } from "../evaluator/index.js";
+import { compileExpression } from "../evaluator/index.js";
 import type { Scope } from "../dom.js";
 import { warn } from "../errors.js";
 
@@ -88,11 +88,18 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
   const parentScopes = utils.scopes;
   let blocks = new Map<unknown, Block>();
 
-  const keyFor = (it: Item, block: Scope): unknown => {
-    if (!keyExpr) return it.objectKey ?? it.index;
-    const env = makeEnv(el, block).env;
+  // Compile the key expression once instead of re-parsing/re-interpreting it per
+  // item on every run.
+  const keyEval = keyExpr ? compileExpression(keyExpr) : null;
+
+  const keyFor = (it: Item): unknown => {
+    if (!keyEval) return it.objectKey ?? it.index;
+    // A plain (non-reactive) scope is enough to read the key; the reactive
+    // Proxy is only paid for when a block is actually created.
+    const data: Record<string, unknown> = { [itemName]: it.value };
+    if (indexName) data[indexName] = it.objectKey ?? it.index;
     try {
-      return evaluateExpression(keyExpr, env);
+      return keyEval(makeEnv(el, data).env);
     } catch {
       return it.index;
     }
@@ -119,8 +126,7 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
 
     for (const it of items) {
       // Reuse an existing block for this key when possible.
-      let scope = makeBlockScope(it);
-      const key = keyFor(it, scope);
+      const key = keyFor(it);
       orderedKeys.push(key);
 
       const existing = blocks.get(key);
@@ -131,6 +137,7 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
         next.set(key, existing);
         blocks.delete(key);
       } else {
+        const scope = makeBlockScope(it);
         const node = blueprint.cloneNode(true) as Element;
         // Attach before initializing so directives that resolve the component
         // root by walking the DOM (e.g. s-ref into $refs) find it. The ordering
@@ -147,10 +154,17 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
       block.node.remove();
     }
 
-    // Place nodes in order, just before the anchor.
-    for (const key of orderedKeys) {
-      const block = next.get(key)!;
-      parent.insertBefore(block.node, anchor);
+    // Minimal-move placement: walk keys in reverse, inserting a node only when
+    // it is not already immediately before the node that should follow it. An
+    // unchanged list does zero DOM moves; append/remove/swap touch only what
+    // actually changed, instead of re-inserting all N nodes every run.
+    let expected: Node = anchor;
+    for (let i = orderedKeys.length - 1; i >= 0; i--) {
+      const node = next.get(orderedKeys[i])!.node;
+      if (node.nextSibling !== expected) {
+        parent.insertBefore(node, expected);
+      }
+      expected = node;
     }
 
     blocks = next;
