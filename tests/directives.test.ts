@@ -213,6 +213,20 @@ describe("s-for", () => {
     const el = mount(`<ul s-data><template s-for="n in 3"><li s-text="n"></li></template></ul>`);
     expect([...el.querySelectorAll("li")].map((l) => l.textContent)).toEqual(["1", "2", "3"]);
   });
+
+  it("registers dynamic s-ref from loop items into $refs", async () => {
+    const el = mount(`
+      <div s-data="{ items: ['a', 'b', 'c'], keys: '', val: '' }">
+        <template s-for="(it, i) in items" :key="i"><input s-ref="'f' + i" :value="it"></template>
+        <button @click="keys = Object.keys($refs).sort().join(','); val = $refs.f1.value"></button>
+        <span class="keys" s-text="keys"></span>
+        <span class="val" s-text="val"></span>
+      </div>`);
+    el.querySelector("button")!.click();
+    await tick();
+    expect(el.querySelector(".keys")!.textContent).toBe("f0,f1,f2");
+    expect(el.querySelector(".val")!.textContent).toBe("b");
+  });
 });
 
 describe("scope inheritance", () => {

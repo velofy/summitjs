@@ -132,6 +132,10 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
         blocks.delete(key);
       } else {
         const node = blueprint.cloneNode(true) as Element;
+        // Attach before initializing so directives that resolve the component
+        // root by walking the DOM (e.g. s-ref into $refs) find it. The ordering
+        // pass below still puts every node in its final position.
+        parent.insertBefore(node, anchor);
         utils.initTree(node, [...parentScopes, scope]);
         next.set(key, { node, scope });
       }
