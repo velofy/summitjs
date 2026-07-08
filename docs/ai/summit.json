@@ -284,6 +284,10 @@
       "summary": "A store init() threw."
     },
     {
+      "code": "E104",
+      "summary": "An s-data expression could not be evaluated; the component starts empty and the rest of the page still initializes."
+    },
+    {
       "code": "E201",
       "summary": "Unknown directive; the message suggests the closest real one."
     },

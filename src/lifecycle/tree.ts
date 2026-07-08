@@ -150,15 +150,28 @@ function initData(el: Element, dmeta: DirectiveMeta, parentScopes: Scope[]): Sco
   const expr = dmeta.expression.trim();
 
   let raw: unknown;
-  const match = expr.match(DATA_PROVIDER_RE);
-  if (match && getData(match[1]!)) {
-    const provider = getData(match[1]!)!;
-    const args = match[2] ? (parentEnv.evaluate("[" + (match[3] ?? "") + "]") as unknown[]) : [];
-    raw = provider(...args);
-  } else if (expr === "") {
+  try {
+    const match = expr.match(DATA_PROVIDER_RE);
+    if (match && getData(match[1]!)) {
+      const provider = getData(match[1]!)!;
+      const args = match[2] ? (parentEnv.evaluate("[" + (match[3] ?? "") + "]") as unknown[]) : [];
+      raw = provider(...args);
+    } else if (expr === "") {
+      raw = {};
+    } else {
+      raw = parentEnv.evaluate("(" + expr + ")");
+    }
+  } catch (err) {
+    // A bad s-data must not take down the rest of the page: report it clearly
+    // and start this component with empty state so siblings still initialize.
+    fail("E104", "s-data could not be evaluated; the component starts with empty state.", {
+      el,
+      expression: expr,
+      doc: "s-data",
+      hint: "Check the object for unsupported syntax, e.g. an async method.",
+      cause: err,
+    });
     raw = {};
-  } else {
-    raw = parentEnv.evaluate("(" + expr + ")");
   }
   if (raw === null || typeof raw !== "object") raw = {};
 
