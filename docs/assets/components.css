@@ -107,6 +107,14 @@
 .s-card-body { padding: 1.1rem 1.25rem; color: var(--text); }
 .s-card-footer { padding: 0 1.25rem 1.1rem; display: flex; gap: 0.6rem; }
 
+/* ---- Table ---------------------------------------------------------- */
+.s-table-wrap { width: 100%; overflow-x: auto; }
+.s-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: var(--s-radius); overflow: hidden; background: var(--surface); color: var(--text); font-size: 0.92rem; }
+.s-table th, .s-table td { padding: 0.7rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); }
+.s-table thead th { background: var(--surface-2); color: var(--muted); font-weight: 600; }
+.s-table tbody tr:nth-child(even) { background: var(--surface-2); }
+.s-table tbody tr:last-child td { border-bottom: none; }
+
 /* ---- Badge / Tag ---------------------------------------------------- */
 .s-badge { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 6px; background: var(--accent-soft); color: var(--accent-2); }
 .s-badge-solid { background: var(--accent); color: #fff; }

@@ -399,6 +399,7 @@ const COMPONENT_CLASS = {
   "comp-avatar": "s-avatar", "comp-progress": "s-progress", "comp-tooltip": "s-tooltip", "comp-dialog": "s-dialog",
   "comp-menu": "s-menu", "comp-popover": "s-popover", "comp-toast": "s-toast", "comp-tabs": "s-tabs-list",
   "comp-accordion": "s-accordion", "comp-breadcrumb": "s-breadcrumb", "comp-pagination": "s-pagination",
+  "comp-table": "s-table",
 };
 
 function buildManifest(ordered, version) {
