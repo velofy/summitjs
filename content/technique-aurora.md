@@ -39,7 +39,8 @@ on its own.
 
 - The glow uses two blurred, animated radial shapes on `::before` and `::after`.
   It runs on the compositor and pauses under `prefers-reduced-motion`.
-- The panel uses your `--ink` background so text stays high contrast in both
-  themes. Recolor the two shapes in `techniques.css` to match your brand.
+- The panel commits to one fixed dark surface with light text in both light and
+  dark themes, so the glow always reads and the copy stays legible. Recolor the
+  two shapes in `techniques.css` to match your brand.
 - For a foreground surface over a busy backdrop, use
   [Matte Glassmorphism](../technique-glassmorphism/) instead.

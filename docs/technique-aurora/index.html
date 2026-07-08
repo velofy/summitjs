@@ -57,8 +57,9 @@ on its own.</p>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>section</span><span class="token punctuation">></span></span></code></pre></div><h2 id="notes"><a class="anchor" href="#notes" aria-hidden="true">#</a>Notes</h2><ul>
 <li>The glow uses two blurred, animated radial shapes on <code>::before</code> and <code>::after</code>.
 It runs on the compositor and pauses under <code>prefers-reduced-motion</code>.</li>
-<li>The panel uses your <code>--ink</code> background so text stays high contrast in both
-themes. Recolor the two shapes in <code>techniques.css</code> to match your brand.</li>
+<li>The panel commits to one fixed dark surface with light text in both light and
+dark themes, so the glow always reads and the copy stays legible. Recolor the
+two shapes in <code>techniques.css</code> to match your brand.</li>
 <li>For a foreground surface over a busy backdrop, use
 <a href="../technique-glassmorphism/">Matte Glassmorphism</a> instead.</li>
 </ul>
