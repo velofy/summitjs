@@ -37,7 +37,7 @@ const effectStack: ReactiveEffect[] = [];
 // Batching. While a batch is open, triggered effects are collected instead of
 // run, then flushed once when the outermost batch closes.
 let batchDepth = 0;
-const pendingEffects = new Set<ReactiveEffect>();
+let pendingEffects = new Set<ReactiveEffect>();
 
 /**
  * Create a reactive effect. Runs immediately unless `lazy` is set. Returns a
@@ -101,6 +101,7 @@ export function track(dep: Dep): void {
 
 /** Wake every effect subscribed to `dep`. */
 export function trigger(dep: Dep): void {
+  if (dep.size === 0) return; // a value with no subscribers: nothing to wake
   // Snapshot first: an effect re-subscribing during its run must not mutate the
   // set we are iterating.
   const effects = [...dep];
@@ -146,8 +147,10 @@ export function batch<T>(fn: () => T): T {
 
 function flushBatch(): void {
   if (pendingEffects.size === 0) return;
-  const effects = [...pendingEffects];
-  pendingEffects.clear();
+  // Drain by swapping rather than copying: the flush runs with batchDepth 0, so
+  // any further triggers run synchronously instead of refilling this set.
+  const effects = pendingEffects;
+  pendingEffects = new Set();
   for (const eff of effects) {
     if (eff.active) runEffect(eff);
   }
