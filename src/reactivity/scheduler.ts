@@ -9,7 +9,7 @@
 
 type Job = () => void;
 
-const queue = new Set<Job>();
+let queue = new Set<Job>();
 let flushing = false;
 let flushPromise: Promise<void> | null = null;
 const resolved = Promise.resolve();
@@ -24,8 +24,10 @@ export function queueJob(job: Job): void {
 }
 
 function flushJobs(): void {
-  const jobs = [...queue];
-  queue.clear();
+  // Drain by swapping the Set instead of copying it into an array: jobs queued
+  // during the flush land in the fresh queue and run next tick, same as before.
+  const jobs = queue;
+  queue = new Set();
   flushing = false;
   flushPromise = null;
   for (const job of jobs) job();
