@@ -10,7 +10,7 @@ light and dark.
 Load the stylesheet once, then use any `s-` prefixed class from the pages below.
 
 ```html
-<link rel="stylesheet" href="https://velofy.github.io/summit/assets/techniques.css" />
+<link rel="stylesheet" href="https://velofy.github.io/summitjs/assets/techniques.css" />
 ```
 
 ## Loaders

@@ -6,14 +6,14 @@ small, CSP-safe interpreter evaluates the expressions, so only a fixed,
 predictable vocabulary is allowed. This file tells you how to write Summit that
 runs correctly the first time.
 
-Full docs as one file: https://velofy.github.io/summit/llms-full.txt
-Index: https://velofy.github.io/summit/llms.txt
+Full docs as one file: https://velofy.github.io/summitjs/llms-full.txt
+Index: https://velofy.github.io/summitjs/llms.txt
 Any page as markdown: append `index.md` to its URL.
 
 ## Load it
 
 ```html
-<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
 ```
 
 ## The model
@@ -98,8 +98,8 @@ prefixed classes (`s-btn`, `s-input`, `s-card`, `s-alert`, `s-tabs`, `s-dialog`,
 and more). Theme everything by overriding CSS variables like `--accent`.
 
 ```html
-<link rel="stylesheet" href="https://velofy.github.io/summit/assets/components.css">
+<link rel="stylesheet" href="https://velofy.github.io/summitjs/assets/components.css">
 ```
 
-See https://velofy.github.io/summit/components/ for every component with live
+See https://velofy.github.io/summitjs/components/ for every component with live
 demos and copy-paste markup.

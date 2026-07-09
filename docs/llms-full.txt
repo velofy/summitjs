@@ -2,7 +2,7 @@
 
 > The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.
 
-Every documentation page, concatenated as markdown in reading order. Source: https://velofy.github.io/summit
+Every documentation page, concatenated as markdown in reading order. Source: https://velofy.github.io/summitjs
 
 ---
 
@@ -87,7 +87,7 @@ that lives on the element, and nothing that needs a build step.
 Load the stylesheet once, then copy any component's markup.
 
 ```html
-<link rel="stylesheet" href="https://velofy.github.io/summit/assets/components.css" />
+<link rel="stylesheet" href="https://velofy.github.io/summitjs/assets/components.css" />
 ```
 
 Or copy the rules you need out of `components.css` into your own styles. Every
@@ -1934,7 +1934,7 @@ light and dark.
 Load the stylesheet once, then use any `s-` prefixed class from the pages below.
 
 ```html
-<link rel="stylesheet" href="https://velofy.github.io/summit/assets/techniques.css" />
+<link rel="stylesheet" href="https://velofy.github.io/summitjs/assets/techniques.css" />
 ```
 
 ## Loaders
@@ -2589,7 +2589,7 @@ compile.
 
 ```html
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
 
 <div s-data="{ count: 0 }" class="flex items-center gap-3 p-4">
   <button class="rounded bg-slate-900 px-3 py-1.5 text-white" @click="count++">Add</button>
@@ -2624,7 +2624,7 @@ The fastest path. Add one tag to your `<head>` and Summit starts on its own
 once the DOM is ready. Use `defer` so it runs after the document is parsed.
 
 ```html
-<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
 ```
 
 That is the entire setup. Any `s-` attributes already in the page come alive,
@@ -2679,7 +2679,7 @@ moment yourself, for example to register custom directives first, call
 `Summit.start()` and it will only run once:
 
 ```html
-<script src="https://velofy.github.io/summit/summit.min.js"></script>
+<script src="https://velofy.github.io/summitjs/summit.min.js"></script>
 <script>
   Summit.directive("sparkle", (el) => {
     el.style.transition = "opacity .3s";
@@ -6902,8 +6902,8 @@ Summit.start();
 Or drop in a second script after the core, no build step:
 
 ```html
-<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
-<script src="https://velofy.github.io/summit/summit-net.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit-net.min.js" defer></script>
 ```
 
 ## The resource pattern

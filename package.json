@@ -1,17 +1,17 @@
 {
   "name": "summitjs",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "The open source, AI Agent Native JavaScript framework. Add reactive behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB.",
   "type": "module",
   "license": "MIT",
   "author": "anishfyi (https://github.com/anishfyi)",
-  "homepage": "https://velofy.github.io/summit/",
+  "homepage": "https://velofy.github.io/summitjs/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/velofy/summit.git"
+    "url": "git+https://github.com/velofy/summitjs.git"
   },
   "bugs": {
-    "url": "https://github.com/velofy/summit/issues"
+    "url": "https://github.com/velofy/summitjs/issues"
   },
   "keywords": [
     "summit",

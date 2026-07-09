@@ -23,8 +23,8 @@ Summit.start();
 Or drop in a second script after the core, no build step:
 
 ```html
-<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
-<script src="https://velofy.github.io/summit/summit-net.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit-net.min.js" defer></script>
 ```
 
 ## The resource pattern

@@ -8,7 +8,7 @@
  * tooling that greps for it keeps working.
  */
 
-const DOCS = "https://velofy.github.io/summit";
+const DOCS = "https://velofy.github.io/summitjs";
 
 /** Levenshtein edit distance between two short strings. */
 function distance(a: string, b: string): number {

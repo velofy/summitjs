@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/velofy/summit/main/docs/assets/logo-dark.svg">
-    <img alt="Summit.js" src="https://raw.githubusercontent.com/velofy/summit/main/docs/assets/logo-light.svg" width="104">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/logo-dark.svg">
+    <img alt="Summit.js" src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/logo-light.svg" width="104">
   </picture>
 </p>
 
@@ -22,11 +22,11 @@ Summit is designed so that an AI agent can write a working, good-looking fronten
 - **HTML-first and local.** Behavior lives on the element it affects, so an agent edits one place and sees the result. No file graph to hold in context.
 - **Predictable vocabulary.** A small, closed set of `s-` directives and `$` magics. There is one obvious way to do most things, which is exactly what a model does best.
 - **Safe by construction.** Expressions are interpreted, never `eval`ed, so generated markup runs under a strict CSP and cannot reach outside its allowlist.
-- **A UI library, included.** Accessible, token-themed components an agent (or a person) drops in and themes with CSS variables. See the [UI Library](https://velofy.github.io/summit/components/).
-- **Built to be read by machines.** The whole framework is discoverable in one fetch: [`llms.txt`](https://velofy.github.io/summit/llms.txt) indexes every page, [`llms-full.txt`](https://velofy.github.io/summit/llms-full.txt) is the entire corpus as markdown, any page is available as markdown (append `index.md` to its URL) with a one-click "Copy for AI" button, and [`AGENTS.md`](./AGENTS.md) is a drop-in brief you can hand to your own agent.
+- **A UI library, included.** Accessible, token-themed components an agent (or a person) drops in and themes with CSS variables. See the [UI Library](https://velofy.github.io/summitjs/components/).
+- **Built to be read by machines.** The whole framework is discoverable in one fetch: [`llms.txt`](https://velofy.github.io/summitjs/llms.txt) indexes every page, [`llms-full.txt`](https://velofy.github.io/summitjs/llms-full.txt) is the entire corpus as markdown, any page is available as markdown (append `index.md` to its URL) with a one-click "Copy for AI" button, and [`AGENTS.md`](./AGENTS.md) is a drop-in brief you can hand to your own agent.
 
 ```html
-<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
 
 <div s-data="{ open: false }">
   <button @click="open = !open">Toggle</button>
@@ -55,7 +55,7 @@ The headline difference is the engine. Summit owns a real signal core, so a chan
 Zero-build, drop in a script (auto-starts, exposes `window.Summit`):
 
 ```html
-<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
 ```
 
 With a bundler:
@@ -157,8 +157,8 @@ Summit.start();
 Or drop in a second script, no build step (it registers itself on the global):
 
 ```html
-<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
-<script src="https://velofy.github.io/summit/summit-net.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit-net.min.js" defer></script>
 ```
 
 ```html

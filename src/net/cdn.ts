@@ -6,8 +6,8 @@
  * `$fetch` magic and `s-resource` directive. No module resolution, no second
  * reactivity runtime.
  *
- *   <script src="https://velofy.github.io/summit/summit.min.js" defer></script>
- *   <script src="https://velofy.github.io/summit/summit-net.min.js" defer></script>
+ *   <script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
+ *   <script src="https://velofy.github.io/summitjs/summit-net.min.js" defer></script>
  */
 import type { SummitGlobal } from "summitjs";
 import { setSignalFactory } from "./runtime.js";

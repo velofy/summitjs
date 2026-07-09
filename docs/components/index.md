@@ -25,7 +25,7 @@ that lives on the element, and nothing that needs a build step.
 Load the stylesheet once, then copy any component's markup.
 
 ```html
-<link rel="stylesheet" href="https://velofy.github.io/summit/assets/components.css" />
+<link rel="stylesheet" href="https://velofy.github.io/summitjs/assets/components.css" />
 ```
 
 Or copy the rules you need out of `components.css` into your own styles. Every

@@ -259,7 +259,7 @@ function layout(page, contentHtml, toc, sidebar, prev, next) {
     <span>Search</span><kbd class="cmdk">⌘K</kbd>
   </button>
   <button class="top-cta copy-md" title="Copy this page as Markdown, ready to paste into an AI agent" aria-label="Copy this page as Markdown for AI" s-data="{ done: false, copy() { fetch('index.md').then(r => r.text()).then(t => { navigator.clipboard.writeText(t); this.done = true; setTimeout(() => { this.done = false; }, 1500); }); } }" @click="copy()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span s-show="!done">Copy for AI</span><span s-show="done">Copied</span></button>
-  <a class="top-link" href="https://github.com/velofy/summit" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.26 3.4.96.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.28 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+  <a class="top-link" href="https://github.com/velofy/summitjs" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.26 3.4.96.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.28 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg></a>
   <button class="top-icon theme-toggle" title="Toggle theme" aria-label="Toggle theme" s-data @click="document.documentElement.dataset.theme=(document.documentElement.dataset.theme==='dark'?'light':'dark');localStorage.setItem('summit-theme',document.documentElement.dataset.theme)"><svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg><svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
   <button class="menu-toggle" s-data="{ o:false }" @click="o=!o; document.body.classList.toggle('nav-open', o)" aria-label="Menu">☰</button>
 </header>
@@ -278,7 +278,7 @@ function layout(page, contentHtml, toc, sidebar, prev, next) {
 <footer class="site-foot"><div class="foot-inner">
   <span class="foot-brand">${LOGO}<span>Summit<span class="dot">.js</span></span></span>
   <span class="foot-motto">Open Source. <span class="nat">by Nature.</span></span>
-  <span>MIT · <a href="https://github.com/velofy/summit">github.com/velofy/summit</a> · <a href="../llms.txt">llms.txt</a></span>
+  <span>MIT · <a href="https://github.com/velofy/summitjs">github.com/velofy/summitjs</a> · <a href="../llms.txt">llms.txt</a></span>
 </div></footer>
 ${searchModal()}
 <script src="../assets/search.js" defer></script>
@@ -290,7 +290,7 @@ ${searchModal()}
 
 // --- AI-native artifacts -------------------------------------------------
 
-const SITE = "https://velofy.github.io/summit";
+const SITE = "https://velofy.github.io/summitjs";
 const SUMMARY =
   "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.";
 
@@ -321,8 +321,8 @@ function buildLlmsIndex(ordered) {
   out += `## Optional\n\n`;
   out += `- [Full documentation corpus](${SITE}/llms-full.txt): every page concatenated as markdown\n`;
   out += `- [Machine-readable API manifest](${SITE}/ai/summit.json): directives, magics, modifiers, error codes, and components as JSON\n`;
-  out += `- [AGENTS.md](https://github.com/velofy/summit/blob/main/AGENTS.md): a drop-in brief for coding agents\n`;
-  out += `- [Source on GitHub](https://github.com/velofy/summit)\n`;
+  out += `- [AGENTS.md](https://github.com/velofy/summitjs/blob/main/AGENTS.md): a drop-in brief for coding agents\n`;
+  out += `- [Source on GitHub](https://github.com/velofy/summitjs)\n`;
   return out;
 }
 
@@ -412,7 +412,7 @@ function buildManifest(ordered, version) {
     docs: `${SITE}/`,
     llms: `${SITE}/llms.txt`,
     llmsFull: `${SITE}/llms-full.txt`,
-    agents: "https://github.com/velofy/summit/blob/main/AGENTS.md",
+    agents: "https://github.com/velofy/summitjs/blob/main/AGENTS.md",
     allowedGlobals: ["Math", "JSON", "Date", "Object", "Array", "Number", "String", "Boolean", "console", "window", "document", "location", "localStorage", "sessionStorage", "setTimeout", "setInterval", "fetch", "URL", "structuredClone"],
     directives: DIRECTIVES.map(([name, shorthand, summary, example]) => ({
       name, shorthand, summary, example, doc: doc(name),

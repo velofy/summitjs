@@ -54,7 +54,7 @@ compile.
 
 ```html
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
 
 <div s-data="{ count: 0 }" class="flex items-center gap-3 p-4">
   <button class="rounded bg-slate-900 px-3 py-1.5 text-white" @click="count++">Add</button>
