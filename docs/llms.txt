@@ -117,6 +117,7 @@ Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` m
 - [The CSP-safe evaluator](https://velofy.github.io/summit/advanced-evaluator/): How Summit evaluates expressions without eval, safe under CSP.
 - [Writing directives and plugins](https://velofy.github.io/summit/advanced-extending/): Build custom directives, magics, and plugins.
 - [Migrating from Alpine](https://velofy.github.io/summit/advanced-migrating/): A guide for developers coming from Alpine.js.
+- [Data Fetching](https://velofy.github.io/summit/advanced-data/): summitjs/net, a tiny reactive data layer whose resources expose loading, error, and data as signals that drive the DOM.
 
 ## Optional
 
