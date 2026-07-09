@@ -14,10 +14,10 @@
  *  - unhandled rejections: refetch never rejects — failures land in `error`.
  */
 
-// Import the signal factory from the public entry (not a relative core path) so
-// the net bundle shares Summit's ONE reactivity runtime instead of bundling a
-// second copy — otherwise resource signals would not drive the core's DOM.
-import { signal } from "summitjs";
+// Signals come from the injected runtime factory (see runtime.ts) so the net
+// layer shares Summit's ONE reactivity runtime whether loaded via npm or CDN;
+// a second copy would mean resource signals could not drive the core's DOM.
+import { signal } from "./runtime.js";
 import type { NetClient, NetError, NetRequest } from "./client.js";
 
 export type ResourceStatus = "idle" | "loading" | "success" | "error";

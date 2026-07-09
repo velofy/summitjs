@@ -38,4 +38,15 @@ export default defineConfig([
     dts: false,
     treeshake: true,
   },
+  // CDN drop-in for the optional data layer. Self-contained: it reads the core's
+  // reactivity off the global (window.Summit.signal), so no `summitjs` import
+  // and no second runtime — load it after summit.min.js.
+  {
+    entry: { "summit-net.min": "src/net/cdn.ts" },
+    format: ["iife"],
+    minify: true,
+    sourcemap: true,
+    dts: false,
+    treeshake: true,
+  },
 ]);

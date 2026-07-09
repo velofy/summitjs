@@ -145,11 +145,20 @@ count.set(5); // logs 10
 
 Summit ships an optional reactive data layer in `summitjs/net` (about 2.5KB gzip, separate from the core, so the base bundle stays lean). It is axios's essential parts, but a resource's `data`, `error`, `loading`, and `status` are signals, so the DOM updates itself. It also closes fetch's real-world footguns: non-2xx **throws**, out-of-order responses are discarded (latest wins), and in-flight requests **abort on unmount**.
 
+With a bundler:
+
 ```js
 import Summit from "summitjs";
 import { net } from "summitjs/net";
 Summit.plugin(net); // adds the $fetch magic and s-resource directive
 Summit.start();
+```
+
+Or drop in a second script, no build step (it registers itself on the global):
+
+```html
+<script src="https://velofy.github.io/summit/summit.min.js" defer></script>
+<script src="https://velofy.github.io/summit/summit-net.min.js" defer></script>
 ```
 
 ```html
