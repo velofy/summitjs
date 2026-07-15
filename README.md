@@ -18,7 +18,7 @@ Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed fur
 <h3 align="center">Sponsors</h3>
 
 <p align="center">
-  <a href="https://nodemaven.com/" title="NodeMaven - residential and mobile proxies">
+  <a href="https://go.nodemaven.com/summitjsGitHub" title="NodeMaven - residential and mobile proxies">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-dark.svg">
       <img src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-light.svg" alt="NodeMaven" height="34">
