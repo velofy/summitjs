@@ -15,6 +15,8 @@ Started by [anishfyi](https://github.com/anishfyi), so that AI agents can make b
 
 Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed further where it counts: a fine-grained signal engine, a CSP-safe expression evaluator, keyed list rendering, cached computed getters, a copy-in UI library, and full TypeScript types, all in about 16KB gzipped.
 
+---
+
 <h3 align="center">Sponsors</h3>
 
 <p align="center">
