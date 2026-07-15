@@ -202,6 +202,17 @@ npm run check   # typecheck + unit tests + build + size budget + bundle smoke + 
 
 The documentation site in `docs/` dogfoods Summit and deploys to GitHub Pages.
 
+## Sponsors
+
+<p align="center">
+  <a href="https://nodemaven.com/" title="NodeMaven - residential and mobile proxies">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-dark.svg">
+      <img src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-light.svg" alt="NodeMaven" height="38">
+    </picture>
+  </a>
+</p>
+
 ## License
 
 MIT

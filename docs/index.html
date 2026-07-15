@@ -305,6 +305,28 @@
       .foot-motto { font-family: var(--font); font-weight: 750; color: var(--text); letter-spacing: -0.01em; }
       .foot-motto .nat { color: var(--accent); }
       @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto; } .dot-pulse::after, .spinner { animation: none; } }
+
+      /* ---------- sponsors modal ---------- */
+      .sponsor-overlay { position: fixed; inset: 0; z-index: 90; background: rgba(2, 6, 23, 0.55); backdrop-filter: blur(3px); }
+      .sponsor-panel { position: fixed; z-index: 91; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: min(92vw, 380px); background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+        padding: 32px 36px 28px; text-align: center; box-shadow: 0 24px 70px rgba(2, 6, 23, 0.45); }
+      .sponsor-close { position: absolute; top: 10px; right: 14px; border: 0; background: none; color: var(--faint);
+        font-size: 22px; line-height: 1; cursor: pointer; }
+      .sponsor-close:hover { color: var(--text); }
+      .sponsor-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); margin-bottom: 16px; }
+      .sponsor-logo { display: inline-flex; align-items: center; opacity: 0.95; transition: opacity 0.15s; }
+      .sponsor-logo:hover { opacity: 1; }
+      .sponsor-logo img { width: auto; }
+      .sponsor-note { margin-top: 18px; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+      .s-logo-dark { display: none; }
+      .s-logo-light { display: block; }
+      :root[data-theme="dark"] .s-logo-dark { display: block; }
+      :root[data-theme="dark"] .s-logo-light { display: none; }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) .s-logo-dark { display: block; }
+        :root:not([data-theme="light"]) .s-logo-light { display: none; }
+      }
     </style>
   </head>
   <body>
@@ -326,6 +348,7 @@
             <a class="nav-a" href="./components/">UI Library</a>
             <a class="nav-a" href="./techniques/">Techniques</a>
             <a class="nav-a nav-demos" href="#demos">Demos</a>
+            <a class="nav-a" href="#" @click.prevent="$dispatch('open-sponsors')">Sponsors</a>
             <a class="icon-btn" href="https://github.com/velofy/summitjs" aria-label="GitHub">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.26 3.4.96.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.28 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z" /></svg>
             </a>
@@ -344,6 +367,7 @@
             <a href="./components/" @click="menu = false">UI Library</a>
             <a href="./techniques/" @click="menu = false">Techniques</a>
             <a href="#demos" @click="menu = false">Demos</a>
+            <a href="#" @click.prevent="$dispatch('open-sponsors'); menu = false">Sponsors</a>
             <a href="https://github.com/velofy/summitjs">GitHub</a>
           </div>
         </div>
@@ -588,6 +612,19 @@ npm install summitjs</code></pre>
         </div>
       </div>
     </div>
+    </div>
+
+    <div class="sponsor-root" s-cloak s-data="{ isOpen: false }" @open-sponsors.window="isOpen = true">
+      <div class="sponsor-overlay" s-show="isOpen" @click="isOpen = false"></div>
+      <div class="sponsor-panel" s-show="isOpen" role="dialog" aria-modal="true" aria-label="Sponsors" @keydown.escape.window="isOpen = false">
+        <button class="sponsor-close" @click="isOpen = false" aria-label="Close">&times;</button>
+        <div class="sponsor-eyebrow">Sponsored by</div>
+        <a class="sponsor-logo" href="https://nodemaven.com/" target="_blank" rel="noopener sponsored" title="NodeMaven - residential and mobile proxies">
+          <img class="s-logo-light" src="./assets/sponsors/nodemaven-light.svg" alt="NodeMaven" height="38" />
+          <img class="s-logo-dark" src="./assets/sponsors/nodemaven-dark.svg" alt="NodeMaven" height="38" />
+        </a>
+        <p class="sponsor-note">Summit.js is free and MIT licensed. NodeMaven helps keep it that way.</p>
+      </div>
     </div>
 
     <script src="./assets/search.js" defer></script>
