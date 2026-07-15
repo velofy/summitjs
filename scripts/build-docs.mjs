@@ -177,6 +177,21 @@ function buildToc(headings) {
 
 const LOGO = `<svg viewBox="0 0 40 32" aria-hidden="true"><rect x="21" y="3" width="9" height="9" rx="1.5" transform="rotate(45 25.5 7.5)" fill="var(--accent)"/><path d="M2 28 L13 10 L20 22 L26 14 L38 28 Z" fill="var(--logo)"/></svg>`;
 
+function sponsorModal(base = "../") {
+  return `<div class="sponsor-root" s-cloak s-data="{ isOpen: false }" @open-sponsors.window="isOpen = true">
+  <div class="sponsor-overlay" s-show="isOpen" @click="isOpen = false"></div>
+  <div class="sponsor-panel" s-show="isOpen" role="dialog" aria-modal="true" aria-label="Sponsors" @keydown.escape.window="isOpen = false">
+    <button class="sponsor-close" @click="isOpen = false" aria-label="Close">&times;</button>
+    <div class="sponsor-eyebrow">Sponsored by</div>
+    <a class="sponsor-logo" href="https://nodemaven.com/" target="_blank" rel="noopener sponsored" title="NodeMaven - residential and mobile proxies">
+      <img class="s-logo-light" src="${base}assets/sponsors/nodemaven-light.svg" alt="NodeMaven" height="38" />
+      <img class="s-logo-dark" src="${base}assets/sponsors/nodemaven-dark.svg" alt="NodeMaven" height="38" />
+    </a>
+    <p class="sponsor-note">Summit.js is free and MIT licensed. NodeMaven helps keep it that way.</p>
+  </div>
+</div>`;
+}
+
 function searchModal() {
   return `<div class="search-root" s-cloak s-data="search" data-base="../"
     @open-search.window="open()"
@@ -254,6 +269,7 @@ function layout(page, contentHtml, toc, sidebar, prev, next) {
   <div class="top-spacer"></div>
   <a class="top-navlink" href="../components/">UI Library</a>
   <a class="top-navlink" href="../techniques/">Techniques</a>
+  <a class="top-navlink" href="#" s-data @click.prevent="$dispatch('open-sponsors')">Sponsors</a>
   <button class="search-trigger" s-data @click="$dispatch('open-search')" aria-label="Search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
     <span>Search</span><kbd class="cmdk">⌘K</kbd>
@@ -281,6 +297,7 @@ function layout(page, contentHtml, toc, sidebar, prev, next) {
   <span>MIT · <a href="https://github.com/velofy/summitjs">github.com/velofy/summitjs</a> · <a href="../llms.txt">llms.txt</a></span>
 </div></footer>
 ${searchModal()}
+${sponsorModal("../")}
 <script src="../assets/search.js" defer></script>
 <script src="../summit.min.js" defer></script>
 <script>document.addEventListener("click",function(e){var b=e.target.closest("[data-copy]");if(!b)return;var c=b.parentElement.querySelector("code");navigator.clipboard.writeText(c.innerText);b.textContent="Copied";setTimeout(function(){b.textContent="Copy";},1200);});</script>
