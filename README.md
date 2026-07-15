@@ -28,6 +28,8 @@ Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed fur
   </a>
 </p>
 
+---
+
 ## AI Agent Native
 
 Summit is designed so that an AI agent can write a working, good-looking frontend on the first try:
