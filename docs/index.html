@@ -309,8 +309,8 @@
       /* ---------- sponsors modal ---------- */
       .sponsor-overlay { position: fixed; inset: 0; z-index: 90; background: rgba(2, 6, 23, 0.55); backdrop-filter: blur(3px); }
       .sponsor-panel { position: fixed; z-index: 91; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        width: min(92vw, 380px); background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
-        padding: 32px 36px 28px; text-align: center; box-shadow: 0 24px 70px rgba(2, 6, 23, 0.45); }
+        width: min(92vw, 420px); max-height: 88vh; overflow-y: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+        padding: 32px 34px 28px; text-align: center; box-shadow: 0 24px 70px rgba(2, 6, 23, 0.45); }
       .sponsor-close { position: absolute; top: 10px; right: 14px; border: 0; background: none; color: var(--faint);
         font-size: 22px; line-height: 1; cursor: pointer; }
       .sponsor-close:hover { color: var(--text); }
@@ -318,7 +318,17 @@
       .sponsor-logo { display: inline-flex; align-items: center; opacity: 0.95; transition: opacity 0.15s; }
       .sponsor-logo:hover { opacity: 1; }
       .sponsor-logo img { width: auto; }
-      .sponsor-note { margin-top: 18px; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+      .sponsor-tagline { margin-top: 18px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+      .sponsor-why { margin: 16px 0 0; padding: 0; list-style: none; text-align: left; }
+      .sponsor-why li { position: relative; padding-left: 22px; margin: 7px 0; font-size: 12.5px; line-height: 1.5; color: var(--text); }
+      .sponsor-why li::before { content: ""; position: absolute; left: 5px; top: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+      .sponsor-codes-label { margin-top: 20px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+      .sponsor-codes { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+      .sponsor-code { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 13px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-2); }
+      .sponsor-code b { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; color: var(--text); letter-spacing: 0.02em; }
+      .sponsor-code span { font-size: 11.5px; color: var(--muted); }
+      .sponsor-cta { display: inline-block; margin-top: 20px; padding: 10px 22px; border-radius: 10px; background: var(--accent); color: #04231f; font-weight: 700; font-size: 13px; text-decoration: none; transition: opacity 0.15s; }
+      .sponsor-cta:hover { opacity: 0.9; }
       .s-logo-dark { display: none; }
       .s-logo-light { display: block; }
       :root[data-theme="dark"] .s-logo-dark { display: block; }
@@ -619,11 +629,24 @@ npm install summitjs</code></pre>
       <div class="sponsor-panel" s-show="isOpen" role="dialog" aria-modal="true" aria-label="Sponsors" @keydown.escape.window="isOpen = false">
         <button class="sponsor-close" @click="isOpen = false" aria-label="Close">&times;</button>
         <div class="sponsor-eyebrow">Sponsored by</div>
-        <a class="sponsor-logo" href="https://nodemaven.com/" target="_blank" rel="noopener sponsored" title="NodeMaven - residential and mobile proxies">
+        <a class="sponsor-logo" href="https://go.nodemaven.com/summitjssoft" target="_blank" rel="noopener sponsored" title="NodeMaven">
           <img class="s-logo-light" src="./assets/sponsors/nodemaven-light.svg" alt="NodeMaven" height="38" />
           <img class="s-logo-dark" src="./assets/sponsors/nodemaven-dark.svg" alt="NodeMaven" height="38" />
         </a>
-        <p class="sponsor-note">Summit.js is free and MIT licensed. NodeMaven helps keep it that way.</p>
+        <p class="sponsor-tagline">The most reliable proxy provider with the highest quality IPs on the market. Best solution for automation, web scraping, SEO research, and social media management.</p>
+        <ul class="sponsor-why">
+          <li>99.9% uptime</li>
+          <li>Sticky sessions up to 7 days</li>
+          <li>IP filtering: all proxies have a fraud score &lt;97%</li>
+          <li>No KYC required</li>
+          <li>Cashback on traffic: burn GB and earn up to 10% back</li>
+        </ul>
+        <div class="sponsor-codes-label">Codes for Summit.js users</div>
+        <div class="sponsor-codes">
+          <div class="sponsor-code"><b>SUMMITJS35</b><span>35% off Mobile &amp; Residential</span></div>
+          <div class="sponsor-code"><b>SUMMITJS40</b><span>40% off ISP (Static)</span></div>
+        </div>
+        <a class="sponsor-cta" href="https://go.nodemaven.com/summitjssoft" target="_blank" rel="noopener sponsored">Get NodeMaven &rarr;</a>
       </div>
     </div>
 
