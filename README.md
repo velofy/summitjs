@@ -15,6 +15,17 @@ Started by [anishfyi](https://github.com/anishfyi), so that AI agents can make b
 
 Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed further where it counts: a fine-grained signal engine, a CSP-safe expression evaluator, keyed list rendering, cached computed getters, a copy-in UI library, and full TypeScript types, all in about 16KB gzipped.
 
+<h3 align="center">Sponsors</h3>
+
+<p align="center">
+  <a href="https://nodemaven.com/" title="NodeMaven - residential and mobile proxies">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-dark.svg">
+      <img src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-light.svg" alt="NodeMaven" height="34">
+    </picture>
+  </a>
+</p>
+
 ## AI Agent Native
 
 Summit is designed so that an AI agent can write a working, good-looking frontend on the first try:
@@ -201,17 +212,6 @@ npm run check   # typecheck + unit tests + build + size budget + bundle smoke + 
 - `npm run verify` boots the real docs page under Summit and checks every demo.
 
 The documentation site in `docs/` dogfoods Summit and deploys to GitHub Pages.
-
-## Sponsors
-
-<p align="center">
-  <a href="https://nodemaven.com/" title="NodeMaven - residential and mobile proxies">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-dark.svg">
-      <img src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-light.svg" alt="NodeMaven" height="38">
-    </picture>
-  </a>
-</p>
 
 ## License
 
