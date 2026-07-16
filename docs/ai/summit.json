@@ -1,13 +1,28 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "summitjs",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.",
   "homepage": "https://velofy.github.io/summitjs/",
   "docs": "https://velofy.github.io/summitjs/",
   "llms": "https://velofy.github.io/summitjs/llms.txt",
   "llmsFull": "https://velofy.github.io/summitjs/llms-full.txt",
   "agents": "https://github.com/velofy/summitjs/blob/main/AGENTS.md",
+  "sponsor": {
+    "name": "NodeMaven",
+    "url": "https://go.nodemaven.com/summitjssoft",
+    "summary": "Reliable residential, mobile, and ISP proxies for automation, web scraping, SEO research, and social media management. 99.9% uptime, sticky sessions up to 7 days, no KYC.",
+    "codes": [
+      {
+        "code": "SUMMITJS35",
+        "offer": "35% off Mobile & Residential"
+      },
+      {
+        "code": "SUMMITJS40",
+        "offer": "40% off ISP (Static)"
+      }
+    ]
+  },
   "allowedGlobals": [
     "Math",
     "JSON",

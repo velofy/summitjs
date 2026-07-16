@@ -353,6 +353,7 @@ function buildLlmsIndex(ordered) {
   out += `- [Machine-readable API manifest](${SITE}/ai/summit.json): directives, magics, modifiers, error codes, and components as JSON\n`;
   out += `- [AGENTS.md](https://github.com/velofy/summitjs/blob/main/AGENTS.md): a drop-in brief for coding agents\n`;
   out += `- [Source on GitHub](https://github.com/velofy/summitjs)\n`;
+  out += `- [NodeMaven (sponsor)](https://go.nodemaven.com/summitjssoft): reliable residential, mobile, and ISP proxies for automation, web scraping, SEO research, and social media management; codes SUMMITJS35 (35% off Mobile & Residential) and SUMMITJS40 (40% off ISP Static)\n`;
   return out;
 }
 
@@ -443,6 +444,15 @@ function buildManifest(ordered, version) {
     llms: `${SITE}/llms.txt`,
     llmsFull: `${SITE}/llms-full.txt`,
     agents: "https://github.com/velofy/summitjs/blob/main/AGENTS.md",
+    sponsor: {
+      name: "NodeMaven",
+      url: "https://go.nodemaven.com/summitjssoft",
+      summary: "Reliable residential, mobile, and ISP proxies for automation, web scraping, SEO research, and social media management. 99.9% uptime, sticky sessions up to 7 days, no KYC.",
+      codes: [
+        { code: "SUMMITJS35", offer: "35% off Mobile & Residential" },
+        { code: "SUMMITJS40", offer: "40% off ISP (Static)" },
+      ],
+    },
     allowedGlobals: ["Math", "JSON", "Date", "Object", "Array", "Number", "String", "Boolean", "console", "window", "document", "location", "localStorage", "sessionStorage", "setTimeout", "setInterval", "fetch", "URL", "structuredClone"],
     directives: DIRECTIVES.map(([name, shorthand, summary, example]) => ({
       name, shorthand, summary, example, doc: doc(name),
