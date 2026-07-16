@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "summitjs",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.",
   "homepage": "https://velofy.github.io/summitjs/",
   "docs": "https://velofy.github.io/summitjs/",
@@ -377,6 +377,12 @@
       "class": "s-badge",
       "summary": "Small status labels and removable tags.",
       "doc": "https://velofy.github.io/summitjs/comp-badge/"
+    },
+    {
+      "name": "Table",
+      "class": "s-table",
+      "summary": "A styled table for displaying rows of tabular data.",
+      "doc": "https://velofy.github.io/summitjs/comp-table/"
     },
     {
       "name": "Alert",

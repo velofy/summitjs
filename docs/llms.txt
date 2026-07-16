@@ -18,6 +18,7 @@ Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` m
 - [Switch](https://velofy.github.io/summitjs/comp-switch/): A toggle switch bound with s-model, for on/off settings.
 - [Card](https://velofy.github.io/summitjs/comp-card/): A surface for grouping content, with header, body, and footer.
 - [Badge & Tag](https://velofy.github.io/summitjs/comp-badge/): Small status labels and removable tags.
+- [Table](https://velofy.github.io/summitjs/comp-table/): A styled table for displaying rows of tabular data.
 - [Alert](https://velofy.github.io/summitjs/comp-alert/): Contextual feedback banners for info, success, warning, and danger.
 - [Avatar](https://velofy.github.io/summitjs/comp-avatar/): User avatars with initials or images, sizes, and stacked groups.
 - [Progress & Spinner](https://velofy.github.io/summitjs/comp-progress/): Progress bars, spinners, and skeleton placeholders for loading states.
