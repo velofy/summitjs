@@ -1,8 +1,10 @@
 import { readFileSync, writeFileSync, renameSync, existsSync } from "node:fs";
 
-// npm renders the tarball's README.md, so prepack swaps in the npm variant of
-// the sponsor block (npm tracking link, and npm's sanitizer can drop
-// <picture>/<source>, so keep the plain <img>) and postpack restores it.
+// npmjs.com renders the readme captured in the publish manifest, which npm
+// reads from README.md in the package dir (not from the tarball), so the swap
+// must bracket the whole `npm publish` (see the release:npm script), not just
+// prepack/postpack. The npm variant uses the npm tracking link, and keeps a
+// plain <img> because npm's sanitizer can drop <picture>/<source>.
 const README = new URL("../README.md", import.meta.url).pathname;
 const BACKUP = new URL("../.readme.github.md", import.meta.url).pathname;
 
@@ -10,7 +12,8 @@ const mode = process.argv[2];
 
 if (mode === "swap") {
   const src = readFileSync(README, "utf8");
-  writeFileSync(BACKUP, src);
+  // never clobber an existing backup: a double swap must not lose the original
+  if (!existsSync(BACKUP)) writeFileSync(BACKUP, src);
   let out = src.replaceAll(
     "https://go.nodemaven.com/summitjsGitHub",
     "https://go.nodemaven.com/summitjssoft",
