@@ -231,3 +231,11 @@
 .s-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
 
 @media (prefers-reduced-motion: reduce) { .s-spinner, .s-skeleton { animation: none; } }
+
+/* ---- Table ------------------------------------------------------- */
+.s-table-wrap { overflow-x: auto; }
+.s-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.s-table th, .s-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+.s-table thead th { background: var(--surface-2); color: var(--muted); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.02em; }
+.s-table tbody tr:nth-child(even) { background: var(--surface-2); }
+.s-table tbody tr:hover { background: var(--accent-soft); }
