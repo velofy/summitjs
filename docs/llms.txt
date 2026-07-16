@@ -125,3 +125,4 @@ Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` m
 - [Machine-readable API manifest](https://velofy.github.io/summitjs/ai/summit.json): directives, magics, modifiers, error codes, and components as JSON
 - [AGENTS.md](https://github.com/velofy/summitjs/blob/main/AGENTS.md): a drop-in brief for coding agents
 - [Source on GitHub](https://github.com/velofy/summitjs)
+- [NodeMaven (sponsor)](https://go.nodemaven.com/summitjssoft): reliable residential, mobile, and ISP proxies for automation, web scraping, SEO research, and social media management; codes SUMMITJS35 (35% off Mobile & Residential) and SUMMITJS40 (40% off ISP Static)

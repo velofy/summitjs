@@ -1,6 +1,6 @@
 {
   "name": "summitjs",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "The open source, AI Agent Native JavaScript framework. Add reactive behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB.",
   "type": "module",
   "license": "MIT",
@@ -75,7 +75,9 @@
     "docs": "node scripts/build-docs.mjs",
     "verify:docs": "node scripts/verify-docs.mjs",
     "check": "npm run typecheck && npm test && npm run build && npm run size && npm run smoke && npm run verify && npm run docs && npm run verify:docs",
-    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+    "prepublishOnly": "npm run typecheck && npm test && npm run build",
+    "prepack": "node scripts/readme-npm.mjs swap",
+    "postpack": "node scripts/readme-npm.mjs restore"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
