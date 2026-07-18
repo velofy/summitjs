@@ -3,31 +3,31 @@
 :root {
   --bg: #ffffff; --surface: #ffffff; --surface-2: #f7f9fc; --border: #e6e9ef;
   --text: #0f172a; --muted: #475569; --faint: #64748b;
-  --accent: #0d9488; --accent-2: #0f766e; --accent-soft: #e6f5f2;
+  --accent: #a35200; --accent-2: #7c3d00; --accent-soft: #fff4d6;
   --ink: #0f172a; --ink-contrast: #ffffff; --logo: #0f172a; --code-bg: #f7f9fc;
-  --c-tag: #0f766e; --c-attr: #475569; --c-str: #b45309; --c-com: #94a3b8; --c-fn: #2563eb; --c-num: #0f172a;
+  --c-tag: #7c3d00; --c-attr: #475569; --c-str: #b45309; --c-com: #94a3b8; --c-fn: #2563eb; --c-num: #0f172a;
   --shadow: 0 1px 2px rgba(15,23,42,.05), 0 10px 30px rgba(15,23,42,.06);
   --shadow-lg: 0 24px 60px rgba(15,23,42,.14);
   --radius-sm: 8px; --radius: 12px; --radius-lg: 16px;
-  --font: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+  --font: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --body: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #0b1120; --surface: #0e1728; --surface-2: #0e1728; --border: #1e293b;
   --text: #e6ebf4; --muted: #9aa7bd; --faint: #7c8aa0;
-  --accent: #2dd4bf; --accent-2: #5eead4; --accent-soft: #0f2b2a;
+  --accent: #ffb224; --accent-2: #ffcf70; --accent-soft: #3a2a08;
   --ink: #e6ebf4; --ink-contrast: #0b1120; --logo: #e6ebf4; --code-bg: #0b1424;
-  --c-tag: #5eead4; --c-attr: #9aa7bd; --c-str: #fbbf24; --c-com: #64748b; --c-fn: #7dd3fc; --c-num: #e6ebf4;
+  --c-tag: #ffcf70; --c-attr: #9aa7bd; --c-str: #fbbf24; --c-com: #64748b; --c-fn: #7dd3fc; --c-num: #e6ebf4;
   --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.4);
   --shadow-lg: 0 30px 70px rgba(0,0,0,.6);
 } }
 :root[data-theme="dark"] {
   --bg: #0b1120; --surface: #0e1728; --surface-2: #0e1728; --border: #1e293b;
   --text: #e6ebf4; --muted: #9aa7bd; --faint: #7c8aa0;
-  --accent: #2dd4bf; --accent-2: #5eead4; --accent-soft: #0f2b2a;
+  --accent: #ffb224; --accent-2: #ffcf70; --accent-soft: #3a2a08;
   --ink: #e6ebf4; --ink-contrast: #0b1120; --logo: #e6ebf4; --code-bg: #0b1424;
-  --c-tag: #5eead4; --c-attr: #9aa7bd; --c-str: #fbbf24; --c-com: #64748b; --c-fn: #7dd3fc; --c-num: #e6ebf4;
+  --c-tag: #ffcf70; --c-attr: #9aa7bd; --c-str: #fbbf24; --c-com: #64748b; --c-fn: #7dd3fc; --c-num: #e6ebf4;
   --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.4);
   --shadow-lg: 0 30px 70px rgba(0,0,0,.6);
 }
