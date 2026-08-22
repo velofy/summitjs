@@ -34,7 +34,6 @@ export const sIf: DirectiveHandler = (el, meta, utils) => {
   let current: Element[] = [];
 
   const remove = (): void => {
-    ((window as any).__bbLog = (window as any).__bbLog || []).push("SIF REMOVE n=" + current.length);
     for (const node of current) {
       utils.destroyTree(node);
       node.remove();
