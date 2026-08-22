@@ -46,7 +46,8 @@ Any page as markdown: append `index.md` to its URL.
 | `s-model` | | two-way bind a form control |
 | `s-show` | | toggle visibility with `display` |
 | `s-if` | | add or remove from the DOM; a `<template s-if>` may hold multiple roots |
-| `s-for` | | render a list; use `:key` |
+| `s-for` | | render a list; use `:key` (LIS minimal-move reconciliation) |
+| `s-island` | | defer hydration until the subtree is visible (`s-island`) or idle (`s-island="idle"`) |
 | `s-ref` | | name an element, read it via `$refs` |
 | `s-init` | | run an expression once on init |
 | `s-effect` | | re-run an expression when its dependencies change |

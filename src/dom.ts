@@ -28,6 +28,8 @@ export interface SummitMeta {
   ignore?: boolean;
   /** Guard against initializing the same element twice. */
   initialized?: boolean;
+  /** True once a deferred s-island subtree has been hydrated. */
+  islandReady?: boolean;
 }
 
 const metaMap = new WeakMap<Node, SummitMeta>();
