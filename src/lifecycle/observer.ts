@@ -40,8 +40,11 @@ function handleMutations(records: MutationRecord[]): void {
   }
 
   // Tear down nodes that are genuinely gone (a moved node stays connected).
+  // Nodes that were never connected while initialized are structural source
+  // nodes (e.g. a detached s-for <template>); destroying them would run the
+  // cleanups of live, rendered content. Skip those.
   for (const el of removed) {
-    if (!el.isConnected) destroyTree(el);
+    if (!el.isConnected && meta(el).sawConnection) destroyTree(el);
   }
 
   // Initialize freshly added, not-yet-initialized nodes.
