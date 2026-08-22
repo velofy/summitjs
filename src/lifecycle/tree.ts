@@ -18,8 +18,9 @@ import { isPersistMarker } from "../magics/persist.js";
 
 const STRUCTURAL = new Set(["if", "for", "teleport"]);
 // Valid directive names that are not in the directive registry: s-data creates
-// scope, s-ignore is read directly off the element.
-const SPECIAL = new Set(["data", "ignore"]);
+// scope, s-ignore is read directly off the element, and s-island is handled by
+// initTree itself (lazy hydration).
+const SPECIAL = new Set(["data", "ignore", "island"]);
 
 let summitGlobal: SummitGlobalLike;
 export function setSummitGlobal(g: SummitGlobalLike): void {
@@ -208,6 +209,63 @@ function initData(el: Element, dmeta: DirectiveMeta, parentScopes: Scope[]): Sco
   return newScopes;
 }
 
+// --- s-island -------------------------------------------------------------
+
+/**
+ * Lazy hydration for below-the-fold or heavy subtrees. The markup ships in the
+ * HTML (crawlable, no-JS friendly), but Summit skips initializing it until it
+ * is actually needed:
+ *
+ *   s-island              hydrate when scrolled near the viewport (default)
+ *   s-island="visible"    same
+ *   s-island="idle"       hydrate when the browser is idle
+ *
+ * On hydrate, directives run exactly as if the element had been initialized
+ * inline. Falls back to immediate hydration where IntersectionObserver is not
+ * available.
+ */
+function deferIsland(el: Element, scopes: Scope[]): void {
+  const m = meta(el);
+  m.initialized = true; // park the subtree until its trigger fires
+
+  let started = false;
+  const hydrate = (): void => {
+    if (started) return;
+    started = true;
+    m.islandReady = true;
+    m.initialized = false;
+    initTree(el, scopes);
+  };
+
+  const mode = el.getAttribute("s-island") ?? "visible";
+  if (mode === "idle") {
+    const ric = (globalThis as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number })
+      .requestIdleCallback;
+    if (ric) ric(hydrate, { timeout: 2000 });
+    else setTimeout(hydrate, 1);
+    return;
+  }
+
+  const IO = (globalThis as { IntersectionObserver?: typeof IntersectionObserver }).IntersectionObserver;
+  if (!IO) {
+    hydrate();
+    return;
+  }
+  // Start slightly before the island scrolls into view so hydration cost is
+  // paid before the user sees it, not during the scroll.
+  const io = new IO(
+    (entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        io.disconnect();
+        hydrate();
+      }
+    },
+    { rootMargin: "300px 0px" },
+  );
+  io.observe(el);
+  addCleanup(el, () => io.disconnect());
+}
+
 // --- initTree / destroyTree ----------------------------------------------
 
 export function initTree(el: Element, scopesArg?: Scope[]): void {
@@ -216,6 +274,12 @@ export function initTree(el: Element, scopesArg?: Scope[]): void {
   if (el.hasAttribute("s-ignore")) {
     m.ignore = true;
     m.initialized = true;
+    return;
+  }
+  // Deferred hydration: an s-island subtree ships in the HTML but its
+  // directives and effects wait until the element is needed.
+  if (el.hasAttribute("s-island") && !m.islandReady) {
+    deferIsland(el, scopesArg ?? resolveScopes(el));
     return;
   }
 

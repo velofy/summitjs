@@ -6,10 +6,11 @@
  *   s-for="(value, key) in object"
  *   s-for="n in 10"           (range 1..10)
  *
- * With :key, blocks are reconciled by key: matching blocks are reused and
- * moved rather than destroyed and recreated, which keeps DOM state (focus,
- * scroll, inputs) stable across reorders. This is the fix for Alpine's weakest
- * area on large or reordering lists.
+ * With :key, blocks are reconciled by key. Pro diffing: an O(n log n) longest
+ * increasing subsequence over old positions marks the nodes that are already
+ * in relative order; only the rest move. That is the theoretical minimum number
+ * of DOM moves for any reorder (shuffle, reverse, sort), which keeps large
+ * catalogs and tables smooth.
  */
 
 import type { DirectiveHandler } from "../types.js";
@@ -36,27 +37,33 @@ function parseIterator(raw: string): { item: string; index: string | null } {
   return { item: trimmed, index: null };
 }
 
-interface Item {
-  value: unknown;
-  index: number;
-  objectKey?: string;
-}
-
-function normalize(source: unknown): Item[] {
-  if (typeof source === "number") {
-    return Array.from({ length: source }, (_, i) => ({ value: i + 1, index: i }));
+/**
+ * Longest strictly increasing subsequence of `arr`, returned as a list of
+ * indices into `arr`. O(n log n). Used to find the largest set of list blocks
+ * that are already in their final relative order and therefore need no move.
+ */
+function lisIndices(arr: number[]): number[] {
+  const n = arr.length;
+  if (n === 0) return [];
+  const tails: number[] = [];
+  const tailIdx: number[] = [];
+  const prev: number[] = new Array(n).fill(-1);
+  for (let i = 0; i < n; i++) {
+    const v = arr[i];
+    let lo = 0;
+    let hi = tails.length;
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1;
+      if (tails[mid] < v) lo = mid + 1;
+      else hi = mid;
+    }
+    if (lo > 0) prev[i] = tailIdx[lo - 1]!;
+    tails[lo] = v;
+    tailIdx[lo] = i;
   }
-  if (Array.isArray(source)) {
-    return source.map((value, index) => ({ value, index }));
-  }
-  if (source && typeof source === "object") {
-    return Object.entries(source as Record<string, unknown>).map(([k, value], index) => ({
-      value,
-      index,
-      objectKey: k,
-    }));
-  }
-  return [];
+  const out: number[] = [];
+  for (let i = tailIdx[tails.length - 1]!; i !== -1; i = prev[i]!) out.push(i);
+  return out.reverse();
 }
 
 export const sFor: DirectiveHandler = (el, meta, utils) => {
@@ -87,27 +94,31 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
 
   const parentScopes = utils.scopes;
   let blocks = new Map<unknown, Block>();
+  let prevKeys: unknown[] = [];
 
   // Compile the key expression once instead of re-parsing/re-interpreting it per
   // item on every run.
   const keyEval = keyExpr ? compileExpression(keyExpr) : null;
+  // One reusable locals object for key evaluation: avoids allocating a fresh
+  // record per item per run on large lists.
+  const keyLocals: Record<string, unknown> = {};
 
-  const keyFor = (it: Item): unknown => {
-    if (!keyEval) return it.objectKey ?? it.index;
+  const keyFor = (value: unknown, index: number, objectKey?: string): unknown => {
+    if (!keyEval) return objectKey ?? index;
     // A plain (non-reactive) scope is enough to read the key; the reactive
     // Proxy is only paid for when a block is actually created.
-    const data: Record<string, unknown> = { [itemName]: it.value };
-    if (indexName) data[indexName] = it.objectKey ?? it.index;
+    keyLocals[itemName] = value;
+    if (indexName) keyLocals[indexName] = objectKey ?? index;
     try {
-      return keyEval(makeEnv(el, data).env);
+      return keyEval(makeEnv(el, keyLocals).env);
     } catch {
-      return it.index;
+      return index;
     }
   };
 
-  const makeBlockScope = (it: Item): Scope => {
-    const data: Record<string, unknown> = { [itemName]: it.value };
-    if (indexName) data[indexName] = it.objectKey ?? it.index;
+  const makeBlockScope = (value: unknown, index: number, objectKey?: string): Scope => {
+    const data: Record<string, unknown> = { [itemName]: value };
+    if (indexName) data[indexName] = objectKey ?? index;
     return reactive(data);
   };
 
@@ -120,24 +131,42 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
   };
 
   utils.effect(() => {
-    const items = normalize(utils.evaluate(sourceExpr));
+    const source = utils.evaluate(sourceExpr);
+
+    // Flatten the source into parallel value/key arrays without allocating an
+    // intermediate Item wrapper per entry.
+    const values: unknown[] = [];
+    const keys: unknown[] = [];
+    let objKeys: string[] | null = null;
+    if (typeof source === "number") {
+      for (let i = 0; i < source; i++) values.push(i + 1);
+    } else if (Array.isArray(source)) {
+      for (let i = 0; i < source.length; i++) values.push(source[i]);
+    } else if (source && typeof source === "object") {
+      objKeys = Object.keys(source as Record<string, unknown>);
+      for (const k of objKeys) values.push((source as Record<string, unknown>)[k]);
+    }
+
     const next = new Map<unknown, Block>();
-    const orderedKeys: unknown[] = [];
+    const created: boolean[] = new Array(values.length).fill(false);
 
-    for (const it of items) {
+    for (let i = 0; i < values.length; i++) {
+      const value = values[i];
+      const objectKey = objKeys ? objKeys[i] : undefined;
+      const key = keyFor(value, i, objectKey);
+      keys.push(key);
+
       // Reuse an existing block for this key when possible.
-      const key = keyFor(it);
-      orderedKeys.push(key);
-
       const existing = blocks.get(key);
       if (existing) {
         // Update the reused block's item and index reactively.
-        (existing.scope as Record<string, unknown>)[itemName] = it.value;
-        if (indexName) (existing.scope as Record<string, unknown>)[indexName] = it.objectKey ?? it.index;
+        (existing.scope as Record<string, unknown>)[itemName] = value;
+        if (indexName)
+          (existing.scope as Record<string, unknown>)[indexName] = objectKey ?? i;
         next.set(key, existing);
         blocks.delete(key);
       } else {
-        const scope = makeBlockScope(it);
+        const scope = makeBlockScope(value, i, objectKey);
         const node = blueprint.cloneNode(true) as Element;
         // Attach before initializing so directives that resolve the component
         // root by walking the DOM (e.g. s-ref into $refs) find it. The ordering
@@ -145,6 +174,7 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
         parent.insertBefore(node, anchor);
         utils.initTree(node, [...parentScopes, scope]);
         next.set(key, { node, scope });
+        created[i] = true;
       }
     }
 
@@ -154,20 +184,46 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
       block.node.remove();
     }
 
-    // Minimal-move placement: walk keys in reverse, inserting a node only when
-    // it is not already immediately before the node that should follow it. An
-    // unchanged list does zero DOM moves; append/remove/swap touch only what
-    // actually changed, instead of re-inserting all N nodes every run.
-    let expected: Node = anchor;
-    for (let i = orderedKeys.length - 1; i >= 0; i--) {
-      const node = next.get(orderedKeys[i])!.node;
-      if (node.nextSibling !== expected) {
-        parent.insertBefore(node, expected);
+    // Minimal-move placement via LIS. Map each surviving key to its previous
+    // position; the longest increasing subsequence of those positions is the
+    // set of nodes already in relative order. Everything else gets moved, and
+    // only those get moved.
+    if (prevKeys.length > 0 && keys.length > 0) {
+      const prevPos = new Map<unknown, number>();
+      for (let i = 0; i < prevKeys.length; i++) prevPos.set(prevKeys[i], i);
+      const stable: number[] = [];
+      const seq: number[] = [];
+      for (let i = 0; i < keys.length; i++) {
+        if (created[i]) continue;
+        const pos = prevPos.get(keys[i]);
+        if (pos === undefined) continue;
+        stable.push(i);
+        seq.push(pos);
       }
-      expected = node;
+      const keep = new Set(lisIndices(seq));
+      let expected: Node = anchor;
+      for (let i = keys.length - 1; i >= 0; i--) {
+        const node = next.get(keys[i])!.node;
+        if (!keep.has(i)) {
+          if (node.nextSibling !== expected) parent.insertBefore(node, expected);
+          expected = node;
+        } else {
+          expected = node;
+        }
+      }
+    } else {
+      // First run (or empty-to-populated): nodes were appended sequentially, so
+      // they are already in order; just verify cheaply like before.
+      let expected: Node = anchor;
+      for (let i = keys.length - 1; i >= 0; i--) {
+        const node = next.get(keys[i])!.node;
+        if (node.nextSibling !== expected) parent.insertBefore(node, expected);
+        expected = node;
+      }
     }
 
     blocks = next;
+    prevKeys = keys;
   });
 
   utils.cleanup(clear);
