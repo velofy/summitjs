@@ -30,6 +30,10 @@ export interface SummitMeta {
   initialized?: boolean;
   /** True once a deferred s-island subtree has been hydrated. */
   islandReady?: boolean;
+  /** True if the subtree was part of the live document when initialized.
+   *  Structural directives detach their source nodes; those must never be
+   *  torn down by the MutationObserver's "removed" pass. */
+  sawConnection?: boolean;
 }
 
 const metaMap = new WeakMap<Node, SummitMeta>();

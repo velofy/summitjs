@@ -286,6 +286,7 @@ export function initTree(el: Element, scopesArg?: Scope[]): void {
   let scopes = scopesArg ?? resolveScopes(el);
   m.scopes = scopes;
   m.marker = nextMarker();
+  m.sawConnection = el.isConnected;
 
   const dirs = collectDirectives(el);
 

@@ -90,7 +90,11 @@ export const sFor: DirectiveHandler = (el, meta, utils) => {
 
   const anchor = document.createComment("s-for");
   parent.insertBefore(anchor, el);
-  el.remove();
+  // The <template> stays in the DOM (it renders nothing and is display:none by
+  // default). Removing it would leave a detached element whose cleanup still
+  // owns the live blocks: if this directive initializes after page load, the
+  // MutationObserver sees the detached template as "removed" and destroys it,
+  // running clear() and wiping every row that was just rendered.
 
   const parentScopes = utils.scopes;
   let blocks = new Map<unknown, Block>();

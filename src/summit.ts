@@ -17,7 +17,7 @@ import {
   getBind,
 } from "./registry/registry.js";
 import { createScope } from "./scope/index.js";
-import { initTree, destroyTree, startObserver, setSummitGlobal } from "./lifecycle/index.js";
+import { initTree, destroyTree, startObserver, stopObserver, setSummitGlobal } from "./lifecycle/index.js";
 import { registerBuiltinDirectives } from "./directives/index.js";
 import { registerBuiltinMagics } from "./magics/index.js";
 import { signal, computed, effect, reactive, batch, nextTick } from "./reactivity/index.js";
@@ -65,12 +65,16 @@ export interface SummitGlobal {
   nextTick: typeof nextTick;
   initTree: typeof initTree;
   destroyTree: typeof destroyTree;
+  stopObserver: typeof stopObserver;
+  startObserver: typeof startObserver;
 }
 
 export const Summit: SummitGlobal = {
   version,
   started: () => started,
   start,
+  stopObserver,
+  startObserver,
 
   data(name, provider) {
     registerData(name, provider);
