@@ -15,8 +15,8 @@ if (mode === "swap") {
   // never clobber an existing backup: a double swap must not lose the original
   if (!existsSync(BACKUP)) writeFileSync(BACKUP, src);
   let out = src.replaceAll(
-    "https://go.nodemaven.com/summitjsGitHub",
-    "https://go.nodemaven.com/summitjssoft",
+    "https://go.nodemaven.com/summitjsreadme",
+    "https://go.nodemaven.com/summitjsnpmjs",
   );
   out = out.replace(/<picture>\s*<source[^>]*>\s*(<img[^>]*>)\s*<\/picture>/g, "$1");
   writeFileSync(README, out);

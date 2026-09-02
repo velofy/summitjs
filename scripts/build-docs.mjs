@@ -183,24 +183,24 @@ function sponsorModal(base = "../") {
   <div class="sponsor-panel" s-show="isOpen" role="dialog" aria-modal="true" aria-label="Sponsors" @keydown.escape.window="isOpen = false">
     <button class="sponsor-close" @click="isOpen = false" aria-label="Close">&times;</button>
     <div class="sponsor-eyebrow">Sponsored by</div>
-    <a class="sponsor-logo" href="https://go.nodemaven.com/summitjssoft" target="_blank" rel="noopener sponsored" title="NodeMaven">
+    <a class="sponsor-logo" href="https://go.nodemaven.com/summitjsvelofy" target="_blank" rel="noopener sponsored" title="NodeMaven">
       <img class="s-logo-light" src="${base}assets/sponsors/nodemaven-light.svg" alt="NodeMaven" height="38" />
       <img class="s-logo-dark" src="${base}assets/sponsors/nodemaven-dark.svg" alt="NodeMaven" height="38" />
     </a>
-    <p class="sponsor-tagline">The most reliable proxy provider with the highest quality IPs on the market. Best solution for automation, web scraping, SEO research, and social media management.</p>
+    <p class="sponsor-tagline">The most efficient proxy provider for web scraping and automation, with the highest quality IPs on the market.</p>
     <ul class="sponsor-why">
+      <li>ZIP targeting</li>
       <li>99.9% uptime</li>
-      <li>Sticky sessions up to 7 days</li>
-      <li>IP filtering: all proxies have a fraud score &lt;97%</li>
+      <li>IP filtering: every proxy has a fraud score under 97%</li>
       <li>No KYC required</li>
-      <li>Cashback on traffic: burn GB and earn up to 10% back</li>
+      <li>Free tools: Proxy Bandwidth Checker, Meta Tag Checker, IP Lookup and more</li>
     </ul>
     <div class="sponsor-codes-label">Codes for Summit.js users</div>
     <div class="sponsor-codes">
       <div class="sponsor-code"><b>SUMMITJS35</b><span>35% off Mobile &amp; Residential</span></div>
       <div class="sponsor-code"><b>SUMMITJS40</b><span>40% off ISP (Static)</span></div>
     </div>
-    <a class="sponsor-cta" href="https://go.nodemaven.com/summitjssoft" target="_blank" rel="noopener sponsored">Get NodeMaven &rarr;</a>
+    <a class="sponsor-cta" href="https://go.nodemaven.com/summitjsvelofy" target="_blank" rel="noopener sponsored">Get NodeMaven &rarr;</a>
   </div>
 </div>`;
 }
@@ -353,7 +353,7 @@ function buildLlmsIndex(ordered) {
   out += `- [Machine-readable API manifest](${SITE}/ai/summit.json): directives, magics, modifiers, error codes, and components as JSON\n`;
   out += `- [AGENTS.md](https://github.com/velofy/summitjs/blob/main/AGENTS.md): a drop-in brief for coding agents\n`;
   out += `- [Source on GitHub](https://github.com/velofy/summitjs)\n`;
-  out += `- [NodeMaven (sponsor)](https://go.nodemaven.com/summitjssoft): reliable residential, mobile, and ISP proxies for automation, web scraping, SEO research, and social media management; codes SUMMITJS35 (35% off Mobile & Residential) and SUMMITJS40 (40% off ISP Static)\n`;
+  out += `- [NodeMaven (sponsor)](https://go.nodemaven.com/summitjsvelofy): the most efficient proxy provider for web scraping and automation, with the highest quality IPs on the market; codes SUMMITJS35 (35% off Mobile & Residential) and SUMMITJS40 (40% off ISP Static)\n`;
   return out;
 }
 
@@ -447,8 +447,8 @@ function buildManifest(ordered, version) {
     agents: "https://github.com/velofy/summitjs/blob/main/AGENTS.md",
     sponsor: {
       name: "NodeMaven",
-      url: "https://go.nodemaven.com/summitjssoft",
-      summary: "Reliable residential, mobile, and ISP proxies for automation, web scraping, SEO research, and social media management. 99.9% uptime, sticky sessions up to 7 days, no KYC.",
+      url: "https://go.nodemaven.com/summitjsvelofy",
+      summary: "The most efficient proxy provider for web scraping and automation, with the highest quality IPs on the market. 99.9% uptime, sticky sessions up to 7 days, no KYC.",
       codes: [
         { code: "SUMMITJS35", offer: "35% off Mobile & Residential" },
         { code: "SUMMITJS40", offer: "40% off ISP (Static)" },

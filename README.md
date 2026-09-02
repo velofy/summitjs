@@ -20,13 +20,22 @@ Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed fur
 <h3 align="center">Sponsors</h3>
 
 <p align="center">
-  <a href="https://go.nodemaven.com/summitjsGitHub" title="NodeMaven - residential and mobile proxies">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-dark.svg">
-      <img src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-light.svg" alt="NodeMaven" height="34">
-    </picture>
+  <a href="https://go.nodemaven.com/summitjsreadme" title="NodeMaven: best proxy for web scraping and automation">
+    <img src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-banner.jpg" alt="NodeMaven: best proxy for web scraping and automation with the highest quality IP" width="720">
   </a>
 </p>
+
+**[NodeMaven](https://go.nodemaven.com/summitjsreadme)**: the most efficient proxy provider for web scraping and automation, with the highest quality IPs on the market.
+
+Why [NodeMaven](https://go.nodemaven.com/summitjsreadme)?
+
+- ZIP targeting
+- 99.9% uptime
+- IP filtering: every proxy has a fraud score under 97%
+- No KYC required
+- Free tools: Proxy Bandwidth Checker, Meta Tag Checker, IP Lookup and more
+
+Codes for Summit.js users: `SUMMITJS35` for 35% off mobile and residential proxies, `SUMMITJS40` for 40% off ISP (static) proxies.
 
 ---
 
