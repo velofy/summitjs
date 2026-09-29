@@ -3,7 +3,7 @@
 > The reactive global store.
 
 `$store` is the reactive root that holds every store you register with
-[Summit.store](../globals-store/). Reading a store value inside an expression
+[Summit.store](https://velofy.co/summitjs/globals-store/). Reading a store value inside an expression
 tracks it, and writing to one triggers an update, so a change made in one
 component reaches every component that reads it.
 
@@ -50,5 +50,5 @@ reactive with nothing extra to wire up.
 
 Use `$store` for state that many, otherwise unrelated components need to share.
 For state that belongs to one component and its children, keep it in `s-data`.
-See [Summit.store](../globals-store/) for creating and reading stores from
+See [Summit.store](https://velofy.co/summitjs/globals-store/) for creating and reading stores from
 JavaScript.

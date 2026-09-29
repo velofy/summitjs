@@ -23,7 +23,7 @@ wrappers to the outer `s-data` element.
 
 ## $root versus $el
 
-[$el](../magic-el/) is the element the current expression runs on, which changes
+[$el](https://velofy.co/summitjs/magic-el/) is the element the current expression runs on, which changes
 from one directive to the next. `$root` is fixed for the whole component: it is
 the same element for every expression inside it. Use `$el` for the element at
 hand and `$root` when you need the component's outer boundary, for example to

@@ -105,4 +105,4 @@ falls back to the object key for objects, or the numeric index otherwise, which
 rebuilds rows when their position changes and loses that state.
 
 To conditionally render a single element rather than a list, see
-[s-if](../s-if/).
+[s-if](https://velofy.co/summitjs/s-if/).

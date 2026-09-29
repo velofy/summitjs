@@ -5,7 +5,7 @@
 A toast is a short, transient notification that slides into a corner to confirm
 an action or report a result, then clears itself after a moment. Toasts stack in
 a fixed `.s-toast-viewport` so several can show at once, newest below the last.
-Each one is a `.s-toast` you render from an array with [s-for](../s-for/), which
+Each one is a `.s-toast` you render from an array with [s-for](https://velofy.co/summitjs/s-for/), which
 means adding and removing entries is all it takes to raise and clear them.
 
 ## A live toast
@@ -104,7 +104,7 @@ you asked for.
 The examples keep the toast list in local `s-data` so each is self-contained, but
 in a real app you want one viewport and a single list that any component can add
 to. Move the array and its `add()` and `dismiss()` methods into a global
-[Summit.store](../globals-store/), render the viewport once near the root, and
+[Summit.store](https://velofy.co/summitjs/globals-store/), render the viewport once near the root, and
 raise a toast from anywhere with `$store.toasts.add(...)`. That way a save button
 in one corner and a form in another share the same stack instead of each managing
 its own.
@@ -113,5 +113,5 @@ The `.s-toast-viewport` is `position: fixed`, so it floats above the page no
 matter where it sits in the markup. Keep the `:key="t.id"` on the `s-for` so
 Summit tracks each toast by identity as the array changes, which keeps
 auto-dismiss and manual dismiss from removing the wrong one. For a persistent,
-inline message rather than a transient one, use an [Alert](../comp-alert/)
+inline message rather than a transient one, use an [Alert](https://velofy.co/summitjs/comp-alert/)
 instead.

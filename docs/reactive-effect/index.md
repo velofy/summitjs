@@ -82,10 +82,10 @@ effect(() => {
 By default an effect re-runs synchronously, the moment a dependency changes. The
 DOM-facing effects behind directives instead batch onto the microtask queue so a
 burst of writes produces a single update, which is why you await
-[nextTick()](../reactive-nexttick/) to read the updated DOM. To coalesce several
+[nextTick()](https://velofy.co/summitjs/reactive-nexttick/) to read the updated DOM. To coalesce several
 synchronous writes into one effect run yourself, use
-[batch()](../reactive-batch/).
+[batch()](https://velofy.co/summitjs/reactive-batch/).
 
 `effect` is also available on the global as `Summit.effect`; `stop` and
 `untrack` ship as named exports of `summitjs`. For the full tracking model, see
-[How reactivity works](../advanced-reactivity/).
+[How reactivity works](https://velofy.co/summitjs/advanced-reactivity/).

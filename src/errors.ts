@@ -8,7 +8,23 @@
  * tooling that greps for it keeps working.
  */
 
-const DOCS = "https://velofy.github.io/summitjs";
+const DOCS = "https://velofy.co/summitjs";
+
+/**
+ * Directives without a page of their own are documented on a related page.
+ * Maps a `doc` slug to its path (and anchor) under DOCS.
+ */
+const DOC_ALIASES: Record<string, string> = {
+  "s-id": "magic-id/#scoping-ids-with-s-id",
+  "s-resize": "s-intersect/#s-resize",
+  "s-resource": "advanced-data/",
+};
+
+/** The docs URL for a slug, e.g. "s-for" -> https://velofy.co/summitjs/s-for/. */
+export function docsUrl(doc?: string): string {
+  if (!doc) return `${DOCS}/`;
+  return `${DOCS}/${DOC_ALIASES[doc] ?? doc + "/"}`;
+}
 
 /** Levenshtein edit distance between two short strings. */
 function distance(a: string, b: string): number {
@@ -68,7 +84,7 @@ function build(code: string, message: string, ctx: Diag): string {
   if (ctx.hint) lines.push(`  ${ctx.hint}`);
   if (ctx.expression) lines.push(`  expression: ${ctx.expression.trim()}`);
   if (ctx.el) lines.push(`  element: ${describeEl(ctx.el)}`);
-  lines.push(`  docs: ${DOCS}/${ctx.doc ? ctx.doc + "/" : ""}`);
+  lines.push(`  docs: ${docsUrl(ctx.doc)}`);
   return lines.join("\n");
 }
 

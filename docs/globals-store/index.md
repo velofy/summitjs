@@ -44,7 +44,7 @@ const cart = Summit.store("cart");
 cart.add({ id: 1 });
 ```
 
-In markup, reach any store through the [$store](../magic-store/) magic. Reads
+In markup, reach any store through the [$store](https://velofy.co/summitjs/magic-store/) magic. Reads
 track, so the view stays in sync, and writes are reactive out of the box:
 
 ```html

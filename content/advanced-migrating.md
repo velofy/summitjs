@@ -147,13 +147,13 @@ is more than a single root element.
 
 `s-model` handles text, number, range, checkbox (boolean or array), radio, and
 single or multiple selects, with these modifiers: `.lazy`, `.change`, `.blur`,
-`.number`, `.boolean`, `.debounce`, `.throttle`, and `.fill`. A few are worth
+`.number`, `.boolean`, `.debounce`, and `.fill`. A few are worth
 calling out for Alpine users:
 
 - `.fill` seeds the model from the control's own initial value when the model is
   empty, so server-rendered form values become the starting state.
 - `.boolean` coerces the input to a real boolean.
-- `.debounce` and `.throttle` accept a duration, for example `s-model.debounce.500ms`.
+- `.debounce` accepts a duration, for example `s-model.debounce.500ms`.
 
 The bound value is also exposed on the element as `el._summitModel = { get, set }`,
 which makes it straightforward to build custom input components that participate

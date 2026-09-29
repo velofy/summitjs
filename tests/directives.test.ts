@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import Summit from "../src/index.js";
+import { docsUrl } from "../src/errors.js";
 
 function mount(html: string): HTMLElement {
   const el = document.createElement("div");
@@ -172,6 +173,15 @@ describe("diagnostics", () => {
     expect(msg).toContain("[summit]");
     expect(msg).toContain("E201");
     expect(msg).toContain("s-text");
+    expect(msg).toContain("docs: https://velofy.co/summitjs/s-text/");
+  });
+
+  it("links directives without their own page to the page that documents them", () => {
+    expect(docsUrl("s-for")).toBe("https://velofy.co/summitjs/s-for/");
+    expect(docsUrl()).toBe("https://velofy.co/summitjs/");
+    expect(docsUrl("s-id")).toBe("https://velofy.co/summitjs/magic-id/#scoping-ids-with-s-id");
+    expect(docsUrl("s-resize")).toBe("https://velofy.co/summitjs/s-intersect/#s-resize");
+    expect(docsUrl("s-resource")).toBe("https://velofy.co/summitjs/advanced-data/");
   });
 
   it("reports a coded error with the expression when a directive throws", async () => {

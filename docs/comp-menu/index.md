@@ -6,7 +6,7 @@ A dropdown menu hangs a short list of actions off a button. You click the button
 to reveal it, pick an action, and it gets out of the way, either because you chose
 something, clicked elsewhere, or pressed `Escape`. Like the rest of the library it
 runs on one boolean in `s-data`, and the two dismissal paths, outside click and
-`Escape`, are wired with plain [event modifiers](../events/).
+`Escape`, are wired with plain [event modifiers](https://velofy.co/summitjs/events/).
 
 ```summit
 <div class="s-anchor" s-data="{ open: false }" @keydown.escape="open = false">
@@ -23,7 +23,7 @@ runs on one boolean in `s-data`, and the two dismissal paths, outside click and
 ## Toggling
 
 The trigger runs `@click="open = !open"`, so clicking it flips the menu open and
-closed. The menu itself is a `.s-menu` shown with [s-show](../s-show/), which keeps
+closed. The menu itself is a `.s-menu` shown with [s-show](https://velofy.co/summitjs/s-show/), which keeps
 the markup in the DOM and toggles its visibility. The wrapper carries the class
 `.s-anchor`, which positions the menu absolutely just under the button, so the
 list floats over the page instead of pushing content down.
@@ -70,12 +70,12 @@ The menu is a stack of building blocks you arrange to taste:
 The trigger is a real `<button>`, so it is focusable and operable with `Enter` and
 `Space` out of the box, and each `.s-menu-item` is a button or link for the same
 reason. Set `aria-haspopup="menu"` on the trigger and reflect the open state with
-`aria-expanded`, bound to your state with [s-bind](../s-bind/), so assistive tech
+`aria-expanded`, bound to your state with [s-bind](https://velofy.co/summitjs/s-bind/), so assistive tech
 knows a menu is attached and whether it is showing. The `Escape` handler gives
 keyboard users a quick way out, matching the behavior of native menus, and the
 outside-click handler keeps a stray open menu from lingering. When the menu opens,
 move focus to the first item so the arrow keys and typing land somewhere sensible.
 
 For a blocking confirmation rather than a list of actions, reach for the
-[Dialog](../comp-dialog/); for free-form content in a floating panel, see the
-[Popover](../comp-popover/).
+[Dialog](https://velofy.co/summitjs/comp-dialog/); for free-form content in a floating panel, see the
+[Popover](https://velofy.co/summitjs/comp-popover/).

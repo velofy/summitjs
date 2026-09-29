@@ -11,6 +11,14 @@
 
 <p align="center"><strong>Open Source. by Nature.</strong></p>
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/summitjs"><img alt="npm version" src="https://img.shields.io/npm/v/summitjs"></a>
+  <a href="https://github.com/velofy/summitjs/actions/workflows/ci.yml"><img alt="CI status" src="https://github.com/velofy/summitjs/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue"></a>
+</p>
+
+**Documentation: https://velofy.co/summitjs/**
+
 Started by [anishfyi](https://github.com/anishfyi), so that AI agents can make beautiful frontends.
 
 Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed further where it counts: a fine-grained signal engine, a CSP-safe expression evaluator, keyed list rendering, cached computed getters, a copy-in UI library, and full TypeScript types, all in about 16KB gzipped.
@@ -39,6 +47,39 @@ Codes for Summit.js users: `SUMMITJS35` for 35% off mobile and residential proxi
 
 ---
 
+## Install
+
+Zero-build, drop in a script (auto-starts, exposes `window.Summit`):
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+```
+
+With a bundler:
+
+```bash
+npm install summitjs
+```
+
+```js
+import Summit from "summitjs";
+// register custom data, directives, magics, stores, or plugins here
+Summit.start();
+```
+
+See [Installation](https://velofy.co/summitjs/installation/) for version pinning and Content-Security-Policy notes.
+
+## Minimal example
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+
+<div s-data="{ open: false }">
+  <button @click="open = !open">Toggle</button>
+  <p s-show="open">Hello from Summit</p>
+</div>
+```
+
 ## AI Agent Native
 
 Summit is designed so that an AI agent can write a working, good-looking frontend on the first try:
@@ -46,17 +87,8 @@ Summit is designed so that an AI agent can write a working, good-looking fronten
 - **HTML-first and local.** Behavior lives on the element it affects, so an agent edits one place and sees the result. No file graph to hold in context.
 - **Predictable vocabulary.** A small, closed set of `s-` directives and `$` magics. There is one obvious way to do most things, which is exactly what a model does best.
 - **Safe by construction.** Expressions are interpreted, never `eval`ed, so generated markup runs under a strict CSP and cannot reach outside its allowlist.
-- **A UI library, included.** Accessible, token-themed components an agent (or a person) drops in and themes with CSS variables. See the [UI Library](https://velofy.github.io/summitjs/components/).
-- **Built to be read by machines.** The whole framework is discoverable in one fetch: [`llms.txt`](https://velofy.github.io/summitjs/llms.txt) indexes every page, [`llms-full.txt`](https://velofy.github.io/summitjs/llms-full.txt) is the entire corpus as markdown, any page is available as markdown (append `index.md` to its URL) with a one-click "Copy for AI" button, and [`AGENTS.md`](./AGENTS.md) is a drop-in brief you can hand to your own agent.
-
-```html
-<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
-
-<div s-data="{ open: false }">
-  <button @click="open = !open">Toggle</button>
-  <p s-show="open">Hello from Summit</p>
-</div>
-```
+- **A UI library, included.** Accessible, token-themed components an agent (or a person) drops in and themes with CSS variables. See the [UI Library](https://velofy.co/summitjs/components/).
+- **Built to be read by machines.** [`llms.txt`](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms.txt) indexes every docs page, [`llms-full.txt`](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms-full.txt) is the entire corpus as markdown, [`summit.json`](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/ai/summit.json) is a JSON manifest of the API, and [`AGENTS.md`](./AGENTS.md) is a drop-in brief you can hand to your own agent. Coded console diagnostics carry a docs link ([error codes](https://velofy.co/summitjs/errors/)).
 
 ## Why Summit
 
@@ -73,26 +105,6 @@ Summit is designed so that an AI agent can write a working, good-looking fronten
 | Build step required | Never | Never |
 
 The headline difference is the engine. Summit owns a real signal core, so a change updates only the DOM that read the value that changed. And because expressions run through a hand-written interpreter rather than `new Function`, a strict Content-Security-Policy works out of the box.
-
-## Install
-
-Zero-build, drop in a script (auto-starts, exposes `window.Summit`):
-
-```html
-<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
-```
-
-With a bundler:
-
-```bash
-npm install summitjs
-```
-
-```js
-import Summit from "summitjs";
-// register custom data, directives, magics, stores, or plugins here
-Summit.start();
-```
 
 ## Directives
 
@@ -114,7 +126,15 @@ Prefix `s-`, with `@` shorthand for `s-on:` and `:` for `s-bind:`.
 | `s-ref` | Register an element into `$refs` (dynamic names supported) |
 | `s-init` | Run an expression once on init |
 | `s-id` | Open an id group for accessible `$id()` pairing |
+| `s-intersect` / `s-resize` | Run an expression on viewport entry or exit, or on resize |
+| `s-trap` | Keep keyboard focus inside an element |
+| `s-anchor` | Position an element next to a reference, flipping to stay in view |
+| `s-collapse` | Animate an element open and closed by height |
+| `s-mask` | Format an input as the user types |
 | `s-cloak` | Hide until initialized; pair with `[s-cloak]{display:none}` |
+| `s-ignore` | Skip a subtree |
+
+Full reference: [directives](https://velofy.co/summitjs/s-data/).
 
 ### Event modifiers
 
@@ -126,7 +146,7 @@ Prefix `s-`, with `@` shorthand for `s-on:` and `:` for `s-bind:`.
 
 ## Magics
 
-`$el`, `$refs`, `$root`, `$store`, `$data`, `$watch`, `$dispatch`, `$nextTick`, `$id`. They are available in expressions and as `this.$watch`, `this.$refs`, and so on inside component methods.
+`$el`, `$refs`, `$root`, `$store`, `$data`, `$watch`, `$dispatch`, `$nextTick`, `$id`, `$persist`, `$focus`. They are available in expressions and as `this.$watch`, `this.$refs`, and so on inside component methods.
 
 `$watch` improves on the usual behavior: it returns an unwatch function and only fires on an actual change, so mutating the watched value inside its own callback cannot spin into an infinite loop.
 
@@ -167,7 +187,7 @@ count.set(5); // logs 10
 
 ## Data fetching
 
-Summit ships an optional reactive data layer in `summitjs/net` (about 2.5KB gzip, separate from the core, so the base bundle stays lean). It is axios's essential parts, but a resource's `data`, `error`, `loading`, and `status` are signals, so the DOM updates itself. It also closes fetch's real-world footguns: non-2xx **throws**, out-of-order responses are discarded (latest wins), and in-flight requests **abort on unmount**.
+Summit ships an optional reactive data layer in `summitjs/net` (about 2KB gzip, separate from the core, so the base bundle stays lean). It is axios's essential parts, but a resource's `data`, `error`, `loading`, and `status` are signals, so the DOM updates itself. It also closes fetch's real-world footguns: non-2xx **throws**, out-of-order responses are discarded (latest wins), and in-flight requests **abort on unmount**.
 
 With a bundler:
 
@@ -181,8 +201,8 @@ Summit.start();
 Or drop in a second script, no build step (it registers itself on the global):
 
 ```html
-<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
-<script src="https://velofy.github.io/summitjs/summit-net.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit-net.min.js" defer></script>
 ```
 
 ```html
@@ -212,19 +232,34 @@ const api = createClient({ baseURL: "/api" });
 const todo = await api.post("/todos", { title: "Ship it" }); // JSON in/out, throws on non-2xx
 ```
 
-## Development
+See [Data Fetching](https://velofy.co/summitjs/advanced-data/).
+
+## Documentation
+
+- [Overview](https://velofy.co/summitjs/) and [Installation](https://velofy.co/summitjs/installation/)
+- [Getting Started](https://velofy.co/summitjs/start/) and [Reactivity and State](https://velofy.co/summitjs/reactivity-state/)
+- [Events](https://velofy.co/summitjs/events/), [Forms](https://velofy.co/summitjs/forms/), [Lifecycle](https://velofy.co/summitjs/lifecycle/)
+- [UI Library](https://velofy.co/summitjs/components/) and [Techniques](https://velofy.co/summitjs/techniques/)
+- Reference: [directives](https://velofy.co/summitjs/s-data/), [magics](https://velofy.co/summitjs/magic-el/), [global API](https://velofy.co/summitjs/globals-data/), [reactivity](https://velofy.co/summitjs/reactive-signal/), [error codes](https://velofy.co/summitjs/errors/)
+- [Migrating from Alpine](https://velofy.co/summitjs/advanced-migrating/) and [Changelog](https://velofy.co/summitjs/changelog/)
+- [Playground](https://velofy.co/summitjs/playground/)
+
+## Contributing
+
+Issues and pull requests are welcome at https://github.com/velofy/summitjs.
 
 ```bash
 npm install
-npm run check   # typecheck + unit tests + build + size budget + bundle smoke + page verification
+npm run check   # typecheck + unit tests + build + size budget + bundle smoke + docs checks
 ```
 
-- `npm test` runs the Vitest suites (reactivity, evaluator, directives).
-- `npm run build` produces ESM, CJS, IIFE, and `.d.ts` in `dist/`, and syncs `docs/`.
+- `npm test` runs the Vitest suites (reactivity, evaluator, directives, net, plugins).
+- `npm run build` produces ESM, CJS, IIFE, and `.d.ts` in `dist/`, and syncs the CDN bundles into `docs/`.
 - `npm run smoke` drives the shipped bundle end to end.
-- `npm run verify` boots the real docs page under Summit and checks every demo.
+- `npm run docs` regenerates the old GitHub Pages site in `docs/`: redirect pages to https://velofy.co/summitjs/, `llms.txt`, `llms-full.txt`, and `ai/summit.json`.
+- `npm run verify` and `npm run verify:docs` check the redirects and run every live example in `content/` under the built bundle.
 
-The documentation site in `docs/` dogfoods Summit and deploys to GitHub Pages.
+The GitHub Pages site keeps serving `summit.min.js`, `summit-net.min.js`, and `assets/*.css` so existing script and stylesheet tags keep working.
 
 ## License
 

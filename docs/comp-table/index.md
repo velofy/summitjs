@@ -73,4 +73,4 @@ A table is a standard `<table>` element carrying the `.s-table` class, optionall
 - The table takes the width of its parent. Constrain it with a `max-width` on the wrapper if needed.
 - All styling comes from tokens (`--border`, `--surface-2`, `--muted`, `--accent-soft`), so it adapts automatically to light and dark themes.
 
-See the full set in the [overview](../components/).
+See the full set in the [overview](https://velofy.co/summitjs/components/).
