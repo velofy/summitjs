@@ -5708,10 +5708,10 @@ document.addEventListener("summit:initialized", () => {
 if (!Summit.started()) Summit.start();
 ```
 
-`Summit.version` is the version string of the running build:
+`Summit.version` is the version string of the running build. Releases before 0.4.4 always report "0.1.0":
 
 ```js
-console.log(Summit.version); // "0.1.0"
+console.log(Summit.version); // "0.4.4", the same as package.json
 ```
 
 For install options and manual-start setup, see
