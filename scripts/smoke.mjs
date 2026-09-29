@@ -16,6 +16,7 @@ globalThis.getComputedStyle = win.getComputedStyle.bind(win);
 globalThis.requestAnimationFrame = (cb) => setTimeout(() => cb(Date.now()), 0);
 
 const code = readFileSync("dist/summit.min.js", "utf8");
+const pkgVersion = JSON.parse(readFileSync("package.json", "utf8")).version;
 // eslint-disable-next-line no-eval
 (0, eval)(code);
 
@@ -29,7 +30,7 @@ function assert(cond, msg) {
 }
 
 assert(Summit && typeof Summit.start === "function", "window.Summit is exposed with start()");
-assert(Summit.version === "0.1.0", "reports version 0.1.0");
+assert(Summit.version === pkgVersion, `reports version ${pkgVersion} (package.json)`);
 assert(typeof Summit.signal === "function", "exposes signal()");
 
 const root = win.document.createElement("div");

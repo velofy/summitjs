@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "summitjs",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.",
   "homepage": "https://velofy.co/summitjs/",
   "docs": "https://velofy.co/summitjs/",
