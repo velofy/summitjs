@@ -13,7 +13,7 @@ bundle both into a reusable plugin.
 
 ## A custom directive
 
-Register a directive with [Summit.directive](../globals-directive/). You pass a
+Register a directive with [Summit.directive](https://velofy.co/summitjs/globals-directive/). You pass a
 name without the `s-` prefix and a handler function. The name becomes the
 attribute: registering `"money"` gives you `s-money`.
 
@@ -112,7 +112,7 @@ and Summit still descends into the element's children afterward.
 ## A custom magic
 
 A magic is a `$`-prefixed helper available in every expression. Register one with
-[Summit.magic](../globals-magic/). The factory receives a context object and
+[Summit.magic](https://velofy.co/summitjs/globals-magic/). The factory receives a context object and
 returns either a value or a function.
 
 ```js
@@ -140,7 +140,7 @@ method you can reach them as `this.$copy`, `this.$refs`, and so on.
 ## Bundling a plugin
 
 A plugin is just a function that receives the Summit global. Use
-[Summit.plugin](../globals-plugin/) to run it. Everything a plugin registers,
+[Summit.plugin](https://velofy.co/summitjs/globals-plugin/) to run it. Everything a plugin registers,
 directives, magics, data providers, stores, and extra globals, lives together in
 one installable unit.
 
@@ -197,9 +197,9 @@ handler, which is how you can replace a built-in directive with your own.
 
 ## See also
 
-- [Summit.directive](../globals-directive/), [Summit.magic](../globals-magic/),
-  and [Summit.plugin](../globals-plugin/) for the reference details.
-- [How reactivity works](../advanced-reactivity/) for what `utils.effect` does
+- [Summit.directive](https://velofy.co/summitjs/globals-directive/), [Summit.magic](https://velofy.co/summitjs/globals-magic/),
+  and [Summit.plugin](https://velofy.co/summitjs/globals-plugin/) for the reference details.
+- [How reactivity works](https://velofy.co/summitjs/advanced-reactivity/) for what `utils.effect` does
   under the hood.
-- [The CSP-safe evaluator](../advanced-evaluator/) for what `utils.evaluate`
+- [The CSP-safe evaluator](https://velofy.co/summitjs/advanced-evaluator/) for what `utils.evaluate`
   accepts.

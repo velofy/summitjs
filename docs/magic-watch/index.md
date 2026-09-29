@@ -15,7 +15,7 @@ component's scope and `callback` receives the new value and the old value.
 </div>
 ```
 
-Set the watcher up once, in [s-init](../s-init/) or in a component's `init()`
+Set the watcher up once, in [s-init](https://velofy.co/summitjs/s-init/) or in a component's `init()`
 method. The callback then fires on every later change to the expression.
 
 ## It only fires on a real change
@@ -55,4 +55,4 @@ this.$watch("items.length", (n) => console.log(n, "items"));
 ```
 
 For a side effect that should re-run without needing the old value, reach for
-[s-effect](../s-effect/) instead.
+[s-effect](https://velofy.co/summitjs/s-effect/) instead.

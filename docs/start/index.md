@@ -44,8 +44,8 @@ with `count`. When you click, only that one number re-renders.
 
 ## Where to go next
 
-- [Installation](../installation/) covers the script tag, npm, and bundlers.
-- [Reactivity and State](../reactivity-state/) explains `s-data`, computed
+- [Installation](https://velofy.co/summitjs/installation/) covers the script tag, npm, and bundlers.
+- [Reactivity and State](https://velofy.co/summitjs/reactivity-state/) explains `s-data`, computed
   values, and methods.
-- The [Directives](../s-data/) and [Magic Properties](../magic-el/) sections are
+- The [Directives](https://velofy.co/summitjs/s-data/) and [Magic Properties](https://velofy.co/summitjs/magic-el/) sections are
   a complete reference for every attribute and helper.

@@ -175,5 +175,5 @@ whose names contain capitals or dots:
 ```
 
 To send events that these modifiers can catch, use
-[$dispatch](../magic-dispatch/). For the state that these listeners usually
-update, see [s-data](../s-data/) and [reactivity](../reactivity-state/).
+[$dispatch](https://velofy.co/summitjs/magic-dispatch/). For the state that these listeners usually
+update, see [s-data](https://velofy.co/summitjs/s-data/) and [reactivity](https://velofy.co/summitjs/reactivity-state/).

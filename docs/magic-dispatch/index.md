@@ -48,5 +48,5 @@ an event no matter where it was dispatched, listen on the window with the
 <div @add-to-cart.window="count += $event.detail.qty"></div>
 ```
 
-For the full listener reference, including modifiers, see the [s-on](../s-on/)
-and [Events](../events/) pages.
+For the full listener reference, including modifiers, see the [s-on](https://velofy.co/summitjs/s-on/)
+and [Events](https://velofy.co/summitjs/events/) pages.

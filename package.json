@@ -5,7 +5,7 @@
   "type": "module",
   "license": "MIT",
   "author": "anishfyi (https://github.com/anishfyi)",
-  "homepage": "https://velofy.github.io/summitjs/",
+  "homepage": "https://velofy.co/summitjs/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/velofy/summitjs.git"
@@ -74,7 +74,7 @@
     "verify": "node scripts/verify-page.mjs",
     "docs": "node scripts/build-docs.mjs",
     "verify:docs": "node scripts/verify-docs.mjs",
-    "check": "npm run typecheck && npm test && npm run build && npm run size && npm run smoke && npm run verify && npm run docs && npm run verify:docs",
+    "check": "npm run typecheck && npm test && npm run build && npm run size && npm run smoke && npm run docs && npm run verify && npm run verify:docs",
     "prepublishOnly": "npm run typecheck && npm test && npm run build",
     "release:npm": "node scripts/readme-npm.mjs swap && npm publish; node scripts/readme-npm.mjs restore"
   },

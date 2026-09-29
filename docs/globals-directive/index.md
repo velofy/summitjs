@@ -70,9 +70,9 @@ Summit.directive("setup", handler, 0); // runs early, before default directives
 ## Timing
 
 Registration is timing-safe: register before or after
-[Summit.start](../globals-start/). Built-in directives are registered when
+[Summit.start](https://velofy.co/summitjs/globals-start/). Built-in directives are registered when
 Summit loads, and registering a custom directive with the same name overrides
 the built-in.
 
 For a fuller walkthrough, see
-[Writing directives and plugins](../advanced-extending/).
+[Writing directives and plugins](https://velofy.co/summitjs/advanced-extending/).

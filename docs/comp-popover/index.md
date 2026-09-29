@@ -4,8 +4,8 @@
 
 A popover is a small floating panel you open with a click to show rich content
 next to its trigger: a short form, a set of controls, a detail card. It is more
-than a [Tooltip](../comp-tooltip/), which only shows a line of text on hover, and
-looser than a [Dropdown Menu](../comp-menu/), which holds a list of actions. The
+than a [Tooltip](https://velofy.co/summitjs/comp-tooltip/), which only shows a line of text on hover, and
+looser than a [Dropdown Menu](https://velofy.co/summitjs/comp-menu/), which holds a list of actions. The
 markup is a `.s-anchor` that positions the floating `.s-popover`, wired with the
 same handful of `s-` directives you already use.
 
@@ -87,9 +87,9 @@ Keep `@click.outside` and `@keydown.escape` on the panel and the anchor so the
 popover always has a way out, whether the user reaches for the mouse or the
 keyboard. For accessibility, add `aria-expanded` bound to `open` on the trigger
 and point `aria-controls` at the panel's id, which you can generate with the
-[$id](../magic-id/) magic.
+[$id](https://velofy.co/summitjs/magic-id/) magic.
 
-For a hover hint of plain text, use a [Tooltip](../comp-tooltip/). For a list of
-commands or links, reach for a [Dropdown Menu](../comp-menu/), which shares the
+For a hover hint of plain text, use a [Tooltip](https://velofy.co/summitjs/comp-tooltip/). For a list of
+commands or links, reach for a [Dropdown Menu](https://velofy.co/summitjs/comp-menu/), which shares the
 same `.s-anchor` and dismissal pattern. The event modifiers used here are covered
-on the [Events](../events/) page.
+on the [Events](https://velofy.co/summitjs/events/) page.

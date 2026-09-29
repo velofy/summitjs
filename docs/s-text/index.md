@@ -42,4 +42,4 @@ for user-supplied strings.
 
 The angle brackets appear on screen instead of creating an `<em>`. When you
 deliberately want markup rendered, and only for content you trust, reach for
-[s-html](../s-html/).
+[s-html](https://velofy.co/summitjs/s-html/).
