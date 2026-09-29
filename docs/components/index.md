@@ -25,7 +25,7 @@ that lives on the element, and nothing that needs a build step.
 Load the stylesheet once, then copy any component's markup.
 
 ```html
-<link rel="stylesheet" href="https://velofy.github.io/summitjs/assets/components.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/assets/components.css" />
 ```
 
 Or copy the rules you need out of `components.css` into your own styles. Every
@@ -52,22 +52,22 @@ Light and dark are handled for you through `prefers-color-scheme` and the
 Interactive components ship with the roles and keyboard behavior you expect:
 focus rings on every control, `Escape` to close overlays, click-outside to
 dismiss menus, and labels wired to their inputs. Where a component needs an id
-to pair a label with a control, use the [$id](../magic-id/) magic.
+to pair a label with a control, use the [$id](https://velofy.co/summitjs/magic-id/) magic.
 
 ## The components
 
 **Forms**
-[Button](../comp-button/), [Input](../comp-input/), [Select](../comp-select/),
-[Checkbox & Radio](../comp-checkbox/), [Switch](../comp-switch/)
+[Button](https://velofy.co/summitjs/comp-button/), [Input](https://velofy.co/summitjs/comp-input/), [Select](https://velofy.co/summitjs/comp-select/),
+[Checkbox & Radio](https://velofy.co/summitjs/comp-checkbox/), [Switch](https://velofy.co/summitjs/comp-switch/)
 
 **Data display**
-[Card](../comp-card/), [Badge & Tag](../comp-badge/), [Alert](../comp-alert/),
-[Avatar](../comp-avatar/), [Progress & Spinner](../comp-progress/)
+[Card](https://velofy.co/summitjs/comp-card/), [Badge & Tag](https://velofy.co/summitjs/comp-badge/), [Alert](https://velofy.co/summitjs/comp-alert/),
+[Avatar](https://velofy.co/summitjs/comp-avatar/), [Progress & Spinner](https://velofy.co/summitjs/comp-progress/)
 
 **Overlays**
-[Dialog](../comp-dialog/), [Dropdown Menu](../comp-menu/),
-[Popover](../comp-popover/), [Tooltip](../comp-tooltip/), [Toast](../comp-toast/)
+[Dialog](https://velofy.co/summitjs/comp-dialog/), [Dropdown Menu](https://velofy.co/summitjs/comp-menu/),
+[Popover](https://velofy.co/summitjs/comp-popover/), [Tooltip](https://velofy.co/summitjs/comp-tooltip/), [Toast](https://velofy.co/summitjs/comp-toast/)
 
 **Navigation**
-[Tabs](../comp-tabs/), [Accordion](../comp-accordion/),
-[Breadcrumb](../comp-breadcrumb/), [Pagination](../comp-pagination/)
+[Tabs](https://velofy.co/summitjs/comp-tabs/), [Accordion](https://velofy.co/summitjs/comp-accordion/),
+[Breadcrumb](https://velofy.co/summitjs/comp-breadcrumb/), [Pagination](https://velofy.co/summitjs/comp-pagination/)

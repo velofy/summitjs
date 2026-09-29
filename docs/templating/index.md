@@ -78,4 +78,4 @@ Bind `style` with an object of camelCase or kebab-case properties.
 ```
 
 For the full attribute reference, including how bound values merge with static
-ones, see [s-bind](../s-bind/).
+ones, see [s-bind](https://velofy.co/summitjs/s-bind/).

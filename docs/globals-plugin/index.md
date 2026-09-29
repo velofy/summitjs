@@ -50,6 +50,6 @@ Summit
 ```
 
 Everything a plugin registers is timing-safe, so it does not matter whether you
-install plugins before or after [Summit.start](../globals-start/). See
-[Writing directives and plugins](../advanced-extending/) for the pieces a plugin
+install plugins before or after [Summit.start](https://velofy.co/summitjs/globals-start/). See
+[Writing directives and plugins](https://velofy.co/summitjs/advanced-extending/) for the pieces a plugin
 is built from.

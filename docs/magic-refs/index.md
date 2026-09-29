@@ -3,7 +3,7 @@
 > Elements in this component marked with s-ref.
 
 `$refs` is an object of the elements in the current component that you tagged
-with [s-ref](../s-ref/), keyed by their ref name. It is how you reach a specific
+with [s-ref](https://velofy.co/summitjs/s-ref/), keyed by their ref name. It is how you reach a specific
 element to focus it, measure it, or call a method on it, without a query
 selector.
 
@@ -21,7 +21,7 @@ Mark an element with `s-ref="name"` and it appears as `$refs.name`.
 By default the literal attribute value is the name, so `s-ref="field"` registers
 under `field`. When the value resolves to a non-empty string it is treated as a
 dynamic name instead, which is what you want inside a loop where each element
-needs its own key. The full rules are on the [s-ref](../s-ref/) page.
+needs its own key. The full rules are on the [s-ref](https://velofy.co/summitjs/s-ref/) page.
 
 ## Scope and lifetime
 
@@ -31,5 +31,5 @@ and vice versa. When an element leaves the DOM its entry is removed, so `$refs`
 only ever holds elements that are currently mounted.
 
 Refs are populated as elements initialize, so read them from an event handler or
-inside [$nextTick](../magic-nextTick/) rather than at the top of `init()`, when a
+inside [$nextTick](https://velofy.co/summitjs/magic-nexttick/) rather than at the top of `init()`, when a
 later sibling may not exist yet.

@@ -69,4 +69,4 @@ console.log(Summit.version); // "0.1.0"
 ```
 
 For install options and manual-start setup, see
-[Installation](../installation/).
+[Installation](https://velofy.co/summitjs/installation/).

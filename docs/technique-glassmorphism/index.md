@@ -60,4 +60,4 @@ solid color blobs used here.
 - The effect uses `backdrop-filter`, supported in all current browsers. Where it
   is unavailable the surface degrades to a solid panel, which is still legible.
 - Keep body text on `.s-glass-matte`, not `.s-glass`, for contrast.
-- A glass bar makes a great sticky header. See [Navbar Patterns](../technique-navbars/).
+- A glass bar makes a great sticky header. See [Navbar Patterns](https://velofy.co/summitjs/technique-navbars/).

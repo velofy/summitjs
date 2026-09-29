@@ -40,7 +40,7 @@ Both hide things, but they do it at different levels:
 - `s-show` keeps the element in the DOM and only changes `display`. Toggling is
   cheap, and any internal state (input values, scroll position, child
   component state) is preserved while hidden.
-- [s-if](../s-if/) adds and removes the element itself. When the condition is
+- [s-if](https://velofy.co/summitjs/s-if/) adds and removes the element itself. When the condition is
   false the node is gone from the DOM and its reactive effects are torn down;
   when it returns it is built fresh.
 
@@ -49,7 +49,7 @@ Reach for `s-show` when you toggle often or need to keep state alive. Reach for
 
 ## Working with transitions
 
-Pair `s-show` with [s-transition](../s-transition/) to animate the element as it
+Pair `s-show` with [s-transition](https://velofy.co/summitjs/s-transition/) to animate the element as it
 appears and disappears. The initial render is applied instantly; every toggle
 after that runs the enter or leave animation.
 

@@ -4,7 +4,7 @@
 
 Inputs collect a line or a block of text. Apply `.s-input` to any text-like
 `<input>` and `.s-textarea` to a `<textarea>`, then bind the value with
-[`s-model`](../forms/) to keep state and control in sync.
+[`s-model`](https://velofy.co/summitjs/forms/) to keep state and control in sync.
 
 ```summit
 <div s-data="{ value: '' }" class="s-stack">
@@ -101,9 +101,9 @@ by the user. Bind it with `s-model` the same way as a single-line input.
 
 Pair every control with a `<label>` by matching the label's `for` to the input's
 `id`, so clicking the label focuses the field. When ids are generated at runtime,
-reach for the [$id](../magic-id/) magic. The `.s-req` asterisk is decorative, so
+reach for the [$id](https://velofy.co/summitjs/magic-id/) magic. The `.s-req` asterisk is decorative, so
 keep the field's real requirement in the `required` attribute. For an invalid
 control, set `aria-invalid="true"` and point `aria-describedby` at the
 `.s-error` element so screen readers announce the message. See
-[Select](../comp-select/) for choosing from options and [s-model](../s-model/)
+[Select](https://velofy.co/summitjs/comp-select/) for choosing from options and [s-model](https://velofy.co/summitjs/s-model/)
 for the binding details.

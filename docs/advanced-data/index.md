@@ -23,8 +23,8 @@ Summit.start();
 Or drop in a second script after the core, no build step:
 
 ```html
-<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
-<script src="https://velofy.github.io/summitjs/summit-net.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit-net.min.js" defer></script>
 ```
 
 ## The resource pattern
@@ -81,7 +81,7 @@ resolving with the error body.
 ```html
 <form s-data="{ title: '' }"
       @submit.prevent="$fetch.post('/api/todos', { title }).then(() => title = '')">
-  <input s-model.trim="title">
+  <input s-model="title">
   <button type="submit">Add</button>
 </form>
 ```

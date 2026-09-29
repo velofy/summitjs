@@ -23,11 +23,11 @@ field after an action, or to step through the focusable elements inside a region
 - `$focus.within(el)` returns a helper rooted at `el` instead of the current one.
 
 By default `$focus` looks inside the element it is used on. `within` lets you aim
-it at any other element, which pairs well with [$refs](../magic-refs/).
+it at any other element, which pairs well with [$refs](https://velofy.co/summitjs/magic-refs/).
 
 ```html
 <input s-ref="email" @keydown.enter="$focus.focus($refs.password)">
 ```
 
-For a full focus trap on a dialog or menu, reach for the [s-trap](../s-trap/)
+For a full focus trap on a dialog or menu, reach for the [s-trap](https://velofy.co/summitjs/s-trap/)
 directive, which builds on the same idea.

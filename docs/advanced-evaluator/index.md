@@ -178,7 +178,7 @@ is that it never asks you to open that door in the first place.
 
 ## See also
 
-- [Reactivity](../advanced-reactivity/) for how the values these expressions read
+- [Reactivity](https://velofy.co/summitjs/advanced-reactivity/) for how the values these expressions read
   are tracked.
-- [Extending Summit](../advanced-extending/) to reach the evaluator from your own
+- [Extending Summit](https://velofy.co/summitjs/advanced-extending/) to reach the evaluator from your own
   directives with `utils.evaluate` and `utils.evaluateAction`.

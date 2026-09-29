@@ -39,9 +39,9 @@ current location and tells screen readers they have arrived.
 - The separator is decorative. Keeping it in its own `.s-sep` span leaves the
   links clean and lets you swap the character (a slash, a chevron) in one place.
 - The trail is static markup, so it drops into any page as-is. To render it from
-  a route array, wrap the crumbs in a [s-for](../s-for/) and mark the final item
+  a route array, wrap the crumbs in a [s-for](https://velofy.co/summitjs/s-for/) and mark the final item
   with `aria-current`.
 
 To move through pages of results rather than up a hierarchy, see
-[Pagination](../comp-pagination/). The whole set is on the
-[overview](../components/).
+[Pagination](https://velofy.co/summitjs/comp-pagination/). The whole set is on the
+[overview](https://velofy.co/summitjs/components/).

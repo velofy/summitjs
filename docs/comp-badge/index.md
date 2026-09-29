@@ -29,7 +29,7 @@ or meaning:
 - `.s-badge-outline` is a quiet, bordered label.
 - `.s-badge-info`, `.s-badge-success`, `.s-badge-warning`, and `.s-badge-danger`
   map to the semantic feedback palette, the same colors the
-  [alert](../comp-alert/) component uses.
+  [alert](https://velofy.co/summitjs/comp-alert/) component uses.
 
 ```html
 <span class="s-badge s-badge-success">Passing</span>
@@ -40,7 +40,7 @@ or meaning:
 ## Removable tags
 
 A `.s-tag` is a pill with an inner `<button>` for removal. Bind the list to state
-with [s-for](../s-for/), key each tag, and let the button `splice` its own item
+with [s-for](https://velofy.co/summitjs/s-for/), key each tag, and let the button `splice` its own item
 out of the array. Because the array is reactive, the tag disappears the moment
 you click.
 
@@ -81,6 +81,6 @@ you click.
   right one leaves even when earlier tags are gone. Use a unique id if your tags
   can repeat.
 - Badges have no interactive behavior; they are labels. For dismissible banners,
-  reach for an [alert](../comp-alert/) or a toast instead.
+  reach for an [alert](https://velofy.co/summitjs/comp-alert/) or a toast instead.
 
-See the whole component set on the [overview](../components/).
+See the whole component set on the [overview](https://velofy.co/summitjs/components/).

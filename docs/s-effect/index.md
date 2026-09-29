@@ -25,7 +25,7 @@ to `document.title`, syncing to `localStorage`, logging, or driving a non-Summit
 library. The expression runs for what it does, not for a value it returns.
 
 To put a value on screen you do not need `s-effect`. Bind it directly with
-[s-text](../s-text/) or [s-bind](../s-bind/), or derive it with a getter, and let
+[s-text](https://velofy.co/summitjs/s-text/) or [s-bind](https://velofy.co/summitjs/s-bind/), or derive it with a getter, and let
 that directive track its own dependencies.
 
 ```summit
@@ -37,5 +37,5 @@ that directive track its own dependencies.
 
 Reserve `s-effect` for the cases a plain binding cannot express. To respond to
 one specific value changing rather than everything an expression touches, see
-[$watch](../magic-watch/). To run something once at startup with no re-runs, use
-[s-init](../s-init/).
+[$watch](https://velofy.co/summitjs/magic-watch/). To run something once at startup with no re-runs, use
+[s-init](https://velofy.co/summitjs/s-init/).
