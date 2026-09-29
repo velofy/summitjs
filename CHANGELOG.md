@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Summit.js. Versions follow [semver](https://semver.org/). Dates are the npm publish dates (UTC).
+All notable changes to Summit.js. Dates are the npm publish dates (UTC). No changelog was kept before 0.4.4; the older entries were written from the npm registry, the git tags and the source diffs between them.
 
 ## 0.4.4 - 2026-09-30
 
@@ -34,16 +34,21 @@ Published to npm from commit 90bf334 without a git tag or GitHub release at the 
 
 ## 0.4.0 - 2026-07-09
 
-Tagged `v0.4.0`. No changelog was kept before 0.4.1; see the git history for 0.1.0 to 0.4.0.
+- `summitjs/net` gained a CDN drop-in, `summit-net.min.js`, that registers itself on `window.Summit` when loaded after the core script, reusing the core's reactivity runtime.
+- Reactivity: effect and job queues drain by swapping sets instead of copying them, and a write to a value with no subscribers returns early.
 
 ## 0.3.0 - 2026-07-09
 
-Tagged `v0.3.0`.
+- New optional data layer, `summitjs/net`: `createClient`, the `net` and `createNet` plugins, reactive resources with `data`, `error`, `loading` and `status` signals, the `$fetch` magic and the `s-resource` directive.
+- `s-for` compiles the key expression once and moves only the nodes whose position changed.
+- `AbortController`, `Headers`, `Request` and `Response` were added to the expression global allowlist.
 
 ## 0.2.0 - 2026-07-08
 
-Tagged `v0.2.0`.
+- The expression interpreter supports regular expression literals and the `new` operator for allowlisted or user-provided constructors.
+- A bad `s-data` expression no longer stops the page: Summit reports E104 and starts that component with empty state.
+- `s-for` attaches new rows before initializing them, so directives that walk up the DOM, such as `s-ref`, find their component.
 
 ## 0.1.0 - 2026-07-08
 
-First release. Tagged `v0.1.0`.
+- First release: the signal core, the CSP-safe interpreter, the `s-` directives and `$` magics, the registration API, the CDN build and TypeScript types.
