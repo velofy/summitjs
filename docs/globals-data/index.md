@@ -33,7 +33,7 @@ Summit.data("counter", (start = 0) => ({
 The returned object becomes reactive state exactly like an inline `s-data`
 object: properties are tracked, getters become cached derived values, and
 methods are bound so `this` is the component. See
-[Reactivity and State](../reactivity-state/) for how that state behaves.
+[Reactivity and State](https://velofy.co/summitjs/reactivity-state/) for how that state behaves.
 
 ## Passing arguments
 
@@ -75,7 +75,7 @@ Summit.data("clock", () => ({
 }));
 ```
 
-See [Lifecycle](../lifecycle/) for the full order of these hooks.
+See [Lifecycle](https://velofy.co/summitjs/lifecycle/) for the full order of these hooks.
 
 ## Chaining and timing
 
@@ -88,5 +88,5 @@ Summit
 ```
 
 Registration is timing-safe. You can register a provider before or after
-[Summit.start](../globals-start/), and any matching `s-data` in the page, now or
+[Summit.start](https://velofy.co/summitjs/globals-start/), and any matching `s-data` in the page, now or
 added later, resolves to it.

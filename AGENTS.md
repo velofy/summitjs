@@ -6,14 +6,15 @@ small, CSP-safe interpreter evaluates the expressions, so only a fixed,
 predictable vocabulary is allowed. This file tells you how to write Summit that
 runs correctly the first time.
 
-Full docs as one file: https://velofy.github.io/summitjs/llms-full.txt
-Index: https://velofy.github.io/summitjs/llms.txt
-Any page as markdown: append `index.md` to its URL.
+Docs: https://velofy.co/summitjs/
+Full docs as one file: https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms-full.txt
+Index: https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms.txt
+Error codes: https://velofy.co/summitjs/errors/
 
 ## Load it
 
 ```html
-<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
 ```
 
 ## The model
@@ -73,10 +74,11 @@ keyboard focus.
 - Events: `.prevent`, `.stop`, `.self`, `.once`, `.window`, `.outside`,
   `.capture`, `.passive`, `.debounce`, `.throttle`, and keys such as `.enter`,
   `.escape`, `.cmd`, `.ctrl`, `.meta`, `.alt`, `.shift`.
-- Model: `.number`, `.trim`, `.lazy`.
+- Model: `.lazy`, `.change`, `.blur`, `.number`, `.boolean`, `.debounce`,
+  `.fill`.
 
 ```html
-<input @keydown.enter="submit()" s-model.trim="query">
+<input @keydown.enter="submit()" s-model.lazy="query">
 <div @keydown.window.cmd.k.prevent="openPalette()"></div>
 <button @click.outside="open = false"></button>
 ```
@@ -98,11 +100,13 @@ prefixed classes (`s-btn`, `s-input`, `s-card`, `s-alert`, `s-tabs`, `s-dialog`,
 and more). Theme everything by overriding CSS variables like `--accent`.
 
 ```html
-<link rel="stylesheet" href="https://velofy.github.io/summitjs/assets/components.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/assets/components.css">
 ```
 
-See https://velofy.github.io/summitjs/components/ for every component with live
-demos and copy-paste markup.
+`components.css` reads base tokens such as `--accent`, `--text`, `--border` and
+`--surface` that it does not define; set them on `:root`. See
+https://velofy.co/summitjs/components/ for every component with examples and
+copy-paste markup.
 
 ## Sponsor: NodeMaven proxies
 

@@ -4,7 +4,7 @@
 
 Tabs let you split related content into panels and show one at a time. There is
 no widget to wire up: a tab is a real `<button>`, the active one is marked with a
-class, and each panel is revealed with [s-show](../s-show/). One piece of state,
+class, and each panel is revealed with [s-show](https://velofy.co/summitjs/s-show/). One piece of state,
 the name of the current tab, drives the whole thing.
 
 ## A live tab bar
@@ -72,8 +72,8 @@ added.
   `Enter` or `Space` for free. Add `role="tablist"` on the list and pair panels
   with `role="tabpanel"` if you want the full ARIA tab semantics.
 - Prefer `s-show` here so panel state stays in the DOM as you switch. If a panel
-  is expensive and should only mount when opened, use [s-if](../s-if/) instead.
+  is expensive and should only mount when opened, use [s-if](https://velofy.co/summitjs/s-if/) instead.
 
 For stacked sections that expand in place rather than swap, see
-[Accordion](../comp-accordion/). The whole set is on the
-[overview](../components/).
+[Accordion](https://velofy.co/summitjs/comp-accordion/). The whole set is on the
+[overview](https://velofy.co/summitjs/components/).

@@ -32,7 +32,7 @@ The whole component lives on the `open` boolean in `s-data`. The trigger button
 sets it to `true`, and every path out of the dialog sets it back to `false`. The
 overlay and panel sit inside a `<template s-if="open">`, so they are added to the
 page only while the dialog is open and removed cleanly when it closes. Using
-[s-if](../s-if/) here, rather than [s-show](../s-show/), means the markup does not
+[s-if](https://velofy.co/summitjs/s-if/) here, rather than [s-show](https://velofy.co/summitjs/s-show/), means the markup does not
 sit hidden in the DOM between openings.
 
 There are three ways to close it, and all of them write the same state:
@@ -57,7 +57,7 @@ The panel is built from a small set of slots you fill in:
   since its only content is a glyph.
 - `.s-dialog-body` holds the message or form.
 - `.s-dialog-footer` right-aligns the actions. Pair a neutral
-  [button](../comp-button/) for cancel with a solid or danger one for confirm.
+  [button](https://velofy.co/summitjs/comp-button/) for cancel with a solid or danger one for confirm.
 
 ```html
 <div s-data="{ open: false }">
@@ -103,7 +103,7 @@ The demo above keeps the overlay next to its trigger so the example stays
 self-contained. In a real layout that is risky: an ancestor with `overflow:
 hidden` can clip the panel, and a local stacking context can push it behind other
 content. The fix is to render the dialog at the end of `<body>`, clear of any
-parent, with [s-teleport](../s-teleport/):
+parent, with [s-teleport](https://velofy.co/summitjs/s-teleport/):
 
 ```html
 <div s-data="{ open: false }">
@@ -127,7 +127,7 @@ working, but it lands at the end of the page where nothing can clip or restack i
 Mark the panel with `role="dialog"` and `aria-modal="true"` so screen readers
 announce it as a modal and treat the content behind it as inert. Point the panel
 at its title with `aria-labelledby` (pair the `.s-dialog-title` with an id, which
-the [$id](../magic-id/) magic can generate) so the dialog has an accessible name.
+the [$id](https://velofy.co/summitjs/magic-id/) magic can generate) so the dialog has an accessible name.
 The `Escape` handler is bound with `.window`, so the key closes the dialog from
 anywhere, which matches the behavior users expect. Give the corner close button an
 `aria-label`, since its `&times;` glyph is not a readable name. When you open a
@@ -135,4 +135,4 @@ dialog, move focus into it and return focus to the trigger on close so keyboard
 users are not stranded.
 
 For a menu of actions rather than a blocking decision, reach for the
-[Dropdown Menu](../comp-menu/).
+[Dropdown Menu](https://velofy.co/summitjs/comp-menu/).

@@ -4,7 +4,7 @@
 
 An accordion stacks sections that expand and collapse in place. Each header is a
 real `<button>`, the chevron rotates through a class, and the panel below is
-revealed with [s-show](../s-show/). The classic behavior is one section open at a
+revealed with [s-show](https://velofy.co/summitjs/s-show/). The classic behavior is one section open at a
 time, which takes a single string of state.
 
 ## One open at a time
@@ -87,4 +87,4 @@ both test with `includes`.
   render, or set it to `''` (or `[]`) to begin fully collapsed.
 
 For swapping between panels rather than stacking them, see
-[Tabs](../comp-tabs/). The whole set is on the [overview](../components/).
+[Tabs](https://velofy.co/summitjs/comp-tabs/). The whole set is on the [overview](https://velofy.co/summitjs/components/).

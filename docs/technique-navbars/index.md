@@ -51,7 +51,7 @@ switch.
 
 ## Glass navbar
 
-Drop [matte glass](../technique-glassmorphism/) onto the bar for a header that
+Drop [matte glass](https://velofy.co/summitjs/technique-glassmorphism/) onto the bar for a header that
 floats over the page.
 
 ```summit

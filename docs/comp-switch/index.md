@@ -5,12 +5,12 @@
 A switch is an on/off control for a single setting, the kind you flip and it
 takes effect right away. Summit's switch is a styled `<label class="s-switch">`
 wrapping a real checkbox, so binding it is exactly like binding a checkbox: point
-[s-model](../s-model/) at a boolean and the track slides between states.
+[s-model](https://velofy.co/summitjs/s-model/) at a boolean and the track slides between states.
 
 ## A live switch
 
 The `<input>` is visually hidden and holds the state; the `.s-track` is the
-sliding pill you see. Here the switch flips `on`, and [s-show](../s-show/)
+sliding pill you see. Here the switch flips `on`, and [s-show](https://velofy.co/summitjs/s-show/)
 reveals a message only while it is `true`.
 
 ```summit
@@ -66,5 +66,5 @@ to announce it as a switch rather than a checkbox, add `role="switch"` to the
 input; the checked state maps to on and off automatically.
 
 For a set of choices rather than a single toggle, use
-[Checkbox & Radio](../comp-checkbox/). See [Forms](../forms/) for the full picture
+[Checkbox & Radio](https://velofy.co/summitjs/comp-checkbox/). See [Forms](https://velofy.co/summitjs/forms/) for the full picture
 of `s-model` bindings.

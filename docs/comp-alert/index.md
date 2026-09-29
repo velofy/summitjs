@@ -79,6 +79,6 @@ drop the title and keep a single `.s-alert-desc` for a one-line note.
 - The icon is decorative here because the title carries the message. If an alert
   has no text title, add an `aria-label` to convey its intent.
 - Alerts stay in the layout. For transient, stacked messages that appear and
-  auto-dismiss, use a toast; for status labels, use a [badge](../comp-badge/).
+  auto-dismiss, use a toast; for status labels, use a [badge](https://velofy.co/summitjs/comp-badge/).
 
-See the whole component set on the [overview](../components/).
+See the whole component set on the [overview](https://velofy.co/summitjs/components/).

@@ -11,14 +11,15 @@ The fastest path. Add one tag to your `<head>` and Summit starts on its own
 once the DOM is ready. Use `defer` so it runs after the document is parsed.
 
 ```html
-<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
 ```
 
 That is the entire setup. Any `s-` attributes already in the page come alive,
 and so does anything you add later, because Summit watches the DOM for changes.
 
-> Pin a version in production, for example `summitjs@0.1.0`, so a new release
-> can never change your site without you knowing.
+> The `@0.4` range follows the latest 0.4.x release on npm. Pin an exact
+> version in production, for example `summitjs@0.4.3`, so a new release can
+> never change your site without you knowing.
 
 ## npm
 
@@ -57,8 +58,6 @@ parsed and interpreted by Summit itself, so a strict policy needs no
 Content-Security-Policy: script-src 'self'
 ```
 
-Everything on this documentation site runs under exactly that constraint.
-
 ## Starting manually
 
 The script-tag build starts automatically. If you would rather control the
@@ -66,7 +65,7 @@ moment yourself, for example to register custom directives first, call
 `Summit.start()` and it will only run once:
 
 ```html
-<script src="https://velofy.github.io/summitjs/summit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js"></script>
 <script>
   Summit.directive("sparkle", (el) => {
     el.style.transition = "opacity .3s";
@@ -75,4 +74,4 @@ moment yourself, for example to register custom directives first, call
 </script>
 ```
 
-See [Summit.start](../globals-start/) for the details.
+See [Summit.start](https://velofy.co/summitjs/globals-start/) for the details.

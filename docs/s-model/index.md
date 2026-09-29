@@ -5,7 +5,7 @@
 `s-model` wires a form control to a piece of state in both directions. When the
 user changes the control, the state updates; when the state changes from
 anywhere else, the control updates to match. It replaces the pair of an
-[s-bind](../s-bind/) on `value` and an [s-on](../s-on/) input listener that you
+[s-bind](https://velofy.co/summitjs/s-bind/) on `value` and an [s-on](https://velofy.co/summitjs/s-on/) input listener that you
 would otherwise write by hand.
 
 ```summit
@@ -70,7 +70,7 @@ The listener defaults to the `input` event for text-like fields and switches to
 radios, and single selects.
 
 `.debounce` defaults to 250ms and takes a custom duration as the next modifier,
-the same as it does on [s-on](../s-on/): `ms` is milliseconds, `s` is seconds.
+the same as it does on [s-on](https://velofy.co/summitjs/s-on/): `ms` is milliseconds, `s` is seconds.
 
 ```html
 <input type="number" s-model.number="age" />
@@ -104,5 +104,5 @@ control. Put `s-model` on the wrapper, then have the custom widget call
 `_summitModel.set(...)` when its value changes and read `_summitModel.get()` to
 render, and the two-way binding works exactly as it does for native inputs.
 
-For the underlying value binding this builds on, see [s-bind](../s-bind/), and
-for the form patterns it fits into, see [forms](../forms/).
+For the underlying value binding this builds on, see [s-bind](https://velofy.co/summitjs/s-bind/), and
+for the form patterns it fits into, see [forms](https://velofy.co/summitjs/forms/).

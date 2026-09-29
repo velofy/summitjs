@@ -18,7 +18,7 @@ the viewport. It is the positioning behind menus, popovers, and tooltips.
 ```
 
 The expression resolves to the reference element, usually through
-[$refs](../magic-refs/).
+[$refs](https://velofy.co/summitjs/magic-refs/).
 
 ## Placement
 
@@ -37,5 +37,5 @@ Modifiers choose the side and alignment. The default is `bottom` and `start`.
 
 `s-anchor` re-positions on scroll and resize. If the preferred side would run off
 the screen it flips to the opposite side, and it clamps horizontally so the
-element never leaves the viewport. The [Menu](../comp-menu/) and
-[Popover](../comp-popover/) components use it out of the box.
+element never leaves the viewport. The [Menu](https://velofy.co/summitjs/comp-menu/) and
+[Popover](https://velofy.co/summitjs/comp-popover/) components use it out of the box.

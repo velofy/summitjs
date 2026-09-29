@@ -81,7 +81,8 @@ and friends), `.page-up`, `.page-down`, `.home`, `.end`, `.delete`, and
 ```
 
 Combine with system keys `.shift`, `.ctrl`, `.alt`, and `.cmd` (alias `.meta`)
-for shortcuts. This fires only on Cmd/Ctrl + K:
+for shortcuts. `.cmd` and `.meta` both require the Meta key (Cmd on macOS), so
+this fires only on Cmd + K. Add a separate `.ctrl.k` listener for Ctrl + K:
 
 ```html
 <div @keydown.cmd.k.prevent="openPalette()"></div>

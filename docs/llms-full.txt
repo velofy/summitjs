@@ -2,7 +2,7 @@
 
 > The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.
 
-Every documentation page, concatenated as markdown in reading order. Source: https://velofy.github.io/summitjs
+Every documentation page, concatenated as markdown in reading order. Source: https://velofy.co/summitjs/
 
 ---
 
@@ -52,10 +52,10 @@ with `count`. When you click, only that one number re-renders.
 
 ## Where to go next
 
-- [Installation](../installation/) covers the script tag, npm, and bundlers.
-- [Reactivity and State](../reactivity-state/) explains `s-data`, computed
+- [Installation](https://velofy.co/summitjs/installation/) covers the script tag, npm, and bundlers.
+- [Reactivity and State](https://velofy.co/summitjs/reactivity-state/) explains `s-data`, computed
   values, and methods.
-- The [Directives](../s-data/) and [Magic Properties](../magic-el/) sections are
+- The [Directives](https://velofy.co/summitjs/s-data/) and [Magic Properties](https://velofy.co/summitjs/magic-el/) sections are
   a complete reference for every attribute and helper.
 
 ---
@@ -87,7 +87,7 @@ that lives on the element, and nothing that needs a build step.
 Load the stylesheet once, then copy any component's markup.
 
 ```html
-<link rel="stylesheet" href="https://velofy.github.io/summitjs/assets/components.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/assets/components.css" />
 ```
 
 Or copy the rules you need out of `components.css` into your own styles. Every
@@ -114,25 +114,25 @@ Light and dark are handled for you through `prefers-color-scheme` and the
 Interactive components ship with the roles and keyboard behavior you expect:
 focus rings on every control, `Escape` to close overlays, click-outside to
 dismiss menus, and labels wired to their inputs. Where a component needs an id
-to pair a label with a control, use the [$id](../magic-id/) magic.
+to pair a label with a control, use the [$id](https://velofy.co/summitjs/magic-id/) magic.
 
 ## The components
 
 **Forms**
-[Button](../comp-button/), [Input](../comp-input/), [Select](../comp-select/),
-[Checkbox & Radio](../comp-checkbox/), [Switch](../comp-switch/)
+[Button](https://velofy.co/summitjs/comp-button/), [Input](https://velofy.co/summitjs/comp-input/), [Select](https://velofy.co/summitjs/comp-select/),
+[Checkbox & Radio](https://velofy.co/summitjs/comp-checkbox/), [Switch](https://velofy.co/summitjs/comp-switch/)
 
 **Data display**
-[Card](../comp-card/), [Badge & Tag](../comp-badge/), [Alert](../comp-alert/),
-[Avatar](../comp-avatar/), [Progress & Spinner](../comp-progress/)
+[Card](https://velofy.co/summitjs/comp-card/), [Badge & Tag](https://velofy.co/summitjs/comp-badge/), [Alert](https://velofy.co/summitjs/comp-alert/),
+[Avatar](https://velofy.co/summitjs/comp-avatar/), [Progress & Spinner](https://velofy.co/summitjs/comp-progress/)
 
 **Overlays**
-[Dialog](../comp-dialog/), [Dropdown Menu](../comp-menu/),
-[Popover](../comp-popover/), [Tooltip](../comp-tooltip/), [Toast](../comp-toast/)
+[Dialog](https://velofy.co/summitjs/comp-dialog/), [Dropdown Menu](https://velofy.co/summitjs/comp-menu/),
+[Popover](https://velofy.co/summitjs/comp-popover/), [Tooltip](https://velofy.co/summitjs/comp-tooltip/), [Toast](https://velofy.co/summitjs/comp-toast/)
 
 **Navigation**
-[Tabs](../comp-tabs/), [Accordion](../comp-accordion/),
-[Breadcrumb](../comp-breadcrumb/), [Pagination](../comp-pagination/)
+[Tabs](https://velofy.co/summitjs/comp-tabs/), [Accordion](https://velofy.co/summitjs/comp-accordion/),
+[Breadcrumb](https://velofy.co/summitjs/comp-breadcrumb/), [Pagination](https://velofy.co/summitjs/comp-pagination/)
 
 ---
 
@@ -222,7 +222,7 @@ borders for you.
 ## Disabled
 
 The native `disabled` attribute dims a button and removes it from the tab order.
-Bind it reactively with [`:disabled`](../s-bind/) to gate an action on state.
+Bind it reactively with [`:disabled`](https://velofy.co/summitjs/s-bind/) to gate an action on state.
 
 ```summit
 <div s-data="{ agreed: false }" class="s-row">
@@ -266,7 +266,7 @@ Always use a real `<button>` element so keyboard activation, focus, and the
 ring on `:focus-visible`. Give icon-only buttons an `aria-label` so assistive
 technology can name them, and label a `.s-btn-group` with `role="group"` and an
 `aria-label` describing the set. For handling clicks and keyboard shortcuts, see
-[s-on](../s-on/); to pair a button with a field, see [Input](../comp-input/).
+[s-on](https://velofy.co/summitjs/s-on/); to pair a button with a field, see [Input](https://velofy.co/summitjs/comp-input/).
 
 ---
 
@@ -276,7 +276,7 @@ technology can name them, and label a `.s-btn-group` with `role="group"` and an
 
 Inputs collect a line or a block of text. Apply `.s-input` to any text-like
 `<input>` and `.s-textarea` to a `<textarea>`, then bind the value with
-[`s-model`](../forms/) to keep state and control in sync.
+[`s-model`](https://velofy.co/summitjs/forms/) to keep state and control in sync.
 
 ```summit
 <div s-data="{ value: '' }" class="s-stack">
@@ -373,11 +373,11 @@ by the user. Bind it with `s-model` the same way as a single-line input.
 
 Pair every control with a `<label>` by matching the label's `for` to the input's
 `id`, so clicking the label focuses the field. When ids are generated at runtime,
-reach for the [$id](../magic-id/) magic. The `.s-req` asterisk is decorative, so
+reach for the [$id](https://velofy.co/summitjs/magic-id/) magic. The `.s-req` asterisk is decorative, so
 keep the field's real requirement in the `required` attribute. For an invalid
 control, set `aria-invalid="true"` and point `aria-describedby` at the
 `.s-error` element so screen readers announce the message. See
-[Select](../comp-select/) for choosing from options and [s-model](../s-model/)
+[Select](https://velofy.co/summitjs/comp-select/) for choosing from options and [s-model](https://velofy.co/summitjs/s-model/)
 for the binding details.
 
 ---
@@ -387,7 +387,7 @@ for the binding details.
 > A styled native select bound with s-model.
 
 Select lets you pick one value from a fixed list. Apply `.s-select` to a real
-`<select>` element and bind it with [`s-model`](../forms/), so the chosen option
+`<select>` element and bind it with [`s-model`](https://velofy.co/summitjs/forms/), so the chosen option
 flows straight into your state.
 
 ```summit
@@ -407,7 +407,7 @@ flows straight into your state.
 ## Driving other state
 
 Because the value is just a piece of your data, you can react to it anywhere.
-Here the choice reveals a note with [`s-show`](../s-show/).
+Here the choice reveals a note with [`s-show`](https://velofy.co/summitjs/s-show/).
 
 ```summit
 <div s-data="{ size: 'M' }" class="s-stack">
@@ -449,10 +449,10 @@ devices for free, and there is no custom widget to maintain.
 
 Since this is a real `<select>`, screen readers, keyboard navigation, and mobile
 pickers all work with no extra wiring. Pair it with a `<label>` by matching the
-label's `for` to the select's `id`, or use the [$id](../magic-id/) magic when the
+label's `for` to the select's `id`, or use the [$id](https://velofy.co/summitjs/magic-id/) magic when the
 id is generated at runtime. For binding, coercion modifiers, and `multiple`
-selects, see [Forms](../forms/) and [s-model](../s-model/); for free-text entry,
-see [Input](../comp-input/).
+selects, see [Forms](https://velofy.co/summitjs/forms/) and [s-model](https://velofy.co/summitjs/s-model/); for free-text entry,
+see [Input](https://velofy.co/summitjs/comp-input/).
 
 ---
 
@@ -463,7 +463,7 @@ see [Input](../comp-input/).
 Checkboxes and radios wrap a real `<input>` in a styled label, so you get a
 custom look without giving up native behavior. The input stays in the markup and
 carries the state; the `.s-box` next to it is only decoration. Bind any of them
-with [s-model](../s-model/) and the checked state flows both ways.
+with [s-model](https://velofy.co/summitjs/s-model/) and the checked state flows both ways.
 
 ## A single checkbox
 
@@ -590,8 +590,8 @@ checked state, and wrapping each control in its `<label>` means the visible text
 is the accessible name, so no extra ARIA is needed. Grouping related radios or
 checkboxes in a `<fieldset>` with a `<legend>` gives the set a shared label.
 
-For an on/off setting, reach for the [Switch](../comp-switch/) instead. See
-[Forms](../forms/) for how `s-model` handles every control type.
+For an on/off setting, reach for the [Switch](https://velofy.co/summitjs/comp-switch/) instead. See
+[Forms](https://velofy.co/summitjs/forms/) for how `s-model` handles every control type.
 
 ---
 
@@ -602,12 +602,12 @@ For an on/off setting, reach for the [Switch](../comp-switch/) instead. See
 A switch is an on/off control for a single setting, the kind you flip and it
 takes effect right away. Summit's switch is a styled `<label class="s-switch">`
 wrapping a real checkbox, so binding it is exactly like binding a checkbox: point
-[s-model](../s-model/) at a boolean and the track slides between states.
+[s-model](https://velofy.co/summitjs/s-model/) at a boolean and the track slides between states.
 
 ## A live switch
 
 The `<input>` is visually hidden and holds the state; the `.s-track` is the
-sliding pill you see. Here the switch flips `on`, and [s-show](../s-show/)
+sliding pill you see. Here the switch flips `on`, and [s-show](https://velofy.co/summitjs/s-show/)
 reveals a message only while it is `true`.
 
 ```summit
@@ -663,7 +663,7 @@ to announce it as a switch rather than a checkbox, add `role="switch"` to the
 input; the checked state maps to on and off automatically.
 
 For a set of choices rather than a single toggle, use
-[Checkbox & Radio](../comp-checkbox/). See [Forms](../forms/) for the full picture
+[Checkbox & Radio](https://velofy.co/summitjs/comp-checkbox/). See [Forms](https://velofy.co/summitjs/forms/) for the full picture
 of `s-model` bindings.
 
 ---
@@ -702,7 +702,7 @@ padding so they line up without extra spacing rules.
 - `.s-card-header` holds the `.s-card-title` and an optional `.s-card-desc`.
 - `.s-card-body` is the main content area.
 - `.s-card-footer` lays out actions in a row with a gap, ready for
-  [buttons](../comp-button/).
+  [buttons](https://velofy.co/summitjs/comp-button/).
 
 The wrapper clips its corners with `overflow: hidden`, so a full-bleed image or a
 colored bar as the first child follows the rounded edge cleanly.
@@ -747,9 +747,9 @@ Drop the header and footer when all you need is a framed block of content.
 - Footer actions align to the start. To push them to the right, add your own
   `style="justify-content:flex-end"` or a utility class.
 
-Pair cards with [badges](../comp-badge/) for status and
-[avatars](../comp-avatar/) for people. See the full set on the
-[overview](../components/).
+Pair cards with [badges](https://velofy.co/summitjs/comp-badge/) for status and
+[avatars](https://velofy.co/summitjs/comp-avatar/) for people. See the full set on the
+[overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -784,7 +784,7 @@ or meaning:
 - `.s-badge-outline` is a quiet, bordered label.
 - `.s-badge-info`, `.s-badge-success`, `.s-badge-warning`, and `.s-badge-danger`
   map to the semantic feedback palette, the same colors the
-  [alert](../comp-alert/) component uses.
+  [alert](https://velofy.co/summitjs/comp-alert/) component uses.
 
 ```html
 <span class="s-badge s-badge-success">Passing</span>
@@ -795,7 +795,7 @@ or meaning:
 ## Removable tags
 
 A `.s-tag` is a pill with an inner `<button>` for removal. Bind the list to state
-with [s-for](../s-for/), key each tag, and let the button `splice` its own item
+with [s-for](https://velofy.co/summitjs/s-for/), key each tag, and let the button `splice` its own item
 out of the array. Because the array is reactive, the tag disappears the moment
 you click.
 
@@ -836,9 +836,9 @@ you click.
   right one leaves even when earlier tags are gone. Use a unique id if your tags
   can repeat.
 - Badges have no interactive behavior; they are labels. For dismissible banners,
-  reach for an [alert](../comp-alert/) or a toast instead.
+  reach for an [alert](https://velofy.co/summitjs/comp-alert/) or a toast instead.
 
-See the whole component set on the [overview](../components/).
+See the whole component set on the [overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -917,7 +917,7 @@ A table is a standard `<table>` element carrying the `.s-table` class, optionall
 - The table takes the width of its parent. Constrain it with a `max-width` on the wrapper if needed.
 - All styling comes from tokens (`--border`, `--surface-2`, `--muted`, `--accent-soft`), so it adapts automatically to light and dark themes.
 
-See the full set in the [overview](../components/).
+See the full set in the [overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -1002,9 +1002,9 @@ drop the title and keep a single `.s-alert-desc` for a one-line note.
 - The icon is decorative here because the title carries the message. If an alert
   has no text title, add an `aria-label` to convey its intent.
 - Alerts stay in the layout. For transient, stacked messages that appear and
-  auto-dismiss, use a toast; for status labels, use a [badge](../comp-badge/).
+  auto-dismiss, use a toast; for status labels, use a [badge](https://velofy.co/summitjs/comp-badge/).
 
-See the whole component set on the [overview](../components/).
+See the whole component set on the [overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -1098,8 +1098,8 @@ avatar with a count reads as an overflow.
 - The ring around grouped avatars comes from the page background color. Place a
   group on a plain surface so the separation reads clearly.
 
-Pair avatars with [cards](../comp-card/) and [badges](../comp-badge/), or browse
-the full set on the [overview](../components/).
+Pair avatars with [cards](https://velofy.co/summitjs/comp-card/) and [badges](https://velofy.co/summitjs/comp-badge/), or browse
+the full set on the [overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -1196,9 +1196,9 @@ several to preview a whole card or list row.
   people who cannot see it turn.
 - Both the spinner's spin and the skeleton's shimmer stop under
   `prefers-reduced-motion`, so you do not need to disable them yourself.
-- Once a load finishes, a [Toast](../comp-toast/) or an [Alert](../comp-alert/)
+- Once a load finishes, a [Toast](https://velofy.co/summitjs/comp-toast/) or an [Alert](https://velofy.co/summitjs/comp-alert/)
   is a good way to confirm the result. See all the pieces on the
-  [UI Library overview](../components/).
+  [UI Library overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -1269,8 +1269,8 @@ the tip short: it renders on a single line and does not wrap.
   the top edge of the page.
 - Text stays on one line by design. For anything longer, or for content that
   should open on click and hold buttons or fields, reach for a
-  [Popover](../comp-popover/) instead.
-- Browse the rest of the set on the [UI Library overview](../components/).
+  [Popover](https://velofy.co/summitjs/comp-popover/) instead.
+- Browse the rest of the set on the [UI Library overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -1308,7 +1308,7 @@ The whole component lives on the `open` boolean in `s-data`. The trigger button
 sets it to `true`, and every path out of the dialog sets it back to `false`. The
 overlay and panel sit inside a `<template s-if="open">`, so they are added to the
 page only while the dialog is open and removed cleanly when it closes. Using
-[s-if](../s-if/) here, rather than [s-show](../s-show/), means the markup does not
+[s-if](https://velofy.co/summitjs/s-if/) here, rather than [s-show](https://velofy.co/summitjs/s-show/), means the markup does not
 sit hidden in the DOM between openings.
 
 There are three ways to close it, and all of them write the same state:
@@ -1333,7 +1333,7 @@ The panel is built from a small set of slots you fill in:
   since its only content is a glyph.
 - `.s-dialog-body` holds the message or form.
 - `.s-dialog-footer` right-aligns the actions. Pair a neutral
-  [button](../comp-button/) for cancel with a solid or danger one for confirm.
+  [button](https://velofy.co/summitjs/comp-button/) for cancel with a solid or danger one for confirm.
 
 ```html
 <div s-data="{ open: false }">
@@ -1379,7 +1379,7 @@ The demo above keeps the overlay next to its trigger so the example stays
 self-contained. In a real layout that is risky: an ancestor with `overflow:
 hidden` can clip the panel, and a local stacking context can push it behind other
 content. The fix is to render the dialog at the end of `<body>`, clear of any
-parent, with [s-teleport](../s-teleport/):
+parent, with [s-teleport](https://velofy.co/summitjs/s-teleport/):
 
 ```html
 <div s-data="{ open: false }">
@@ -1403,7 +1403,7 @@ working, but it lands at the end of the page where nothing can clip or restack i
 Mark the panel with `role="dialog"` and `aria-modal="true"` so screen readers
 announce it as a modal and treat the content behind it as inert. Point the panel
 at its title with `aria-labelledby` (pair the `.s-dialog-title` with an id, which
-the [$id](../magic-id/) magic can generate) so the dialog has an accessible name.
+the [$id](https://velofy.co/summitjs/magic-id/) magic can generate) so the dialog has an accessible name.
 The `Escape` handler is bound with `.window`, so the key closes the dialog from
 anywhere, which matches the behavior users expect. Give the corner close button an
 `aria-label`, since its `&times;` glyph is not a readable name. When you open a
@@ -1411,7 +1411,7 @@ dialog, move focus into it and return focus to the trigger on close so keyboard
 users are not stranded.
 
 For a menu of actions rather than a blocking decision, reach for the
-[Dropdown Menu](../comp-menu/).
+[Dropdown Menu](https://velofy.co/summitjs/comp-menu/).
 
 ---
 
@@ -1423,7 +1423,7 @@ A dropdown menu hangs a short list of actions off a button. You click the button
 to reveal it, pick an action, and it gets out of the way, either because you chose
 something, clicked elsewhere, or pressed `Escape`. Like the rest of the library it
 runs on one boolean in `s-data`, and the two dismissal paths, outside click and
-`Escape`, are wired with plain [event modifiers](../events/).
+`Escape`, are wired with plain [event modifiers](https://velofy.co/summitjs/events/).
 
 ```summit
 <div class="s-anchor" s-data="{ open: false }" @keydown.escape="open = false">
@@ -1440,7 +1440,7 @@ runs on one boolean in `s-data`, and the two dismissal paths, outside click and
 ## Toggling
 
 The trigger runs `@click="open = !open"`, so clicking it flips the menu open and
-closed. The menu itself is a `.s-menu` shown with [s-show](../s-show/), which keeps
+closed. The menu itself is a `.s-menu` shown with [s-show](https://velofy.co/summitjs/s-show/), which keeps
 the markup in the DOM and toggles its visibility. The wrapper carries the class
 `.s-anchor`, which positions the menu absolutely just under the button, so the
 list floats over the page instead of pushing content down.
@@ -1487,15 +1487,15 @@ The menu is a stack of building blocks you arrange to taste:
 The trigger is a real `<button>`, so it is focusable and operable with `Enter` and
 `Space` out of the box, and each `.s-menu-item` is a button or link for the same
 reason. Set `aria-haspopup="menu"` on the trigger and reflect the open state with
-`aria-expanded`, bound to your state with [s-bind](../s-bind/), so assistive tech
+`aria-expanded`, bound to your state with [s-bind](https://velofy.co/summitjs/s-bind/), so assistive tech
 knows a menu is attached and whether it is showing. The `Escape` handler gives
 keyboard users a quick way out, matching the behavior of native menus, and the
 outside-click handler keeps a stray open menu from lingering. When the menu opens,
 move focus to the first item so the arrow keys and typing land somewhere sensible.
 
 For a blocking confirmation rather than a list of actions, reach for the
-[Dialog](../comp-dialog/); for free-form content in a floating panel, see the
-[Popover](../comp-popover/).
+[Dialog](https://velofy.co/summitjs/comp-dialog/); for free-form content in a floating panel, see the
+[Popover](https://velofy.co/summitjs/comp-popover/).
 
 ---
 
@@ -1505,8 +1505,8 @@ For a blocking confirmation rather than a list of actions, reach for the
 
 A popover is a small floating panel you open with a click to show rich content
 next to its trigger: a short form, a set of controls, a detail card. It is more
-than a [Tooltip](../comp-tooltip/), which only shows a line of text on hover, and
-looser than a [Dropdown Menu](../comp-menu/), which holds a list of actions. The
+than a [Tooltip](https://velofy.co/summitjs/comp-tooltip/), which only shows a line of text on hover, and
+looser than a [Dropdown Menu](https://velofy.co/summitjs/comp-menu/), which holds a list of actions. The
 markup is a `.s-anchor` that positions the floating `.s-popover`, wired with the
 same handful of `s-` directives you already use.
 
@@ -1588,12 +1588,12 @@ Keep `@click.outside` and `@keydown.escape` on the panel and the anchor so the
 popover always has a way out, whether the user reaches for the mouse or the
 keyboard. For accessibility, add `aria-expanded` bound to `open` on the trigger
 and point `aria-controls` at the panel's id, which you can generate with the
-[$id](../magic-id/) magic.
+[$id](https://velofy.co/summitjs/magic-id/) magic.
 
-For a hover hint of plain text, use a [Tooltip](../comp-tooltip/). For a list of
-commands or links, reach for a [Dropdown Menu](../comp-menu/), which shares the
+For a hover hint of plain text, use a [Tooltip](https://velofy.co/summitjs/comp-tooltip/). For a list of
+commands or links, reach for a [Dropdown Menu](https://velofy.co/summitjs/comp-menu/), which shares the
 same `.s-anchor` and dismissal pattern. The event modifiers used here are covered
-on the [Events](../events/) page.
+on the [Events](https://velofy.co/summitjs/events/) page.
 
 ---
 
@@ -1604,7 +1604,7 @@ on the [Events](../events/) page.
 A toast is a short, transient notification that slides into a corner to confirm
 an action or report a result, then clears itself after a moment. Toasts stack in
 a fixed `.s-toast-viewport` so several can show at once, newest below the last.
-Each one is a `.s-toast` you render from an array with [s-for](../s-for/), which
+Each one is a `.s-toast` you render from an array with [s-for](https://velofy.co/summitjs/s-for/), which
 means adding and removing entries is all it takes to raise and clear them.
 
 ## A live toast
@@ -1703,7 +1703,7 @@ you asked for.
 The examples keep the toast list in local `s-data` so each is self-contained, but
 in a real app you want one viewport and a single list that any component can add
 to. Move the array and its `add()` and `dismiss()` methods into a global
-[Summit.store](../globals-store/), render the viewport once near the root, and
+[Summit.store](https://velofy.co/summitjs/globals-store/), render the viewport once near the root, and
 raise a toast from anywhere with `$store.toasts.add(...)`. That way a save button
 in one corner and a form in another share the same stack instead of each managing
 its own.
@@ -1712,7 +1712,7 @@ The `.s-toast-viewport` is `position: fixed`, so it floats above the page no
 matter where it sits in the markup. Keep the `:key="t.id"` on the `s-for` so
 Summit tracks each toast by identity as the array changes, which keeps
 auto-dismiss and manual dismiss from removing the wrong one. For a persistent,
-inline message rather than a transient one, use an [Alert](../comp-alert/)
+inline message rather than a transient one, use an [Alert](https://velofy.co/summitjs/comp-alert/)
 instead.
 
 ---
@@ -1723,7 +1723,7 @@ instead.
 
 Tabs let you split related content into panels and show one at a time. There is
 no widget to wire up: a tab is a real `<button>`, the active one is marked with a
-class, and each panel is revealed with [s-show](../s-show/). One piece of state,
+class, and each panel is revealed with [s-show](https://velofy.co/summitjs/s-show/). One piece of state,
 the name of the current tab, drives the whole thing.
 
 ## A live tab bar
@@ -1791,11 +1791,11 @@ added.
   `Enter` or `Space` for free. Add `role="tablist"` on the list and pair panels
   with `role="tabpanel"` if you want the full ARIA tab semantics.
 - Prefer `s-show` here so panel state stays in the DOM as you switch. If a panel
-  is expensive and should only mount when opened, use [s-if](../s-if/) instead.
+  is expensive and should only mount when opened, use [s-if](https://velofy.co/summitjs/s-if/) instead.
 
 For stacked sections that expand in place rather than swap, see
-[Accordion](../comp-accordion/). The whole set is on the
-[overview](../components/).
+[Accordion](https://velofy.co/summitjs/comp-accordion/). The whole set is on the
+[overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -1805,7 +1805,7 @@ For stacked sections that expand in place rather than swap, see
 
 An accordion stacks sections that expand and collapse in place. Each header is a
 real `<button>`, the chevron rotates through a class, and the panel below is
-revealed with [s-show](../s-show/). The classic behavior is one section open at a
+revealed with [s-show](https://velofy.co/summitjs/s-show/). The classic behavior is one section open at a
 time, which takes a single string of state.
 
 ## One open at a time
@@ -1888,7 +1888,7 @@ both test with `includes`.
   render, or set it to `''` (or `[]`) to begin fully collapsed.
 
 For swapping between panels rather than stacking them, see
-[Tabs](../comp-tabs/). The whole set is on the [overview](../components/).
+[Tabs](https://velofy.co/summitjs/comp-tabs/). The whole set is on the [overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -1933,12 +1933,12 @@ current location and tells screen readers they have arrived.
 - The separator is decorative. Keeping it in its own `.s-sep` span leaves the
   links clean and lets you swap the character (a slash, a chevron) in one place.
 - The trail is static markup, so it drops into any page as-is. To render it from
-  a route array, wrap the crumbs in a [s-for](../s-for/) and mark the final item
+  a route array, wrap the crumbs in a [s-for](https://velofy.co/summitjs/s-for/) and mark the final item
   with `aria-current`.
 
 To move through pages of results rather than up a hierarchy, see
-[Pagination](../comp-pagination/). The whole set is on the
-[overview](../components/).
+[Pagination](https://velofy.co/summitjs/comp-pagination/). The whole set is on the
+[overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -1949,7 +1949,7 @@ To move through pages of results rather than up a hierarchy, see
 Pagination splits a long list of results into numbered pages and gives people
 Prev and Next controls to move through them. One number of state, the current
 page, drives which button is active and when the ends disable. The number
-buttons themselves come straight out of a [s-for](../s-for/).
+buttons themselves come straight out of a [s-for](https://velofy.co/summitjs/s-for/).
 
 ## A live pager
 
@@ -1996,8 +1996,8 @@ up through `:class` when it matches.
   data, or seed it from the URL to deep-link a page.
 
 To show where the current page sits in your site hierarchy instead, see
-[Breadcrumb](../comp-breadcrumb/). The whole set is on the
-[overview](../components/).
+[Breadcrumb](https://velofy.co/summitjs/comp-breadcrumb/). The whole set is on the
+[overview](https://velofy.co/summitjs/components/).
 
 ---
 
@@ -2013,27 +2013,27 @@ light and dark.
 Load the stylesheet once, then use any `s-` prefixed class from the pages below.
 
 ```html
-<link rel="stylesheet" href="https://velofy.github.io/summitjs/assets/techniques.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/assets/techniques.css" />
 ```
 
 ## Loaders
 
-- [Loaders & Spinners](../technique-animation/): fifteen pure-CSS loaders, animated logo marks, and skeleton screens.
+- [Loaders & Spinners](https://velofy.co/summitjs/technique-animation/): fifteen pure-CSS loaders, animated logo marks, and skeleton screens.
 
 ## Style families
 
-- [Matte Glassmorphism](../technique-glassmorphism/): frosted, low-gloss surfaces that stay legible over anything.
-- [Neumorphism](../technique-neumorphism/): soft, extruded UI built from twin light and dark shadows.
-- [Claymorphism](../technique-claymorphism/): puffy, rounded, playful clay surfaces.
-- [Retro UI](../technique-retro/): hard shadows and neon text.
-- [Brutalism](../technique-brutalism/): stark borders, loud type, and blunt offset shadows.
-- [Aurora Backgrounds](../technique-aurora/): slow, glowing color fields behind your content.
-- [Glow & Spotlight](../technique-glow/): a highlight that follows the cursor across a card.
+- [Matte Glassmorphism](https://velofy.co/summitjs/technique-glassmorphism/): frosted, low-gloss surfaces that stay legible over anything.
+- [Neumorphism](https://velofy.co/summitjs/technique-neumorphism/): soft, extruded UI built from twin light and dark shadows.
+- [Claymorphism](https://velofy.co/summitjs/technique-claymorphism/): puffy, rounded, playful clay surfaces.
+- [Retro UI](https://velofy.co/summitjs/technique-retro/): hard shadows and neon text.
+- [Brutalism](https://velofy.co/summitjs/technique-brutalism/): stark borders, loud type, and blunt offset shadows.
+- [Aurora Backgrounds](https://velofy.co/summitjs/technique-aurora/): slow, glowing color fields behind your content.
+- [Glow & Spotlight](https://velofy.co/summitjs/technique-glow/): a highlight that follows the cursor across a card.
 
 ## Patterns
 
-- [Navbar Patterns](../technique-navbars/): active links, a responsive mobile menu, and a glass bar.
-- [Using Tailwind CSS](../technique-tailwind/): Summit for behavior, Tailwind for styling, no build step.
+- [Navbar Patterns](https://velofy.co/summitjs/technique-navbars/): active links, a responsive mobile menu, and a glass bar.
+- [Using Tailwind CSS](https://velofy.co/summitjs/technique-tailwind/): Summit for behavior, Tailwind for styling, no build step.
 
 ---
 
@@ -2224,7 +2224,7 @@ solid color blobs used here.
 - The effect uses `backdrop-filter`, supported in all current browsers. Where it
   is unavailable the surface degrades to a solid panel, which is still legible.
 - Keep body text on `.s-glass-matte`, not `.s-glass`, for contrast.
-- A glass bar makes a great sticky header. See [Navbar Patterns](../technique-navbars/).
+- A glass bar makes a great sticky header. See [Navbar Patterns](https://velofy.co/summitjs/technique-navbars/).
 
 ---
 
@@ -2329,8 +2329,8 @@ clay. It suits friendly, consumer, and onboarding interfaces.
 
 - The puffed look comes from an outer drop shadow plus inner top and bottom
   shadows. It recolors with your accent through `.s-clay-btn`.
-- Pair it with the [Claymorphism](../technique-claymorphism/) accent and rounded
-  [components](../components/) for a consistent, playful set.
+- Pair it with the [Claymorphism](https://velofy.co/summitjs/technique-claymorphism/) accent and rounded
+  [components](https://velofy.co/summitjs/components/) for a consistent, playful set.
 
 ---
 
@@ -2444,7 +2444,7 @@ The button slams into its shadow when pressed.
 
 The classes are `.s-brutal` (card), `.s-brutal-accent` (fill it with the accent),
 `.s-brutal-btn`, and `.s-brutal-tag`. For a softer take on hard shadows, see
-[Retro UI](../technique-retro/).
+[Retro UI](https://velofy.co/summitjs/technique-retro/).
 
 ---
 
@@ -2488,7 +2488,7 @@ on its own.
   dark themes, so the glow always reads and the copy stays legible. Recolor the
   two shapes in `techniques.css` to match your brand.
 - For a foreground surface over a busy backdrop, use
-  [Matte Glassmorphism](../technique-glassmorphism/) instead.
+  [Matte Glassmorphism](https://velofy.co/summitjs/technique-glassmorphism/) instead.
 
 ---
 
@@ -2531,8 +2531,8 @@ in on hover. A `@mousemove` handler writes the pointer's position, taken from
 
 ## Notes
 
-- No state is needed: the handler reads [$event](../s-on/) and writes to
-  [$el](../magic-el/) directly, so there is nothing to store.
+- No state is needed: the handler reads [$event](https://velofy.co/summitjs/s-on/) and writes to
+  [$el](https://velofy.co/summitjs/magic-el/) directly, so there is nothing to store.
 - The highlight only appears on hover, so touch users see a clean card.
 - Tint the glow by changing the accent mix in the `.s-glow-card::before` rule.
 
@@ -2591,7 +2591,7 @@ switch.
 
 ## Glass navbar
 
-Drop [matte glass](../technique-glassmorphism/) onto the bar for a header that
+Drop [matte glass](https://velofy.co/summitjs/technique-glassmorphism/) onto the bar for a header that
 floats over the page.
 
 ```summit
@@ -2668,7 +2668,7 @@ compile.
 
 ```html
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
 
 <div s-data="{ count: 0 }" class="flex items-center gap-3 p-4">
   <button class="rounded bg-slate-900 px-3 py-1.5 text-white" @click="count++">Add</button>
@@ -2684,8 +2684,8 @@ classes, then load `summitjs` alongside your bundle exactly as above.
 - Summit reads only `s-`, `@`, and `:` attributes, so it never touches your
   `class` list except where you ask it to with `:class`.
 - Tailwind's classes are static strings, which is exactly what Summit's
-  [s-bind](../s-bind/) is best at toggling.
-- The [UI Library](../components/) and [Techniques](../techniques/) are optional:
+  [s-bind](https://velofy.co/summitjs/s-bind/) is best at toggling.
+- The [UI Library](https://velofy.co/summitjs/components/) and [Techniques](https://velofy.co/summitjs/techniques/) are optional:
   use them, use Tailwind, or mix both in the same page.
 
 ---
@@ -2703,14 +2703,15 @@ The fastest path. Add one tag to your `<head>` and Summit starts on its own
 once the DOM is ready. Use `defer` so it runs after the document is parsed.
 
 ```html
-<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
 ```
 
 That is the entire setup. Any `s-` attributes already in the page come alive,
 and so does anything you add later, because Summit watches the DOM for changes.
 
-> Pin a version in production, for example `summitjs@0.1.0`, so a new release
-> can never change your site without you knowing.
+> The `@0.4` range follows the latest 0.4.x release on npm. Pin an exact
+> version in production, for example `summitjs@0.4.3`, so a new release can
+> never change your site without you knowing.
 
 ## npm
 
@@ -2749,8 +2750,6 @@ parsed and interpreted by Summit itself, so a strict policy needs no
 Content-Security-Policy: script-src 'self'
 ```
 
-Everything on this documentation site runs under exactly that constraint.
-
 ## Starting manually
 
 The script-tag build starts automatically. If you would rather control the
@@ -2758,7 +2757,7 @@ moment yourself, for example to register custom directives first, call
 `Summit.start()` and it will only run once:
 
 ```html
-<script src="https://velofy.github.io/summitjs/summit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js"></script>
 <script>
   Summit.directive("sparkle", (el) => {
     el.style.transition = "opacity .3s";
@@ -2767,7 +2766,7 @@ moment yourself, for example to register custom directives first, call
 </script>
 ```
 
-See [Summit.start](../globals-start/) for the details.
+See [Summit.start](https://velofy.co/summitjs/globals-start/) for the details.
 
 ---
 
@@ -2825,7 +2824,7 @@ so you can read and mutate freely.
 ## Reusable components
 
 For anything beyond a small inline object, register a named provider with
-[Summit.data](../globals-data/) and reference it by name. The provider is a
+[Summit.data](https://velofy.co/summitjs/globals-data/) and reference it by name. The provider is a
 function that returns the state object, so each use gets its own copy.
 
 ```js
@@ -2862,8 +2861,8 @@ its ancestors, with the nearest name winning on a conflict.
 ## Shared state
 
 State that many components need lives in a store, not in `s-data`. Reach it from
-any expression with the [$store](../magic-store/) magic. See
-[Summit.store](../globals-store/) to create one.
+any expression with the [$store](https://velofy.co/summitjs/magic-store/) magic. See
+[Summit.store](https://velofy.co/summitjs/globals-store/) to create one.
 
 ---
 
@@ -2947,7 +2946,7 @@ Bind `style` with an object of camelCase or kebab-case properties.
 ```
 
 For the full attribute reference, including how bound values merge with static
-ones, see [s-bind](../s-bind/).
+ones, see [s-bind](https://velofy.co/summitjs/s-bind/).
 
 ---
 
@@ -3030,7 +3029,8 @@ and friends), `.page-up`, `.page-down`, `.home`, `.end`, `.delete`, and
 ```
 
 Combine with system keys `.shift`, `.ctrl`, `.alt`, and `.cmd` (alias `.meta`)
-for shortcuts. This fires only on Cmd/Ctrl + K:
+for shortcuts. `.cmd` and `.meta` both require the Meta key (Cmd on macOS), so
+this fires only on Cmd + K. Add a separate `.ctrl.k` listener for Ctrl + K:
 
 ```html
 <div @keydown.cmd.k.prevent="openPalette()"></div>
@@ -3054,8 +3054,8 @@ event names that used dashes:
 <div @custom-event.camel="onCustomEvent()"></div>
 ```
 
-For dispatching your own events, see [$dispatch](../magic-dispatch/). The full
-directive reference is on the [s-on](../s-on/) page.
+For dispatching your own events, see [$dispatch](https://velofy.co/summitjs/magic-dispatch/). The full
+directive reference is on the [s-on](https://velofy.co/summitjs/s-on/) page.
 
 ---
 
@@ -3120,7 +3120,7 @@ same directive covers all of them.
 
 Every element with `s-model` exposes `el._summitModel`, an object with `get` and
 `set`, so a wrapper component can drive the same binding from custom controls.
-The full reference is on the [s-model](../s-model/) page.
+The full reference is on the [s-model](https://velofy.co/summitjs/s-model/) page.
 
 ---
 
@@ -3149,7 +3149,7 @@ Summit.data("clock", () => ({
 }));
 ```
 
-For a one-off expression rather than a method, use the [s-init](../s-init/)
+For a one-off expression rather than a method, use the [s-init](https://velofy.co/summitjs/s-init/)
 directive:
 
 ```html
@@ -3160,7 +3160,7 @@ directive:
 
 Most of the time you do not watch for changes yourself: any expression that
 reads state re-runs when that state changes. For an explicit side effect that
-should re-run on change, use [s-effect](../s-effect/):
+should re-run on change, use [s-effect](https://velofy.co/summitjs/s-effect/):
 
 ```summit
 <div s-data="{ count: 0 }">
@@ -3170,7 +3170,7 @@ should re-run on change, use [s-effect](../s-effect/):
 ```
 
 To watch a single value and get both the new and old value, use the
-[$watch](../magic-watch/) magic.
+[$watch](https://velofy.co/summitjs/magic-watch/) magic.
 
 ## Automatic setup for new nodes
 
@@ -3195,13 +3195,13 @@ right.
 When an element is removed, Summit tears its component down and runs every
 cleanup registered for it: event listeners are removed, effects are stopped,
 and timers you registered through a directive are cleared. Keyed
-[s-for](../s-for/) reuses nodes across updates, so state is preserved for rows
+[s-for](https://velofy.co/summitjs/s-for/) reuses nodes across updates, so state is preserved for rows
 that merely moved.
 
 ## Waiting for the DOM
 
 After you change state, the DOM updates on the next tick. To run code after that
-update lands, use [$nextTick](../magic-nextTick/):
+update lands, use [$nextTick](https://velofy.co/summitjs/magic-nexttick/):
 
 ```html
 <button @click="open = true; $nextTick(() => $refs.panel.focus())">Open</button>
@@ -3237,8 +3237,8 @@ whole subtree can use.
 ```
 
 An empty component is fine too. `s-data` on its own (or `s-data=""`) starts with
-an empty object, which is handy when the element only needs an [s-init](../s-init/)
-or a place to hang [$refs](../magic-refs/).
+an empty object, which is handy when the element only needs an [s-init](https://velofy.co/summitjs/s-init/)
+or a place to hang [$refs](https://velofy.co/summitjs/magic-refs/).
 
 ## Getters
 
@@ -3290,7 +3290,7 @@ Inside `init()`, and inside any method, the `$`-magics are reachable through
 ## Named providers
 
 For anything past a small inline object, register the state once with
-[Summit.data](../globals-data/) and reference it by name. The provider is a
+[Summit.data](https://velofy.co/summitjs/globals-data/) and reference it by name. The provider is a
 function that returns the state object, so every element that uses it gets a
 fresh copy.
 
@@ -3330,8 +3330,8 @@ its ancestors, and the nearest name wins when two scopes define the same key.
 ```
 
 State that many unrelated components share belongs in a store rather than
-`s-data`. Create one with [Summit.store](../globals-store/) and reach it from any
-expression with [$store](../magic-store/).
+`s-data`. Create one with [Summit.store](https://velofy.co/summitjs/globals-store/) and reach it from any
+expression with [$store](https://velofy.co/summitjs/magic-store/).
 
 ---
 
@@ -3614,8 +3614,8 @@ whose names contain capitals or dots:
 ```
 
 To send events that these modifiers can catch, use
-[$dispatch](../magic-dispatch/). For the state that these listeners usually
-update, see [s-data](../s-data/) and [reactivity](../reactivity-state/).
+[$dispatch](https://velofy.co/summitjs/magic-dispatch/). For the state that these listeners usually
+update, see [s-data](https://velofy.co/summitjs/s-data/) and [reactivity](https://velofy.co/summitjs/reactivity-state/).
 
 ---
 
@@ -3663,7 +3663,7 @@ for user-supplied strings.
 
 The angle brackets appear on screen instead of creating an `<em>`. When you
 deliberately want markup rendered, and only for content you trust, reach for
-[s-html](../s-html/).
+[s-html](https://velofy.co/summitjs/s-html/).
 
 ---
 
@@ -3681,7 +3681,7 @@ example a fragment rendered on the server or returned from a fetch.
 </div>
 ```
 
-Unlike [s-text](../s-text/), the string is parsed as HTML, so the `<strong>`
+Unlike [s-text](https://velofy.co/summitjs/s-text/), the string is parsed as HTML, so the `<strong>`
 above becomes real bold text.
 
 ## Injected markup is initialized
@@ -3698,7 +3698,7 @@ containing a `<script>` tag or an `onerror` handler can run code in your page.
 Never point `s-html` at anything a user typed, a URL parameter, or a third-party
 response you do not control.
 
-If the source is not fully trusted, use [s-text](../s-text/) instead, which
+If the source is not fully trusted, use [s-text](https://velofy.co/summitjs/s-text/) instead, which
 escapes everything it renders.
 
 ---
@@ -3710,7 +3710,7 @@ escapes everything it renders.
 `s-model` wires a form control to a piece of state in both directions. When the
 user changes the control, the state updates; when the state changes from
 anywhere else, the control updates to match. It replaces the pair of an
-[s-bind](../s-bind/) on `value` and an [s-on](../s-on/) input listener that you
+[s-bind](https://velofy.co/summitjs/s-bind/) on `value` and an [s-on](https://velofy.co/summitjs/s-on/) input listener that you
 would otherwise write by hand.
 
 ```summit
@@ -3775,7 +3775,7 @@ The listener defaults to the `input` event for text-like fields and switches to
 radios, and single selects.
 
 `.debounce` defaults to 250ms and takes a custom duration as the next modifier,
-the same as it does on [s-on](../s-on/): `ms` is milliseconds, `s` is seconds.
+the same as it does on [s-on](https://velofy.co/summitjs/s-on/): `ms` is milliseconds, `s` is seconds.
 
 ```html
 <input type="number" s-model.number="age" />
@@ -3809,8 +3809,8 @@ control. Put `s-model` on the wrapper, then have the custom widget call
 `_summitModel.set(...)` when its value changes and read `_summitModel.get()` to
 render, and the two-way binding works exactly as it does for native inputs.
 
-For the underlying value binding this builds on, see [s-bind](../s-bind/), and
-for the form patterns it fits into, see [forms](../forms/).
+For the underlying value binding this builds on, see [s-bind](https://velofy.co/summitjs/s-bind/), and
+for the form patterns it fits into, see [forms](https://velofy.co/summitjs/forms/).
 
 ---
 
@@ -3856,7 +3856,7 @@ Both hide things, but they do it at different levels:
 - `s-show` keeps the element in the DOM and only changes `display`. Toggling is
   cheap, and any internal state (input values, scroll position, child
   component state) is preserved while hidden.
-- [s-if](../s-if/) adds and removes the element itself. When the condition is
+- [s-if](https://velofy.co/summitjs/s-if/) adds and removes the element itself. When the condition is
   false the node is gone from the DOM and its reactive effects are torn down;
   when it returns it is built fresh.
 
@@ -3865,7 +3865,7 @@ Reach for `s-show` when you toggle often or need to keep state alive. Reach for
 
 ## Working with transitions
 
-Pair `s-show` with [s-transition](../s-transition/) to animate the element as it
+Pair `s-show` with [s-transition](https://velofy.co/summitjs/s-transition/) to animate the element as it
 appears and disappears. The initial render is applied instantly; every toggle
 after that runs the enter or leave animation.
 
@@ -3932,7 +3932,7 @@ is used as the blueprint:
 
 ## Difference from s-show
 
-`s-if` and [s-show](../s-show/) look similar but differ in what they do to the
+`s-if` and [s-show](https://velofy.co/summitjs/s-show/) look similar but differ in what they do to the
 element:
 
 - `s-if` adds and removes the node. While the condition is false the element is
@@ -3945,9 +3945,9 @@ Use `s-if` when you want the element and its cost gone entirely, or when it is
 rarely shown. Use `s-show` when you toggle frequently or need to preserve the
 element's internal state.
 
-For lists of elements that come and go, see [s-for](../s-for/), which reconciles
+For lists of elements that come and go, see [s-for](https://velofy.co/summitjs/s-for/), which reconciles
 by key. To animate elements as they appear and disappear, pair
-[s-transition](../s-transition/) with `s-show`.
+[s-transition](https://velofy.co/summitjs/s-transition/) with `s-show`.
 
 ---
 
@@ -4058,7 +4058,7 @@ falls back to the object key for objects, or the numeric index otherwise, which
 rebuilds rows when their position changes and loses that state.
 
 To conditionally render a single element rather than a list, see
-[s-if](../s-if/).
+[s-if](https://velofy.co/summitjs/s-if/).
 
 ---
 
@@ -4089,7 +4089,7 @@ to `document.title`, syncing to `localStorage`, logging, or driving a non-Summit
 library. The expression runs for what it does, not for a value it returns.
 
 To put a value on screen you do not need `s-effect`. Bind it directly with
-[s-text](../s-text/) or [s-bind](../s-bind/), or derive it with a getter, and let
+[s-text](https://velofy.co/summitjs/s-text/) or [s-bind](https://velofy.co/summitjs/s-bind/), or derive it with a getter, and let
 that directive track its own dependencies.
 
 ```summit
@@ -4101,8 +4101,8 @@ that directive track its own dependencies.
 
 Reserve `s-effect` for the cases a plain binding cannot express. To respond to
 one specific value changing rather than everything an expression touches, see
-[$watch](../magic-watch/). To run something once at startup with no re-runs, use
-[s-init](../s-init/).
+[$watch](https://velofy.co/summitjs/magic-watch/). To run something once at startup with no re-runs, use
+[s-init](https://velofy.co/summitjs/s-init/).
 
 ---
 
@@ -4126,7 +4126,7 @@ initializes the element, before any children below it are set up.
 </div>
 ```
 
-Unlike [s-effect](../s-effect/), which re-runs whenever the state it reads
+Unlike [s-effect](https://velofy.co/summitjs/s-effect/), which re-runs whenever the state it reads
 changes, `s-init` fires exactly once and never again. Reach for it when you want
 a one-time action, not a reactive one.
 
@@ -4144,9 +4144,9 @@ element initializes.
 
 ## Relationship to a component's init() method
 
-A component defined with [s-data](../s-data/) can expose an `init()` method,
+A component defined with [s-data](https://velofy.co/summitjs/s-data/) can expose an `init()` method,
 which Summit calls when the component is created (see
-[Lifecycle](../lifecycle/)). The two are complementary:
+[Lifecycle](https://velofy.co/summitjs/lifecycle/)). The two are complementary:
 
 - Use `init()` for setup that is substantial or belongs alongside the
   component's data, such as fetching, reading storage, or starting a timer.
@@ -4163,7 +4163,7 @@ directive, the `init()` method runs first, then the `s-init` expression.
 > Name an element so you can reach it through $refs.
 
 `s-ref` gives an element a name so you can reach the real DOM node later through
-the [$refs](../magic-refs/) magic. This is how you focus an input, measure a
+the [$refs](https://velofy.co/summitjs/magic-refs/) magic. This is how you focus an input, measure a
 box, or hand a node to another library, without reaching for
 `document.querySelector`.
 
@@ -4180,7 +4180,7 @@ value is the element itself.
 ```
 
 Refs are registered on the nearest component root, so every element inside the
-same [s-data](../s-data/) component shares one `$refs` registry. When the
+same [s-data](https://velofy.co/summitjs/s-data/) component shares one `$refs` registry. When the
 element leaves the DOM, its ref is removed for you.
 
 ## Dynamic names
@@ -4188,7 +4188,7 @@ element leaves the DOM, its ref is removed for you.
 If the expression resolves to a non-empty string, Summit uses that string as the
 name. Otherwise it falls back to the literal text you wrote. That means a plain
 name like `s-ref="field"` just works, and you can also compute a name, which is
-handy inside an [s-for](../s-for/) loop.
+handy inside an [s-for](https://velofy.co/summitjs/s-for/) loop.
 
 ```html
 <template s-for="item in items" :key="item.id">
@@ -4204,7 +4204,7 @@ use that variable's value as the name instead of the literal text.
 ## Reaching a ref after the DOM updates
 
 If you reveal an element and then want to focus it in the same handler, wait for
-the DOM to catch up first with [$nextTick](../magic-nextTick/).
+the DOM to catch up first with [$nextTick](https://velofy.co/summitjs/magic-nexttick/).
 
 ```html
 <button @click="open = true; $nextTick(() => $refs.panel.focus())">Open</button>
@@ -4216,8 +4216,8 @@ the DOM to catch up first with [$nextTick](../magic-nextTick/).
 
 > Hide markup until Summit has initialized it.
 
-Before Summit runs, your markup is just plain HTML: an [s-text](../s-text/) span
-is empty, an [s-show](../s-show/) element is fully visible, and bound attributes
+Before Summit runs, your markup is just plain HTML: an [s-text](https://velofy.co/summitjs/s-text/) span
+is empty, an [s-show](https://velofy.co/summitjs/s-show/) element is fully visible, and bound attributes
 are unset. For a brief moment the page can show that raw, un-hydrated state.
 `s-cloak` hides an element until Summit has finished initializing it.
 
@@ -4247,7 +4247,7 @@ time it becomes visible its text, bindings, and classes are already in place.
 ## Where to put it
 
 Put `s-cloak` on the outermost element whose contents you do not want to flash,
-which is usually the same element that carries [s-data](../s-data/). You can
+which is usually the same element that carries [s-data](https://velofy.co/summitjs/s-data/). You can
 also place it on individual pieces, such as a list that fills in from a fetch.
 
 The CSS rule is yours to add once, globally. Summit does not inject it for you,
@@ -4279,7 +4279,7 @@ Any directives inside the ignored region are left untouched.
 ```
 
 The first span shows `Ada`. The second sits inside an `s-ignore` block, so its
-[s-text](../s-text/) never runs and the span stays empty. The skip covers the
+[s-text](https://velofy.co/summitjs/s-text/) never runs and the span stays empty. The skip covers the
 whole subtree, not just the element itself.
 
 ## When to use it
@@ -4292,7 +4292,7 @@ whole subtree, not just the element itself.
 
 `s-ignore` is a hard stop for the entire subtree, not a per-directive opt-out.
 If you need reactivity on part of that region, keep it outside the ignored
-element. Where [s-cloak](../s-cloak/) hides markup until it is ready, `s-ignore`
+element. Where [s-cloak](https://velofy.co/summitjs/s-cloak/) hides markup until it is ready, `s-ignore`
 never initializes it at all.
 
 ---
@@ -4330,7 +4330,7 @@ state.
 The modal markup is authored inside the component, yet it ends up appended to
 `<body>`, clear of any `overflow: hidden` ancestor. Because Summit initializes
 it with the component's scope, `open` still controls it with
-[s-show](../s-show/) and the Close button still writes back.
+[s-show](https://velofy.co/summitjs/s-show/) and the Close button still writes back.
 
 ## Choosing where it lands
 
@@ -4359,7 +4359,7 @@ So `s-teleport="body"` puts the content at the end of the page body, while
   the teleported nodes too, so no detached DOM is left behind.
 
 To animate the teleported content as it appears, pair it with
-[s-transition](../s-transition/).
+[s-transition](https://velofy.co/summitjs/s-transition/).
 
 ---
 
@@ -4374,14 +4374,14 @@ scale with no CSS to write.
 
 ## How it pairs with s-show
 
-Transitions run through [s-show](../s-show/). Put both directives on the same
+Transitions run through [s-show](https://velofy.co/summitjs/s-show/). Put both directives on the same
 element: `s-show` decides when the element is visible, and `s-transition`
 animates the change. The very first render is applied instantly with no
 animation. Every toggle after that plays the enter animation when the element
 appears and the leave animation when it hides, and the element is only set to
 `display: none` once the leave animation finishes.
 
-Note that [s-if](../s-if/) does not run transitions. It adds and removes the node
+Note that [s-if](https://velofy.co/summitjs/s-if/) does not run transitions. It adds and removes the node
 directly, so to animate an element in and out, use `s-show` rather than `s-if`.
 
 ## Class style
@@ -4554,7 +4554,7 @@ element also releases the trap, so there is nothing to tear down.
 </div>
 ```
 
-The built-in [Dialog](../comp-dialog/) component already uses `s-trap`, so most
+The built-in [Dialog](https://velofy.co/summitjs/comp-dialog/) component already uses `s-trap`, so most
 of the time you get this for free.
 
 ---
@@ -4579,7 +4579,7 @@ the viewport. It is the positioning behind menus, popovers, and tooltips.
 ```
 
 The expression resolves to the reference element, usually through
-[$refs](../magic-refs/).
+[$refs](https://velofy.co/summitjs/magic-refs/).
 
 ## Placement
 
@@ -4598,8 +4598,8 @@ Modifiers choose the side and alignment. The default is `bottom` and `start`.
 
 `s-anchor` re-positions on scroll and resize. If the preferred side would run off
 the screen it flips to the opposite side, and it clamps horizontally so the
-element never leaves the viewport. The [Menu](../comp-menu/) and
-[Popover](../comp-popover/) components use it out of the box.
+element never leaves the viewport. The [Menu](https://velofy.co/summitjs/comp-menu/) and
+[Popover](https://velofy.co/summitjs/comp-popover/) components use it out of the box.
 
 ---
 
@@ -4608,7 +4608,7 @@ element never leaves the viewport. The [Menu](../comp-menu/) and
 > Animate an element open and closed by height.
 
 `s-collapse` smoothly animates an element's height as an expression toggles. It
-is a drop-in, animated alternative to [s-show](../s-show/) for accordions,
+is a drop-in, animated alternative to [s-show](https://velofy.co/summitjs/s-show/) for accordions,
 disclosure panels, and expanding menus.
 
 ```summit
@@ -4719,8 +4719,8 @@ for reading a property straight off the node instead of mirroring it in state.
 
 `$el` is always the nearest element, which is often deep inside a component. When
 you want the element that owns the `s-data` instead, use
-[$root](../magic-root/). To reach other named elements in the component, use
-[$refs](../magic-refs/).
+[$root](https://velofy.co/summitjs/magic-root/). To reach other named elements in the component, use
+[$refs](https://velofy.co/summitjs/magic-refs/).
 
 ---
 
@@ -4729,7 +4729,7 @@ you want the element that owns the `s-data` instead, use
 > Elements in this component marked with s-ref.
 
 `$refs` is an object of the elements in the current component that you tagged
-with [s-ref](../s-ref/), keyed by their ref name. It is how you reach a specific
+with [s-ref](https://velofy.co/summitjs/s-ref/), keyed by their ref name. It is how you reach a specific
 element to focus it, measure it, or call a method on it, without a query
 selector.
 
@@ -4747,7 +4747,7 @@ Mark an element with `s-ref="name"` and it appears as `$refs.name`.
 By default the literal attribute value is the name, so `s-ref="field"` registers
 under `field`. When the value resolves to a non-empty string it is treated as a
 dynamic name instead, which is what you want inside a loop where each element
-needs its own key. The full rules are on the [s-ref](../s-ref/) page.
+needs its own key. The full rules are on the [s-ref](https://velofy.co/summitjs/s-ref/) page.
 
 ## Scope and lifetime
 
@@ -4757,7 +4757,7 @@ and vice versa. When an element leaves the DOM its entry is removed, so `$refs`
 only ever holds elements that are currently mounted.
 
 Refs are populated as elements initialize, so read them from an event handler or
-inside [$nextTick](../magic-nextTick/) rather than at the top of `init()`, when a
+inside [$nextTick](https://velofy.co/summitjs/magic-nexttick/) rather than at the top of `init()`, when a
 later sibling may not exist yet.
 
 ---
@@ -4767,7 +4767,7 @@ later sibling may not exist yet.
 > The reactive global store.
 
 `$store` is the reactive root that holds every store you register with
-[Summit.store](../globals-store/). Reading a store value inside an expression
+[Summit.store](https://velofy.co/summitjs/globals-store/). Reading a store value inside an expression
 tracks it, and writing to one triggers an update, so a change made in one
 component reaches every component that reads it.
 
@@ -4814,7 +4814,7 @@ reactive with nothing extra to wire up.
 
 Use `$store` for state that many, otherwise unrelated components need to share.
 For state that belongs to one component and its children, keep it in `s-data`.
-See [Summit.store](../globals-store/) for creating and reading stores from
+See [Summit.store](https://velofy.co/summitjs/globals-store/) for creating and reading stores from
 JavaScript.
 
 ---
@@ -4836,7 +4836,7 @@ component's scope and `callback` receives the new value and the old value.
 </div>
 ```
 
-Set the watcher up once, in [s-init](../s-init/) or in a component's `init()`
+Set the watcher up once, in [s-init](https://velofy.co/summitjs/s-init/) or in a component's `init()`
 method. The callback then fires on every later change to the expression.
 
 ## It only fires on a real change
@@ -4876,7 +4876,7 @@ this.$watch("items.length", (n) => console.log(n, "items"));
 ```
 
 For a side effect that should re-run without needing the old value, reach for
-[s-effect](../s-effect/) instead.
+[s-effect](https://velofy.co/summitjs/s-effect/) instead.
 
 ---
 
@@ -4930,8 +4930,8 @@ an event no matter where it was dispatched, listen on the window with the
 <div @add-to-cart.window="count += $event.detail.qty"></div>
 ```
 
-For the full listener reference, including modifiers, see the [s-on](../s-on/)
-and [Events](../events/) pages.
+For the full listener reference, including modifiers, see the [s-on](https://velofy.co/summitjs/s-on/)
+and [Events](https://velofy.co/summitjs/events/) pages.
 
 ---
 
@@ -4974,7 +4974,7 @@ async grow() {
 ```
 
 A common use is focusing an element that only just appeared, which is why you
-will often see `$nextTick` paired with [$refs](../magic-refs/).
+will often see `$nextTick` paired with [$refs](https://velofy.co/summitjs/magic-refs/).
 
 ```html
 <button @click="open = true; $nextTick(() => $refs.panel.focus())">Open</button>
@@ -5007,7 +5007,7 @@ wrappers to the outer `s-data` element.
 
 ## $root versus $el
 
-[$el](../magic-el/) is the element the current expression runs on, which changes
+[$el](https://velofy.co/summitjs/magic-el/) is the element the current expression runs on, which changes
 from one directive to the next. `$root` is fixed for the whole component: it is
 the same element for every expression inside it. Use `$el` for the element at
 hand and `$root` when you need the component's outer boundary, for example to
@@ -5054,7 +5054,7 @@ Pass `s-id` an array of the names you want to scope. Groups nest: an inner
 
 ## Ids in a list
 
-Inside an [s-for](../s-for/) loop, open a fresh group per row so each row gets
+Inside an [s-for](https://velofy.co/summitjs/s-for/) loop, open a fresh group per row so each row gets
 its own ids and none of them collide.
 
 ```html
@@ -5117,9 +5117,9 @@ helper, or reset it in one assignment.
 ## Which component
 
 `$data` is the state of the nearest component. In
-[nested components](../reactivity-state/) the inner `s-data` wins, so `$data`
+[nested components](https://velofy.co/summitjs/reactivity-state/) the inner `s-data` wins, so `$data`
 inside a child gives the child's state, not the parent's. To reach shared state
-across components, use [$store](../magic-store/) instead.
+across components, use [$store](https://velofy.co/summitjs/magic-store/) instead.
 
 ---
 
@@ -5190,13 +5190,13 @@ field after an action, or to step through the focusable elements inside a region
 - `$focus.within(el)` returns a helper rooted at `el` instead of the current one.
 
 By default `$focus` looks inside the element it is used on. `within` lets you aim
-it at any other element, which pairs well with [$refs](../magic-refs/).
+it at any other element, which pairs well with [$refs](https://velofy.co/summitjs/magic-refs/).
 
 ```html
 <input s-ref="email" @keydown.enter="$focus.focus($refs.password)">
 ```
 
-For a full focus trap on a dialog or menu, reach for the [s-trap](../s-trap/)
+For a full focus trap on a dialog or menu, reach for the [s-trap](https://velofy.co/summitjs/s-trap/)
 directive, which builds on the same idea.
 
 ---
@@ -5236,7 +5236,7 @@ Summit.data("counter", (start = 0) => ({
 The returned object becomes reactive state exactly like an inline `s-data`
 object: properties are tracked, getters become cached derived values, and
 methods are bound so `this` is the component. See
-[Reactivity and State](../reactivity-state/) for how that state behaves.
+[Reactivity and State](https://velofy.co/summitjs/reactivity-state/) for how that state behaves.
 
 ## Passing arguments
 
@@ -5278,7 +5278,7 @@ Summit.data("clock", () => ({
 }));
 ```
 
-See [Lifecycle](../lifecycle/) for the full order of these hooks.
+See [Lifecycle](https://velofy.co/summitjs/lifecycle/) for the full order of these hooks.
 
 ## Chaining and timing
 
@@ -5291,7 +5291,7 @@ Summit
 ```
 
 Registration is timing-safe. You can register a provider before or after
-[Summit.start](../globals-start/), and any matching `s-data` in the page, now or
+[Summit.start](https://velofy.co/summitjs/globals-start/), and any matching `s-data` in the page, now or
 added later, resolves to it.
 
 ---
@@ -5342,7 +5342,7 @@ const cart = Summit.store("cart");
 cart.add({ id: 1 });
 ```
 
-In markup, reach any store through the [$store](../magic-store/) magic. Reads
+In markup, reach any store through the [$store](https://velofy.co/summitjs/magic-store/) magic. Reads
 track, so the view stays in sync, and writes are reactive out of the box:
 
 ```html
@@ -5385,7 +5385,7 @@ primitive examples above.
 dynamic bindings so you can apply the whole set at once instead of repeating the
 same `:class`, `@click`, and `aria-*` attributes on every element that needs
 them. It is the reusable form of an object passed to
-[s-bind](../s-bind/).
+[s-bind](https://velofy.co/summitjs/s-bind/).
 
 ## Registering a bundle
 
@@ -5410,7 +5410,7 @@ registrations.
 
 ## What a bind provider returns
 
-The object uses the same shape [s-bind](../s-bind/) accepts, and each kind of key
+The object uses the same shape [s-bind](https://velofy.co/summitjs/s-bind/) accepts, and each kind of key
 is handled differently:
 
 - A plain key sets an attribute. Boolean attributes such as `disabled` are added
@@ -5427,7 +5427,7 @@ is handled differently:
 
 Retrieve a registered provider with `Summit.getBind(name)`, which returns the
 provider function (or `undefined` if none is registered). Calling it produces the
-bindings object, which you hand to [s-bind](../s-bind/). Add `Summit` to the
+bindings object, which you hand to [s-bind](https://velofy.co/summitjs/s-bind/). Add `Summit` to the
 expression globals once so markup can reach it:
 
 ```js
@@ -5515,12 +5515,12 @@ Summit.directive("setup", handler, 0); // runs early, before default directives
 ## Timing
 
 Registration is timing-safe: register before or after
-[Summit.start](../globals-start/). Built-in directives are registered when
+[Summit.start](https://velofy.co/summitjs/globals-start/). Built-in directives are registered when
 Summit loads, and registering a custom directive with the same name overrides
 the built-in.
 
 For a fuller walkthrough, see
-[Writing directives and plugins](../advanced-extending/).
+[Writing directives and plugins](https://velofy.co/summitjs/advanced-extending/).
 
 ---
 
@@ -5529,8 +5529,8 @@ For a fuller walkthrough, see
 > Register a custom magic property.
 
 `Summit.magic` adds a `$`-prefixed helper that every expression can reach, the
-same way the built-ins [$el](../magic-el/), [$refs](../magic-refs/), and
-[$store](../magic-store/) work. Use it to expose a value or a small function to
+same way the built-ins [$el](https://velofy.co/summitjs/magic-el/), [$refs](https://velofy.co/summitjs/magic-refs/), and
+[$store](https://velofy.co/summitjs/magic-store/) work. Use it to expose a value or a small function to
 your markup without threading it through component state.
 
 ## Registering a magic
@@ -5580,9 +5580,9 @@ disposable, so it is cleaned up when the element goes away.
 ## Timing
 
 Registration is timing-safe: register before or after
-[Summit.start](../globals-start/). Registering a magic with the name of a
+[Summit.start](https://velofy.co/summitjs/globals-start/). Registering a magic with the name of a
 built-in overrides it. For a broader guide, see
-[Writing directives and plugins](../advanced-extending/).
+[Writing directives and plugins](https://velofy.co/summitjs/advanced-extending/).
 
 ---
 
@@ -5638,8 +5638,8 @@ Summit
 ```
 
 Everything a plugin registers is timing-safe, so it does not matter whether you
-install plugins before or after [Summit.start](../globals-start/). See
-[Writing directives and plugins](../advanced-extending/) for the pieces a plugin
+install plugins before or after [Summit.start](https://velofy.co/summitjs/globals-start/). See
+[Writing directives and plugins](https://velofy.co/summitjs/advanced-extending/) for the pieces a plugin
 is built from.
 
 ---
@@ -5715,7 +5715,7 @@ console.log(Summit.version); // "0.1.0"
 ```
 
 For install options and manual-start setup, see
-[Installation](../installation/).
+[Installation](https://velofy.co/summitjs/installation/).
 
 ---
 
@@ -5744,7 +5744,7 @@ calling it, and you write it with `.set()`.
 ## Reading
 
 Call the signal to get its current value. When you read a signal inside an
-[effect()](../reactive-effect/) or [computed()](../reactive-computed/), that
+[effect()](https://velofy.co/summitjs/reactive-effect/) or [computed()](https://velofy.co/summitjs/reactive-computed/), that
 reader subscribes to the signal and re-runs whenever the value changes.
 
 ```js
@@ -5792,12 +5792,12 @@ a named export of `summitjs`.
 ## How signals underpin the framework
 
 Every reactive `s-` directive ultimately reads and writes signals. The state you
-declare with `s-data` lives in a [reactive()](../reactive-reactive/) proxy, and
+declare with `s-data` lives in a [reactive()](https://velofy.co/summitjs/reactive-reactive/) proxy, and
 both signals and that proxy feed the one dependency-tracking engine described in
-[How reactivity works](../advanced-reactivity/). For the HTML-first way to hold
-and update state, see [Reactivity and State](../reactivity-state/). To derive a
-cached value from a signal, reach for [computed()](../reactive-computed/); to run
-a side effect when it changes, use [effect()](../reactive-effect/).
+[How reactivity works](https://velofy.co/summitjs/advanced-reactivity/). For the HTML-first way to hold
+and update state, see [Reactivity and State](https://velofy.co/summitjs/reactivity-state/). To derive a
+cached value from a signal, reach for [computed()](https://velofy.co/summitjs/reactive-computed/); to run
+a side effect when it changes, use [effect()](https://velofy.co/summitjs/reactive-effect/).
 
 ---
 
@@ -5813,7 +5813,7 @@ repeatedly, which would redo the work on every call.
 ## Creating a computed
 
 Pass `computed` a getter function. It returns a computed you read the same way as
-a [signal](../reactive-signal/), by calling it.
+a [signal](https://velofy.co/summitjs/reactive-signal/), by calling it.
 
 ```js
 import { signal, computed } from "summitjs";
@@ -5854,7 +5854,7 @@ dependency such as `price` invalidates the cache.
 
 Because a computed both reads dependencies and is itself readable, computeds
 chain. Reading one computed inside another subscribes to it, and reading a
-computed inside an [effect()](../reactive-effect/) re-runs the effect when the
+computed inside an [effect()](https://velofy.co/summitjs/reactive-effect/) re-runs the effect when the
 computed's result changes.
 
 ```js
@@ -5876,8 +5876,8 @@ total.peek(); // current total, without creating a dependency
 
 The getters you define in `s-data` are cached the same way a computed is, which
 is why a derived value like a full name recomputes only when its parts change.
-See [Derived values](../reactivity-state/) for the HTML-first form, and
-[How reactivity works](../advanced-reactivity/) for the tracking model
+See [Derived values](https://velofy.co/summitjs/reactivity-state/) for the HTML-first form, and
+[How reactivity works](https://velofy.co/summitjs/advanced-reactivity/) for the tracking model
 underneath. `computed` is also available on the global as `Summit.computed`.
 
 ---
@@ -5966,13 +5966,13 @@ effect(() => {
 By default an effect re-runs synchronously, the moment a dependency changes. The
 DOM-facing effects behind directives instead batch onto the microtask queue so a
 burst of writes produces a single update, which is why you await
-[nextTick()](../reactive-nexttick/) to read the updated DOM. To coalesce several
+[nextTick()](https://velofy.co/summitjs/reactive-nexttick/) to read the updated DOM. To coalesce several
 synchronous writes into one effect run yourself, use
-[batch()](../reactive-batch/).
+[batch()](https://velofy.co/summitjs/reactive-batch/).
 
 `effect` is also available on the global as `Summit.effect`; `stop` and
 `untrack` ship as named exports of `summitjs`. For the full tracking model, see
-[How reactivity works](../advanced-reactivity/).
+[How reactivity works](https://velofy.co/summitjs/advanced-reactivity/).
 
 ---
 
@@ -5983,7 +5983,7 @@ synchronous writes into one effect run yourself, use
 `reactive(obj)` wraps a plain object or array in a deep proxy that tracks reads
 and triggers on writes. It is what backs a component's `s-data` scope, so a plain
 assignment like `state.open = true` updates everything that read `open`. Where a
-[signal](../reactive-signal/) holds one value, `reactive` gives you an ordinary
+[signal](https://velofy.co/summitjs/reactive-signal/) holds one value, `reactive` gives you an ordinary
 object you can read and mutate by property.
 
 ## Creating reactive state
@@ -6046,11 +6046,11 @@ isReactive(raw); // false
 
 ## How it fits
 
-`reactive` and [signal()](../reactive-signal/) share one dependency-tracking
-core, so an [effect()](../reactive-effect/) or [computed()](../reactive-computed/)
+`reactive` and [signal()](https://velofy.co/summitjs/reactive-signal/) share one dependency-tracking
+core, so an [effect()](https://velofy.co/summitjs/reactive-effect/) or [computed()](https://velofy.co/summitjs/reactive-computed/)
 can depend on a mix of both. This proxy is exactly what gives `s-data` its
-ergonomics; see [Reactivity and State](../reactivity-state/) for the HTML side
-and [How reactivity works](../advanced-reactivity/) for the internals.
+ergonomics; see [Reactivity and State](https://velofy.co/summitjs/reactivity-state/) for the HTML side
+and [How reactivity works](https://velofy.co/summitjs/advanced-reactivity/) for the internals.
 `reactive` is also available on the global as `Summit.reactive`; `toRaw` and
 `isReactive` ship as named exports of `summitjs`.
 
@@ -6060,7 +6060,7 @@ and [How reactivity works](../advanced-reactivity/) for the internals.
 
 > Group writes so effects run once.
 
-Without batching, each write to a [signal](../reactive-signal/) or reactive
+Without batching, each write to a [signal](https://velofy.co/summitjs/reactive-signal/) or reactive
 property triggers its dependent effects right away. When you make several related
 writes, that can run the same effect more than once. `batch()` defers those
 triggers until the whole function has run, then flushes each affected effect a
@@ -6121,10 +6121,10 @@ batch(() => {
 `batch()` coalesces synchronous writes within one function. It is different from
 the microtask scheduling that DOM-facing directives use, where updates are
 already deferred to the next tick. When you need to read the DOM after updates
-apply, await [nextTick()](../reactive-nexttick/) instead.
+apply, await [nextTick()](https://velofy.co/summitjs/reactive-nexttick/) instead.
 
 `batch` is also available on the global as `Summit.batch`. For the trigger and
-flush mechanism underneath, see [How reactivity works](../advanced-reactivity/).
+flush mechanism underneath, see [How reactivity works](https://velofy.co/summitjs/advanced-reactivity/).
 
 ---
 
@@ -6168,7 +6168,7 @@ Either form returns a `Promise<void>`, so you can `await` it or chain `.then()`.
 ## The $nextTick magic
 
 Inside markup, the same capability is available as the
-[$nextTick](../magic-nextTick/) magic. It is this function bound into the
+[$nextTick](https://velofy.co/summitjs/magic-nexttick/) magic. It is this function bound into the
 expression scope, so you can wait for the DOM from an `s-` attribute:
 
 ```html
@@ -6182,9 +6182,9 @@ Use `nextTick` from JavaScript and `$nextTick` from an expression.
 The batched, DOM-facing effects that directives are built on schedule themselves
 onto this same microtask queue, so awaiting `nextTick` after a state change is the
 reliable way to observe the resulting DOM. To collapse several synchronous writes
-into one effect run before the flush, see [batch()](../reactive-batch/). For the
+into one effect run before the flush, see [batch()](https://velofy.co/summitjs/reactive-batch/). For the
 queue and effect machinery underneath, see
-[How reactivity works](../advanced-reactivity/). `nextTick` is also available on
+[How reactivity works](https://velofy.co/summitjs/advanced-reactivity/). `nextTick` is also available on
 the global as `Summit.nextTick`.
 
 ---
@@ -6199,7 +6199,7 @@ that engine end to end so you can reason about updates, write your own effects,
 and understand exactly why a directive fires when it does.
 
 If you just want to use signals, computeds, and effects, the
-[Reactivity](../reactive-signal/) reference pages cover the public API. This page
+[Reactivity](https://velofy.co/summitjs/reactive-signal/) reference pages cover the public API. This page
 is about the machinery underneath them.
 
 ## The signal, the atom of state
@@ -6384,11 +6384,11 @@ value.
 
 ## Where to go next
 
-- [signal](../reactive-signal/) and [computed](../reactive-computed/) for the
+- [signal](https://velofy.co/summitjs/reactive-signal/) and [computed](https://velofy.co/summitjs/reactive-computed/) for the
   value primitives.
-- [effect](../reactive-effect/) for the tracking primitive, and
-  [reactive](../reactive-reactive/) for deep reactive objects.
-- [batch](../reactive-batch/) and [nextTick](../reactive-nexttick/) for
+- [effect](https://velofy.co/summitjs/reactive-effect/) for the tracking primitive, and
+  [reactive](https://velofy.co/summitjs/reactive-reactive/) for deep reactive objects.
+- [batch](https://velofy.co/summitjs/reactive-batch/) and [nextTick](https://velofy.co/summitjs/reactive-nexttick/) for
   controlling when work runs.
 
 ---
@@ -6573,9 +6573,9 @@ is that it never asks you to open that door in the first place.
 
 ## See also
 
-- [Reactivity](../advanced-reactivity/) for how the values these expressions read
+- [Reactivity](https://velofy.co/summitjs/advanced-reactivity/) for how the values these expressions read
   are tracked.
-- [Extending Summit](../advanced-extending/) to reach the evaluator from your own
+- [Extending Summit](https://velofy.co/summitjs/advanced-extending/) to reach the evaluator from your own
   directives with `utils.evaluate` and `utils.evaluateAction`.
 
 ---
@@ -6595,7 +6595,7 @@ bundle both into a reusable plugin.
 
 ## A custom directive
 
-Register a directive with [Summit.directive](../globals-directive/). You pass a
+Register a directive with [Summit.directive](https://velofy.co/summitjs/globals-directive/). You pass a
 name without the `s-` prefix and a handler function. The name becomes the
 attribute: registering `"money"` gives you `s-money`.
 
@@ -6694,7 +6694,7 @@ and Summit still descends into the element's children afterward.
 ## A custom magic
 
 A magic is a `$`-prefixed helper available in every expression. Register one with
-[Summit.magic](../globals-magic/). The factory receives a context object and
+[Summit.magic](https://velofy.co/summitjs/globals-magic/). The factory receives a context object and
 returns either a value or a function.
 
 ```js
@@ -6722,7 +6722,7 @@ method you can reach them as `this.$copy`, `this.$refs`, and so on.
 ## Bundling a plugin
 
 A plugin is just a function that receives the Summit global. Use
-[Summit.plugin](../globals-plugin/) to run it. Everything a plugin registers,
+[Summit.plugin](https://velofy.co/summitjs/globals-plugin/) to run it. Everything a plugin registers,
 directives, magics, data providers, stores, and extra globals, lives together in
 one installable unit.
 
@@ -6779,11 +6779,11 @@ handler, which is how you can replace a built-in directive with your own.
 
 ## See also
 
-- [Summit.directive](../globals-directive/), [Summit.magic](../globals-magic/),
-  and [Summit.plugin](../globals-plugin/) for the reference details.
-- [How reactivity works](../advanced-reactivity/) for what `utils.effect` does
+- [Summit.directive](https://velofy.co/summitjs/globals-directive/), [Summit.magic](https://velofy.co/summitjs/globals-magic/),
+  and [Summit.plugin](https://velofy.co/summitjs/globals-plugin/) for the reference details.
+- [How reactivity works](https://velofy.co/summitjs/advanced-reactivity/) for what `utils.effect` does
   under the hood.
-- [The CSP-safe evaluator](../advanced-evaluator/) for what `utils.evaluate`
+- [The CSP-safe evaluator](https://velofy.co/summitjs/advanced-evaluator/) for what `utils.evaluate`
   accepts.
 
 ---
@@ -6845,14 +6845,14 @@ you are done.
 
 The magics keep their names too: `$el`, `$refs`, `$store`, `$watch`, `$dispatch`,
 `$nextTick`, `$root`, and `$id` all work as you expect. Summit adds one,
-[$data](../magic-data/), which returns the nearest scope object.
+[$data](https://velofy.co/summitjs/magic-data/), which returns the nearest scope object.
 
 The global API maps one for one as well: `Alpine.data`, `Alpine.store`,
 `Alpine.bind`, `Alpine.directive`, `Alpine.magic`, `Alpine.plugin`, and
-`Alpine.start` become [Summit.data](../globals-data/),
-[Summit.store](../globals-store/), [Summit.bind](../globals-bind/),
-[Summit.directive](../globals-directive/), [Summit.magic](../globals-magic/),
-[Summit.plugin](../globals-plugin/), and [Summit.start](../globals-start/).
+`Alpine.start` become [Summit.data](https://velofy.co/summitjs/globals-data/),
+[Summit.store](https://velofy.co/summitjs/globals-store/), [Summit.bind](https://velofy.co/summitjs/globals-bind/),
+[Summit.directive](https://velofy.co/summitjs/globals-directive/), [Summit.magic](https://velofy.co/summitjs/globals-magic/),
+[Summit.plugin](https://velofy.co/summitjs/globals-plugin/), and [Summit.start](https://velofy.co/summitjs/globals-start/).
 
 ## What is genuinely different
 
@@ -6870,7 +6870,7 @@ is no subtree to re-evaluate.
 One practical upshot is getters. A getter you define in `s-data` is a cached
 computed: it recomputes only when one of its own dependencies changes, and
 reading it several times in one render does the work once. The same getter in
-Alpine re-runs on every read. See [How reactivity works](../advanced-reactivity/)
+Alpine re-runs on every read. See [How reactivity works](https://velofy.co/summitjs/advanced-reactivity/)
 for the full picture.
 
 ### CSP-safe with the standard build
@@ -6881,7 +6881,7 @@ expressions may do). Summit interprets expressions with its own engine and never
 calls `eval` or `new Function`, so a policy like `script-src 'self'` works with
 the one and only build, and directive expressions still support a broad slice of
 JavaScript. The details, including the exact supported syntax and the global
-allowlist, are in [The CSP-safe evaluator](../advanced-evaluator/).
+allowlist, are in [The CSP-safe evaluator](https://velofy.co/summitjs/advanced-evaluator/).
 
 ### $watch returns an unwatch function and will not loop
 
@@ -6932,13 +6932,13 @@ is more than a single root element.
 
 `s-model` handles text, number, range, checkbox (boolean or array), radio, and
 single or multiple selects, with these modifiers: `.lazy`, `.change`, `.blur`,
-`.number`, `.boolean`, `.debounce`, `.throttle`, and `.fill`. A few are worth
+`.number`, `.boolean`, `.debounce`, and `.fill`. A few are worth
 calling out for Alpine users:
 
 - `.fill` seeds the model from the control's own initial value when the model is
   empty, so server-rendered form values become the starting state.
 - `.boolean` coerces the input to a real boolean.
-- `.debounce` and `.throttle` accept a duration, for example `s-model.debounce.500ms`.
+- `.debounce` accepts a duration, for example `s-model.debounce.500ms`.
 
 The bound value is also exposed on the element as `el._summitModel = { get, set }`,
 which makes it straightforward to build custom input components that participate
@@ -6952,7 +6952,7 @@ matter and a later registration overrides an earlier one of the same name.
 Summit dispatches `summit:init` on `document` just before it initializes the page
 and `summit:initialized` when it is done, so register your plugins before start,
 or inside a `summit:init` listener. See
-[Extending Summit](../advanced-extending/) for the full pattern.
+[Extending Summit](https://velofy.co/summitjs/advanced-extending/) for the full pattern.
 
 ---
 
@@ -6981,8 +6981,8 @@ Summit.start();
 Or drop in a second script after the core, no build step:
 
 ```html
-<script src="https://velofy.github.io/summitjs/summit.min.js" defer></script>
-<script src="https://velofy.github.io/summitjs/summit-net.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit-net.min.js" defer></script>
 ```
 
 ## The resource pattern
@@ -7039,7 +7039,7 @@ resolving with the error body.
 ```html
 <form s-data="{ title: '' }"
       @submit.prevent="$fetch.post('/api/todos', { title }).then(() => title = '')">
-  <input s-model.trim="title">
+  <input s-model="title">
   <button type="submit">Add</button>
 </form>
 ```

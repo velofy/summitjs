@@ -33,5 +33,5 @@ for reading a property straight off the node instead of mirroring it in state.
 
 `$el` is always the nearest element, which is often deep inside a component. When
 you want the element that owns the `s-data` instead, use
-[$root](../magic-root/). To reach other named elements in the component, use
-[$refs](../magic-refs/).
+[$root](https://velofy.co/summitjs/magic-root/). To reach other named elements in the component, use
+[$refs](https://velofy.co/summitjs/magic-refs/).
