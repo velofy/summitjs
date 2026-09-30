@@ -27,6 +27,8 @@ Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed fur
 
 <h3 align="center">Sponsors</h3>
 
+<p align="center"><strong>Primary sponsor</strong></p>
+
 <p align="center">
   <a href="https://go.nodemaven.com/summitjsreadme" title="NodeMaven: best proxy for web scraping and automation">
     <img src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-banner.jpg" alt="NodeMaven: best proxy for web scraping and automation with the highest quality IP" width="720">
