@@ -1,8 +1,8 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/logo-dark.svg">
-    <img alt="Summit.js" src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/logo-light.svg" width="104">
-  </picture>
+  <a href="https://summitjs.velofy.co/"><picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/tile-dark.svg">
+    <img alt="Summit.js" src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/tile-light.svg" width="360">
+  </picture></a>
 </p>
 
 <h1 align="center">Summit.js</h1>
