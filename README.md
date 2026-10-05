@@ -30,14 +30,14 @@ Summit is built in the spirit of Alpine's HTML-first ergonomics, then pushed fur
 <p align="center"><strong>Primary sponsor</strong></p>
 
 <p align="center">
-  <a href="https://go.nodemaven.com/summitjsreadme" title="NodeMaven: best proxy for web scraping and automation">
+  <a href="https://go.nodemaven.com/summitjsreadmeoct" title="NodeMaven: best proxy for web scraping and automation">
     <img src="https://raw.githubusercontent.com/velofy/summitjs/main/docs/assets/sponsors/nodemaven-banner.jpg" alt="NodeMaven: best proxy for web scraping and automation with the highest quality IP" width="720">
   </a>
 </p>
 
-**[NodeMaven](https://go.nodemaven.com/summitjsreadme)**: the most efficient proxy provider for web scraping and automation, with the highest quality IPs on the market.
+**[NodeMaven](https://go.nodemaven.com/summitjsreadmeoct)**: the most efficient proxy provider for web scraping and automation, with the highest quality IPs on the market.
 
-Why [NodeMaven](https://go.nodemaven.com/summitjsreadme)?
+Why [NodeMaven](https://go.nodemaven.com/summitjsreadmeoct)?
 
 - ZIP targeting
 - 99.9% uptime
