@@ -3,6 +3,7 @@
  * restore the GitHub README. Exits with npm publish's status, so a failed
  * publish (no login, bad OTP, version already taken) fails the command.
  * Extra arguments pass through: `npm run release:npm -- --otp 123456`.
+ * Works on README.md in the working directory, which npm sets to the package root.
  */
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
