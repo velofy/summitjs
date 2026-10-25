@@ -6,6 +6,11 @@ import { readFileSync, writeFileSync, renameSync, existsSync } from "node:fs";
 // prepack/postpack. The npm variant uses the npm tracking link, and keeps a
 // plain <img> because npm's sanitizer can drop <picture>/<source>.
 const README = new URL("../README.md", import.meta.url).pathname;
+// The tracking link used on npmjs.com. Every README tracking link
+// (summitjsreadme, summitjsreadmeoct, ...) becomes this one in full, so a new
+// README slug can never leave a half-replaced link behind.
+const NPM_LINK = "https://go.nodemaven.com/summitjsnpmjs";
+const README_LINK = /https:\/\/go\.nodemaven\.com\/summitjsreadme[A-Za-z0-9_-]*/g;
 const BACKUP = new URL("../.readme.github.md", import.meta.url).pathname;
 
 const mode = process.argv[2];
@@ -14,10 +19,7 @@ if (mode === "swap") {
   const src = readFileSync(README, "utf8");
   // never clobber an existing backup: a double swap must not lose the original
   if (!existsSync(BACKUP)) writeFileSync(BACKUP, src);
-  let out = src.replaceAll(
-    "https://go.nodemaven.com/summitjsreadme",
-    "https://go.nodemaven.com/summitjsnpmjs",
-  );
+  let out = src.replace(README_LINK, NPM_LINK);
   out = out.replace(/<picture>\s*<source[^>]*>\s*(<img[^>]*>)\s*<\/picture>/g, "$1");
   writeFileSync(README, out);
 } else if (mode === "restore") {
