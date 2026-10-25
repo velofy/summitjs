@@ -14,7 +14,7 @@ element you clicked and inside `s-text` it is the element being filled.
 </div>
 ```
 
-Each expression sees its own `$el`. In the demo above `$el` is the button, so
+Each expression sees its own `$el`. In the first example above `$el` is the button, so
 writing to `$el.textContent` changes only the button.
 
 ## Reading from the element

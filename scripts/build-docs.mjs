@@ -151,10 +151,12 @@ const DIRECTIVES = [
   ["s-for", null, "Render a keyed list.", `<template s-for="item in items" :key="item.id">`],
   ["s-ref", null, "Name an element; read it via $refs.", `<input s-ref="field">`],
   ["s-init", null, "Run an expression once when the element initializes.", `<div s-init="load()">`],
+  ["s-id", null, "Open an id group so $id() calls inside it share one generated id.", `<div s-id="['field']">`],
   ["s-effect", null, "Re-run an expression whenever its reactive dependencies change.", `<div s-effect="document.title = title">`],
   ["s-transition", null, "Animate enter and leave.", `<div s-show="open" s-transition>`],
   ["s-teleport", null, "Render a template's content elsewhere in the DOM.", `<template s-teleport="body">...</template>`],
   ["s-intersect", ":leave", "Run an expression when the element enters or leaves the viewport.", `<div s-intersect="load()">`],
+  ["s-resize", null, "Run an expression when the element changes size, with $width and $height.", `<div s-resize="w = $width">`],
   ["s-trap", null, "Keep keyboard focus inside an element while an expression is truthy.", `<div s-trap="open">`],
   ["s-anchor", null, "Position an element next to a reference, flipping to stay in view.", `<div s-anchor="$refs.trigger">`],
   ["s-collapse", null, "Animate an element open and closed by height.", `<div s-collapse="open">`],
@@ -176,10 +178,26 @@ const MAGICS = [
   ["$focus", "Move keyboard focus around from an expression.", "magic-focus"],
 ];
 const MODIFIERS = {
-  event: ["prevent", "stop", "self", "outside", "once", "capture", "passive", "window", "document", "debounce", "throttle", "camel", "dot", "enter", "escape", "tab", "space", "up", "down", "left", "right", "cmd", "ctrl", "meta", "alt", "shift"],
+  // Matches src/directives/on.ts: behavior modifiers, key aliases, then system keys.
+  // Any other modifier is matched against the key name in kebab case (`.k`, `.f1`).
+  event: ["prevent", "stop", "self", "outside", "once", "capture", "passive", "window", "document", "debounce", "throttle", "camel", "dot", "enter", "tab", "space", "esc", "escape", "up", "down", "left", "right", "arrow-up", "arrow-down", "arrow-left", "arrow-right", "page-up", "page-down", "home", "end", "delete", "backspace", "shift", "ctrl", "alt", "cmd", "meta"],
   // Matches src/directives/model.ts.
   model: ["lazy", "change", "blur", "number", "boolean", "debounce", "fill"],
 };
+// Matches GLOBAL_ALLOW in src/evaluator/interpreter.ts (verify-docs checks it).
+export const ALLOWED_GLOBALS = [
+  "Math", "JSON", "Date", "Object", "Array", "Number", "String", "Boolean",
+  "parseInt", "parseFloat", "isNaN", "isFinite", "RegExp",
+  "Map", "Set", "WeakMap", "WeakSet", "Promise", "Intl", "console",
+  "window", "document", "location", "navigator", "history",
+  "localStorage", "sessionStorage",
+  "setTimeout", "clearTimeout", "setInterval", "clearInterval",
+  "requestAnimationFrame", "cancelAnimationFrame",
+  "fetch", "AbortController", "Headers", "Request", "Response",
+  "alert", "confirm", "prompt", "structuredClone",
+  "URL", "URLSearchParams", "encodeURIComponent", "decodeURIComponent",
+  "NaN", "Infinity",
+];
 const ERROR_CODES = [
   ["E101", "s-data init() threw."],
   ["E102", "s-data destroy() threw."],
@@ -225,7 +243,7 @@ function buildManifest(ordered, version) {
         { code: "SUMMITJS40", offer: "40% off ISP (Static)" },
       ],
     },
-    allowedGlobals: ["Math", "JSON", "Date", "Object", "Array", "Number", "String", "Boolean", "console", "window", "document", "location", "localStorage", "sessionStorage", "setTimeout", "setInterval", "fetch", "URL", "structuredClone"],
+    allowedGlobals: ALLOWED_GLOBALS,
     directives: DIRECTIVES.map(([name, shorthand, summary, example]) => ({
       name, shorthand, summary, example, doc: doc(name),
     })),

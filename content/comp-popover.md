@@ -31,16 +31,6 @@ dismissal: `@click.outside` closes the panel when you click anywhere else, and
 </div>
 ```
 
-```html
-<div class="s-anchor" s-data="{ open: false }" @keydown.escape="open = false">
-  <button class="s-btn s-btn-outline" @click="open = !open">Show popover</button>
-  <div class="s-popover" s-show="open" @click.outside="open = false">
-    <p style="margin:0 0 .4rem;font-weight:600">Dimensions</p>
-    <p style="margin:0;color:var(--muted);font-size:.88rem">Set the width and height of the layer.</p>
-  </div>
-</div>
-```
-
 ## A panel with controls
 
 Because a popover holds real content, you can put inputs and buttons inside it.
@@ -49,20 +39,6 @@ field keeps the popover open. Wire a confirming action to set `open = false` so
 the panel closes once the user is done.
 
 ```summit
-<div class="s-anchor" s-data="{ open: false, name: 'Untitled' }" @keydown.escape="open = false">
-  <button class="s-btn" @click="open = !open">Rename</button>
-  <div class="s-popover" s-show="open" @click.outside="open = false">
-    <label class="s-label">Project name</label>
-    <input class="s-input" s-model="name">
-    <div class="s-row" style="margin-top:.7rem;justify-content:flex-end">
-      <button class="s-btn s-btn-ghost s-btn-sm" @click="open = false">Cancel</button>
-      <button class="s-btn s-btn-sm" @click="open = false">Save</button>
-    </div>
-  </div>
-</div>
-```
-
-```html
 <div class="s-anchor" s-data="{ open: false, name: 'Untitled' }" @keydown.escape="open = false">
   <button class="s-btn" @click="open = !open">Rename</button>
   <div class="s-popover" s-show="open" @click.outside="open = false">

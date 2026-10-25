@@ -10,7 +10,7 @@
 import { Window } from "happy-dom";
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { loadPages, newSlug, redirectStub, SITE } from "./build-docs.mjs";
+import { loadPages, newSlug, redirectStub, SITE, ALLOWED_GLOBALS } from "./build-docs.mjs";
 
 const bundle = readFileSync("dist/summit.min.js", "utf8");
 const pages = loadPages();
@@ -63,6 +63,13 @@ for (const f of ["docs/llms.txt", "docs/llms-full.txt", "docs/ai/summit.json"]) 
   if (!existsSync(f)) problems.push(`missing ${f}`);
   else if (readFileSync(f, "utf8").includes("velofy.github.io")) problems.push(`${f} still links to velofy.github.io`);
 }
+
+// The manifest's allowedGlobals must match the evaluator's real allowlist.
+const interp = readFileSync("src/evaluator/interpreter.ts", "utf8");
+const allowBlock = interp.match(/const GLOBAL_ALLOW = new Set<string>\(\[([\s\S]*?)\]\)/);
+const realGlobals = allowBlock ? [...allowBlock[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]) : [];
+if (!realGlobals.length) problems.push("could not read GLOBAL_ALLOW from src/evaluator/interpreter.ts");
+else if (realGlobals.join() !== ALLOWED_GLOBALS.join()) problems.push("ALLOWED_GLOBALS in build-docs.mjs differs from GLOBAL_ALLOW in the evaluator");
 
 problems.forEach((p) => realError("FAIL", p));
 console.log(

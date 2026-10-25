@@ -140,7 +140,7 @@ Full reference: [directives](https://velofy.co/summitjs/s-data/).
 
 ### Event modifiers
 
-`.prevent .stop .self .outside .once .capture .passive .window .document .debounce .throttle`, key filters (`.enter .escape .arrow-up ...`), system keys (`.shift .ctrl .alt .cmd`), and name transforms (`.camel .dot`).
+`.prevent .stop .self .outside .once .capture .passive .window .document .debounce .throttle`, key filters (`.enter .escape .arrow-up ...`), system keys (`.shift .ctrl .alt .cmd .meta`), and name transforms (`.camel .dot`).
 
 ### `s-model` modifiers
 
@@ -255,7 +255,7 @@ npm install
 npm run check   # typecheck + unit tests + build + size budget + bundle smoke + docs checks
 ```
 
-- `npm test` runs the Vitest suites (reactivity, evaluator, directives, net, plugins).
+- `npm test` runs the Vitest suites (reactivity, evaluator, directives, net, plugins, version, and the `release:npm` script).
 - `npm run build` produces ESM, CJS, IIFE, and `.d.ts` in `dist/`, and syncs the CDN bundles into `docs/`.
 - `npm run smoke` drives the shipped bundle end to end.
 - `npm run docs` regenerates the old GitHub Pages site in `docs/`: redirect pages to https://velofy.co/summitjs/, `llms.txt`, `llms-full.txt`, and `ai/summit.json`.

@@ -32,25 +32,6 @@ only one value can match, opening a section closes whatever was open before.
 </div>
 ```
 
-```html
-<div class="s-accordion" s-data="{ open: 'a' }">
-  <div class="s-accordion-item">
-    <button class="s-accordion-trigger" :class="{ 'is-open': open === 'a' }" @click="open = open === 'a' ? '' : 'a'">
-      <span>Is it accessible?</span>
-      <svg class="s-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <div class="s-accordion-panel" s-show="open === 'a'">Yes, every control is a real button.</div>
-  </div>
-  <div class="s-accordion-item">
-    <button class="s-accordion-trigger" :class="{ 'is-open': open === 'b' }" @click="open = open === 'b' ? '' : 'b'">
-      <span>Can I open many?</span>
-      <svg class="s-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <div class="s-accordion-panel" s-show="open === 'b'">Track an array instead of a single value.</div>
-  </div>
-</div>
-```
-
 ## Allowing multiple open
 
 To let several sections stay open at once, track an array of open ids instead of

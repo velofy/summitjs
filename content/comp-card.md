@@ -76,7 +76,7 @@ Drop the header and footer when all you need is a framed block of content.
 ## Notes
 
 - The card sets a width of whatever it sits in, so control its size from the
-  parent layout (a grid, a flex row, or a `max-width` like the demos above).
+  parent layout (a grid, a flex row, or a `max-width` like the examples above).
 - The title renders as an `h3` here, but the class carries the styling. Use the
   heading level that fits your document outline.
 - Footer actions align to the start. To push them to the right, add your own

@@ -50,10 +50,12 @@ Error codes: https://velofy.co/summitjs/errors/
 | `s-for` | | render a list; use `:key` |
 | `s-ref` | | name an element, read it via `$refs` |
 | `s-init` | | run an expression once on init |
+| `s-id` | | open an id group so `$id()` calls inside it pair up |
 | `s-effect` | | re-run an expression when its dependencies change |
 | `s-transition` | | animate enter and leave |
 | `s-teleport` | | move an element elsewhere in the DOM (dialogs, toasts) |
 | `s-intersect` | `s-intersect:leave` | run an expression when the element enters or leaves the viewport (`.once`, `.half`, `.full`) |
+| `s-resize` | | run an expression when the element changes size (`$width`, `$height`) |
 | `s-trap` | | keep keyboard focus inside an element while an expression is truthy |
 | `s-anchor` | | position next to a reference element, flipping to stay in view (`.top`, `.end`, `.offset.N`) |
 | `s-collapse` | | animate an element open and closed by height |

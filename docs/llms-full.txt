@@ -22,8 +22,8 @@ strict Content-Security-Policy with nothing extra to configure.
 
 ## Your first component
 
-Here is a complete, working counter. There is no setup around it: this snippet
-is running live on the page right now.
+Here is a complete, working counter. With the Summit script on the page, this
+markup needs no other setup.
 
 ```summit
 <div s-data="{ count: 0 }">
@@ -46,9 +46,9 @@ with `count`. When you click, only that one number re-renders.
   No `eval`, no `new Function`, no `unsafe-eval` in your policy.
 - **Tiny and buildless.** The whole runtime is roughly 16KB gzipped. Drop in one
   script tag and it starts on its own.
-- **Familiar.** Fifteen directives, nine magic properties, and the `@` and `:`
-  shorthands. If you have used an HTML-first framework before, this will feel
-  like home, with the rough edges filed off.
+- **Familiar.** A small, closed set of `s-` directives and `$` magic properties,
+  plus the `@` and `:` shorthands. If you have used an HTML-first framework
+  before, this will feel like home, with the rough edges filed off.
 
 ## Where to go next
 
@@ -107,7 +107,35 @@ Components read the same design tokens as the rest of Summit. Override them on
 ```
 
 Light and dark are handled for you through `prefers-color-scheme` and the
-`data-theme` attribute, exactly like this documentation.
+`data-theme` attribute: `components.css` switches its feedback palette under
+`prefers-color-scheme: dark` and `:root[data-theme="dark"]`.
+
+### Base tokens you define
+
+`components.css` defines its own `--s-` tokens (feedback colors, radius, focus
+ring), but it also reads base tokens that it does not define: `--accent`,
+`--accent-2`, `--accent-soft`, `--bg`, `--surface`, `--surface-2`, `--border`,
+`--text`, `--muted`, `--faint`, `--ink`, `--ink-contrast`, `--shadow`,
+`--shadow-lg`, `--font`, `--body` and `--mono`. The old documentation site set
+them in its own `docs.css`. When you use `components.css` on its own, define
+them on `:root`. These are the light values the old site used:
+
+```css
+:root {
+  --bg: #ffffff; --surface: #ffffff; --surface-2: #f7f9fc; --border: #e6e9ef;
+  --text: #0f172a; --muted: #475569; --faint: #64748b;
+  --accent: #a35200; --accent-2: #7c3d00; --accent-soft: #fff4d6;
+  --ink: #0f172a; --ink-contrast: #ffffff;
+  --shadow: 0 1px 2px rgba(15,23,42,.05), 0 10px 30px rgba(15,23,42,.06);
+  --shadow-lg: 0 24px 60px rgba(15,23,42,.14);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+```
+
+The old site listed the Geist fonts first in `--font`, `--body` and `--mono`;
+use any font stack you like.
 
 ## Accessibility
 
@@ -123,8 +151,8 @@ to pair a label with a control, use the [$id](https://velofy.co/summitjs/magic-i
 [Checkbox & Radio](https://velofy.co/summitjs/comp-checkbox/), [Switch](https://velofy.co/summitjs/comp-switch/)
 
 **Data display**
-[Card](https://velofy.co/summitjs/comp-card/), [Badge & Tag](https://velofy.co/summitjs/comp-badge/), [Alert](https://velofy.co/summitjs/comp-alert/),
-[Avatar](https://velofy.co/summitjs/comp-avatar/), [Progress & Spinner](https://velofy.co/summitjs/comp-progress/)
+[Card](https://velofy.co/summitjs/comp-card/), [Badge & Tag](https://velofy.co/summitjs/comp-badge/), [Table](https://velofy.co/summitjs/comp-table/),
+[Alert](https://velofy.co/summitjs/comp-alert/), [Avatar](https://velofy.co/summitjs/comp-avatar/), [Progress & Spinner](https://velofy.co/summitjs/comp-progress/)
 
 **Overlays**
 [Dialog](https://velofy.co/summitjs/comp-dialog/), [Dropdown Menu](https://velofy.co/summitjs/comp-menu/),
@@ -741,7 +769,7 @@ Drop the header and footer when all you need is a framed block of content.
 ## Notes
 
 - The card sets a width of whatever it sits in, so control its size from the
-  parent layout (a grid, a flex row, or a `max-width` like the demos above).
+  parent layout (a grid, a flex row, or a `max-width` like the examples above).
 - The title renders as an `h3` here, but the class carries the styling. Use the
   heading level that fits your document outline.
 - Footer actions align to the start. To push them to the right, add your own
@@ -1138,7 +1166,7 @@ fill. Bind it with `:style` so the width tracks whatever number lives in state.
 ```
 
 Keep the number inside `0` to `100`. Clamping with `Math.max` and `Math.min`
-when you change it, as the demo above does, means a stray click can never push
+when you change it, as the first example does, means a stray click can never push
 the fill past either end.
 
 ## Spinner
@@ -1191,7 +1219,7 @@ several to preview a whole card or list row.
 
 - The bar carries no semantics on its own. Add `role="progressbar"` with
   `aria-valuemin`, `aria-valuemax`, and a bound `:aria-valuenow` so screen
-  readers announce the position, as the top demo does.
+  readers announce the position, as the first example does.
 - Give the spinner `role="status"` and an `aria-label` so its purpose reaches
   people who cannot see it turn.
 - Both the spinner's spin and the skeleton's shimmer stop under
@@ -1375,7 +1403,7 @@ panel class changes.
 
 ## Rendering in a real app
 
-The demo above keeps the overlay next to its trigger so the example stays
+The example above keeps the overlay next to its trigger so the example stays
 self-contained. In a real layout that is risky: an ancestor with `overflow:
 hidden` can clip the panel, and a local stacking context can push it behind other
 content. The fix is to render the dialog at the end of `<body>`, clear of any
@@ -1527,16 +1555,6 @@ dismissal: `@click.outside` closes the panel when you click anywhere else, and
 </div>
 ```
 
-```html
-<div class="s-anchor" s-data="{ open: false }" @keydown.escape="open = false">
-  <button class="s-btn s-btn-outline" @click="open = !open">Show popover</button>
-  <div class="s-popover" s-show="open" @click.outside="open = false">
-    <p style="margin:0 0 .4rem;font-weight:600">Dimensions</p>
-    <p style="margin:0;color:var(--muted);font-size:.88rem">Set the width and height of the layer.</p>
-  </div>
-</div>
-```
-
 ## A panel with controls
 
 Because a popover holds real content, you can put inputs and buttons inside it.
@@ -1545,20 +1563,6 @@ field keeps the popover open. Wire a confirming action to set `open = false` so
 the panel closes once the user is done.
 
 ```summit
-<div class="s-anchor" s-data="{ open: false, name: 'Untitled' }" @keydown.escape="open = false">
-  <button class="s-btn" @click="open = !open">Rename</button>
-  <div class="s-popover" s-show="open" @click.outside="open = false">
-    <label class="s-label">Project name</label>
-    <input class="s-input" s-model="name">
-    <div class="s-row" style="margin-top:.7rem;justify-content:flex-end">
-      <button class="s-btn s-btn-ghost s-btn-sm" @click="open = false">Cancel</button>
-      <button class="s-btn s-btn-sm" @click="open = false">Save</button>
-    </div>
-  </div>
-</div>
-```
-
-```html
 <div class="s-anchor" s-data="{ open: false, name: 'Untitled' }" @keydown.escape="open = false">
   <button class="s-btn" @click="open = !open">Rename</button>
   <div class="s-popover" s-show="open" @click.outside="open = false">
@@ -1743,17 +1747,6 @@ one matches. The panels below use `s-show` so only the current one renders.
 </div>
 ```
 
-```html
-<div s-data="{ tab: 'account' }">
-  <div class="s-tabs-list" role="tablist">
-    <button class="s-tab" :class="{ 'is-active': tab === 'account' }" @click="tab = 'account'">Account</button>
-    <button class="s-tab" :class="{ 'is-active': tab === 'billing' }" @click="tab = 'billing'">Billing</button>
-  </div>
-  <div class="s-tab-panel" s-show="tab === 'account'">Manage your account.</div>
-  <div class="s-tab-panel" s-show="tab === 'billing'">Update your plan.</div>
-</div>
-```
-
 ## Soft variant
 
 Wrap the exact same markup in a parent with `class="s-tabs-soft"` and the
@@ -1762,17 +1755,6 @@ raised surface. Nothing about the behavior changes; only the container class is
 added.
 
 ```summit
-<div class="s-tabs-soft" s-data="{ tab: 'account' }">
-  <div class="s-tabs-list" role="tablist">
-    <button class="s-tab" :class="{ 'is-active': tab === 'account' }" @click="tab = 'account'">Account</button>
-    <button class="s-tab" :class="{ 'is-active': tab === 'billing' }" @click="tab = 'billing'">Billing</button>
-  </div>
-  <div class="s-tab-panel" s-show="tab === 'account'">Manage your account.</div>
-  <div class="s-tab-panel" s-show="tab === 'billing'">Update your plan.</div>
-</div>
-```
-
-```html
 <div class="s-tabs-soft" s-data="{ tab: 'account' }">
   <div class="s-tabs-list" role="tablist">
     <button class="s-tab" :class="{ 'is-active': tab === 'account' }" @click="tab = 'account'">Account</button>
@@ -1815,25 +1797,6 @@ and it sets `open` back to empty; click a closed one and it takes over. Because
 only one value can match, opening a section closes whatever was open before.
 
 ```summit
-<div class="s-accordion" s-data="{ open: 'a' }">
-  <div class="s-accordion-item">
-    <button class="s-accordion-trigger" :class="{ 'is-open': open === 'a' }" @click="open = open === 'a' ? '' : 'a'">
-      <span>Is it accessible?</span>
-      <svg class="s-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <div class="s-accordion-panel" s-show="open === 'a'">Yes, every control is a real button.</div>
-  </div>
-  <div class="s-accordion-item">
-    <button class="s-accordion-trigger" :class="{ 'is-open': open === 'b' }" @click="open = open === 'b' ? '' : 'b'">
-      <span>Can I open many?</span>
-      <svg class="s-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <div class="s-accordion-panel" s-show="open === 'b'">Track an array instead of a single value.</div>
-  </div>
-</div>
-```
-
-```html
 <div class="s-accordion" s-data="{ open: 'a' }">
   <div class="s-accordion-item">
     <button class="s-accordion-trigger" :class="{ 'is-open': open === 'a' }" @click="open = open === 'a' ? '' : 'a'">
@@ -1915,14 +1878,6 @@ current location and tells screen readers they have arrived.
 </nav>
 ```
 
-```html
-<nav class="s-breadcrumb" aria-label="Breadcrumb">
-  <a href="#">Home</a><span class="s-sep">/</span>
-  <a href="#">Components</a><span class="s-sep">/</span>
-  <span aria-current="page">Breadcrumb</span>
-</nav>
-```
-
 ## Notes
 
 - Mark the last crumb with `aria-current="page"`. It is the one visual and
@@ -1970,18 +1925,6 @@ up through `:class` when it matches.
 </div>
 ```
 
-```html
-<div s-data="{ page: 1, total: 5 }">
-  <div class="s-pagination">
-    <button @click="page = Math.max(1, page - 1)" :disabled="page === 1">Prev</button>
-    <template s-for="n in total" :key="n">
-      <button :class="{ 'is-active': page === n }" @click="page = n" s-text="n"></button>
-    </template>
-    <button @click="page = Math.min(total, page + 1)" :disabled="page === total">Next</button>
-  </div>
-</div>
-```
-
 ## Notes
 
 - Prev disables at page one and Next at the last page, driven by `:disabled`. The
@@ -2010,7 +1953,10 @@ patterns you copy in and compose with the directives and components you already
 use. They are pure markup plus a class, token-themed, and they work in both
 light and dark.
 
-Load the stylesheet once, then use any `s-` prefixed class from the pages below.
+Load the stylesheet once, then use any `s-` prefixed class from the pages listed here.
+The examples on these pages also use layout and UI Library classes such as
+`.s-row`, `.s-stack`, `.s-btn`, `.s-avatar`, and `.s-spinner`. Those live in
+`components.css`; see the [UI Library](https://velofy.co/summitjs/components/) for how to load it.
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/assets/techniques.css" />
@@ -2047,7 +1993,8 @@ the markup, and it inherits your accent color and both themes.
 
 ## Spinners
 
-Ring-shaped loaders, from a plain ring to a masked conic sweep.
+Ring-shaped loaders, from a plain ring to a masked conic sweep. The plain ring,
+`.s-spinner`, is defined in `components.css`; the others are in `techniques.css`.
 
 ```summit
 <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:1.6rem; text-align:center">
@@ -2453,7 +2400,7 @@ The classes are `.s-brutal` (card), `.s-brutal-accent` (fill it with the accent)
 > Slow, glowing color fields that drift behind your content for a premium hero look.
 
 An aurora is a soft field of colored light that drifts slowly behind your
-content. It gives heroes and feature panels a premium, ambient feel without a
+content. It gives heroes and feature panels an ambient feel without a
 busy image. The glow lives on pseudo-elements, so your content sits cleanly on
 top.
 
@@ -2498,7 +2445,7 @@ on its own.
 
 A spotlight card puts a soft highlight under the cursor and moves it as you go.
 The highlight is pure CSS; Summit's only job is to feed the pointer position
-into two CSS variables. Move your cursor across the card below.
+into two CSS variables.
 
 ## Spotlight card
 
@@ -2565,8 +2512,7 @@ Track the current section in `s-data` and mark the matching link.
 ## Responsive with a mobile menu
 
 Below a narrow width the inline links hide and a toggle appears. The toggle
-flips an `open` flag that reveals a stacked menu. Resize the window to see it
-switch.
+flips an `open` flag that reveals a stacked menu.
 
 ```summit
 <nav s-data="{ open: false }">
@@ -2746,9 +2692,14 @@ Summit never calls `eval` or `new Function`. Expressions in your markup are
 parsed and interpreted by Summit itself, so a strict policy needs no
 `'unsafe-eval'`:
 
-```
+```text
 Content-Security-Policy: script-src 'self'
 ```
+
+That policy assumes you serve `summit.min.js` from your own origin. If you load
+it from a CDN, add that origin to `script-src`, for example
+`script-src 'self' https://cdn.jsdelivr.net`. Either way, no `'unsafe-eval'` is
+needed.
 
 ## Starting manually
 
@@ -4052,8 +4003,8 @@ reorders.
 </div>
 ```
 
-Type into an input, then reverse the list: because each row is matched by
-`person.id` and moved, your text stays with its person. Without a `:key`, Summit
+If you type into an input and then reverse the list, each row is matched by
+`person.id` and moved, so the typed text stays with its person. Without a `:key`, Summit
 falls back to the object key for objects, or the numeric index otherwise, which
 rebuilds rows when their position changes and loses that state.
 
@@ -4700,7 +4651,7 @@ element you clicked and inside `s-text` it is the element being filled.
 </div>
 ```
 
-Each expression sees its own `$el`. In the demo above `$el` is the button, so
+Each expression sees its own `$el`. In the first example above `$el` is the button, so
 writing to `$el.textContent` changes only the button.
 
 ## Reading from the element
@@ -6490,15 +6441,23 @@ multi-statement logic.
 
 ## What is not supported
 
-The subset stops where an expression language should. If you write any of these
-in a directive, you get a parse error, which Summit catches and logs to the
-console rather than executing:
+The subset stops where an expression language should. The interpreter has no
+meaning for any of these, so do not write them in a directive:
 
 - Bitwise operators (`& | ^ ~ << >> >>>`).
 - The `function` keyword and function declarations. Use arrow functions.
 - Classes, `try`/`catch`, `throw`, `switch`, `do...while`, `async`/`await`, and
   generators.
 - Comments and tagged template literals.
+
+In a value directive (`s-text`, `:bind`, `s-show`) they are a parse error, which
+Summit catches and logs to the console rather than executing. Action directives
+(`s-on` handlers and `s-init`) are more lenient: the parser does not reserve
+these keywords, so `try`, `throw` or `function` is read as a plain name and the
+code around it still runs without its JavaScript meaning. For example, in
+`@click="try { save() } catch (e) { report() }"` both `save()` and `report()`
+run, and nothing is caught. Bitwise operators and comments are a parse error in
+both modes.
 
 Keeping the surface bounded is not only about safety. It also keeps directive
 expressions readable. Anything more involved belongs in a `Summit.data` method,
@@ -6538,7 +6497,8 @@ window, document, location, navigator, history,
 localStorage, sessionStorage,
 setTimeout, clearTimeout, setInterval, clearInterval,
 requestAnimationFrame, cancelAnimationFrame,
-fetch, alert, confirm, prompt, structuredClone,
+fetch, AbortController, Headers, Request, Response,
+alert, confirm, prompt, structuredClone,
 URL, URLSearchParams, encodeURIComponent, decodeURIComponent,
 NaN, Infinity
 ```

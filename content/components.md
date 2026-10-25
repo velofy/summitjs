@@ -50,7 +50,35 @@ Components read the same design tokens as the rest of Summit. Override them on
 ```
 
 Light and dark are handled for you through `prefers-color-scheme` and the
-`data-theme` attribute, exactly like this documentation.
+`data-theme` attribute: `components.css` switches its feedback palette under
+`prefers-color-scheme: dark` and `:root[data-theme="dark"]`.
+
+### Base tokens you define
+
+`components.css` defines its own `--s-` tokens (feedback colors, radius, focus
+ring), but it also reads base tokens that it does not define: `--accent`,
+`--accent-2`, `--accent-soft`, `--bg`, `--surface`, `--surface-2`, `--border`,
+`--text`, `--muted`, `--faint`, `--ink`, `--ink-contrast`, `--shadow`,
+`--shadow-lg`, `--font`, `--body` and `--mono`. The old documentation site set
+them in its own `docs.css`. When you use `components.css` on its own, define
+them on `:root`. These are the light values the old site used:
+
+```css
+:root {
+  --bg: #ffffff; --surface: #ffffff; --surface-2: #f7f9fc; --border: #e6e9ef;
+  --text: #0f172a; --muted: #475569; --faint: #64748b;
+  --accent: #a35200; --accent-2: #7c3d00; --accent-soft: #fff4d6;
+  --ink: #0f172a; --ink-contrast: #ffffff;
+  --shadow: 0 1px 2px rgba(15,23,42,.05), 0 10px 30px rgba(15,23,42,.06);
+  --shadow-lg: 0 24px 60px rgba(15,23,42,.14);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+```
+
+The old site listed the Geist fonts first in `--font`, `--body` and `--mono`;
+use any font stack you like.
 
 ## Accessibility
 
@@ -66,8 +94,8 @@ to pair a label with a control, use the [$id](../magic-id/) magic.
 [Checkbox & Radio](../comp-checkbox/), [Switch](../comp-switch/)
 
 **Data display**
-[Card](../comp-card/), [Badge & Tag](../comp-badge/), [Alert](../comp-alert/),
-[Avatar](../comp-avatar/), [Progress & Spinner](../comp-progress/)
+[Card](../comp-card/), [Badge & Tag](../comp-badge/), [Table](../comp-table/),
+[Alert](../comp-alert/), [Avatar](../comp-avatar/), [Progress & Spinner](../comp-progress/)
 
 **Overlays**
 [Dialog](../comp-dialog/), [Dropdown Menu](../comp-menu/),

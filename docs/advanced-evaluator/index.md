@@ -95,15 +95,23 @@ multi-statement logic.
 
 ## What is not supported
 
-The subset stops where an expression language should. If you write any of these
-in a directive, you get a parse error, which Summit catches and logs to the
-console rather than executing:
+The subset stops where an expression language should. The interpreter has no
+meaning for any of these, so do not write them in a directive:
 
 - Bitwise operators (`& | ^ ~ << >> >>>`).
 - The `function` keyword and function declarations. Use arrow functions.
 - Classes, `try`/`catch`, `throw`, `switch`, `do...while`, `async`/`await`, and
   generators.
 - Comments and tagged template literals.
+
+In a value directive (`s-text`, `:bind`, `s-show`) they are a parse error, which
+Summit catches and logs to the console rather than executing. Action directives
+(`s-on` handlers and `s-init`) are more lenient: the parser does not reserve
+these keywords, so `try`, `throw` or `function` is read as a plain name and the
+code around it still runs without its JavaScript meaning. For example, in
+`@click="try { save() } catch (e) { report() }"` both `save()` and `report()`
+run, and nothing is caught. Bitwise operators and comments are a parse error in
+both modes.
 
 Keeping the surface bounded is not only about safety. It also keeps directive
 expressions readable. Anything more involved belongs in a `Summit.data` method,
@@ -143,7 +151,8 @@ window, document, location, navigator, history,
 localStorage, sessionStorage,
 setTimeout, clearTimeout, setInterval, clearInterval,
 requestAnimationFrame, cancelAnimationFrame,
-fetch, alert, confirm, prompt, structuredClone,
+fetch, AbortController, Headers, Request, Response,
+alert, confirm, prompt, structuredClone,
 URL, URLSearchParams, encodeURIComponent, decodeURIComponent,
 NaN, Infinity
 ```

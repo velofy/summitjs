@@ -31,18 +31,6 @@ up through `:class` when it matches.
 </div>
 ```
 
-```html
-<div s-data="{ page: 1, total: 5 }">
-  <div class="s-pagination">
-    <button @click="page = Math.max(1, page - 1)" :disabled="page === 1">Prev</button>
-    <template s-for="n in total" :key="n">
-      <button :class="{ 'is-active': page === n }" @click="page = n" s-text="n"></button>
-    </template>
-    <button @click="page = Math.min(total, page + 1)" :disabled="page === total">Next</button>
-  </div>
-</div>
-```
-
 ## Notes
 
 - Prev disables at page one and Next at the last page, driven by `:disabled`. The

@@ -99,8 +99,8 @@ reorders.
 </div>
 ```
 
-Type into an input, then reverse the list: because each row is matched by
-`person.id` and moved, your text stays with its person. Without a `:key`, Summit
+If you type into an input and then reverse the list, each row is matched by
+`person.id` and moved, so the typed text stays with its person. Without a `:key`, Summit
 falls back to the object key for objects, or the numeric index otherwise, which
 rebuilds rows when their position changes and loses that state.
 

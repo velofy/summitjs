@@ -26,14 +26,6 @@ current location and tells screen readers they have arrived.
 </nav>
 ```
 
-```html
-<nav class="s-breadcrumb" aria-label="Breadcrumb">
-  <a href="#">Home</a><span class="s-sep">/</span>
-  <a href="#">Components</a><span class="s-sep">/</span>
-  <span aria-current="page">Breadcrumb</span>
-</nav>
-```
-
 ## Notes
 
 - Mark the last crumb with `aria-current="page"`. It is the one visual and

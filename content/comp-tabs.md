@@ -29,17 +29,6 @@ one matches. The panels below use `s-show` so only the current one renders.
 </div>
 ```
 
-```html
-<div s-data="{ tab: 'account' }">
-  <div class="s-tabs-list" role="tablist">
-    <button class="s-tab" :class="{ 'is-active': tab === 'account' }" @click="tab = 'account'">Account</button>
-    <button class="s-tab" :class="{ 'is-active': tab === 'billing' }" @click="tab = 'billing'">Billing</button>
-  </div>
-  <div class="s-tab-panel" s-show="tab === 'account'">Manage your account.</div>
-  <div class="s-tab-panel" s-show="tab === 'billing'">Update your plan.</div>
-</div>
-```
-
 ## Soft variant
 
 Wrap the exact same markup in a parent with `class="s-tabs-soft"` and the
@@ -48,17 +37,6 @@ raised surface. Nothing about the behavior changes; only the container class is
 added.
 
 ```summit
-<div class="s-tabs-soft" s-data="{ tab: 'account' }">
-  <div class="s-tabs-list" role="tablist">
-    <button class="s-tab" :class="{ 'is-active': tab === 'account' }" @click="tab = 'account'">Account</button>
-    <button class="s-tab" :class="{ 'is-active': tab === 'billing' }" @click="tab = 'billing'">Billing</button>
-  </div>
-  <div class="s-tab-panel" s-show="tab === 'account'">Manage your account.</div>
-  <div class="s-tab-panel" s-show="tab === 'billing'">Update your plan.</div>
-</div>
-```
-
-```html
 <div class="s-tabs-soft" s-data="{ tab: 'account' }">
   <div class="s-tabs-list" role="tablist">
     <button class="s-tab" :class="{ 'is-active': tab === 'account' }" @click="tab = 'account'">Account</button>

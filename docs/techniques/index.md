@@ -7,7 +7,10 @@ patterns you copy in and compose with the directives and components you already
 use. They are pure markup plus a class, token-themed, and they work in both
 light and dark.
 
-Load the stylesheet once, then use any `s-` prefixed class from the pages below.
+Load the stylesheet once, then use any `s-` prefixed class from the pages listed here.
+The examples on these pages also use layout and UI Library classes such as
+`.s-row`, `.s-stack`, `.s-btn`, `.s-avatar`, and `.s-spinner`. Those live in
+`components.css`; see the [UI Library](https://velofy.co/summitjs/components/) for how to load it.
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/assets/techniques.css" />

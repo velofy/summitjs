@@ -9,7 +9,7 @@ description: A soft highlight that follows the cursor across a card, driven by a
 
 A spotlight card puts a soft highlight under the cursor and moves it as you go.
 The highlight is pure CSS; Summit's only job is to feed the pointer position
-into two CSS variables. Move your cursor across the card below.
+into two CSS variables.
 
 ## Spotlight card
 

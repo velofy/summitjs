@@ -13,7 +13,8 @@ the markup, and it inherits your accent color and both themes.
 
 ## Spinners
 
-Ring-shaped loaders, from a plain ring to a masked conic sweep.
+Ring-shaped loaders, from a plain ring to a masked conic sweep. The plain ring,
+`.s-spinner`, is defined in `components.css`; the others are in `techniques.css`.
 
 ```summit
 <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:1.6rem; text-align:center">

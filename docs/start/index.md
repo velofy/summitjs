@@ -14,8 +14,8 @@ strict Content-Security-Policy with nothing extra to configure.
 
 ## Your first component
 
-Here is a complete, working counter. There is no setup around it: this snippet
-is running live on the page right now.
+Here is a complete, working counter. With the Summit script on the page, this
+markup needs no other setup.
 
 ```summit
 <div s-data="{ count: 0 }">
@@ -38,9 +38,9 @@ with `count`. When you click, only that one number re-renders.
   No `eval`, no `new Function`, no `unsafe-eval` in your policy.
 - **Tiny and buildless.** The whole runtime is roughly 16KB gzipped. Drop in one
   script tag and it starts on its own.
-- **Familiar.** Fifteen directives, nine magic properties, and the `@` and `:`
-  shorthands. If you have used an HTML-first framework before, this will feel
-  like home, with the rough edges filed off.
+- **Familiar.** A small, closed set of `s-` directives and `$` magic properties,
+  plus the `@` and `:` shorthands. If you have used an HTML-first framework
+  before, this will feel like home, with the rough edges filed off.
 
 ## Where to go next
 

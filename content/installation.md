@@ -58,9 +58,14 @@ Summit never calls `eval` or `new Function`. Expressions in your markup are
 parsed and interpreted by Summit itself, so a strict policy needs no
 `'unsafe-eval'`:
 
-```
+```text
 Content-Security-Policy: script-src 'self'
 ```
+
+That policy assumes you serve `summit.min.js` from your own origin. If you load
+it from a CDN, add that origin to `script-src`, for example
+`script-src 'self' https://cdn.jsdelivr.net`. Either way, no `'unsafe-eval'` is
+needed.
 
 ## Starting manually
 

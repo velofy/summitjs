@@ -99,7 +99,7 @@ panel class changes.
 
 ## Rendering in a real app
 
-The demo above keeps the overlay next to its trigger so the example stays
+The example above keeps the overlay next to its trigger so the example stays
 self-contained. In a real layout that is risky: an ancestor with `overflow:
 hidden` can clip the panel, and a local stacking context can push it behind other
 content. The fix is to render the dialog at the end of `<body>`, clear of any
