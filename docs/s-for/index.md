@@ -21,8 +21,10 @@ that element once per item and inserts the results where the template stood.
 </div>
 ```
 
-The template must be a `<template>` tag with exactly one root child. Summit warns
-in the console if either is missing.
+The template must be a `<template>` tag with one root element. Summit warns in
+the console if `s-for` is on another tag (E401) or the template has no element
+inside it (E402). With more than one element inside, only the first is
+repeated, without a warning.
 
 ## Item and index
 

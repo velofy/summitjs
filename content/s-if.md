@@ -39,12 +39,14 @@ cloned in and out.
 <article s-if="post">...</article>
 ```
 
-A `<template>` still works if you prefer it. In that case its single root child
-is used as the blueprint:
+A `<template>` still works if you prefer it. In that case every top-level
+element inside it is rendered, in order, so a template can hold more than one
+root, such as an overlay and its dialog:
 
 ```html
-<template s-if="post">
-  <article>...</article>
+<template s-if="open">
+  <div class="overlay"></div>
+  <div class="dialog">...</div>
 </template>
 ```
 
