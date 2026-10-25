@@ -22,7 +22,7 @@ That is the entire setup. Any `s-` attributes already in the page come alive,
 and so does anything you add later, because Summit watches the DOM for changes.
 
 > The `@0.4` range follows the latest 0.4.x release on npm. Pin an exact
-> version in production, for example `summitjs@0.4.3`, so a new release can
+> version in production, for example `summitjs@0.4.5`, so a new release can
 > never change your site without you knowing.
 
 ## npm

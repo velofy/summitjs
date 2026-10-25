@@ -25,7 +25,7 @@ import { addGlobals } from "./evaluator/index.js";
 import { fail } from "./errors.js";
 import type { DataProvider, BindProvider, DirectiveHandler, MagicFactory } from "./types.js";
 
-export const version = "0.4.4";
+export const version = "0.4.5";
 
 let started = false;
 
