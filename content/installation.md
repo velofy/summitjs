@@ -83,4 +83,4 @@ moment yourself, for example to register custom directives first, call
 </script>
 ```
 
-See [Summit.start](../globals-start/) for the details.
+See [Summit.start](globals-start.md) for the details.

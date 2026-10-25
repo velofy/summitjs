@@ -93,5 +93,5 @@ avatar with a count reads as an overflow.
 - The ring around grouped avatars comes from the page background color. Place a
   group on a plain surface so the separation reads clearly.
 
-Pair avatars with [cards](../comp-card/) and [badges](../comp-badge/), or browse
-the full set on the [overview](../components/).
+Pair avatars with [cards](comp-card.md) and [badges](comp-badge.md), or browse
+the full set on the [overview](components.md).

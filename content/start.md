@@ -49,8 +49,8 @@ with `count`. When you click, only that one number re-renders.
 
 ## Where to go next
 
-- [Installation](../installation/) covers the script tag, npm, and bundlers.
-- [Reactivity and State](../reactivity-state/) explains `s-data`, computed
+- [Installation](installation.md) covers the script tag, npm, and bundlers.
+- [Reactivity and State](reactivity-state.md) explains `s-data`, computed
   values, and methods.
-- The [Directives](../s-data/) and [Magic Properties](../magic-el/) sections are
+- The [Directives](s-data.md) and [Magic Properties](magic-el.md) sections are
   a complete reference for every attribute and helper.

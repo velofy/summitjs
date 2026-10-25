@@ -21,7 +21,7 @@ Any directives inside the ignored region are left untouched.
 ```
 
 The first span shows `Ada`. The second sits inside an `s-ignore` block, so its
-[s-text](https://velofy.co/summitjs/s-text/) never runs and the span stays empty. The skip covers the
+[s-text](https://github.com/velofy/summitjs/blob/main/content/s-text.md) never runs and the span stays empty. The skip covers the
 whole subtree, not just the element itself.
 
 ## When to use it
@@ -34,5 +34,5 @@ whole subtree, not just the element itself.
 
 `s-ignore` is a hard stop for the entire subtree, not a per-directive opt-out.
 If you need reactivity on part of that region, keep it outside the ignored
-element. Where [s-cloak](https://velofy.co/summitjs/s-cloak/) hides markup until it is ready, `s-ignore`
+element. Where [s-cloak](https://github.com/velofy/summitjs/blob/main/content/s-cloak.md) hides markup until it is ready, `s-ignore`
 never initializes it at all.

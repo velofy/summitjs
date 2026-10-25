@@ -38,4 +38,4 @@ on its own.
   dark themes, so the glow always reads and the copy stays legible. Recolor the
   two shapes in `techniques.css` to match your brand.
 - For a foreground surface over a busy backdrop, use
-  [Matte Glassmorphism](https://velofy.co/summitjs/technique-glassmorphism/) instead.
+  [Matte Glassmorphism](https://github.com/velofy/summitjs/blob/main/content/technique-glassmorphism.md) instead.

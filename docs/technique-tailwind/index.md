@@ -65,6 +65,6 @@ classes, then load `summitjs` alongside your bundle exactly as above.
 - Summit reads only `s-`, `@`, and `:` attributes, so it never touches your
   `class` list except where you ask it to with `:class`.
 - Tailwind's classes are static strings, which is exactly what Summit's
-  [s-bind](https://velofy.co/summitjs/s-bind/) is best at toggling.
-- The [UI Library](https://velofy.co/summitjs/components/) and [Techniques](https://velofy.co/summitjs/techniques/) are optional:
+  [s-bind](https://github.com/velofy/summitjs/blob/main/content/s-bind.md) is best at toggling.
+- The [UI Library](https://github.com/velofy/summitjs/blob/main/content/components.md) and [Techniques](https://github.com/velofy/summitjs/blob/main/content/techniques.md) are optional:
   use them, use Tailwind, or mix both in the same page.

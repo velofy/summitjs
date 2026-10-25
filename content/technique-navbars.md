@@ -55,7 +55,7 @@ flips an `open` flag that reveals a stacked menu.
 
 ## Glass navbar
 
-Drop [matte glass](../technique-glassmorphism/) onto the bar for a header that
+Drop [matte glass](technique-glassmorphism.md) onto the bar for a header that
 floats over the page.
 
 ```summit

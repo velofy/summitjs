@@ -70,6 +70,6 @@ classes, then load `summitjs` alongside your bundle exactly as above.
 - Summit reads only `s-`, `@`, and `:` attributes, so it never touches your
   `class` list except where you ask it to with `:class`.
 - Tailwind's classes are static strings, which is exactly what Summit's
-  [s-bind](../s-bind/) is best at toggling.
-- The [UI Library](../components/) and [Techniques](../techniques/) are optional:
+  [s-bind](s-bind.md) is best at toggling.
+- The [UI Library](components.md) and [Techniques](techniques.md) are optional:
   use them, use Tailwind, or mix both in the same page.

@@ -5,7 +5,7 @@
 `reactive(obj)` wraps a plain object or array in a deep proxy that tracks reads
 and triggers on writes. It is what backs a component's `s-data` scope, so a plain
 assignment like `state.open = true` updates everything that read `open`. Where a
-[signal](https://velofy.co/summitjs/reactive-signal/) holds one value, `reactive` gives you an ordinary
+[signal](https://github.com/velofy/summitjs/blob/main/content/reactive-signal.md) holds one value, `reactive` gives you an ordinary
 object you can read and mutate by property.
 
 ## Creating reactive state
@@ -68,10 +68,10 @@ isReactive(raw); // false
 
 ## How it fits
 
-`reactive` and [signal()](https://velofy.co/summitjs/reactive-signal/) share one dependency-tracking
-core, so an [effect()](https://velofy.co/summitjs/reactive-effect/) or [computed()](https://velofy.co/summitjs/reactive-computed/)
+`reactive` and [signal()](https://github.com/velofy/summitjs/blob/main/content/reactive-signal.md) share one dependency-tracking
+core, so an [effect()](https://github.com/velofy/summitjs/blob/main/content/reactive-effect.md) or [computed()](https://github.com/velofy/summitjs/blob/main/content/reactive-computed.md)
 can depend on a mix of both. This proxy is exactly what gives `s-data` its
-ergonomics; see [Reactivity and State](https://velofy.co/summitjs/reactivity-state/) for the HTML side
-and [How reactivity works](https://velofy.co/summitjs/advanced-reactivity/) for the internals.
+ergonomics; see [Reactivity and State](https://github.com/velofy/summitjs/blob/main/content/reactivity-state.md) for the HTML side
+and [How reactivity works](https://github.com/velofy/summitjs/blob/main/content/advanced-reactivity.md) for the internals.
 `reactive` is also available on the global as `Summit.reactive`; `toRaw` and
 `isReactive` ship as named exports of `summitjs`.

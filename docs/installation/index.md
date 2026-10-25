@@ -79,4 +79,4 @@ moment yourself, for example to register custom directives first, call
 </script>
 ```
 
-See [Summit.start](https://velofy.co/summitjs/globals-start/) for the details.
+See [Summit.start](https://github.com/velofy/summitjs/blob/main/content/globals-start.md) for the details.

@@ -1,12 +1,12 @@
 /**
- * Verify the retired Pages site's entry points.
+ * Verify the old Pages site's entry points.
  *
- * The docs moved to https://velofy.co/summitjs/. docs/index.html and
- * docs/404.html must be the redirect stub, and the CDN files that existing
- * sites load from the old Pages URL must still be published from docs/.
+ * docs/index.html must redirect to the project page and docs/404.html to the
+ * docs index on GitHub, and the CDN files that existing sites load from the
+ * old Pages URL must still be published from docs/.
  */
 import { readFileSync, existsSync } from "node:fs";
-import { redirectStub, SITE } from "./build-docs.mjs";
+import { redirectStub, HOME, DOCS_INDEX } from "./build-docs.mjs";
 
 function assert(cond, msg) {
   if (!cond) {
@@ -16,9 +16,8 @@ function assert(cond, msg) {
   console.log("ok:", msg);
 }
 
-const stub = redirectStub(`${SITE}/`);
-for (const f of ["docs/index.html", "docs/404.html"]) {
-  assert(existsSync(f) && readFileSync(f, "utf8") === stub, `${f} redirects to ${SITE}/`);
+for (const [f, target] of [["docs/index.html", HOME], ["docs/404.html", DOCS_INDEX]]) {
+  assert(existsSync(f) && readFileSync(f, "utf8") === redirectStub(target), `${f} redirects to ${target}`);
 }
 
 // Existing pages load these straight from the old Pages URL; keep serving them.
@@ -40,5 +39,5 @@ if (existsSync("dist/summit.min.js")) {
   );
 }
 
-console.log(`\nPage verification passed: the old site redirects to ${SITE}/ and still serves the CDN files.`);
+console.log(`\nPage verification passed: the old site redirects to ${HOME} and ${DOCS_INDEX}, and still serves the CDN files.`);
 process.exit(0);

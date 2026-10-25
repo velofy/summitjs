@@ -10,7 +10,7 @@ description: Navigate through pages of results.
 Pagination splits a long list of results into numbered pages and gives people
 Prev and Next controls to move through them. One number of state, the current
 page, drives which button is active and when the ends disable. The number
-buttons themselves come straight out of a [s-for](../s-for/).
+buttons themselves come straight out of a [s-for](s-for.md).
 
 ## A live pager
 
@@ -45,5 +45,5 @@ up through `:class` when it matches.
   data, or seed it from the URL to deep-link a page.
 
 To show where the current page sits in your site hierarchy instead, see
-[Breadcrumb](../comp-breadcrumb/). The whole set is on the
-[overview](../components/).
+[Breadcrumb](comp-breadcrumb.md). The whole set is on the
+[overview](components.md).

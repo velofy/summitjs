@@ -15,7 +15,7 @@ repeatedly, which would redo the work on every call.
 ## Creating a computed
 
 Pass `computed` a getter function. It returns a computed you read the same way as
-a [signal](../reactive-signal/), by calling it.
+a [signal](reactive-signal.md), by calling it.
 
 ```js
 import { signal, computed } from "summitjs";
@@ -56,7 +56,7 @@ dependency such as `price` invalidates the cache.
 
 Because a computed both reads dependencies and is itself readable, computeds
 chain. Reading one computed inside another subscribes to it, and reading a
-computed inside an [effect()](../reactive-effect/) re-runs the effect when the
+computed inside an [effect()](reactive-effect.md) re-runs the effect when the
 computed's result changes.
 
 ```js
@@ -78,6 +78,6 @@ total.peek(); // current total, without creating a dependency
 
 The getters you define in `s-data` are cached the same way a computed is, which
 is why a derived value like a full name recomputes only when its parts change.
-See [Derived values](../reactivity-state/) for the HTML-first form, and
-[How reactivity works](../advanced-reactivity/) for the tracking model
+See [Derived values](reactivity-state.md) for the HTML-first form, and
+[How reactivity works](advanced-reactivity.md) for the tracking model
 underneath. `computed` is also available on the global as `Summit.computed`.

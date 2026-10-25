@@ -8,7 +8,7 @@ description: Animate an element open and closed by height.
 ---
 
 `s-collapse` smoothly animates an element's height as an expression toggles. It
-is a drop-in, animated alternative to [s-show](../s-show/) for accordions,
+is a drop-in, animated alternative to [s-show](s-show.md) for accordions,
 disclosure panels, and expanding menus.
 
 ```summit

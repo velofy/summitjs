@@ -8,22 +8,29 @@
  * tooling that greps for it keeps working.
  */
 
-const DOCS = "https://velofy.co/summitjs";
+/** The docs are the markdown pages in the repository's content/ folder. */
+const DOCS = "https://github.com/velofy/summitjs/blob/main/content";
+const DOCS_INDEX = "https://github.com/velofy/summitjs/tree/main/content";
 
 /**
  * Directives without a page of their own are documented on a related page.
- * Maps a `doc` slug to its path (and anchor) under DOCS.
+ * Maps a `doc` slug to its file (and anchor) under DOCS. scripts/build-docs.mjs
+ * has the same map and checks that each target exists.
  */
 const DOC_ALIASES: Record<string, string> = {
-  "s-id": "magic-id/#scoping-ids-with-s-id",
-  "s-resize": "s-intersect/#s-resize",
-  "s-resource": "advanced-data/",
+  "s-id": "magic-id.md#scoping-ids-with-s-id",
+  "s-resize": "s-intersect.md#s-resize",
+  "s-resource": "advanced-data.md",
 };
 
-/** The docs URL for a slug, e.g. "s-for" -> https://velofy.co/summitjs/s-for/. */
+/**
+ * The docs URL for a slug, e.g. "s-for" ->
+ * https://github.com/velofy/summitjs/blob/main/content/s-for.md. With no slug,
+ * the docs index.
+ */
 export function docsUrl(doc?: string): string {
-  if (!doc) return `${DOCS}/`;
-  return `${DOCS}/${DOC_ALIASES[doc] ?? doc + "/"}`;
+  if (!doc) return DOCS_INDEX;
+  return `${DOCS}/${DOC_ALIASES[doc] ?? doc + ".md"}`;
 }
 
 /** Levenshtein edit distance between two short strings. */

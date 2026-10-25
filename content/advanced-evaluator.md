@@ -192,7 +192,7 @@ is that it never asks you to open that door in the first place.
 
 ## See also
 
-- [Reactivity](../advanced-reactivity/) for how the values these expressions read
+- [Reactivity](advanced-reactivity.md) for how the values these expressions read
   are tracked.
-- [Extending Summit](../advanced-extending/) to reach the evaluator from your own
+- [Extending Summit](advanced-extending.md) to reach the evaluator from your own
   directives with `utils.evaluate` and `utils.evaluateAction`.

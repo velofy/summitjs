@@ -8,7 +8,7 @@ description: A styled native select bound with s-model.
 ---
 
 Select lets you pick one value from a fixed list. Apply `.s-select` to a real
-`<select>` element and bind it with [`s-model`](../forms/), so the chosen option
+`<select>` element and bind it with [`s-model`](forms.md), so the chosen option
 flows straight into your state.
 
 ```summit
@@ -28,7 +28,7 @@ flows straight into your state.
 ## Driving other state
 
 Because the value is just a piece of your data, you can react to it anywhere.
-Here the choice reveals a note with [`s-show`](../s-show/).
+Here the choice reveals a note with [`s-show`](s-show.md).
 
 ```summit
 <div s-data="{ size: 'M' }" class="s-stack">
@@ -70,7 +70,7 @@ devices for free, and there is no custom widget to maintain.
 
 Since this is a real `<select>`, screen readers, keyboard navigation, and mobile
 pickers all work with no extra wiring. Pair it with a `<label>` by matching the
-label's `for` to the select's `id`, or use the [$id](../magic-id/) magic when the
+label's `for` to the select's `id`, or use the [$id](magic-id.md) magic when the
 id is generated at runtime. For binding, coercion modifiers, and `multiple`
-selects, see [Forms](../forms/) and [s-model](../s-model/); for free-text entry,
-see [Input](../comp-input/).
+selects, see [Forms](forms.md) and [s-model](s-model.md); for free-text entry,
+see [Input](comp-input.md).

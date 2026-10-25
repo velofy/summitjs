@@ -23,7 +23,7 @@ calling it, and you write it with `.set()`.
 ## Reading
 
 Call the signal to get its current value. When you read a signal inside an
-[effect()](https://velofy.co/summitjs/reactive-effect/) or [computed()](https://velofy.co/summitjs/reactive-computed/), that
+[effect()](https://github.com/velofy/summitjs/blob/main/content/reactive-effect.md) or [computed()](https://github.com/velofy/summitjs/blob/main/content/reactive-computed.md), that
 reader subscribes to the signal and re-runs whenever the value changes.
 
 ```js
@@ -71,9 +71,9 @@ a named export of `summitjs`.
 ## How signals underpin the framework
 
 Every reactive `s-` directive ultimately reads and writes signals. The state you
-declare with `s-data` lives in a [reactive()](https://velofy.co/summitjs/reactive-reactive/) proxy, and
+declare with `s-data` lives in a [reactive()](https://github.com/velofy/summitjs/blob/main/content/reactive-reactive.md) proxy, and
 both signals and that proxy feed the one dependency-tracking engine described in
-[How reactivity works](https://velofy.co/summitjs/advanced-reactivity/). For the HTML-first way to hold
-and update state, see [Reactivity and State](https://velofy.co/summitjs/reactivity-state/). To derive a
-cached value from a signal, reach for [computed()](https://velofy.co/summitjs/reactive-computed/); to run
-a side effect when it changes, use [effect()](https://velofy.co/summitjs/reactive-effect/).
+[How reactivity works](https://github.com/velofy/summitjs/blob/main/content/advanced-reactivity.md). For the HTML-first way to hold
+and update state, see [Reactivity and State](https://github.com/velofy/summitjs/blob/main/content/reactivity-state.md). To derive a
+cached value from a signal, reach for [computed()](https://github.com/velofy/summitjs/blob/main/content/reactive-computed.md); to run
+a side effect when it changes, use [effect()](https://github.com/velofy/summitjs/blob/main/content/reactive-effect.md).

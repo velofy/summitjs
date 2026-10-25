@@ -23,7 +23,7 @@ initializes the element, before any children below it are set up.
 </div>
 ```
 
-Unlike [s-effect](../s-effect/), which re-runs whenever the state it reads
+Unlike [s-effect](s-effect.md), which re-runs whenever the state it reads
 changes, `s-init` fires exactly once and never again. Reach for it when you want
 a one-time action, not a reactive one.
 
@@ -41,9 +41,9 @@ element initializes.
 
 ## Relationship to a component's init() method
 
-A component defined with [s-data](../s-data/) can expose an `init()` method,
+A component defined with [s-data](s-data.md) can expose an `init()` method,
 which Summit calls when the component is created (see
-[Lifecycle](../lifecycle/)). The two are complementary:
+[Lifecycle](lifecycle.md)). The two are complementary:
 
 - Use `init()` for setup that is substantial or belongs alongside the
   component's data, such as fetching, reading storage, or starting a timer.

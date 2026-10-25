@@ -37,7 +37,7 @@ padding so they line up without extra spacing rules.
 - `.s-card-header` holds the `.s-card-title` and an optional `.s-card-desc`.
 - `.s-card-body` is the main content area.
 - `.s-card-footer` lays out actions in a row with a gap, ready for
-  [buttons](../comp-button/).
+  [buttons](comp-button.md).
 
 The wrapper clips its corners with `overflow: hidden`, so a full-bleed image or a
 colored bar as the first child follows the rounded edge cleanly.
@@ -82,6 +82,6 @@ Drop the header and footer when all you need is a framed block of content.
 - Footer actions align to the start. To push them to the right, add your own
   `style="justify-content:flex-end"` or a utility class.
 
-Pair cards with [badges](../comp-badge/) for status and
-[avatars](../comp-avatar/) for people. See the full set on the
-[overview](../components/).
+Pair cards with [badges](comp-badge.md) for status and
+[avatars](comp-avatar.md) for people. See the full set on the
+[overview](components.md).

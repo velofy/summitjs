@@ -50,7 +50,7 @@ flips an `open` flag that reveals a stacked menu.
 
 ## Glass navbar
 
-Drop [matte glass](https://velofy.co/summitjs/technique-glassmorphism/) onto the bar for a header that
+Drop [matte glass](https://github.com/velofy/summitjs/blob/main/content/technique-glassmorphism.md) onto the bar for a header that
 floats over the page.
 
 ```summit

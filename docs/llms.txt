@@ -2,128 +2,128 @@
 
 > The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.
 
-Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` magics, evaluated by a small CSP-safe interpreter. The documentation lives at https://velofy.co/summitjs/. The full corpus is also available as one markdown file (see Optional below).
+Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` magics, evaluated by a small CSP-safe interpreter. The documentation is the markdown in the repository's content/ folder (https://github.com/velofy/summitjs/tree/main/content), and the project page is https://summitjs.velofy.co/. The full corpus is also available as one markdown file (see Optional below).
 
 ## Getting Started
 
-- [Getting Started](https://velofy.co/summitjs/start/): Summit is a rugged, signal-powered JavaScript framework for composing behavior directly in your HTML. Learn what it is and write your first component.
+- [Getting Started](https://github.com/velofy/summitjs/blob/main/content/start.md): Summit is a rugged, signal-powered JavaScript framework for composing behavior directly in your HTML. Learn what it is and write your first component.
 
 ## Components
 
-- [UI Library](https://velofy.co/summitjs/components/): An accessible, token-themed component library you copy into your markup and theme with CSS variables. Built with Summit, for people and AI agents.
-- [Button](https://velofy.co/summitjs/comp-button/): Buttons with solid, outline, ghost, subtle, and danger variants, plus sizes and groups.
-- [Input](https://velofy.co/summitjs/comp-input/): Text inputs and textareas with labels, help text, addons, and validation state.
-- [Select](https://velofy.co/summitjs/comp-select/): A styled native select bound with s-model.
-- [Checkbox & Radio](https://velofy.co/summitjs/comp-checkbox/): Accessible checkboxes and radio groups bound with s-model.
-- [Switch](https://velofy.co/summitjs/comp-switch/): A toggle switch bound with s-model, for on/off settings.
-- [Card](https://velofy.co/summitjs/comp-card/): A surface for grouping content, with header, body, and footer.
-- [Badge & Tag](https://velofy.co/summitjs/comp-badge/): Small status labels and removable tags.
-- [Table](https://velofy.co/summitjs/comp-table/): A styled table for displaying rows of tabular data.
-- [Alert](https://velofy.co/summitjs/comp-alert/): Contextual feedback banners for info, success, warning, and danger.
-- [Avatar](https://velofy.co/summitjs/comp-avatar/): User avatars with initials or images, sizes, and stacked groups.
-- [Progress & Spinner](https://velofy.co/summitjs/comp-progress/): Progress bars, spinners, and skeleton placeholders for loading states.
-- [Tooltip](https://velofy.co/summitjs/comp-tooltip/): A CSS-only tooltip that appears on hover and focus.
-- [Dialog](https://velofy.co/summitjs/comp-dialog/): A modal dialog for confirmations and focused tasks, with overlay and Escape to close.
-- [Dropdown Menu](https://velofy.co/summitjs/comp-menu/): A button-triggered menu that closes on outside click or Escape.
-- [Popover](https://velofy.co/summitjs/comp-popover/): A click-triggered floating panel for rich content, dismissed on outside click or Escape.
-- [Toast](https://velofy.co/summitjs/comp-toast/): Transient notifications that stack and auto-dismiss.
-- [Tabs](https://velofy.co/summitjs/comp-tabs/): Switch between panels with an underlined or soft tab bar.
-- [Accordion](https://velofy.co/summitjs/comp-accordion/): Collapsible sections, single or multiple open.
-- [Breadcrumb](https://velofy.co/summitjs/comp-breadcrumb/): Show the path to the current page.
-- [Pagination](https://velofy.co/summitjs/comp-pagination/): Navigate through pages of results.
+- [UI Library](https://github.com/velofy/summitjs/blob/main/content/components.md): An accessible, token-themed component library you copy into your markup and theme with CSS variables. Built with Summit, for people and AI agents.
+- [Button](https://github.com/velofy/summitjs/blob/main/content/comp-button.md): Buttons with solid, outline, ghost, subtle, and danger variants, plus sizes and groups.
+- [Input](https://github.com/velofy/summitjs/blob/main/content/comp-input.md): Text inputs and textareas with labels, help text, addons, and validation state.
+- [Select](https://github.com/velofy/summitjs/blob/main/content/comp-select.md): A styled native select bound with s-model.
+- [Checkbox & Radio](https://github.com/velofy/summitjs/blob/main/content/comp-checkbox.md): Accessible checkboxes and radio groups bound with s-model.
+- [Switch](https://github.com/velofy/summitjs/blob/main/content/comp-switch.md): A toggle switch bound with s-model, for on/off settings.
+- [Card](https://github.com/velofy/summitjs/blob/main/content/comp-card.md): A surface for grouping content, with header, body, and footer.
+- [Badge & Tag](https://github.com/velofy/summitjs/blob/main/content/comp-badge.md): Small status labels and removable tags.
+- [Table](https://github.com/velofy/summitjs/blob/main/content/comp-table.md): A styled table for displaying rows of tabular data.
+- [Alert](https://github.com/velofy/summitjs/blob/main/content/comp-alert.md): Contextual feedback banners for info, success, warning, and danger.
+- [Avatar](https://github.com/velofy/summitjs/blob/main/content/comp-avatar.md): User avatars with initials or images, sizes, and stacked groups.
+- [Progress & Spinner](https://github.com/velofy/summitjs/blob/main/content/comp-progress.md): Progress bars, spinners, and skeleton placeholders for loading states.
+- [Tooltip](https://github.com/velofy/summitjs/blob/main/content/comp-tooltip.md): A CSS-only tooltip that appears on hover and focus.
+- [Dialog](https://github.com/velofy/summitjs/blob/main/content/comp-dialog.md): A modal dialog for confirmations and focused tasks, with overlay and Escape to close.
+- [Dropdown Menu](https://github.com/velofy/summitjs/blob/main/content/comp-menu.md): A button-triggered menu that closes on outside click or Escape.
+- [Popover](https://github.com/velofy/summitjs/blob/main/content/comp-popover.md): A click-triggered floating panel for rich content, dismissed on outside click or Escape.
+- [Toast](https://github.com/velofy/summitjs/blob/main/content/comp-toast.md): Transient notifications that stack and auto-dismiss.
+- [Tabs](https://github.com/velofy/summitjs/blob/main/content/comp-tabs.md): Switch between panels with an underlined or soft tab bar.
+- [Accordion](https://github.com/velofy/summitjs/blob/main/content/comp-accordion.md): Collapsible sections, single or multiple open.
+- [Breadcrumb](https://github.com/velofy/summitjs/blob/main/content/comp-breadcrumb.md): Show the path to the current page.
+- [Pagination](https://github.com/velofy/summitjs/blob/main/content/comp-pagination.md): Navigate through pages of results.
 
 ## Techniques
 
-- [Techniques](https://velofy.co/summitjs/techniques/): Presentational recipes you compose with Summit's directives and classes: animated loaders, matte glassmorphism, retro interfaces, navbar patterns, and using Tailwind.
-- [Loaders & Spinners](https://velofy.co/summitjs/technique-animation/): A gallery of pure-CSS loaders: rings, dots, bars, shapes, animated logo marks, and skeleton screens.
-- [Matte Glassmorphism](https://velofy.co/summitjs/technique-glassmorphism/): Frosted, low-gloss glass surfaces that blur what is behind them while staying legible in both themes.
-- [Neumorphism](https://velofy.co/summitjs/technique-neumorphism/): Soft, extruded UI built from twin light and dark shadows on a matching surface.
-- [Claymorphism](https://velofy.co/summitjs/technique-claymorphism/): Puffy, rounded, playful clay surfaces with soft inner and outer shadows.
-- [Retro UI](https://velofy.co/summitjs/technique-retro/): Hard offset shadows and neon text for a retro, terminal, or arcade look.
-- [Brutalism](https://velofy.co/summitjs/technique-brutalism/): Stark borders, loud uppercase type, and blunt offset shadows for a raw, confident look.
-- [Aurora Backgrounds](https://velofy.co/summitjs/technique-aurora/): Slow, glowing color fields that drift behind your content for a premium hero look.
-- [Glow & Spotlight](https://velofy.co/summitjs/technique-glow/): A soft highlight that follows the cursor across a card, driven by a tiny Summit handler.
-- [Navbar Patterns](https://velofy.co/summitjs/technique-navbars/): Navigation bars with active links, a responsive mobile menu, and a glass variant, wired with Summit state.
-- [Using Tailwind CSS](https://velofy.co/summitjs/technique-tailwind/): Summit for behavior, Tailwind for styling. They compose cleanly because Summit lives in attributes and Tailwind lives in classes.
+- [Techniques](https://github.com/velofy/summitjs/blob/main/content/techniques.md): Presentational recipes you compose with Summit's directives and classes: animated loaders, matte glassmorphism, retro interfaces, navbar patterns, and using Tailwind.
+- [Loaders & Spinners](https://github.com/velofy/summitjs/blob/main/content/technique-animation.md): A gallery of pure-CSS loaders: rings, dots, bars, shapes, animated logo marks, and skeleton screens.
+- [Matte Glassmorphism](https://github.com/velofy/summitjs/blob/main/content/technique-glassmorphism.md): Frosted, low-gloss glass surfaces that blur what is behind them while staying legible in both themes.
+- [Neumorphism](https://github.com/velofy/summitjs/blob/main/content/technique-neumorphism.md): Soft, extruded UI built from twin light and dark shadows on a matching surface.
+- [Claymorphism](https://github.com/velofy/summitjs/blob/main/content/technique-claymorphism.md): Puffy, rounded, playful clay surfaces with soft inner and outer shadows.
+- [Retro UI](https://github.com/velofy/summitjs/blob/main/content/technique-retro.md): Hard offset shadows and neon text for a retro, terminal, or arcade look.
+- [Brutalism](https://github.com/velofy/summitjs/blob/main/content/technique-brutalism.md): Stark borders, loud uppercase type, and blunt offset shadows for a raw, confident look.
+- [Aurora Backgrounds](https://github.com/velofy/summitjs/blob/main/content/technique-aurora.md): Slow, glowing color fields that drift behind your content for a premium hero look.
+- [Glow & Spotlight](https://github.com/velofy/summitjs/blob/main/content/technique-glow.md): A soft highlight that follows the cursor across a card, driven by a tiny Summit handler.
+- [Navbar Patterns](https://github.com/velofy/summitjs/blob/main/content/technique-navbars.md): Navigation bars with active links, a responsive mobile menu, and a glass variant, wired with Summit state.
+- [Using Tailwind CSS](https://github.com/velofy/summitjs/blob/main/content/technique-tailwind.md): Summit for behavior, Tailwind for styling. They compose cleanly because Summit lives in attributes and Tailwind lives in classes.
 
 ## Essentials
 
-- [Installation](https://velofy.co/summitjs/installation/): Add Summit with a single script tag, or install it from npm for use with a bundler.
-- [Reactivity and State](https://velofy.co/summitjs/reactivity-state/): Declare state with s-data, derive values with getters, and add behavior with methods. Summit tracks reads and updates only what changed.
-- [Templating](https://velofy.co/summitjs/templating/): Put state on the screen with s-text and s-html, and drive attributes, classes, and styles with s-bind.
-- [Events](https://velofy.co/summitjs/events/): Respond to user input with s-on and its @ shorthand, including a full set of modifiers for keys, timing, and event control.
-- [Forms](https://velofy.co/summitjs/forms/): Bind form controls to state in both directions with s-model, covering text, numbers, checkboxes, radios, and selects.
-- [Lifecycle](https://velofy.co/summitjs/lifecycle/): Run code when a component initializes, react to DOM changes automatically, and clean up when elements leave.
+- [Installation](https://github.com/velofy/summitjs/blob/main/content/installation.md): Add Summit with a single script tag, or install it from npm for use with a bundler.
+- [Reactivity and State](https://github.com/velofy/summitjs/blob/main/content/reactivity-state.md): Declare state with s-data, derive values with getters, and add behavior with methods. Summit tracks reads and updates only what changed.
+- [Templating](https://github.com/velofy/summitjs/blob/main/content/templating.md): Put state on the screen with s-text and s-html, and drive attributes, classes, and styles with s-bind.
+- [Events](https://github.com/velofy/summitjs/blob/main/content/events.md): Respond to user input with s-on and its @ shorthand, including a full set of modifiers for keys, timing, and event control.
+- [Forms](https://github.com/velofy/summitjs/blob/main/content/forms.md): Bind form controls to state in both directions with s-model, covering text, numbers, checkboxes, radios, and selects.
+- [Lifecycle](https://github.com/velofy/summitjs/blob/main/content/lifecycle.md): Run code when a component initializes, react to DOM changes automatically, and clean up when elements leave.
 
 ## Directives
 
-- [s-data](https://velofy.co/summitjs/s-data/): Declare a reactive component and its state.
-- [s-bind](https://velofy.co/summitjs/s-bind/): Bind attributes, classes, and styles, with the colon shorthand.
-- [s-on](https://velofy.co/summitjs/s-on/): Listen for events with the @ shorthand and a full set of modifiers.
-- [s-text](https://velofy.co/summitjs/s-text/): Set an element's text content from an expression.
-- [s-html](https://velofy.co/summitjs/s-html/): Set an element's innerHTML from an expression.
-- [s-model](https://velofy.co/summitjs/s-model/): Two-way binding for form controls.
-- [s-show](https://velofy.co/summitjs/s-show/): Toggle an element's visibility with display.
-- [s-if](https://velofy.co/summitjs/s-if/): Conditionally render an element in the DOM.
-- [s-for](https://velofy.co/summitjs/s-for/): Render a list, reconciled by key.
-- [s-effect](https://velofy.co/summitjs/s-effect/): Run a side effect that re-runs when its reactive dependencies change.
-- [s-init](https://velofy.co/summitjs/s-init/): Run an expression when the element initializes.
-- [s-ref](https://velofy.co/summitjs/s-ref/): Name an element so you can reach it through $refs.
-- [s-cloak](https://velofy.co/summitjs/s-cloak/): Hide markup until Summit has initialized it.
-- [s-ignore](https://velofy.co/summitjs/s-ignore/): Skip Summit initialization for an element and its children.
-- [s-teleport](https://velofy.co/summitjs/s-teleport/): Render an element at a different place in the DOM.
-- [s-transition](https://velofy.co/summitjs/s-transition/): Animate elements as they enter and leave.
-- [s-intersect](https://velofy.co/summitjs/s-intersect/): Run an expression when an element enters or leaves the viewport.
-- [s-trap](https://velofy.co/summitjs/s-trap/): Keep keyboard focus inside an element while it is open.
-- [s-anchor](https://velofy.co/summitjs/s-anchor/): Position an element next to a reference, flipping to stay in view.
-- [s-collapse](https://velofy.co/summitjs/s-collapse/): Animate an element open and closed by height.
-- [s-mask](https://velofy.co/summitjs/s-mask/): Format an input as the user types against a pattern.
+- [s-data](https://github.com/velofy/summitjs/blob/main/content/s-data.md): Declare a reactive component and its state.
+- [s-bind](https://github.com/velofy/summitjs/blob/main/content/s-bind.md): Bind attributes, classes, and styles, with the colon shorthand.
+- [s-on](https://github.com/velofy/summitjs/blob/main/content/s-on.md): Listen for events with the @ shorthand and a full set of modifiers.
+- [s-text](https://github.com/velofy/summitjs/blob/main/content/s-text.md): Set an element's text content from an expression.
+- [s-html](https://github.com/velofy/summitjs/blob/main/content/s-html.md): Set an element's innerHTML from an expression.
+- [s-model](https://github.com/velofy/summitjs/blob/main/content/s-model.md): Two-way binding for form controls.
+- [s-show](https://github.com/velofy/summitjs/blob/main/content/s-show.md): Toggle an element's visibility with display.
+- [s-if](https://github.com/velofy/summitjs/blob/main/content/s-if.md): Conditionally render an element in the DOM.
+- [s-for](https://github.com/velofy/summitjs/blob/main/content/s-for.md): Render a list, reconciled by key.
+- [s-effect](https://github.com/velofy/summitjs/blob/main/content/s-effect.md): Run a side effect that re-runs when its reactive dependencies change.
+- [s-init](https://github.com/velofy/summitjs/blob/main/content/s-init.md): Run an expression when the element initializes.
+- [s-ref](https://github.com/velofy/summitjs/blob/main/content/s-ref.md): Name an element so you can reach it through $refs.
+- [s-cloak](https://github.com/velofy/summitjs/blob/main/content/s-cloak.md): Hide markup until Summit has initialized it.
+- [s-ignore](https://github.com/velofy/summitjs/blob/main/content/s-ignore.md): Skip Summit initialization for an element and its children.
+- [s-teleport](https://github.com/velofy/summitjs/blob/main/content/s-teleport.md): Render an element at a different place in the DOM.
+- [s-transition](https://github.com/velofy/summitjs/blob/main/content/s-transition.md): Animate elements as they enter and leave.
+- [s-intersect](https://github.com/velofy/summitjs/blob/main/content/s-intersect.md): Run an expression when an element enters or leaves the viewport.
+- [s-trap](https://github.com/velofy/summitjs/blob/main/content/s-trap.md): Keep keyboard focus inside an element while it is open.
+- [s-anchor](https://github.com/velofy/summitjs/blob/main/content/s-anchor.md): Position an element next to a reference, flipping to stay in view.
+- [s-collapse](https://github.com/velofy/summitjs/blob/main/content/s-collapse.md): Animate an element open and closed by height.
+- [s-mask](https://github.com/velofy/summitjs/blob/main/content/s-mask.md): Format an input as the user types against a pattern.
 
 ## Magic Properties
 
-- [$el](https://velofy.co/summitjs/magic-el/): The current DOM element.
-- [$refs](https://velofy.co/summitjs/magic-refs/): Elements in this component marked with s-ref.
-- [$store](https://velofy.co/summitjs/magic-store/): The reactive global store.
-- [$watch](https://velofy.co/summitjs/magic-watch/): Run a callback when a watched expression changes.
-- [$dispatch](https://velofy.co/summitjs/magic-dispatch/): Dispatch a custom DOM event.
-- [$nextTick](https://velofy.co/summitjs/magic-nexttick/): Run code after the next DOM update.
-- [$root](https://velofy.co/summitjs/magic-root/): The root element of the nearest component.
-- [$id](https://velofy.co/summitjs/magic-id/): Generate stable, scoped unique ids.
-- [$data](https://velofy.co/summitjs/magic-data/): The current component's reactive state object.
-- [$persist](https://velofy.co/summitjs/magic-persist/): Reactive state backed by localStorage that survives reloads.
-- [$focus](https://velofy.co/summitjs/magic-focus/): Move keyboard focus around from an expression.
+- [$el](https://github.com/velofy/summitjs/blob/main/content/magic-el.md): The current DOM element.
+- [$refs](https://github.com/velofy/summitjs/blob/main/content/magic-refs.md): Elements in this component marked with s-ref.
+- [$store](https://github.com/velofy/summitjs/blob/main/content/magic-store.md): The reactive global store.
+- [$watch](https://github.com/velofy/summitjs/blob/main/content/magic-watch.md): Run a callback when a watched expression changes.
+- [$dispatch](https://github.com/velofy/summitjs/blob/main/content/magic-dispatch.md): Dispatch a custom DOM event.
+- [$nextTick](https://github.com/velofy/summitjs/blob/main/content/magic-nextTick.md): Run code after the next DOM update.
+- [$root](https://github.com/velofy/summitjs/blob/main/content/magic-root.md): The root element of the nearest component.
+- [$id](https://github.com/velofy/summitjs/blob/main/content/magic-id.md): Generate stable, scoped unique ids.
+- [$data](https://github.com/velofy/summitjs/blob/main/content/magic-data.md): The current component's reactive state object.
+- [$persist](https://github.com/velofy/summitjs/blob/main/content/magic-persist.md): Reactive state backed by localStorage that survives reloads.
+- [$focus](https://github.com/velofy/summitjs/blob/main/content/magic-focus.md): Move keyboard focus around from an expression.
 
 ## Globals & API
 
-- [Summit.data](https://velofy.co/summitjs/globals-data/): Register a reusable named component.
-- [Summit.store](https://velofy.co/summitjs/globals-store/): Create and read global reactive state.
-- [Summit.bind](https://velofy.co/summitjs/globals-bind/): Register a reusable set of bindings.
-- [Summit.directive](https://velofy.co/summitjs/globals-directive/): Register a custom directive.
-- [Summit.magic](https://velofy.co/summitjs/globals-magic/): Register a custom magic property.
-- [Summit.plugin](https://velofy.co/summitjs/globals-plugin/): Install a plugin that registers features in bulk.
-- [Summit.start](https://velofy.co/summitjs/globals-start/): Start Summit and initialize the DOM.
+- [Summit.data](https://github.com/velofy/summitjs/blob/main/content/globals-data.md): Register a reusable named component.
+- [Summit.store](https://github.com/velofy/summitjs/blob/main/content/globals-store.md): Create and read global reactive state.
+- [Summit.bind](https://github.com/velofy/summitjs/blob/main/content/globals-bind.md): Register a reusable set of bindings.
+- [Summit.directive](https://github.com/velofy/summitjs/blob/main/content/globals-directive.md): Register a custom directive.
+- [Summit.magic](https://github.com/velofy/summitjs/blob/main/content/globals-magic.md): Register a custom magic property.
+- [Summit.plugin](https://github.com/velofy/summitjs/blob/main/content/globals-plugin.md): Install a plugin that registers features in bulk.
+- [Summit.start](https://github.com/velofy/summitjs/blob/main/content/globals-start.md): Start Summit and initialize the DOM.
 
 ## Reactivity
 
-- [signal()](https://velofy.co/summitjs/reactive-signal/): A single reactive value you read by calling it and update with set().
-- [computed()](https://velofy.co/summitjs/reactive-computed/): A cached value derived from other reactive state.
-- [effect()](https://velofy.co/summitjs/reactive-effect/): Run a function reactively whenever its dependencies change.
-- [reactive()](https://velofy.co/summitjs/reactive-reactive/): A deeply reactive object or array.
-- [batch()](https://velofy.co/summitjs/reactive-batch/): Group writes so effects run once.
-- [nextTick()](https://velofy.co/summitjs/reactive-nexttick/): Wait for pending reactive updates to flush.
+- [signal()](https://github.com/velofy/summitjs/blob/main/content/reactive-signal.md): A single reactive value you read by calling it and update with set().
+- [computed()](https://github.com/velofy/summitjs/blob/main/content/reactive-computed.md): A cached value derived from other reactive state.
+- [effect()](https://github.com/velofy/summitjs/blob/main/content/reactive-effect.md): Run a function reactively whenever its dependencies change.
+- [reactive()](https://github.com/velofy/summitjs/blob/main/content/reactive-reactive.md): A deeply reactive object or array.
+- [batch()](https://github.com/velofy/summitjs/blob/main/content/reactive-batch.md): Group writes so effects run once.
+- [nextTick()](https://github.com/velofy/summitjs/blob/main/content/reactive-nexttick.md): Wait for pending reactive updates to flush.
 
 ## Advanced
 
-- [How reactivity works](https://velofy.co/summitjs/advanced-reactivity/): How Summit tracks dependencies and updates the DOM.
-- [The CSP-safe evaluator](https://velofy.co/summitjs/advanced-evaluator/): How Summit evaluates expressions without eval, safe under CSP.
-- [Writing directives and plugins](https://velofy.co/summitjs/advanced-extending/): Build custom directives, magics, and plugins.
-- [Migrating from Alpine](https://velofy.co/summitjs/advanced-migrating/): A guide for developers coming from Alpine.js.
-- [Data Fetching](https://velofy.co/summitjs/advanced-data/): summitjs/net, a tiny reactive data layer whose resources expose loading, error, and data as signals that drive the DOM.
+- [How reactivity works](https://github.com/velofy/summitjs/blob/main/content/advanced-reactivity.md): How Summit tracks dependencies and updates the DOM.
+- [The CSP-safe evaluator](https://github.com/velofy/summitjs/blob/main/content/advanced-evaluator.md): How Summit evaluates expressions without eval, safe under CSP.
+- [Writing directives and plugins](https://github.com/velofy/summitjs/blob/main/content/advanced-extending.md): Build custom directives, magics, and plugins.
+- [Migrating from Alpine](https://github.com/velofy/summitjs/blob/main/content/advanced-migrating.md): A guide for developers coming from Alpine.js.
+- [Data Fetching](https://github.com/velofy/summitjs/blob/main/content/advanced-data.md): summitjs/net, a tiny reactive data layer whose resources expose loading, error, and data as signals that drive the DOM.
+- [Error codes](https://github.com/velofy/summitjs/blob/main/content/errors.md): Every diagnostic code Summit prints to the console, what causes it, and where the docs link in each message points.
 
 ## Optional
 
-- [Error codes](https://velofy.co/summitjs/errors/): every [summit] diagnostic code and its docs link
-- [Changelog](https://velofy.co/summitjs/changelog/): releases and notable changes
+- [Changelog](https://github.com/velofy/summitjs/blob/main/CHANGELOG.md): releases and notable changes
 - [Full documentation corpus](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms-full.txt): every page concatenated as markdown
 - [Machine-readable API manifest](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/ai/summit.json): directives, magics, modifiers, error codes, and components as JSON
 - [AGENTS.md](https://github.com/velofy/summitjs/blob/main/AGENTS.md): a drop-in brief for coding agents

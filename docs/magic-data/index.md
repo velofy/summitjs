@@ -30,6 +30,6 @@ helper, or reset it in one assignment.
 ## Which component
 
 `$data` is the state of the nearest component. In
-[nested components](https://velofy.co/summitjs/reactivity-state/) the inner `s-data` wins, so `$data`
+[nested components](https://github.com/velofy/summitjs/blob/main/content/reactivity-state.md) the inner `s-data` wins, so `$data`
 inside a child gives the child's state, not the parent's. To reach shared state
-across components, use [$store](https://velofy.co/summitjs/magic-store/) instead.
+across components, use [$store](https://github.com/velofy/summitjs/blob/main/content/magic-store.md) instead.

@@ -89,7 +89,7 @@ borders for you.
 ## Disabled
 
 The native `disabled` attribute dims a button and removes it from the tab order.
-Bind it reactively with [`:disabled`](../s-bind/) to gate an action on state.
+Bind it reactively with [`:disabled`](s-bind.md) to gate an action on state.
 
 ```summit
 <div s-data="{ agreed: false }" class="s-row">
@@ -133,4 +133,4 @@ Always use a real `<button>` element so keyboard activation, focus, and the
 ring on `:focus-visible`. Give icon-only buttons an `aria-label` so assistive
 technology can name them, and label a `.s-btn-group` with `role="group"` and an
 `aria-label` describing the set. For handling clicks and keyboard shortcuts, see
-[s-on](../s-on/); to pair a button with a field, see [Input](../comp-input/).
+[s-on](s-on.md); to pair a button with a field, see [Input](comp-input.md).

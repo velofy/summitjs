@@ -42,7 +42,7 @@ in on hover. A `@mousemove` handler writes the pointer's position, taken from
 
 ## Notes
 
-- No state is needed: the handler reads [$event](../s-on/) and writes to
-  [$el](../magic-el/) directly, so there is nothing to store.
+- No state is needed: the handler reads [$event](s-on.md) and writes to
+  [$el](magic-el.md) directly, so there is nothing to store.
 - The highlight only appears on hover, so touch users see a clean card.
 - Tint the glow by changing the accent mix in the `.s-glow-card::before` rule.

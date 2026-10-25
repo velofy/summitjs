@@ -3,8 +3,8 @@
 > Register a custom magic property.
 
 `Summit.magic` adds a `$`-prefixed helper that every expression can reach, the
-same way the built-ins [$el](https://velofy.co/summitjs/magic-el/), [$refs](https://velofy.co/summitjs/magic-refs/), and
-[$store](https://velofy.co/summitjs/magic-store/) work. Use it to expose a value or a small function to
+same way the built-ins [$el](https://github.com/velofy/summitjs/blob/main/content/magic-el.md), [$refs](https://github.com/velofy/summitjs/blob/main/content/magic-refs.md), and
+[$store](https://github.com/velofy/summitjs/blob/main/content/magic-store.md) work. Use it to expose a value or a small function to
 your markup without threading it through component state.
 
 ## Registering a magic
@@ -54,6 +54,6 @@ disposable, so it is cleaned up when the element goes away.
 ## Timing
 
 Registration is timing-safe: register before or after
-[Summit.start](https://velofy.co/summitjs/globals-start/). Registering a magic with the name of a
+[Summit.start](https://github.com/velofy/summitjs/blob/main/content/globals-start.md). Registering a magic with the name of a
 built-in overrides it. For a broader guide, see
-[Writing directives and plugins](https://velofy.co/summitjs/advanced-extending/).
+[Writing directives and plugins](https://github.com/velofy/summitjs/blob/main/content/advanced-extending.md).

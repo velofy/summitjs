@@ -74,4 +74,4 @@ console.log(Summit.version); // "0.4.4", the same as package.json
 ```
 
 For install options and manual-start setup, see
-[Installation](../installation/).
+[Installation](installation.md).

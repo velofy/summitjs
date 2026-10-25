@@ -14,14 +14,14 @@ scale with no CSS to write.
 
 ## How it pairs with s-show
 
-Transitions run through [s-show](../s-show/). Put both directives on the same
+Transitions run through [s-show](s-show.md). Put both directives on the same
 element: `s-show` decides when the element is visible, and `s-transition`
 animates the change. The very first render is applied instantly with no
 animation. Every toggle after that plays the enter animation when the element
 appears and the leave animation when it hides, and the element is only set to
 `display: none` once the leave animation finishes.
 
-Note that [s-if](../s-if/) does not run transitions. It adds and removes the node
+Note that [s-if](s-if.md) does not run transitions. It adds and removes the node
 directly, so to animate an element in and out, use `s-show` rather than `s-if`.
 
 ## Class style

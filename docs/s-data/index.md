@@ -20,8 +20,8 @@ whole subtree can use.
 ```
 
 An empty component is fine too. `s-data` on its own (or `s-data=""`) starts with
-an empty object, which is handy when the element only needs an [s-init](https://velofy.co/summitjs/s-init/)
-or a place to hang [$refs](https://velofy.co/summitjs/magic-refs/).
+an empty object, which is handy when the element only needs an [s-init](https://github.com/velofy/summitjs/blob/main/content/s-init.md)
+or a place to hang [$refs](https://github.com/velofy/summitjs/blob/main/content/magic-refs.md).
 
 ## Getters
 
@@ -73,7 +73,7 @@ Inside `init()`, and inside any method, the `$`-magics are reachable through
 ## Named providers
 
 For anything past a small inline object, register the state once with
-[Summit.data](https://velofy.co/summitjs/globals-data/) and reference it by name. The provider is a
+[Summit.data](https://github.com/velofy/summitjs/blob/main/content/globals-data.md) and reference it by name. The provider is a
 function that returns the state object, so every element that uses it gets a
 fresh copy.
 
@@ -113,5 +113,5 @@ its ancestors, and the nearest name wins when two scopes define the same key.
 ```
 
 State that many unrelated components share belongs in a store rather than
-`s-data`. Create one with [Summit.store](https://velofy.co/summitjs/globals-store/) and reach it from any
-expression with [$store](https://velofy.co/summitjs/magic-store/).
+`s-data`. Create one with [Summit.store](https://github.com/velofy/summitjs/blob/main/content/globals-store.md) and reach it from any
+expression with [$store](https://github.com/velofy/summitjs/blob/main/content/magic-store.md).

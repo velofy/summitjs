@@ -96,6 +96,6 @@ several to preview a whole card or list row.
   people who cannot see it turn.
 - Both the spinner's spin and the skeleton's shimmer stop under
   `prefers-reduced-motion`, so you do not need to disable them yourself.
-- Once a load finishes, a [Toast](../comp-toast/) or an [Alert](../comp-alert/)
+- Once a load finishes, a [Toast](comp-toast.md) or an [Alert](comp-alert.md)
   is a good way to confirm the result. See all the pieces on the
-  [UI Library overview](../components/).
+  [UI Library overview](components.md).

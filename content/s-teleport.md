@@ -36,7 +36,7 @@ state.
 The modal markup is authored inside the component, yet it ends up appended to
 `<body>`, clear of any `overflow: hidden` ancestor. Because Summit initializes
 it with the component's scope, `open` still controls it with
-[s-show](../s-show/) and the Close button still writes back.
+[s-show](s-show.md) and the Close button still writes back.
 
 ## Choosing where it lands
 
@@ -65,4 +65,4 @@ So `s-teleport="body"` puts the content at the end of the page body, while
   the teleported nodes too, so no detached DOM is left behind.
 
 To animate the teleported content as it appears, pair it with
-[s-transition](../s-transition/).
+[s-transition](s-transition.md).

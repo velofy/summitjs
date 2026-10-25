@@ -37,7 +37,7 @@ in on hover. A `@mousemove` handler writes the pointer's position, taken from
 
 ## Notes
 
-- No state is needed: the handler reads [$event](https://velofy.co/summitjs/s-on/) and writes to
-  [$el](https://velofy.co/summitjs/magic-el/) directly, so there is nothing to store.
+- No state is needed: the handler reads [$event](https://github.com/velofy/summitjs/blob/main/content/s-on.md) and writes to
+  [$el](https://github.com/velofy/summitjs/blob/main/content/magic-el.md) directly, so there is nothing to store.
 - The highlight only appears on hover, so touch users see a clean card.
 - Tint the glow by changing the accent mix in the `.s-glow-card::before` rule.

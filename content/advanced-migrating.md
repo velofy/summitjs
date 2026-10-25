@@ -60,14 +60,14 @@ you are done.
 
 The magics keep their names too: `$el`, `$refs`, `$store`, `$watch`, `$dispatch`,
 `$nextTick`, `$root`, and `$id` all work as you expect. Summit adds one,
-[$data](../magic-data/), which returns the nearest scope object.
+[$data](magic-data.md), which returns the nearest scope object.
 
 The global API maps one for one as well: `Alpine.data`, `Alpine.store`,
 `Alpine.bind`, `Alpine.directive`, `Alpine.magic`, `Alpine.plugin`, and
-`Alpine.start` become [Summit.data](../globals-data/),
-[Summit.store](../globals-store/), [Summit.bind](../globals-bind/),
-[Summit.directive](../globals-directive/), [Summit.magic](../globals-magic/),
-[Summit.plugin](../globals-plugin/), and [Summit.start](../globals-start/).
+`Alpine.start` become [Summit.data](globals-data.md),
+[Summit.store](globals-store.md), [Summit.bind](globals-bind.md),
+[Summit.directive](globals-directive.md), [Summit.magic](globals-magic.md),
+[Summit.plugin](globals-plugin.md), and [Summit.start](globals-start.md).
 
 ## What is genuinely different
 
@@ -85,7 +85,7 @@ is no subtree to re-evaluate.
 One practical upshot is getters. A getter you define in `s-data` is a cached
 computed: it recomputes only when one of its own dependencies changes, and
 reading it several times in one render does the work once. The same getter in
-Alpine re-runs on every read. See [How reactivity works](../advanced-reactivity/)
+Alpine re-runs on every read. See [How reactivity works](advanced-reactivity.md)
 for the full picture.
 
 ### CSP-safe with the standard build
@@ -96,7 +96,7 @@ expressions may do). Summit interprets expressions with its own engine and never
 calls `eval` or `new Function`, so a policy like `script-src 'self'` works with
 the one and only build, and directive expressions still support a broad slice of
 JavaScript. The details, including the exact supported syntax and the global
-allowlist, are in [The CSP-safe evaluator](../advanced-evaluator/).
+allowlist, are in [The CSP-safe evaluator](advanced-evaluator.md).
 
 ### $watch returns an unwatch function and will not loop
 
@@ -167,4 +167,4 @@ matter and a later registration overrides an earlier one of the same name.
 Summit dispatches `summit:init` on `document` just before it initializes the page
 and `summit:initialized` when it is done, so register your plugins before start,
 or inside a `summit:init` listener. See
-[Extending Summit](../advanced-extending/) for the full pattern.
+[Extending Summit](advanced-extending.md) for the full pattern.

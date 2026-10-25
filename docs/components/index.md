@@ -80,22 +80,22 @@ use any font stack you like.
 Interactive components ship with the roles and keyboard behavior you expect:
 focus rings on every control, `Escape` to close overlays, click-outside to
 dismiss menus, and labels wired to their inputs. Where a component needs an id
-to pair a label with a control, use the [$id](https://velofy.co/summitjs/magic-id/) magic.
+to pair a label with a control, use the [$id](https://github.com/velofy/summitjs/blob/main/content/magic-id.md) magic.
 
 ## The components
 
 **Forms**
-[Button](https://velofy.co/summitjs/comp-button/), [Input](https://velofy.co/summitjs/comp-input/), [Select](https://velofy.co/summitjs/comp-select/),
-[Checkbox & Radio](https://velofy.co/summitjs/comp-checkbox/), [Switch](https://velofy.co/summitjs/comp-switch/)
+[Button](https://github.com/velofy/summitjs/blob/main/content/comp-button.md), [Input](https://github.com/velofy/summitjs/blob/main/content/comp-input.md), [Select](https://github.com/velofy/summitjs/blob/main/content/comp-select.md),
+[Checkbox & Radio](https://github.com/velofy/summitjs/blob/main/content/comp-checkbox.md), [Switch](https://github.com/velofy/summitjs/blob/main/content/comp-switch.md)
 
 **Data display**
-[Card](https://velofy.co/summitjs/comp-card/), [Badge & Tag](https://velofy.co/summitjs/comp-badge/), [Table](https://velofy.co/summitjs/comp-table/),
-[Alert](https://velofy.co/summitjs/comp-alert/), [Avatar](https://velofy.co/summitjs/comp-avatar/), [Progress & Spinner](https://velofy.co/summitjs/comp-progress/)
+[Card](https://github.com/velofy/summitjs/blob/main/content/comp-card.md), [Badge & Tag](https://github.com/velofy/summitjs/blob/main/content/comp-badge.md), [Table](https://github.com/velofy/summitjs/blob/main/content/comp-table.md),
+[Alert](https://github.com/velofy/summitjs/blob/main/content/comp-alert.md), [Avatar](https://github.com/velofy/summitjs/blob/main/content/comp-avatar.md), [Progress & Spinner](https://github.com/velofy/summitjs/blob/main/content/comp-progress.md)
 
 **Overlays**
-[Dialog](https://velofy.co/summitjs/comp-dialog/), [Dropdown Menu](https://velofy.co/summitjs/comp-menu/),
-[Popover](https://velofy.co/summitjs/comp-popover/), [Tooltip](https://velofy.co/summitjs/comp-tooltip/), [Toast](https://velofy.co/summitjs/comp-toast/)
+[Dialog](https://github.com/velofy/summitjs/blob/main/content/comp-dialog.md), [Dropdown Menu](https://github.com/velofy/summitjs/blob/main/content/comp-menu.md),
+[Popover](https://github.com/velofy/summitjs/blob/main/content/comp-popover.md), [Tooltip](https://github.com/velofy/summitjs/blob/main/content/comp-tooltip.md), [Toast](https://github.com/velofy/summitjs/blob/main/content/comp-toast.md)
 
 **Navigation**
-[Tabs](https://velofy.co/summitjs/comp-tabs/), [Accordion](https://velofy.co/summitjs/comp-accordion/),
-[Breadcrumb](https://velofy.co/summitjs/comp-breadcrumb/), [Pagination](https://velofy.co/summitjs/comp-pagination/)
+[Tabs](https://github.com/velofy/summitjs/blob/main/content/comp-tabs.md), [Accordion](https://github.com/velofy/summitjs/blob/main/content/comp-accordion.md),
+[Breadcrumb](https://github.com/velofy/summitjs/blob/main/content/comp-breadcrumb.md), [Pagination](https://github.com/velofy/summitjs/blob/main/content/comp-pagination.md)

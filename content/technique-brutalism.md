@@ -54,4 +54,4 @@ The button slams into its shadow when pressed.
 
 The classes are `.s-brutal` (card), `.s-brutal-accent` (fill it with the accent),
 `.s-brutal-btn`, and `.s-brutal-tag`. For a softer take on hard shadows, see
-[Retro UI](../technique-retro/).
+[Retro UI](technique-retro.md).

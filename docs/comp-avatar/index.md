@@ -88,5 +88,5 @@ avatar with a count reads as an overflow.
 - The ring around grouped avatars comes from the page background color. Place a
   group on a plain surface so the separation reads clearly.
 
-Pair avatars with [cards](https://velofy.co/summitjs/comp-card/) and [badges](https://velofy.co/summitjs/comp-badge/), or browse
-the full set on the [overview](https://velofy.co/summitjs/components/).
+Pair avatars with [cards](https://github.com/velofy/summitjs/blob/main/content/comp-card.md) and [badges](https://github.com/velofy/summitjs/blob/main/content/comp-badge.md), or browse
+the full set on the [overview](https://github.com/velofy/summitjs/blob/main/content/components.md).

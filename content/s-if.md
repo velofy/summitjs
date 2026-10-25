@@ -50,7 +50,7 @@ is used as the blueprint:
 
 ## Difference from s-show
 
-`s-if` and [s-show](../s-show/) look similar but differ in what they do to the
+`s-if` and [s-show](s-show.md) look similar but differ in what they do to the
 element:
 
 - `s-if` adds and removes the node. While the condition is false the element is
@@ -63,6 +63,6 @@ Use `s-if` when you want the element and its cost gone entirely, or when it is
 rarely shown. Use `s-show` when you toggle frequently or need to preserve the
 element's internal state.
 
-For lists of elements that come and go, see [s-for](../s-for/), which reconciles
+For lists of elements that come and go, see [s-for](s-for.md), which reconciles
 by key. To animate elements as they appear and disappear, pair
-[s-transition](../s-transition/) with `s-show`.
+[s-transition](s-transition.md) with `s-show`.

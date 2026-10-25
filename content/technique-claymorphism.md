@@ -45,5 +45,5 @@ clay. It suits friendly, consumer, and onboarding interfaces.
 
 - The puffed look comes from an outer drop shadow plus inner top and bottom
   shadows. It recolors with your accent through `.s-clay-btn`.
-- Pair it with the [Claymorphism](../technique-claymorphism/) accent and rounded
-  [components](../components/) for a consistent, playful set.
+- Pair it with the [Claymorphism](technique-claymorphism.md) accent and rounded
+  [components](components.md) for a consistent, playful set.

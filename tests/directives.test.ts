@@ -1,6 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { join } from "node:path";
 import Summit from "../src/index.js";
 import { docsUrl } from "../src/errors.js";
+import { directiveNames } from "../src/registry/registry.js";
+
+const DOCS = "https://github.com/velofy/summitjs/blob/main/content/";
 
 function mount(html: string): HTMLElement {
   const el = document.createElement("div");
@@ -173,15 +178,32 @@ describe("diagnostics", () => {
     expect(msg).toContain("[summit]");
     expect(msg).toContain("E201");
     expect(msg).toContain("s-text");
-    expect(msg).toContain("docs: https://velofy.co/summitjs/s-text/");
+    expect(msg).toContain(`docs: ${DOCS}s-text.md`);
   });
 
   it("links directives without their own page to the page that documents them", () => {
-    expect(docsUrl("s-for")).toBe("https://velofy.co/summitjs/s-for/");
-    expect(docsUrl()).toBe("https://velofy.co/summitjs/");
-    expect(docsUrl("s-id")).toBe("https://velofy.co/summitjs/magic-id/#scoping-ids-with-s-id");
-    expect(docsUrl("s-resize")).toBe("https://velofy.co/summitjs/s-intersect/#s-resize");
-    expect(docsUrl("s-resource")).toBe("https://velofy.co/summitjs/advanced-data/");
+    expect(docsUrl("s-for")).toBe(`${DOCS}s-for.md`);
+    expect(docsUrl()).toBe("https://github.com/velofy/summitjs/tree/main/content");
+    expect(docsUrl("s-id")).toBe(`${DOCS}magic-id.md#scoping-ids-with-s-id`);
+    expect(docsUrl("s-resize")).toBe(`${DOCS}s-intersect.md#s-resize`);
+    expect(docsUrl("s-resource")).toBe(`${DOCS}advanced-data.md`);
+  });
+
+  it("links every built-in directive and every fixed docs slug to a page in content/", () => {
+    const content = join(__dirname, "..", "content");
+    // Fixed slugs passed as `doc:` in src, plus the s- pages E201 and E301 build from directive names.
+    const src = (dir: string): string[] =>
+      readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+        e.isDirectory() ? src(join(dir, e.name)) : e.name.endsWith(".ts") ? [readFileSync(join(dir, e.name), "utf8")] : [],
+      );
+    const fixed = src(join(__dirname, "..", "src")).flatMap((t) => [...t.matchAll(/doc: "([a-z-]+)"/g)].map((m) => m[1]!));
+    expect(fixed.length).toBeGreaterThan(5);
+    for (const slug of [...fixed, ...directiveNames().map((n) => `s-${n}`), "s-data", "s-ignore", "s-resource"]) {
+      const url = docsUrl(slug);
+      expect(url.startsWith(DOCS), url).toBe(true);
+      const file = url.slice(DOCS.length).split("#")[0]!;
+      expect(existsSync(join(content, file)), `${slug} -> ${file}`).toBe(true);
+    }
   });
 
   it("reports a coded error with the expression when a directive throws", async () => {

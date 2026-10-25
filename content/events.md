@@ -106,5 +106,5 @@ event names that used dashes:
 <div @custom-event.camel="onCustomEvent()"></div>
 ```
 
-For dispatching your own events, see [$dispatch](../magic-dispatch/). The full
-directive reference is on the [s-on](../s-on/) page.
+For dispatching your own events, see [$dispatch](magic-dispatch.md). The full
+directive reference is on the [s-on](s-on.md) page.

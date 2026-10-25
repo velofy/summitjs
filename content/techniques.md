@@ -15,7 +15,7 @@ light and dark.
 Load the stylesheet once, then use any `s-` prefixed class from the pages listed here.
 The examples on these pages also use layout and UI Library classes such as
 `.s-row`, `.s-stack`, `.s-btn`, `.s-avatar`, and `.s-spinner`. Those live in
-`components.css`; see the [UI Library](../components/) for how to load it.
+`components.css`; see the [UI Library](components.md) for how to load it.
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/assets/techniques.css" />
@@ -23,19 +23,19 @@ The examples on these pages also use layout and UI Library classes such as
 
 ## Loaders
 
-- [Loaders & Spinners](../technique-animation/): fifteen pure-CSS loaders, animated logo marks, and skeleton screens.
+- [Loaders & Spinners](technique-animation.md): fifteen pure-CSS loaders, animated logo marks, and skeleton screens.
 
 ## Style families
 
-- [Matte Glassmorphism](../technique-glassmorphism/): frosted, low-gloss surfaces that stay legible over anything.
-- [Neumorphism](../technique-neumorphism/): soft, extruded UI built from twin light and dark shadows.
-- [Claymorphism](../technique-claymorphism/): puffy, rounded, playful clay surfaces.
-- [Retro UI](../technique-retro/): hard shadows and neon text.
-- [Brutalism](../technique-brutalism/): stark borders, loud type, and blunt offset shadows.
-- [Aurora Backgrounds](../technique-aurora/): slow, glowing color fields behind your content.
-- [Glow & Spotlight](../technique-glow/): a highlight that follows the cursor across a card.
+- [Matte Glassmorphism](technique-glassmorphism.md): frosted, low-gloss surfaces that stay legible over anything.
+- [Neumorphism](technique-neumorphism.md): soft, extruded UI built from twin light and dark shadows.
+- [Claymorphism](technique-claymorphism.md): puffy, rounded, playful clay surfaces.
+- [Retro UI](technique-retro.md): hard shadows and neon text.
+- [Brutalism](technique-brutalism.md): stark borders, loud type, and blunt offset shadows.
+- [Aurora Backgrounds](technique-aurora.md): slow, glowing color fields behind your content.
+- [Glow & Spotlight](technique-glow.md): a highlight that follows the cursor across a card.
 
 ## Patterns
 
-- [Navbar Patterns](../technique-navbars/): active links, a responsive mobile menu, and a glass bar.
-- [Using Tailwind CSS](../technique-tailwind/): Summit for behavior, Tailwind for styling, no build step.
+- [Navbar Patterns](technique-navbars.md): active links, a responsive mobile menu, and a glass bar.
+- [Using Tailwind CSS](technique-tailwind.md): Summit for behavior, Tailwind for styling, no build step.

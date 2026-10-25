@@ -27,7 +27,7 @@ Summit.data("clock", () => ({
 }));
 ```
 
-For a one-off expression rather than a method, use the [s-init](../s-init/)
+For a one-off expression rather than a method, use the [s-init](s-init.md)
 directive:
 
 ```html
@@ -38,7 +38,7 @@ directive:
 
 Most of the time you do not watch for changes yourself: any expression that
 reads state re-runs when that state changes. For an explicit side effect that
-should re-run on change, use [s-effect](../s-effect/):
+should re-run on change, use [s-effect](s-effect.md):
 
 ```summit
 <div s-data="{ count: 0 }">
@@ -48,7 +48,7 @@ should re-run on change, use [s-effect](../s-effect/):
 ```
 
 To watch a single value and get both the new and old value, use the
-[$watch](../magic-watch/) magic.
+[$watch](magic-watch.md) magic.
 
 ## Automatic setup for new nodes
 
@@ -73,13 +73,13 @@ right.
 When an element is removed, Summit tears its component down and runs every
 cleanup registered for it: event listeners are removed, effects are stopped,
 and timers you registered through a directive are cleared. Keyed
-[s-for](../s-for/) reuses nodes across updates, so state is preserved for rows
+[s-for](s-for.md) reuses nodes across updates, so state is preserved for rows
 that merely moved.
 
 ## Waiting for the DOM
 
 After you change state, the DOM updates on the next tick. To run code after that
-update lands, use [$nextTick](../magic-nextTick/):
+update lands, use [$nextTick](magic-nextTick.md):
 
 ```html
 <button @click="open = true; $nextTick(() => $refs.panel.focus())">Open</button>
