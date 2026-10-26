@@ -5,19 +5,22 @@
   </picture></a>
 </p>
 
-<h1 align="center">Summit.js</h1>
-
 <p align="center">The open source, AI Agent Native JavaScript framework for composing behavior directly in your HTML.<br>Drop in one script and go. No build step, no virtual DOM, no <code>eval</code>.</p>
 
 <p align="center"><strong>Open Source. by Nature.</strong></p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/summitjs"><img alt="npm version" src="https://img.shields.io/npm/v/summitjs"></a>
-  <a href="https://github.com/velofy/summitjs/actions/workflows/ci.yml"><img alt="CI status" src="https://github.com/velofy/summitjs/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue"></a>
+  <a href="https://www.npmjs.com/package/summitjs"><img alt="npm" src="https://img.shields.io/npm/v/summitjs?label=npm&color=12130f"></a>
+  <a href="https://github.com/velofy/summitjs/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/velofy/summitjs/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/velofy/summitjs/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-12130f"></a>
 </p>
 
-**Documentation:** the markdown pages in [`content/`](https://github.com/velofy/summitjs/tree/main/content). **Project page:** https://summitjs.velofy.co/
+<p align="center">
+  <a href="https://summitjs.velofy.co/">Project page</a> ·
+  <a href="https://github.com/velofy/summitjs/tree/main/content">Documentation</a> ·
+  <a href="https://github.com/velofy/summitjs/blob/main/CHANGELOG.md">Changelog</a> ·
+  <a href="https://github.com/velofy/summitjs/releases">Releases</a>
+</p>
 
 Started by [anishfyi](https://github.com/anishfyi), so that AI agents can make beautiful frontends.
 
@@ -54,7 +57,7 @@ Codes for Summit.js users: `SUMMITJS35` for 35% off mobile and residential proxi
 Zero-build, drop in a script (auto-starts, exposes `window.Summit`):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
 ```
 
 With a bundler:
@@ -74,7 +77,7 @@ See [Installation](https://github.com/velofy/summitjs/blob/main/content/installa
 ## Minimal example
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
 
 <div s-data="{ open: false }">
   <button @click="open = !open">Toggle</button>
@@ -203,8 +206,8 @@ Summit.start();
 Or drop in a second script, no build step (it registers itself on the global):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit-net.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit-net.min.js" defer></script>
 ```
 
 ```html
