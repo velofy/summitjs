@@ -7148,8 +7148,8 @@ See [s-data](https://github.com/velofy/summitjs/blob/main/content/s-data.md).
 
 ### E201
 
-An attribute looks like a directive (`s-*`, `@*`, or `:*`) but nothing handles
-it. When a close match exists, the hint reads `Did you mean "s-..."?` and the
+An `s-*` attribute names a directive that nothing handles. (`@*` and `:*`
+attributes always go to `s-on` and `s-bind`.) When a close match exists, the hint reads `Did you mean "s-..."?` and the
 docs link points at that directive. Otherwise the link points at
 [Getting Started](https://github.com/velofy/summitjs/blob/main/content/start.md).
 

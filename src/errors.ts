@@ -78,7 +78,7 @@ export interface Diag {
   el?: Element;
   /** The expression that failed, shown verbatim. */
   expression?: string;
-  /** Docs slug to link, e.g. "s-for" -> https://.../s-for/. */
+  /** Docs slug to link, e.g. "s-for" -> https://.../content/s-for.md (see docsUrl). */
   doc?: string;
   /** A one-line "here is how to fix it" hint. */
   hint?: string;

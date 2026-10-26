@@ -3,7 +3,7 @@
  *
  * Supports the full modifier vocabulary: .prevent .stop .self .outside .once
  * .capture .passive .window .document .debounce .throttle, key filters
- * (.enter .escape .arrow-up ...), system-key combos (.shift .ctrl .alt .cmd),
+ * (.enter .escape .arrow-up ...), system-key combos (.shift .ctrl .alt .cmd .meta),
  * and event-name transforms (.camel .dot). A bare method reference
  * (`@click="handler"`) is called with the event.
  */
