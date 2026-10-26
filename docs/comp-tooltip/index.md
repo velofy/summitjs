@@ -65,5 +65,5 @@ the tip short: it renders on a single line and does not wrap.
   the top edge of the page.
 - Text stays on one line by design. For anything longer, or for content that
   should open on click and hold buttons or fields, reach for a
-  [Popover](https://velofy.co/summitjs/comp-popover/) instead.
-- Browse the rest of the set on the [UI Library overview](https://velofy.co/summitjs/components/).
+  [Popover](https://github.com/velofy/summitjs/blob/main/content/comp-popover.md) instead.
+- Browse the rest of the set on the [UI Library overview](https://github.com/velofy/summitjs/blob/main/content/components.md).

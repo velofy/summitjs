@@ -34,18 +34,20 @@ cloned in and out.
 <article s-if="post">...</article>
 ```
 
-A `<template>` still works if you prefer it. In that case its single root child
-is used as the blueprint:
+A `<template>` still works if you prefer it. In that case every top-level
+element inside it is rendered, in order, so a template can hold more than one
+root, such as an overlay and its dialog:
 
 ```html
-<template s-if="post">
-  <article>...</article>
+<template s-if="open">
+  <div class="overlay"></div>
+  <div class="dialog">...</div>
 </template>
 ```
 
 ## Difference from s-show
 
-`s-if` and [s-show](https://velofy.co/summitjs/s-show/) look similar but differ in what they do to the
+`s-if` and [s-show](https://github.com/velofy/summitjs/blob/main/content/s-show.md) look similar but differ in what they do to the
 element:
 
 - `s-if` adds and removes the node. While the condition is false the element is
@@ -58,6 +60,6 @@ Use `s-if` when you want the element and its cost gone entirely, or when it is
 rarely shown. Use `s-show` when you toggle frequently or need to preserve the
 element's internal state.
 
-For lists of elements that come and go, see [s-for](https://velofy.co/summitjs/s-for/), which reconciles
+For lists of elements that come and go, see [s-for](https://github.com/velofy/summitjs/blob/main/content/s-for.md), which reconciles
 by key. To animate elements as they appear and disappear, pair
-[s-transition](https://velofy.co/summitjs/s-transition/) with `s-show`.
+[s-transition](https://github.com/velofy/summitjs/blob/main/content/s-transition.md) with `s-show`.

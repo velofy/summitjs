@@ -11,7 +11,7 @@ description: Register a reusable set of bindings.
 dynamic bindings so you can apply the whole set at once instead of repeating the
 same `:class`, `@click`, and `aria-*` attributes on every element that needs
 them. It is the reusable form of an object passed to
-[s-bind](../s-bind/).
+[s-bind](s-bind.md).
 
 ## Registering a bundle
 
@@ -36,7 +36,7 @@ registrations.
 
 ## What a bind provider returns
 
-The object uses the same shape [s-bind](../s-bind/) accepts, and each kind of key
+The object uses the same shape [s-bind](s-bind.md) accepts, and each kind of key
 is handled differently:
 
 - A plain key sets an attribute. Boolean attributes such as `disabled` are added
@@ -53,7 +53,7 @@ is handled differently:
 
 Retrieve a registered provider with `Summit.getBind(name)`, which returns the
 provider function (or `undefined` if none is registered). Calling it produces the
-bindings object, which you hand to [s-bind](../s-bind/). Add `Summit` to the
+bindings object, which you hand to [s-bind](s-bind.md). Add `Summit` to the
 expression globals once so markup can reach it:
 
 ```js

@@ -8,7 +8,7 @@ that engine end to end so you can reason about updates, write your own effects,
 and understand exactly why a directive fires when it does.
 
 If you just want to use signals, computeds, and effects, the
-[Reactivity](https://velofy.co/summitjs/reactive-signal/) reference pages cover the public API. This page
+[Reactivity](https://github.com/velofy/summitjs/blob/main/content/reactive-signal.md) reference pages cover the public API. This page
 is about the machinery underneath them.
 
 ## The signal, the atom of state
@@ -193,9 +193,9 @@ value.
 
 ## Where to go next
 
-- [signal](https://velofy.co/summitjs/reactive-signal/) and [computed](https://velofy.co/summitjs/reactive-computed/) for the
+- [signal](https://github.com/velofy/summitjs/blob/main/content/reactive-signal.md) and [computed](https://github.com/velofy/summitjs/blob/main/content/reactive-computed.md) for the
   value primitives.
-- [effect](https://velofy.co/summitjs/reactive-effect/) for the tracking primitive, and
-  [reactive](https://velofy.co/summitjs/reactive-reactive/) for deep reactive objects.
-- [batch](https://velofy.co/summitjs/reactive-batch/) and [nextTick](https://velofy.co/summitjs/reactive-nexttick/) for
+- [effect](https://github.com/velofy/summitjs/blob/main/content/reactive-effect.md) for the tracking primitive, and
+  [reactive](https://github.com/velofy/summitjs/blob/main/content/reactive-reactive.md) for deep reactive objects.
+- [batch](https://github.com/velofy/summitjs/blob/main/content/reactive-batch.md) and [nextTick](https://github.com/velofy/summitjs/blob/main/content/reactive-nexttick.md) for
   controlling when work runs.

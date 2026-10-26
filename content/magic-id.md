@@ -40,7 +40,7 @@ Pass `s-id` an array of the names you want to scope. Groups nest: an inner
 
 ## Ids in a list
 
-Inside an [s-for](../s-for/) loop, open a fresh group per row so each row gets
+Inside an [s-for](s-for.md) loop, open a fresh group per row so each row gets
 its own ids and none of them collide.
 
 ```html

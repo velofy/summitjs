@@ -1,18 +1,22 @@
 /**
- * Summit docs generator for the retired GitHub Pages site.
+ * Summit docs generator.
  *
- * The documentation now lives at https://velofy.co/summitjs/. This script keeps
- * every old Pages URL working and keeps the machine-readable files current:
+ * The documentation is the markdown in content/, read on GitHub at
+ * https://github.com/velofy/summitjs/tree/main/content. Pages link to each
+ * other with relative `slug.md` links, so they work in the repository as is.
+ * The project page is https://summitjs.velofy.co/. This script writes:
  *
- *   docs/index.html, docs/404.html      redirect to https://velofy.co/summitjs/
- *   docs/<slug>/index.html              redirect to the matching velofy.co page
+ *   content/README.md                   the docs index GitHub shows for content/
+ *   docs/index.html                     redirect to the project page
+ *   docs/404.html                       redirect to the docs index
+ *   docs/<slug>/index.html              redirect to the page on GitHub
  *   docs/<slug>/index.md                the page as clean markdown (for agents)
- *   docs/llms.txt, docs/llms-full.txt   indexes that link to velofy.co pages
- *   docs/ai/summit.json                 API manifest with velofy.co doc links
+ *   docs/llms.txt, docs/llms-full.txt   indexes that link to the pages on GitHub
+ *   docs/ai/summit.json                 API manifest with doc links
  *
- * The CDN files the old site served (summit.min.js, summit-net.min.js and
- * assets/*.css) are left in docs/ so existing <script> and <link> tags keep
- * working. Markdown sources stay in content/.
+ * docs/ is the old GitHub Pages site (velofy.github.io/summitjs). Its CDN files
+ * (summit.min.js, summit-net.min.js and assets/*.css) stay in docs/ so existing
+ * <script> and <link> tags keep working.
  */
 
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, rmSync } from "node:fs";
@@ -23,13 +27,25 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const CONTENT = join(root, "content");
 const OUT = join(root, "docs");
 
-export const SITE = "https://velofy.co/summitjs";
+export const REPO = "https://github.com/velofy/summitjs";
+/** Where each page is read: content/<slug>.md on GitHub. */
+export const SITE = `${REPO}/blob/main/content`;
+/** The content/ folder on GitHub, which renders the generated content/README.md. */
+export const DOCS_INDEX = `${REPO}/tree/main/content`;
+/** The project page. */
+export const HOME = "https://summitjs.velofy.co/";
+/** The GitHub URL of a page, with an optional `#anchor`. */
+export const pageUrl = (slug, hash = "") => `${SITE}/${slug}.md${hash}`;
 
-/** Old Pages slug -> new velofy.co slug, where the name changed. */
-export const SLUG_MAP = {
-  "magic-nextTick": "magic-nexttick",
+/** Directives without a page of their own, and the page section that documents them. Matches src/errors.ts. */
+export const DOC_ALIASES = {
+  "s-id": ["magic-id", "#scoping-ids-with-s-id"],
+  "s-resize": ["s-intersect", "#s-resize"],
+  "s-resource": ["advanced-data", ""],
 };
-export const newSlug = (slug) => SLUG_MAP[slug] ?? slug;
+
+/** Relative `slug.md` and `slug.md#anchor` links between pages. */
+const PAGE_LINK = /\]\(([A-Za-z0-9-]+)\.md(#[A-Za-z0-9-]+)?\)/g;
 
 const CATEGORIES = [
   { key: "start", label: "Getting Started" },
@@ -44,6 +60,23 @@ const CATEGORIES = [
 ];
 
 // --- Frontmatter ---------------------------------------------------------
+
+/** GitHub's heading anchors for a page body (lower case, punctuation dropped, spaces to hyphens). */
+export function anchors(body) {
+  const out = new Set();
+  const seen = new Map();
+  let fence = false;
+  for (const line of body.split("\n")) {
+    if (line.startsWith("```")) fence = !fence;
+    const m = !fence && line.match(/^#{1,6}\s+(.*)$/);
+    if (!m) continue;
+    const base = m[1].trim().toLowerCase().replace(/[^\p{L}\p{N}\s_-]/gu, "").replace(/\s/g, "-");
+    const n = seen.get(base) ?? 0;
+    seen.set(base, n + 1);
+    out.add(n ? `${base}-${n}` : base);
+  }
+  return out;
+}
 
 function parseFrontmatter(raw) {
   const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -86,9 +119,9 @@ export function redirectStub(target) {
 const SUMMARY =
   "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.";
 
-/** Rewrite relative ../slug/ links to absolute velofy.co URLs. */
+/** Rewrite relative slug.md links to absolute GitHub URLs. */
 function absolutize(body) {
-  return body.replace(/\]\(\.\.\/([^)/#]+)\/(#[^)]*)?\)/g, (_, s, h) => `](${SITE}/${newSlug(s)}/${h || ""})`);
+  return body.replace(PAGE_LINK, (_, s, h) => `](${pageUrl(s, h || "")})`);
 }
 
 /** A page rendered as a clean, self-contained markdown document. */
@@ -104,20 +137,19 @@ function buildLlmsIndex(ordered) {
   let out = `# Summit.js\n\n> ${SUMMARY}\n\n`;
   out +=
     "Summit is HTML-first: behavior lives on your markup as `s-` directives and `$` magics, " +
-    `evaluated by a small CSP-safe interpreter. The documentation lives at ${SITE}/. ` +
+    `evaluated by a small CSP-safe interpreter. The documentation is the markdown in the repository's content/ folder (${DOCS_INDEX}), and the project page is ${HOME}. ` +
     "The full corpus is also available as one markdown file (see Optional below).\n\n";
   for (const cat of CATEGORIES) {
     const inCat = ordered.filter((p) => p.category === cat.key);
     if (!inCat.length) continue;
     out += `## ${cat.label}\n\n`;
     for (const p of inCat) {
-      out += `- [${p.title}](${SITE}/${newSlug(p.slug)}/)${p.description ? `: ${p.description}` : ""}\n`;
+      out += `- [${p.title}](${pageUrl(p.slug)})${p.description ? `: ${p.description}` : ""}\n`;
     }
     out += `\n`;
   }
   out += `## Optional\n\n`;
-  out += `- [Error codes](${SITE}/errors/): every [summit] diagnostic code and its docs link\n`;
-  out += `- [Changelog](${SITE}/changelog/): releases and notable changes\n`;
+  out += `- [Changelog](${REPO}/blob/main/CHANGELOG.md): releases and notable changes\n`;
   out += `- [Full documentation corpus](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms-full.txt): every page concatenated as markdown\n`;
   out += `- [Machine-readable API manifest](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/ai/summit.json): directives, magics, modifiers, error codes, and components as JSON\n`;
   out += `- [AGENTS.md](https://github.com/velofy/summitjs/blob/main/AGENTS.md): a drop-in brief for coding agents\n`;
@@ -129,7 +161,7 @@ function buildLlmsIndex(ordered) {
 /** llms-full.txt: the entire docs corpus in one markdown file, in reading order. */
 function buildLlmsFull(ordered) {
   let out = `# Summit.js: Full Documentation\n\n> ${SUMMARY}\n\n`;
-  out += `Every documentation page, concatenated as markdown in reading order. Source: ${SITE}/\n\n---\n\n`;
+  out += `Every documentation page, concatenated as markdown in reading order. Source: ${DOCS_INDEX}\n\n---\n\n`;
   out += ordered.map((p) => pageMarkdown(p)).join("\n---\n\n");
   return out;
 }
@@ -151,10 +183,12 @@ const DIRECTIVES = [
   ["s-for", null, "Render a keyed list.", `<template s-for="item in items" :key="item.id">`],
   ["s-ref", null, "Name an element; read it via $refs.", `<input s-ref="field">`],
   ["s-init", null, "Run an expression once when the element initializes.", `<div s-init="load()">`],
+  ["s-id", null, "Open an id group so $id() calls inside it share one generated id.", `<div s-id="['field']">`],
   ["s-effect", null, "Re-run an expression whenever its reactive dependencies change.", `<div s-effect="document.title = title">`],
   ["s-transition", null, "Animate enter and leave.", `<div s-show="open" s-transition>`],
   ["s-teleport", null, "Render a template's content elsewhere in the DOM.", `<template s-teleport="body">...</template>`],
   ["s-intersect", ":leave", "Run an expression when the element enters or leaves the viewport.", `<div s-intersect="load()">`],
+  ["s-resize", null, "Run an expression when the element changes size, with $width and $height.", `<div s-resize="w = $width">`],
   ["s-trap", null, "Keep keyboard focus inside an element while an expression is truthy.", `<div s-trap="open">`],
   ["s-anchor", null, "Position an element next to a reference, flipping to stay in view.", `<div s-anchor="$refs.trigger">`],
   ["s-collapse", null, "Animate an element open and closed by height.", `<div s-collapse="open">`],
@@ -169,17 +203,33 @@ const MAGICS = [
   ["$id", "A stable unique id, scoped for pairing labels and controls.", "magic-id"],
   ["$store", "Global reactive stores shared across components.", "magic-store"],
   ["$watch", "Run a callback when a reactive expression changes.", "magic-watch"],
-  ["$nextTick", "Run a callback after the next DOM update.", "magic-nexttick"],
+  ["$nextTick", "Run a callback after the next DOM update.", "magic-nextTick"],
   ["$dispatch", "Dispatch a custom DOM event that bubbles.", "magic-dispatch"],
   ["$data", "The reactive state object of the current scope.", "magic-data"],
   ["$persist", "Reactive state backed by localStorage that survives reloads.", "magic-persist"],
   ["$focus", "Move keyboard focus around from an expression.", "magic-focus"],
 ];
 const MODIFIERS = {
-  event: ["prevent", "stop", "self", "outside", "once", "capture", "passive", "window", "document", "debounce", "throttle", "camel", "dot", "enter", "escape", "tab", "space", "up", "down", "left", "right", "cmd", "ctrl", "meta", "alt", "shift"],
+  // Matches src/directives/on.ts: behavior modifiers, key aliases, then system keys.
+  // Any other modifier is matched against the key name in kebab case (`.k`, `.f1`).
+  event: ["prevent", "stop", "self", "outside", "once", "capture", "passive", "window", "document", "debounce", "throttle", "camel", "dot", "enter", "tab", "space", "esc", "escape", "up", "down", "left", "right", "arrow-up", "arrow-down", "arrow-left", "arrow-right", "page-up", "page-down", "home", "end", "delete", "backspace", "shift", "ctrl", "alt", "cmd", "meta"],
   // Matches src/directives/model.ts.
   model: ["lazy", "change", "blur", "number", "boolean", "debounce", "fill"],
 };
+// Matches GLOBAL_ALLOW in src/evaluator/interpreter.ts (verify-docs checks it).
+export const ALLOWED_GLOBALS = [
+  "Math", "JSON", "Date", "Object", "Array", "Number", "String", "Boolean",
+  "parseInt", "parseFloat", "isNaN", "isFinite", "RegExp",
+  "Map", "Set", "WeakMap", "WeakSet", "Promise", "Intl", "console",
+  "window", "document", "location", "navigator", "history",
+  "localStorage", "sessionStorage",
+  "setTimeout", "clearTimeout", "setInterval", "clearInterval",
+  "requestAnimationFrame", "cancelAnimationFrame",
+  "fetch", "AbortController", "Headers", "Request", "Response",
+  "alert", "confirm", "prompt", "structuredClone",
+  "URL", "URLSearchParams", "encodeURIComponent", "decodeURIComponent",
+  "NaN", "Infinity",
+];
 const ERROR_CODES = [
   ["E101", "s-data init() threw."],
   ["E102", "s-data destroy() threw."],
@@ -204,17 +254,17 @@ const COMPONENT_CLASS = {
 };
 
 function buildManifest(ordered, version) {
-  const doc = (slug) => `${SITE}/${newSlug(slug)}/`;
+  const doc = (slug) => (DOC_ALIASES[slug] ? pageUrl(...DOC_ALIASES[slug]) : pageUrl(slug));
   return {
     $schema: "https://json-schema.org/draft/2020-12/schema",
     name: "summitjs",
     version,
     description: SUMMARY,
-    homepage: `${SITE}/`,
-    docs: `${SITE}/`,
+    homepage: HOME,
+    docs: DOCS_INDEX,
     llms: "https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms.txt",
     llmsFull: "https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms-full.txt",
-    errorsDoc: `${SITE}/errors/`,
+    errorsDoc: pageUrl("errors"),
     agents: "https://github.com/velofy/summitjs/blob/main/AGENTS.md",
     sponsor: {
       name: "NodeMaven",
@@ -225,7 +275,7 @@ function buildManifest(ordered, version) {
         { code: "SUMMITJS40", offer: "40% off ISP (Static)" },
       ],
     },
-    allowedGlobals: ["Math", "JSON", "Date", "Object", "Array", "Number", "String", "Boolean", "console", "window", "document", "location", "localStorage", "sessionStorage", "setTimeout", "setInterval", "fetch", "URL", "structuredClone"],
+    allowedGlobals: ALLOWED_GLOBALS,
     directives: DIRECTIVES.map(([name, shorthand, summary, example]) => ({
       name, shorthand, summary, example, doc: doc(name),
     })),
@@ -243,8 +293,26 @@ function buildManifest(ordered, version) {
 
 // --- Main ----------------------------------------------------------------
 
+/** content/README.md: the docs index GitHub renders under the content/ listing. */
+export function buildContentIndex(ordered) {
+  let out = "<!-- npm run docs writes this file from each page's front matter. Edit the pages, not this file. -->\n\n";
+  out += `# Summit.js documentation\n\n${SUMMARY}\n\n`;
+  out += `Project page: ${HOME}. Changelog: [CHANGELOG.md](../CHANGELOG.md). `;
+  out += "For coding agents: [AGENTS.md](../AGENTS.md), [llms.txt](../docs/llms.txt), ";
+  out += "[llms-full.txt](../docs/llms-full.txt) and [summit.json](../docs/ai/summit.json).\n\n";
+  out += "Code blocks tagged `summit` hold HTML that runs as is with the Summit script on the page.\n\n";
+  for (const cat of CATEGORIES) {
+    const inCat = ordered.filter((p) => p.category === cat.key);
+    if (!inCat.length) continue;
+    out += `## ${cat.label}\n\n`;
+    for (const p of inCat) out += `- [${p.title}](${p.slug}.md)${p.description ? `: ${p.description}` : ""}\n`;
+    out += "\n";
+  }
+  return out;
+}
+
 export function loadPages() {
-  const files = readdirSync(CONTENT).filter((f) => f.endsWith(".md"));
+  const files = readdirSync(CONTENT).filter((f) => f.endsWith(".md") && f !== "README.md");
   const catIndex = Object.fromEntries(CATEGORIES.map((c, i) => [c.key, i]));
   const pages = files.map((file) => {
     const raw = readFileSync(join(CONTENT, file), "utf8");
@@ -271,23 +339,36 @@ function main() {
   const slugSet = new Set(ordered.map((p) => p.slug));
   const broken = [];
 
-  // Entry point and not-found page both go to the docs overview.
-  writeFileSync(join(OUT, "index.html"), redirectStub(`${SITE}/`));
-  writeFileSync(join(OUT, "404.html"), redirectStub(`${SITE}/`));
+  // The old site's home was the project page; any unknown old URL goes to the docs index.
+  writeFileSync(join(OUT, "index.html"), redirectStub(HOME));
+  writeFileSync(join(OUT, "404.html"), redirectStub(DOCS_INDEX));
 
   for (const page of ordered) {
     const dir = join(OUT, page.slug);
     mkdirSync(dir, { recursive: true });
-    writeFileSync(join(dir, "index.html"), redirectStub(`${SITE}/${newSlug(page.slug)}/`));
+    writeFileSync(join(dir, "index.html"), redirectStub(pageUrl(page.slug)));
     // Clean-markdown copy of every page, so agents that fetched <slug>/index.md
     // from the old site still get the content.
     writeFileSync(join(dir, "index.md"), pageMarkdown(page));
 
-    // Validate internal cross-links (case-sensitive).
-    for (const m of page.body.matchAll(/\]\(\.\.\/([^)/#]+)\//g)) {
-      if (!slugSet.has(m[1])) broken.push(`${page.slug}  ->  ../${m[1]}/`);
+    // Validate internal cross-links (case-sensitive), including #anchors.
+    for (const m of page.body.matchAll(PAGE_LINK)) {
+      const target = ordered.find((p) => p.slug === m[1]);
+      if (!target) broken.push(`${page.slug}  ->  ${m[1]}.md`);
+      else if (m[2] && !anchors(target.body).has(m[2].slice(1))) broken.push(`${page.slug}  ->  ${m[1]}.md${m[2]}`);
     }
+    // Links that only work on a docs website.
+    for (const m of page.body.matchAll(/\]\(\.\.\/[^)]*\)/g)) broken.push(`${page.slug}  ->  ${m[0].slice(2, -1)} (use slug.md)`);
   }
+  for (const [name, [slug, hash]] of Object.entries(DOC_ALIASES)) {
+    const target = ordered.find((p) => p.slug === slug);
+    if (!target || (hash && !anchors(target.body).has(hash.slice(1)))) broken.push(`DOC_ALIASES ${name}  ->  ${slug}.md${hash}`);
+  }
+  for (const slug of [...MAGICS.map((m) => m[2]), ...Object.keys(COMPONENT_CLASS), "errors"]) {
+    if (!slugSet.has(slug)) broken.push(`summit.json  ->  ${slug}.md`);
+  }
+
+  writeFileSync(join(CONTENT, "README.md"), buildContentIndex(ordered));
 
   // The command-palette index only served the old HTML pages.
   rmSync(join(OUT, "search-index.json"), { force: true });
@@ -299,8 +380,8 @@ function main() {
   mkdirSync(join(OUT, "ai"), { recursive: true });
   writeFileSync(join(OUT, "ai", "summit.json"), JSON.stringify(buildManifest(ordered, version), null, 2));
 
-  console.log(`Wrote ${ordered.length} redirect pages (+ index.html, 404.html) to ${SITE}/.`);
-  console.log(`Wrote per-page index.md, llms.txt, llms-full.txt, and ai/summit.json.`);
+  console.log(`Wrote ${ordered.length} redirect pages to ${SITE}/<slug>.md (+ index.html, 404.html).`);
+  console.log(`Wrote content/README.md, per-page index.md, llms.txt, llms-full.txt, and ai/summit.json.`);
   if (broken.length) {
     console.warn(`\n${broken.length} broken internal link(s):`);
     broken.forEach((b) => console.warn("  " + b));

@@ -7,7 +7,7 @@ order: 5
 description: Group writes so effects run once.
 ---
 
-Without batching, each write to a [signal](../reactive-signal/) or reactive
+Without batching, each write to a [signal](reactive-signal.md) or reactive
 property triggers its dependent effects right away. When you make several related
 writes, that can run the same effect more than once. `batch()` defers those
 triggers until the whole function has run, then flushes each affected effect a
@@ -68,7 +68,7 @@ batch(() => {
 `batch()` coalesces synchronous writes within one function. It is different from
 the microtask scheduling that DOM-facing directives use, where updates are
 already deferred to the next tick. When you need to read the DOM after updates
-apply, await [nextTick()](../reactive-nexttick/) instead.
+apply, await [nextTick()](reactive-nexttick.md) instead.
 
 `batch` is also available on the global as `Summit.batch`. For the trigger and
-flush mechanism underneath, see [How reactivity works](../advanced-reactivity/).
+flush mechanism underneath, see [How reactivity works](advanced-reactivity.md).

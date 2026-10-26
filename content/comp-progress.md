@@ -38,7 +38,7 @@ fill. Bind it with `:style` so the width tracks whatever number lives in state.
 ```
 
 Keep the number inside `0` to `100`. Clamping with `Math.max` and `Math.min`
-when you change it, as the demo above does, means a stray click can never push
+when you change it, as the first example does, means a stray click can never push
 the fill past either end.
 
 ## Spinner
@@ -91,11 +91,11 @@ several to preview a whole card or list row.
 
 - The bar carries no semantics on its own. Add `role="progressbar"` with
   `aria-valuemin`, `aria-valuemax`, and a bound `:aria-valuenow` so screen
-  readers announce the position, as the top demo does.
+  readers announce the position, as the first example does.
 - Give the spinner `role="status"` and an `aria-label` so its purpose reaches
   people who cannot see it turn.
 - Both the spinner's spin and the skeleton's shimmer stop under
   `prefers-reduced-motion`, so you do not need to disable them yourself.
-- Once a load finishes, a [Toast](../comp-toast/) or an [Alert](../comp-alert/)
+- Once a load finishes, a [Toast](comp-toast.md) or an [Alert](comp-alert.md)
   is a good way to confirm the result. See all the pieces on the
-  [UI Library overview](../components/).
+  [UI Library overview](components.md).

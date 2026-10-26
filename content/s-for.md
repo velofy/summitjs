@@ -26,8 +26,10 @@ that element once per item and inserts the results where the template stood.
 </div>
 ```
 
-The template must be a `<template>` tag with exactly one root child. Summit warns
-in the console if either is missing.
+The template must be a `<template>` tag with one root element. Summit warns in
+the console if `s-for` is on another tag (E401) or the template has no element
+inside it (E402). With more than one element inside, only the first is
+repeated, without a warning.
 
 ## Item and index
 
@@ -104,10 +106,10 @@ reorders.
 </div>
 ```
 
-Type into an input, then reverse the list: because each row is matched by
-`person.id` and moved, your text stays with its person. Without a `:key`, Summit
+If you type into an input and then reverse the list, each row is matched by
+`person.id` and moved, so the typed text stays with its person. Without a `:key`, Summit
 falls back to the object key for objects, or the numeric index otherwise, which
 rebuilds rows when their position changes and loses that state.
 
 To conditionally render a single element rather than a list, see
-[s-if](../s-if/).
+[s-if](s-if.md).

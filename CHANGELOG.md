@@ -1,10 +1,23 @@
 # Changelog
 
-All notable changes to Summit.js. Dates are the npm publish dates (UTC). No changelog was kept before 0.4.4; the older entries were written from the npm registry, the git tags and the source diffs between them.
+All notable changes to Summit.js. Dates are the npm publish dates (UTC); 0.4.4, which never reached npm, has its GitHub release date. No changelog was kept before 0.4.4; the older entries were written from the npm registry, the git tags and the source diffs between them.
 
-## 0.4.4 - 2026-09-30
+## 1.0.0 - 2026-10-26
 
-Documentation moved to https://velofy.co/summitjs/. No API or behavior change.
+The first npm release since 0.4.3, and the first stable version: 1.0.0 follows 0.4.4 directly (no 0.4.5 was released). It carries the 0.4.4 changes below, including the real `Summit.version`, to npm. No API change; at runtime only the `docs:` links in diagnostics and the `Summit.version` string differ from 0.4.4.
+
+- CDN snippets use the `@1` range (`https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js`). The `@0.4` range keeps serving 0.4.3, so move to `@1` to get this release.
+
+- Diagnostic `docs:` links point at the documentation pages in the repository, `https://github.com/velofy/summitjs/blob/main/content/<page>.md`. velofy.co stopped hosting the summit.js docs on 2026-10-25, so the velofy.co/summitjs/ links that 0.4.4 prints land on the project page instead of the page they name. `s-id`, `s-resize` and `s-resource` still link to the section that documents them, and a test checks that every page a diagnostic can link to exists.
+- `homepage` in package.json is https://summitjs.velofy.co/.
+- The docs in `content/` read correctly on GitHub: pages link to each other with relative links, `content/README.md` is a generated index, and the error code reference is now in the repository as `content/errors.md`. The old GitHub Pages site at https://velofy.github.io/summitjs/ forwards each page to its file on GitHub and its home page to https://summitjs.velofy.co/. `llms.txt`, `llms-full.txt` and `ai/summit.json` link to the pages on GitHub.
+- Documentation fixes, most of them made on the velofy.co copy and never brought back to `content/`: the evaluator allowlist includes `AbortController`, `Headers`, `Request` and `Response`; unsupported keywords such as `try` and `throw` are not a parse error in event handlers and `s-init`, and the evaluator page now says so; a `<template s-if>` renders every top-level element; `s-for` warns only when its template is empty; the UI library page lists the base tokens `components.css` needs; the start page no longer counts fifteen directives and nine magics. `ai/summit.json` lists the full global allowlist, every key modifier, and `s-id` and `s-resize`.
+- README and AGENTS.md (both shipped in the package): the README leads with the Summit.js tile and labels NodeMaven as the primary sponsor, the sponsor links on GitHub and in AGENTS.md use the October tracking links (the README published to npm keeps the npm link, `summitjsnpmjs`), and the docs links point at `content/`.
+- `npm run release:npm` can publish again. Since 0.4.4, `prepublishOnly` ran the `release:npm` tests while the README was swapped; they restored the real README in the middle of the publish and failed, so the command stopped before publishing. The tests now work on a scratch copy of the README. The swap also replaces whole tracking links: its prefix replacement would have turned the README's October link into `summitjsnpmjsoct`, a link that was never set up.
+
+## 0.4.4 - 2026-09-29
+
+Tagged `v0.4.4` and released on GitHub with a package tarball, but never published to npm; npm went from 0.4.3 to 1.0.0. Documentation moved to https://velofy.co/summitjs/. No API or behavior change.
 
 - Diagnostic `docs:` links now point at https://velofy.co/summitjs/. Directives without their own page (`s-id`, `s-resize`, `s-resource`) link to the page that documents them instead of a missing one.
 - `Summit.version` now reports the real package version. It returned "0.1.0" in every release from 0.1.0 to 0.4.3. A unit test and the bundle smoke test now fail if it differs from package.json.

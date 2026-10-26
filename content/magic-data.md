@@ -35,6 +35,6 @@ helper, or reset it in one assignment.
 ## Which component
 
 `$data` is the state of the nearest component. In
-[nested components](../reactivity-state/) the inner `s-data` wins, so `$data`
+[nested components](reactivity-state.md) the inner `s-data` wins, so `$data`
 inside a child gives the child's state, not the parent's. To reach shared state
-across components, use [$store](../magic-store/) instead.
+across components, use [$store](magic-store.md) instead.

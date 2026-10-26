@@ -55,14 +55,14 @@ you are done.
 
 The magics keep their names too: `$el`, `$refs`, `$store`, `$watch`, `$dispatch`,
 `$nextTick`, `$root`, and `$id` all work as you expect. Summit adds one,
-[$data](https://velofy.co/summitjs/magic-data/), which returns the nearest scope object.
+[$data](https://github.com/velofy/summitjs/blob/main/content/magic-data.md), which returns the nearest scope object.
 
 The global API maps one for one as well: `Alpine.data`, `Alpine.store`,
 `Alpine.bind`, `Alpine.directive`, `Alpine.magic`, `Alpine.plugin`, and
-`Alpine.start` become [Summit.data](https://velofy.co/summitjs/globals-data/),
-[Summit.store](https://velofy.co/summitjs/globals-store/), [Summit.bind](https://velofy.co/summitjs/globals-bind/),
-[Summit.directive](https://velofy.co/summitjs/globals-directive/), [Summit.magic](https://velofy.co/summitjs/globals-magic/),
-[Summit.plugin](https://velofy.co/summitjs/globals-plugin/), and [Summit.start](https://velofy.co/summitjs/globals-start/).
+`Alpine.start` become [Summit.data](https://github.com/velofy/summitjs/blob/main/content/globals-data.md),
+[Summit.store](https://github.com/velofy/summitjs/blob/main/content/globals-store.md), [Summit.bind](https://github.com/velofy/summitjs/blob/main/content/globals-bind.md),
+[Summit.directive](https://github.com/velofy/summitjs/blob/main/content/globals-directive.md), [Summit.magic](https://github.com/velofy/summitjs/blob/main/content/globals-magic.md),
+[Summit.plugin](https://github.com/velofy/summitjs/blob/main/content/globals-plugin.md), and [Summit.start](https://github.com/velofy/summitjs/blob/main/content/globals-start.md).
 
 ## What is genuinely different
 
@@ -80,7 +80,7 @@ is no subtree to re-evaluate.
 One practical upshot is getters. A getter you define in `s-data` is a cached
 computed: it recomputes only when one of its own dependencies changes, and
 reading it several times in one render does the work once. The same getter in
-Alpine re-runs on every read. See [How reactivity works](https://velofy.co/summitjs/advanced-reactivity/)
+Alpine re-runs on every read. See [How reactivity works](https://github.com/velofy/summitjs/blob/main/content/advanced-reactivity.md)
 for the full picture.
 
 ### CSP-safe with the standard build
@@ -91,7 +91,7 @@ expressions may do). Summit interprets expressions with its own engine and never
 calls `eval` or `new Function`, so a policy like `script-src 'self'` works with
 the one and only build, and directive expressions still support a broad slice of
 JavaScript. The details, including the exact supported syntax and the global
-allowlist, are in [The CSP-safe evaluator](https://velofy.co/summitjs/advanced-evaluator/).
+allowlist, are in [The CSP-safe evaluator](https://github.com/velofy/summitjs/blob/main/content/advanced-evaluator.md).
 
 ### $watch returns an unwatch function and will not loop
 
@@ -162,4 +162,4 @@ matter and a later registration overrides an earlier one of the same name.
 Summit dispatches `summit:init` on `document` just before it initializes the page
 and `summit:initialized` when it is done, so register your plugins before start,
 or inside a `summit:init` listener. See
-[Extending Summit](https://velofy.co/summitjs/advanced-extending/) for the full pattern.
+[Extending Summit](https://github.com/velofy/summitjs/blob/main/content/advanced-extending.md) for the full pattern.

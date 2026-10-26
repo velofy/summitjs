@@ -42,7 +42,7 @@ async grow() {
 ```
 
 A common use is focusing an element that only just appeared, which is why you
-will often see `$nextTick` paired with [$refs](../magic-refs/).
+will often see `$nextTick` paired with [$refs](magic-refs.md).
 
 ```html
 <button @click="open = true; $nextTick(() => $refs.panel.focus())">Open</button>

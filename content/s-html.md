@@ -17,7 +17,7 @@ example a fragment rendered on the server or returned from a fetch.
 </div>
 ```
 
-Unlike [s-text](../s-text/), the string is parsed as HTML, so the `<strong>`
+Unlike [s-text](s-text.md), the string is parsed as HTML, so the `<strong>`
 above becomes real bold text.
 
 ## Injected markup is initialized
@@ -34,5 +34,5 @@ containing a `<script>` tag or an `onerror` handler can run code in your page.
 Never point `s-html` at anything a user typed, a URL parameter, or a third-party
 response you do not control.
 
-If the source is not fully trusted, use [s-text](../s-text/) instead, which
+If the source is not fully trusted, use [s-text](s-text.md) instead, which
 escapes everything it renders.

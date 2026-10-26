@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "summitjs",
-  "version": "0.4.4",
+  "version": "1.0.0",
   "description": "The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.",
-  "homepage": "https://velofy.co/summitjs/",
-  "docs": "https://velofy.co/summitjs/",
+  "homepage": "https://summitjs.velofy.co/",
+  "docs": "https://github.com/velofy/summitjs/tree/main/content",
   "llms": "https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms.txt",
   "llmsFull": "https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms-full.txt",
-  "errorsDoc": "https://velofy.co/summitjs/errors/",
+  "errorsDoc": "https://github.com/velofy/summitjs/blob/main/content/errors.md",
   "agents": "https://github.com/velofy/summitjs/blob/main/AGENTS.md",
   "sponsor": {
     "name": "NodeMaven",
@@ -33,17 +33,46 @@
     "Number",
     "String",
     "Boolean",
+    "parseInt",
+    "parseFloat",
+    "isNaN",
+    "isFinite",
+    "RegExp",
+    "Map",
+    "Set",
+    "WeakMap",
+    "WeakSet",
+    "Promise",
+    "Intl",
     "console",
     "window",
     "document",
     "location",
+    "navigator",
+    "history",
     "localStorage",
     "sessionStorage",
     "setTimeout",
+    "clearTimeout",
     "setInterval",
+    "clearInterval",
+    "requestAnimationFrame",
+    "cancelAnimationFrame",
     "fetch",
+    "AbortController",
+    "Headers",
+    "Request",
+    "Response",
+    "alert",
+    "confirm",
+    "prompt",
+    "structuredClone",
     "URL",
-    "structuredClone"
+    "URLSearchParams",
+    "encodeURIComponent",
+    "decodeURIComponent",
+    "NaN",
+    "Infinity"
   ],
   "directives": [
     {
@@ -51,204 +80,218 @@
       "shorthand": null,
       "summary": "Declare reactive state on an element; descendants read and write it.",
       "example": "<div s-data=\"{ count: 0 }\">",
-      "doc": "https://velofy.co/summitjs/s-data/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-data.md"
     },
     {
       "name": "s-text",
       "shorthand": null,
       "summary": "Set the element's textContent from an expression.",
       "example": "<span s-text=\"count\"></span>",
-      "doc": "https://velofy.co/summitjs/s-text/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-text.md"
     },
     {
       "name": "s-html",
       "shorthand": null,
       "summary": "Set innerHTML from an expression (trusted content only).",
       "example": "<div s-html=\"markup\"></div>",
-      "doc": "https://velofy.co/summitjs/s-html/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-html.md"
     },
     {
       "name": "s-bind",
       "shorthand": ":",
       "summary": "Bind an attribute; :class and :style accept objects.",
       "example": "<a :href=\"url\" :class=\"{ on: active }\">",
-      "doc": "https://velofy.co/summitjs/s-bind/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-bind.md"
     },
     {
       "name": "s-on",
       "shorthand": "@",
       "summary": "Run an expression on a DOM event; supports modifiers.",
       "example": "<button @click=\"count++\">",
-      "doc": "https://velofy.co/summitjs/s-on/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-on.md"
     },
     {
       "name": "s-model",
       "shorthand": null,
       "summary": "Two-way bind a form control to state.",
       "example": "<input s-model=\"name\">",
-      "doc": "https://velofy.co/summitjs/s-model/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-model.md"
     },
     {
       "name": "s-show",
       "shorthand": null,
       "summary": "Toggle visibility with the display property.",
       "example": "<p s-show=\"open\">",
-      "doc": "https://velofy.co/summitjs/s-show/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-show.md"
     },
     {
       "name": "s-if",
       "shorthand": null,
       "summary": "Add or remove from the DOM; a <template s-if> may hold multiple roots.",
       "example": "<template s-if=\"open\">...</template>",
-      "doc": "https://velofy.co/summitjs/s-if/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-if.md"
     },
     {
       "name": "s-for",
       "shorthand": null,
       "summary": "Render a keyed list.",
       "example": "<template s-for=\"item in items\" :key=\"item.id\">",
-      "doc": "https://velofy.co/summitjs/s-for/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-for.md"
     },
     {
       "name": "s-ref",
       "shorthand": null,
       "summary": "Name an element; read it via $refs.",
       "example": "<input s-ref=\"field\">",
-      "doc": "https://velofy.co/summitjs/s-ref/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-ref.md"
     },
     {
       "name": "s-init",
       "shorthand": null,
       "summary": "Run an expression once when the element initializes.",
       "example": "<div s-init=\"load()\">",
-      "doc": "https://velofy.co/summitjs/s-init/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-init.md"
+    },
+    {
+      "name": "s-id",
+      "shorthand": null,
+      "summary": "Open an id group so $id() calls inside it share one generated id.",
+      "example": "<div s-id=\"['field']\">",
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-id.md#scoping-ids-with-s-id"
     },
     {
       "name": "s-effect",
       "shorthand": null,
       "summary": "Re-run an expression whenever its reactive dependencies change.",
       "example": "<div s-effect=\"document.title = title\">",
-      "doc": "https://velofy.co/summitjs/s-effect/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-effect.md"
     },
     {
       "name": "s-transition",
       "shorthand": null,
       "summary": "Animate enter and leave.",
       "example": "<div s-show=\"open\" s-transition>",
-      "doc": "https://velofy.co/summitjs/s-transition/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-transition.md"
     },
     {
       "name": "s-teleport",
       "shorthand": null,
       "summary": "Render a template's content elsewhere in the DOM.",
       "example": "<template s-teleport=\"body\">...</template>",
-      "doc": "https://velofy.co/summitjs/s-teleport/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-teleport.md"
     },
     {
       "name": "s-intersect",
       "shorthand": ":leave",
       "summary": "Run an expression when the element enters or leaves the viewport.",
       "example": "<div s-intersect=\"load()\">",
-      "doc": "https://velofy.co/summitjs/s-intersect/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-intersect.md"
+    },
+    {
+      "name": "s-resize",
+      "shorthand": null,
+      "summary": "Run an expression when the element changes size, with $width and $height.",
+      "example": "<div s-resize=\"w = $width\">",
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-intersect.md#s-resize"
     },
     {
       "name": "s-trap",
       "shorthand": null,
       "summary": "Keep keyboard focus inside an element while an expression is truthy.",
       "example": "<div s-trap=\"open\">",
-      "doc": "https://velofy.co/summitjs/s-trap/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-trap.md"
     },
     {
       "name": "s-anchor",
       "shorthand": null,
       "summary": "Position an element next to a reference, flipping to stay in view.",
       "example": "<div s-anchor=\"$refs.trigger\">",
-      "doc": "https://velofy.co/summitjs/s-anchor/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-anchor.md"
     },
     {
       "name": "s-collapse",
       "shorthand": null,
       "summary": "Animate an element open and closed by height.",
       "example": "<div s-collapse=\"open\">",
-      "doc": "https://velofy.co/summitjs/s-collapse/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-collapse.md"
     },
     {
       "name": "s-mask",
       "shorthand": null,
       "summary": "Format an input as the user types against a pattern.",
       "example": "<input s-mask=\"'(999) 999-9999'\">",
-      "doc": "https://velofy.co/summitjs/s-mask/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-mask.md"
     },
     {
       "name": "s-cloak",
       "shorthand": null,
       "summary": "Hide until initialized; pair with [s-cloak]{display:none}.",
       "example": "<div s-cloak>",
-      "doc": "https://velofy.co/summitjs/s-cloak/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-cloak.md"
     },
     {
       "name": "s-ignore",
       "shorthand": null,
       "summary": "Skip a subtree during initialization.",
       "example": "<div s-ignore>",
-      "doc": "https://velofy.co/summitjs/s-ignore/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/s-ignore.md"
     }
   ],
   "magics": [
     {
       "name": "$el",
       "summary": "The current DOM element.",
-      "doc": "https://velofy.co/summitjs/magic-el/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-el.md"
     },
     {
       "name": "$refs",
       "summary": "Elements named with s-ref, by name.",
-      "doc": "https://velofy.co/summitjs/magic-refs/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-refs.md"
     },
     {
       "name": "$root",
       "summary": "The nearest enclosing s-data root element.",
-      "doc": "https://velofy.co/summitjs/magic-root/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-root.md"
     },
     {
       "name": "$id",
       "summary": "A stable unique id, scoped for pairing labels and controls.",
-      "doc": "https://velofy.co/summitjs/magic-id/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-id.md"
     },
     {
       "name": "$store",
       "summary": "Global reactive stores shared across components.",
-      "doc": "https://velofy.co/summitjs/magic-store/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-store.md"
     },
     {
       "name": "$watch",
       "summary": "Run a callback when a reactive expression changes.",
-      "doc": "https://velofy.co/summitjs/magic-watch/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-watch.md"
     },
     {
       "name": "$nextTick",
       "summary": "Run a callback after the next DOM update.",
-      "doc": "https://velofy.co/summitjs/magic-nexttick/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-nextTick.md"
     },
     {
       "name": "$dispatch",
       "summary": "Dispatch a custom DOM event that bubbles.",
-      "doc": "https://velofy.co/summitjs/magic-dispatch/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-dispatch.md"
     },
     {
       "name": "$data",
       "summary": "The reactive state object of the current scope.",
-      "doc": "https://velofy.co/summitjs/magic-data/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-data.md"
     },
     {
       "name": "$persist",
       "summary": "Reactive state backed by localStorage that survives reloads.",
-      "doc": "https://velofy.co/summitjs/magic-persist/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-persist.md"
     },
     {
       "name": "$focus",
       "summary": "Move keyboard focus around from an expression.",
-      "doc": "https://velofy.co/summitjs/magic-focus/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/magic-focus.md"
     }
   ],
   "modifiers": {
@@ -267,18 +310,29 @@
       "camel",
       "dot",
       "enter",
-      "escape",
       "tab",
       "space",
+      "esc",
+      "escape",
       "up",
       "down",
       "left",
       "right",
-      "cmd",
+      "arrow-up",
+      "arrow-down",
+      "arrow-left",
+      "arrow-right",
+      "page-up",
+      "page-down",
+      "home",
+      "end",
+      "delete",
+      "backspace",
+      "shift",
       "ctrl",
-      "meta",
       "alt",
-      "shift"
+      "cmd",
+      "meta"
     ],
     "model": [
       "lazy",
@@ -345,173 +399,173 @@
       "name": "Button",
       "class": "s-btn",
       "summary": "Buttons with solid, outline, ghost, subtle, and danger variants, plus sizes and groups.",
-      "doc": "https://velofy.co/summitjs/comp-button/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-button.md"
     },
     {
       "name": "Input",
       "class": "s-input",
       "summary": "Text inputs and textareas with labels, help text, addons, and validation state.",
-      "doc": "https://velofy.co/summitjs/comp-input/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-input.md"
     },
     {
       "name": "Select",
       "class": "s-select",
       "summary": "A styled native select bound with s-model.",
-      "doc": "https://velofy.co/summitjs/comp-select/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-select.md"
     },
     {
       "name": "Checkbox & Radio",
       "class": "s-check",
       "summary": "Accessible checkboxes and radio groups bound with s-model.",
-      "doc": "https://velofy.co/summitjs/comp-checkbox/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-checkbox.md"
     },
     {
       "name": "Switch",
       "class": "s-switch",
       "summary": "A toggle switch bound with s-model, for on/off settings.",
-      "doc": "https://velofy.co/summitjs/comp-switch/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-switch.md"
     },
     {
       "name": "Card",
       "class": "s-card",
       "summary": "A surface for grouping content, with header, body, and footer.",
-      "doc": "https://velofy.co/summitjs/comp-card/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-card.md"
     },
     {
       "name": "Badge & Tag",
       "class": "s-badge",
       "summary": "Small status labels and removable tags.",
-      "doc": "https://velofy.co/summitjs/comp-badge/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-badge.md"
     },
     {
       "name": "Table",
       "class": "s-table",
       "summary": "A styled table for displaying rows of tabular data.",
-      "doc": "https://velofy.co/summitjs/comp-table/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-table.md"
     },
     {
       "name": "Alert",
       "class": "s-alert",
       "summary": "Contextual feedback banners for info, success, warning, and danger.",
-      "doc": "https://velofy.co/summitjs/comp-alert/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-alert.md"
     },
     {
       "name": "Avatar",
       "class": "s-avatar",
       "summary": "User avatars with initials or images, sizes, and stacked groups.",
-      "doc": "https://velofy.co/summitjs/comp-avatar/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-avatar.md"
     },
     {
       "name": "Progress & Spinner",
       "class": "s-progress",
       "summary": "Progress bars, spinners, and skeleton placeholders for loading states.",
-      "doc": "https://velofy.co/summitjs/comp-progress/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-progress.md"
     },
     {
       "name": "Tooltip",
       "class": "s-tooltip",
       "summary": "A CSS-only tooltip that appears on hover and focus.",
-      "doc": "https://velofy.co/summitjs/comp-tooltip/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-tooltip.md"
     },
     {
       "name": "Dialog",
       "class": "s-dialog",
       "summary": "A modal dialog for confirmations and focused tasks, with overlay and Escape to close.",
-      "doc": "https://velofy.co/summitjs/comp-dialog/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-dialog.md"
     },
     {
       "name": "Dropdown Menu",
       "class": "s-menu",
       "summary": "A button-triggered menu that closes on outside click or Escape.",
-      "doc": "https://velofy.co/summitjs/comp-menu/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-menu.md"
     },
     {
       "name": "Popover",
       "class": "s-popover",
       "summary": "A click-triggered floating panel for rich content, dismissed on outside click or Escape.",
-      "doc": "https://velofy.co/summitjs/comp-popover/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-popover.md"
     },
     {
       "name": "Toast",
       "class": "s-toast",
       "summary": "Transient notifications that stack and auto-dismiss.",
-      "doc": "https://velofy.co/summitjs/comp-toast/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-toast.md"
     },
     {
       "name": "Tabs",
       "class": "s-tabs-list",
       "summary": "Switch between panels with an underlined or soft tab bar.",
-      "doc": "https://velofy.co/summitjs/comp-tabs/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-tabs.md"
     },
     {
       "name": "Accordion",
       "class": "s-accordion",
       "summary": "Collapsible sections, single or multiple open.",
-      "doc": "https://velofy.co/summitjs/comp-accordion/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-accordion.md"
     },
     {
       "name": "Breadcrumb",
       "class": "s-breadcrumb",
       "summary": "Show the path to the current page.",
-      "doc": "https://velofy.co/summitjs/comp-breadcrumb/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-breadcrumb.md"
     },
     {
       "name": "Pagination",
       "class": "s-pagination",
       "summary": "Navigate through pages of results.",
-      "doc": "https://velofy.co/summitjs/comp-pagination/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/comp-pagination.md"
     }
   ],
   "techniques": [
     {
       "name": "Loaders & Spinners",
       "summary": "A gallery of pure-CSS loaders: rings, dots, bars, shapes, animated logo marks, and skeleton screens.",
-      "doc": "https://velofy.co/summitjs/technique-animation/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/technique-animation.md"
     },
     {
       "name": "Matte Glassmorphism",
       "summary": "Frosted, low-gloss glass surfaces that blur what is behind them while staying legible in both themes.",
-      "doc": "https://velofy.co/summitjs/technique-glassmorphism/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/technique-glassmorphism.md"
     },
     {
       "name": "Neumorphism",
       "summary": "Soft, extruded UI built from twin light and dark shadows on a matching surface.",
-      "doc": "https://velofy.co/summitjs/technique-neumorphism/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/technique-neumorphism.md"
     },
     {
       "name": "Claymorphism",
       "summary": "Puffy, rounded, playful clay surfaces with soft inner and outer shadows.",
-      "doc": "https://velofy.co/summitjs/technique-claymorphism/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/technique-claymorphism.md"
     },
     {
       "name": "Retro UI",
       "summary": "Hard offset shadows and neon text for a retro, terminal, or arcade look.",
-      "doc": "https://velofy.co/summitjs/technique-retro/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/technique-retro.md"
     },
     {
       "name": "Brutalism",
       "summary": "Stark borders, loud uppercase type, and blunt offset shadows for a raw, confident look.",
-      "doc": "https://velofy.co/summitjs/technique-brutalism/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/technique-brutalism.md"
     },
     {
       "name": "Aurora Backgrounds",
       "summary": "Slow, glowing color fields that drift behind your content for a premium hero look.",
-      "doc": "https://velofy.co/summitjs/technique-aurora/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/technique-aurora.md"
     },
     {
       "name": "Glow & Spotlight",
       "summary": "A soft highlight that follows the cursor across a card, driven by a tiny Summit handler.",
-      "doc": "https://velofy.co/summitjs/technique-glow/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/technique-glow.md"
     },
     {
       "name": "Navbar Patterns",
       "summary": "Navigation bars with active links, a responsive mobile menu, and a glass variant, wired with Summit state.",
-      "doc": "https://velofy.co/summitjs/technique-navbars/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/technique-navbars.md"
     },
     {
       "name": "Using Tailwind CSS",
       "summary": "Summit for behavior, Tailwind for styling. They compose cleanly because Summit lives in attributes and Tailwind lives in classes.",
-      "doc": "https://velofy.co/summitjs/technique-tailwind/"
+      "doc": "https://github.com/velofy/summitjs/blob/main/content/technique-tailwind.md"
     }
   ]
 }

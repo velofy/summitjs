@@ -1,0 +1,127 @@
+<!-- npm run docs writes this file from each page's front matter. Edit the pages, not this file. -->
+
+# Summit.js documentation
+
+The open source, AI Agent Native JavaScript framework. Add behavior directly in your HTML with signal-powered s- directives and $ magics. No build step, CSP-safe, about 16KB with focus, positioning, persistence, and masking built in.
+
+Project page: https://summitjs.velofy.co/. Changelog: [CHANGELOG.md](../CHANGELOG.md). For coding agents: [AGENTS.md](../AGENTS.md), [llms.txt](../docs/llms.txt), [llms-full.txt](../docs/llms-full.txt) and [summit.json](../docs/ai/summit.json).
+
+Code blocks tagged `summit` hold HTML that runs as is with the Summit script on the page.
+
+## Getting Started
+
+- [Getting Started](start.md): Summit is a rugged, signal-powered JavaScript framework for composing behavior directly in your HTML. Learn what it is and write your first component.
+
+## Components
+
+- [UI Library](components.md): An accessible, token-themed component library you copy into your markup and theme with CSS variables. Built with Summit, for people and AI agents.
+- [Button](comp-button.md): Buttons with solid, outline, ghost, subtle, and danger variants, plus sizes and groups.
+- [Input](comp-input.md): Text inputs and textareas with labels, help text, addons, and validation state.
+- [Select](comp-select.md): A styled native select bound with s-model.
+- [Checkbox & Radio](comp-checkbox.md): Accessible checkboxes and radio groups bound with s-model.
+- [Switch](comp-switch.md): A toggle switch bound with s-model, for on/off settings.
+- [Card](comp-card.md): A surface for grouping content, with header, body, and footer.
+- [Badge & Tag](comp-badge.md): Small status labels and removable tags.
+- [Table](comp-table.md): A styled table for displaying rows of tabular data.
+- [Alert](comp-alert.md): Contextual feedback banners for info, success, warning, and danger.
+- [Avatar](comp-avatar.md): User avatars with initials or images, sizes, and stacked groups.
+- [Progress & Spinner](comp-progress.md): Progress bars, spinners, and skeleton placeholders for loading states.
+- [Tooltip](comp-tooltip.md): A CSS-only tooltip that appears on hover and focus.
+- [Dialog](comp-dialog.md): A modal dialog for confirmations and focused tasks, with overlay and Escape to close.
+- [Dropdown Menu](comp-menu.md): A button-triggered menu that closes on outside click or Escape.
+- [Popover](comp-popover.md): A click-triggered floating panel for rich content, dismissed on outside click or Escape.
+- [Toast](comp-toast.md): Transient notifications that stack and auto-dismiss.
+- [Tabs](comp-tabs.md): Switch between panels with an underlined or soft tab bar.
+- [Accordion](comp-accordion.md): Collapsible sections, single or multiple open.
+- [Breadcrumb](comp-breadcrumb.md): Show the path to the current page.
+- [Pagination](comp-pagination.md): Navigate through pages of results.
+
+## Techniques
+
+- [Techniques](techniques.md): Presentational recipes you compose with Summit's directives and classes: animated loaders, matte glassmorphism, retro interfaces, navbar patterns, and using Tailwind.
+- [Loaders & Spinners](technique-animation.md): A gallery of pure-CSS loaders: rings, dots, bars, shapes, animated logo marks, and skeleton screens.
+- [Matte Glassmorphism](technique-glassmorphism.md): Frosted, low-gloss glass surfaces that blur what is behind them while staying legible in both themes.
+- [Neumorphism](technique-neumorphism.md): Soft, extruded UI built from twin light and dark shadows on a matching surface.
+- [Claymorphism](technique-claymorphism.md): Puffy, rounded, playful clay surfaces with soft inner and outer shadows.
+- [Retro UI](technique-retro.md): Hard offset shadows and neon text for a retro, terminal, or arcade look.
+- [Brutalism](technique-brutalism.md): Stark borders, loud uppercase type, and blunt offset shadows for a raw, confident look.
+- [Aurora Backgrounds](technique-aurora.md): Slow, glowing color fields that drift behind your content for a premium hero look.
+- [Glow & Spotlight](technique-glow.md): A soft highlight that follows the cursor across a card, driven by a tiny Summit handler.
+- [Navbar Patterns](technique-navbars.md): Navigation bars with active links, a responsive mobile menu, and a glass variant, wired with Summit state.
+- [Using Tailwind CSS](technique-tailwind.md): Summit for behavior, Tailwind for styling. They compose cleanly because Summit lives in attributes and Tailwind lives in classes.
+
+## Essentials
+
+- [Installation](installation.md): Add Summit with a single script tag, or install it from npm for use with a bundler.
+- [Reactivity and State](reactivity-state.md): Declare state with s-data, derive values with getters, and add behavior with methods. Summit tracks reads and updates only what changed.
+- [Templating](templating.md): Put state on the screen with s-text and s-html, and drive attributes, classes, and styles with s-bind.
+- [Events](events.md): Respond to user input with s-on and its @ shorthand, including a full set of modifiers for keys, timing, and event control.
+- [Forms](forms.md): Bind form controls to state in both directions with s-model, covering text, numbers, checkboxes, radios, and selects.
+- [Lifecycle](lifecycle.md): Run code when a component initializes, react to DOM changes automatically, and clean up when elements leave.
+
+## Directives
+
+- [s-data](s-data.md): Declare a reactive component and its state.
+- [s-bind](s-bind.md): Bind attributes, classes, and styles, with the colon shorthand.
+- [s-on](s-on.md): Listen for events with the @ shorthand and a full set of modifiers.
+- [s-text](s-text.md): Set an element's text content from an expression.
+- [s-html](s-html.md): Set an element's innerHTML from an expression.
+- [s-model](s-model.md): Two-way binding for form controls.
+- [s-show](s-show.md): Toggle an element's visibility with display.
+- [s-if](s-if.md): Conditionally render an element in the DOM.
+- [s-for](s-for.md): Render a list, reconciled by key.
+- [s-effect](s-effect.md): Run a side effect that re-runs when its reactive dependencies change.
+- [s-init](s-init.md): Run an expression when the element initializes.
+- [s-ref](s-ref.md): Name an element so you can reach it through $refs.
+- [s-cloak](s-cloak.md): Hide markup until Summit has initialized it.
+- [s-ignore](s-ignore.md): Skip Summit initialization for an element and its children.
+- [s-teleport](s-teleport.md): Render an element at a different place in the DOM.
+- [s-transition](s-transition.md): Animate elements as they enter and leave.
+- [s-intersect](s-intersect.md): Run an expression when an element enters or leaves the viewport.
+- [s-trap](s-trap.md): Keep keyboard focus inside an element while it is open.
+- [s-anchor](s-anchor.md): Position an element next to a reference, flipping to stay in view.
+- [s-collapse](s-collapse.md): Animate an element open and closed by height.
+- [s-mask](s-mask.md): Format an input as the user types against a pattern.
+
+## Magic Properties
+
+- [$el](magic-el.md): The current DOM element.
+- [$refs](magic-refs.md): Elements in this component marked with s-ref.
+- [$store](magic-store.md): The reactive global store.
+- [$watch](magic-watch.md): Run a callback when a watched expression changes.
+- [$dispatch](magic-dispatch.md): Dispatch a custom DOM event.
+- [$nextTick](magic-nextTick.md): Run code after the next DOM update.
+- [$root](magic-root.md): The root element of the nearest component.
+- [$id](magic-id.md): Generate stable, scoped unique ids.
+- [$data](magic-data.md): The current component's reactive state object.
+- [$persist](magic-persist.md): Reactive state backed by localStorage that survives reloads.
+- [$focus](magic-focus.md): Move keyboard focus around from an expression.
+
+## Globals & API
+
+- [Summit.data](globals-data.md): Register a reusable named component.
+- [Summit.store](globals-store.md): Create and read global reactive state.
+- [Summit.bind](globals-bind.md): Register a reusable set of bindings.
+- [Summit.directive](globals-directive.md): Register a custom directive.
+- [Summit.magic](globals-magic.md): Register a custom magic property.
+- [Summit.plugin](globals-plugin.md): Install a plugin that registers features in bulk.
+- [Summit.start](globals-start.md): Start Summit and initialize the DOM.
+
+## Reactivity
+
+- [signal()](reactive-signal.md): A single reactive value you read by calling it and update with set().
+- [computed()](reactive-computed.md): A cached value derived from other reactive state.
+- [effect()](reactive-effect.md): Run a function reactively whenever its dependencies change.
+- [reactive()](reactive-reactive.md): A deeply reactive object or array.
+- [batch()](reactive-batch.md): Group writes so effects run once.
+- [nextTick()](reactive-nexttick.md): Wait for pending reactive updates to flush.
+
+## Advanced
+
+- [How reactivity works](advanced-reactivity.md): How Summit tracks dependencies and updates the DOM.
+- [The CSP-safe evaluator](advanced-evaluator.md): How Summit evaluates expressions without eval, safe under CSP.
+- [Writing directives and plugins](advanced-extending.md): Build custom directives, magics, and plugins.
+- [Migrating from Alpine](advanced-migrating.md): A guide for developers coming from Alpine.js.
+- [Data Fetching](advanced-data.md): summitjs/net, a tiny reactive data layer whose resources expose loading, error, and data as signals that drive the DOM.
+- [Error codes](errors.md): Every diagnostic code Summit prints to the console, what causes it, and where the docs link in each message points.
+

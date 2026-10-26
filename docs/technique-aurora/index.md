@@ -3,7 +3,7 @@
 > Slow, glowing color fields that drift behind your content for a premium hero look.
 
 An aurora is a soft field of colored light that drifts slowly behind your
-content. It gives heroes and feature panels a premium, ambient feel without a
+content. It gives heroes and feature panels an ambient feel without a
 busy image. The glow lives on pseudo-elements, so your content sits cleanly on
 top.
 
@@ -38,4 +38,4 @@ on its own.
   dark themes, so the glow always reads and the copy stays legible. Recolor the
   two shapes in `techniques.css` to match your brand.
 - For a foreground surface over a busy backdrop, use
-  [Matte Glassmorphism](https://velofy.co/summitjs/technique-glassmorphism/) instead.
+  [Matte Glassmorphism](https://github.com/velofy/summitjs/blob/main/content/technique-glassmorphism.md) instead.

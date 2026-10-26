@@ -1,16 +1,17 @@
 /**
- * Docs checks for the retired Pages site.
+ * Docs checks.
  *
  * 1. Boot every live example (```summit fences in content/) under the shipped
  *    bundle in happy-dom and fail on any [summit] directive error. The examples
- *    are published as code on https://velofy.co/summitjs/, so they must still run.
+ *    are published as code in content/, so they must still run.
  * 2. Check that every page has a redirect stub in docs/<slug>/index.html that
- *    points at its velofy.co page, and that the markdown copies exist.
+ *    points at its page on GitHub, that the markdown copies exist, and that
+ *    content/README.md is current.
  */
 import { Window } from "happy-dom";
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { loadPages, newSlug, redirectStub, SITE } from "./build-docs.mjs";
+import { loadPages, pageUrl, redirectStub, buildContentIndex, ALLOWED_GLOBALS } from "./build-docs.mjs";
 
 const bundle = readFileSync("dist/summit.min.js", "utf8");
 const pages = loadPages();
@@ -54,15 +55,25 @@ for (const page of pages) {
   }
 
   const stub = join("docs", page.slug, "index.html");
-  const expected = redirectStub(`${SITE}/${newSlug(page.slug)}/`);
+  const expected = redirectStub(pageUrl(page.slug));
   if (!existsSync(stub) || readFileSync(stub, "utf8") !== expected) problems.push(`missing or stale redirect: ${stub}`);
   if (!existsSync(join("docs", page.slug, "index.md"))) problems.push(`missing markdown copy: docs/${page.slug}/index.md`);
 }
 
 for (const f of ["docs/llms.txt", "docs/llms-full.txt", "docs/ai/summit.json"]) {
   if (!existsSync(f)) problems.push(`missing ${f}`);
-  else if (readFileSync(f, "utf8").includes("velofy.github.io")) problems.push(`${f} still links to velofy.github.io`);
+  else if (/velofy\.github\.io|velofy\.co\/summitjs/.test(readFileSync(f, "utf8"))) problems.push(`${f} still links to a retired docs site`);
 }
+if (!existsSync("content/README.md") || readFileSync("content/README.md", "utf8") !== buildContentIndex(pages)) {
+  problems.push("content/README.md is missing or stale: run npm run docs");
+}
+
+// The manifest's allowedGlobals must match the evaluator's real allowlist.
+const interp = readFileSync("src/evaluator/interpreter.ts", "utf8");
+const allowBlock = interp.match(/const GLOBAL_ALLOW = new Set<string>\(\[([\s\S]*?)\]\)/);
+const realGlobals = allowBlock ? [...allowBlock[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]) : [];
+if (!realGlobals.length) problems.push("could not read GLOBAL_ALLOW from src/evaluator/interpreter.ts");
+else if (realGlobals.join() !== ALLOWED_GLOBALS.join()) problems.push("ALLOWED_GLOBALS in build-docs.mjs differs from GLOBAL_ALLOW in the evaluator");
 
 problems.forEach((p) => realError("FAIL", p));
 console.log(

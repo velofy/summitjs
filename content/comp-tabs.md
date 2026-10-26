@@ -9,7 +9,7 @@ description: Switch between panels with an underlined or soft tab bar.
 
 Tabs let you split related content into panels and show one at a time. There is
 no widget to wire up: a tab is a real `<button>`, the active one is marked with a
-class, and each panel is revealed with [s-show](../s-show/). One piece of state,
+class, and each panel is revealed with [s-show](s-show.md). One piece of state,
 the name of the current tab, drives the whole thing.
 
 ## A live tab bar
@@ -19,17 +19,6 @@ clicks to set `tab` to its own name, and `:class` paints `is-active` on whicheve
 one matches. The panels below use `s-show` so only the current one renders.
 
 ```summit
-<div s-data="{ tab: 'account' }">
-  <div class="s-tabs-list" role="tablist">
-    <button class="s-tab" :class="{ 'is-active': tab === 'account' }" @click="tab = 'account'">Account</button>
-    <button class="s-tab" :class="{ 'is-active': tab === 'billing' }" @click="tab = 'billing'">Billing</button>
-  </div>
-  <div class="s-tab-panel" s-show="tab === 'account'">Manage your account.</div>
-  <div class="s-tab-panel" s-show="tab === 'billing'">Update your plan.</div>
-</div>
-```
-
-```html
 <div s-data="{ tab: 'account' }">
   <div class="s-tabs-list" role="tablist">
     <button class="s-tab" :class="{ 'is-active': tab === 'account' }" @click="tab = 'account'">Account</button>
@@ -58,17 +47,6 @@ added.
 </div>
 ```
 
-```html
-<div class="s-tabs-soft" s-data="{ tab: 'account' }">
-  <div class="s-tabs-list" role="tablist">
-    <button class="s-tab" :class="{ 'is-active': tab === 'account' }" @click="tab = 'account'">Account</button>
-    <button class="s-tab" :class="{ 'is-active': tab === 'billing' }" @click="tab = 'billing'">Billing</button>
-  </div>
-  <div class="s-tab-panel" s-show="tab === 'account'">Manage your account.</div>
-  <div class="s-tab-panel" s-show="tab === 'billing'">Update your plan.</div>
-</div>
-```
-
 ## Notes
 
 - The current tab is just a string on `s-data`, so you can set a default by
@@ -77,8 +55,8 @@ added.
   `Enter` or `Space` for free. Add `role="tablist"` on the list and pair panels
   with `role="tabpanel"` if you want the full ARIA tab semantics.
 - Prefer `s-show` here so panel state stays in the DOM as you switch. If a panel
-  is expensive and should only mount when opened, use [s-if](../s-if/) instead.
+  is expensive and should only mount when opened, use [s-if](s-if.md) instead.
 
 For stacked sections that expand in place rather than swap, see
-[Accordion](../comp-accordion/). The whole set is on the
-[overview](../components/).
+[Accordion](comp-accordion.md). The whole set is on the
+[overview](components.md).

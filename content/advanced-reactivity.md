@@ -13,7 +13,7 @@ that engine end to end so you can reason about updates, write your own effects,
 and understand exactly why a directive fires when it does.
 
 If you just want to use signals, computeds, and effects, the
-[Reactivity](../reactive-signal/) reference pages cover the public API. This page
+[Reactivity](reactive-signal.md) reference pages cover the public API. This page
 is about the machinery underneath them.
 
 ## The signal, the atom of state
@@ -198,9 +198,9 @@ value.
 
 ## Where to go next
 
-- [signal](../reactive-signal/) and [computed](../reactive-computed/) for the
+- [signal](reactive-signal.md) and [computed](reactive-computed.md) for the
   value primitives.
-- [effect](../reactive-effect/) for the tracking primitive, and
-  [reactive](../reactive-reactive/) for deep reactive objects.
-- [batch](../reactive-batch/) and [nextTick](../reactive-nexttick/) for
+- [effect](reactive-effect.md) for the tracking primitive, and
+  [reactive](reactive-reactive.md) for deep reactive objects.
+- [batch](reactive-batch.md) and [nextTick](reactive-nexttick.md) for
   controlling when work runs.

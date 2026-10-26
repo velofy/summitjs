@@ -4,7 +4,7 @@
 
 An accordion stacks sections that expand and collapse in place. Each header is a
 real `<button>`, the chevron rotates through a class, and the panel below is
-revealed with [s-show](https://velofy.co/summitjs/s-show/). The classic behavior is one section open at a
+revealed with [s-show](https://github.com/velofy/summitjs/blob/main/content/s-show.md). The classic behavior is one section open at a
 time, which takes a single string of state.
 
 ## One open at a time
@@ -14,25 +14,6 @@ and it sets `open` back to empty; click a closed one and it takes over. Because
 only one value can match, opening a section closes whatever was open before.
 
 ```summit
-<div class="s-accordion" s-data="{ open: 'a' }">
-  <div class="s-accordion-item">
-    <button class="s-accordion-trigger" :class="{ 'is-open': open === 'a' }" @click="open = open === 'a' ? '' : 'a'">
-      <span>Is it accessible?</span>
-      <svg class="s-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <div class="s-accordion-panel" s-show="open === 'a'">Yes, every control is a real button.</div>
-  </div>
-  <div class="s-accordion-item">
-    <button class="s-accordion-trigger" :class="{ 'is-open': open === 'b' }" @click="open = open === 'b' ? '' : 'b'">
-      <span>Can I open many?</span>
-      <svg class="s-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <div class="s-accordion-panel" s-show="open === 'b'">Track an array instead of a single value.</div>
-  </div>
-</div>
-```
-
-```html
 <div class="s-accordion" s-data="{ open: 'a' }">
   <div class="s-accordion-item">
     <button class="s-accordion-trigger" :class="{ 'is-open': open === 'a' }" @click="open = open === 'a' ? '' : 'a'">
@@ -87,4 +68,4 @@ both test with `includes`.
   render, or set it to `''` (or `[]`) to begin fully collapsed.
 
 For swapping between panels rather than stacking them, see
-[Tabs](https://velofy.co/summitjs/comp-tabs/). The whole set is on the [overview](https://velofy.co/summitjs/components/).
+[Tabs](https://github.com/velofy/summitjs/blob/main/content/comp-tabs.md). The whole set is on the [overview](https://github.com/velofy/summitjs/blob/main/content/components.md).

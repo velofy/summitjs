@@ -70,5 +70,5 @@ the tip short: it renders on a single line and does not wrap.
   the top edge of the page.
 - Text stays on one line by design. For anything longer, or for content that
   should open on click and hold buttons or fields, reach for a
-  [Popover](../comp-popover/) instead.
-- Browse the rest of the set on the [UI Library overview](../components/).
+  [Popover](comp-popover.md) instead.
+- Browse the rest of the set on the [UI Library overview](components.md).

@@ -43,7 +43,7 @@ Either form returns a `Promise<void>`, so you can `await` it or chain `.then()`.
 ## The $nextTick magic
 
 Inside markup, the same capability is available as the
-[$nextTick](../magic-nextTick/) magic. It is this function bound into the
+[$nextTick](magic-nextTick.md) magic. It is this function bound into the
 expression scope, so you can wait for the DOM from an `s-` attribute:
 
 ```html
@@ -57,7 +57,7 @@ Use `nextTick` from JavaScript and `$nextTick` from an expression.
 The batched, DOM-facing effects that directives are built on schedule themselves
 onto this same microtask queue, so awaiting `nextTick` after a state change is the
 reliable way to observe the resulting DOM. To collapse several synchronous writes
-into one effect run before the flush, see [batch()](../reactive-batch/). For the
+into one effect run before the flush, see [batch()](reactive-batch.md). For the
 queue and effect machinery underneath, see
-[How reactivity works](../advanced-reactivity/). `nextTick` is also available on
+[How reactivity works](advanced-reactivity.md). `nextTick` is also available on
 the global as `Summit.nextTick`.

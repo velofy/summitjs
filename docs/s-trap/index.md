@@ -39,5 +39,5 @@ element also releases the trap, so there is nothing to tear down.
 </div>
 ```
 
-The built-in [Dialog](https://velofy.co/summitjs/comp-dialog/) component already uses `s-trap`, so most
+The built-in [Dialog](https://github.com/velofy/summitjs/blob/main/content/comp-dialog.md) component already uses `s-trap`, so most
 of the time you get this for free.

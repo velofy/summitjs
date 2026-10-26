@@ -63,4 +63,4 @@ same directive covers all of them.
 
 Every element with `s-model` exposes `el._summitModel`, an object with `get` and
 `set`, so a wrapper component can drive the same binding from custom controls.
-The full reference is on the [s-model](../s-model/) page.
+The full reference is on the [s-model](s-model.md) page.

@@ -30,8 +30,7 @@ Track the current section in `s-data` and mark the matching link.
 ## Responsive with a mobile menu
 
 Below a narrow width the inline links hide and a toggle appears. The toggle
-flips an `open` flag that reveals a stacked menu. Resize the window to see it
-switch.
+flips an `open` flag that reveals a stacked menu.
 
 ```summit
 <nav s-data="{ open: false }">
@@ -56,7 +55,7 @@ switch.
 
 ## Glass navbar
 
-Drop [matte glass](../technique-glassmorphism/) onto the bar for a header that
+Drop [matte glass](technique-glassmorphism.md) onto the bar for a header that
 floats over the page.
 
 ```summit

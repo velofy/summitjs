@@ -52,7 +52,7 @@ so you can read and mutate freely.
 ## Reusable components
 
 For anything beyond a small inline object, register a named provider with
-[Summit.data](https://velofy.co/summitjs/globals-data/) and reference it by name. The provider is a
+[Summit.data](https://github.com/velofy/summitjs/blob/main/content/globals-data.md) and reference it by name. The provider is a
 function that returns the state object, so each use gets its own copy.
 
 ```js
@@ -89,5 +89,5 @@ its ancestors, with the nearest name winning on a conflict.
 ## Shared state
 
 State that many components need lives in a store, not in `s-data`. Reach it from
-any expression with the [$store](https://velofy.co/summitjs/magic-store/) magic. See
-[Summit.store](https://velofy.co/summitjs/globals-store/) to create one.
+any expression with the [$store](https://github.com/velofy/summitjs/blob/main/content/magic-store.md) magic. See
+[Summit.store](https://github.com/velofy/summitjs/blob/main/content/globals-store.md) to create one.

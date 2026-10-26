@@ -102,5 +102,5 @@ event names that used dashes:
 <div @custom-event.camel="onCustomEvent()"></div>
 ```
 
-For dispatching your own events, see [$dispatch](https://velofy.co/summitjs/magic-dispatch/). The full
-directive reference is on the [s-on](https://velofy.co/summitjs/s-on/) page.
+For dispatching your own events, see [$dispatch](https://github.com/velofy/summitjs/blob/main/content/magic-dispatch.md). The full
+directive reference is on the [s-on](https://github.com/velofy/summitjs/blob/main/content/s-on.md) page.

@@ -28,7 +28,7 @@ calling it, and you write it with `.set()`.
 ## Reading
 
 Call the signal to get its current value. When you read a signal inside an
-[effect()](../reactive-effect/) or [computed()](../reactive-computed/), that
+[effect()](reactive-effect.md) or [computed()](reactive-computed.md), that
 reader subscribes to the signal and re-runs whenever the value changes.
 
 ```js
@@ -76,9 +76,9 @@ a named export of `summitjs`.
 ## How signals underpin the framework
 
 Every reactive `s-` directive ultimately reads and writes signals. The state you
-declare with `s-data` lives in a [reactive()](../reactive-reactive/) proxy, and
+declare with `s-data` lives in a [reactive()](reactive-reactive.md) proxy, and
 both signals and that proxy feed the one dependency-tracking engine described in
-[How reactivity works](../advanced-reactivity/). For the HTML-first way to hold
-and update state, see [Reactivity and State](../reactivity-state/). To derive a
-cached value from a signal, reach for [computed()](../reactive-computed/); to run
-a side effect when it changes, use [effect()](../reactive-effect/).
+[How reactivity works](advanced-reactivity.md). For the HTML-first way to hold
+and update state, see [Reactivity and State](reactivity-state.md). To derive a
+cached value from a signal, reach for [computed()](reactive-computed.md); to run
+a side effect when it changes, use [effect()](reactive-effect.md).

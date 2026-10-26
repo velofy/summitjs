@@ -15,14 +15,14 @@ The fastest path. Add one tag to your `<head>` and Summit starts on its own
 once the DOM is ready. Use `defer` so it runs after the document is parsed.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
 ```
 
 That is the entire setup. Any `s-` attributes already in the page come alive,
 and so does anything you add later, because Summit watches the DOM for changes.
 
-> The `@0.4` range follows the latest 0.4.x release on npm. Pin an exact
-> version in production, for example `summitjs@0.4.3`, so a new release can
+> The `@1` range follows the latest 1.x release on npm. Pin an exact
+> version in production, for example `summitjs@1.0.0`, so a new release can
 > never change your site without you knowing.
 
 ## npm
@@ -58,9 +58,14 @@ Summit never calls `eval` or `new Function`. Expressions in your markup are
 parsed and interpreted by Summit itself, so a strict policy needs no
 `'unsafe-eval'`:
 
-```
+```text
 Content-Security-Policy: script-src 'self'
 ```
+
+That policy assumes you serve `summit.min.js` from your own origin. If you load
+it from a CDN, add that origin to `script-src`, for example
+`script-src 'self' https://cdn.jsdelivr.net`. Either way, no `'unsafe-eval'` is
+needed.
 
 ## Starting manually
 
@@ -69,7 +74,7 @@ moment yourself, for example to register custom directives first, call
 `Summit.start()` and it will only run once:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js"></script>
 <script>
   Summit.directive("sparkle", (el) => {
     el.style.transition = "opacity .3s";
@@ -78,4 +83,4 @@ moment yourself, for example to register custom directives first, call
 </script>
 ```
 
-See [Summit.start](../globals-start/) for the details.
+See [Summit.start](globals-start.md) for the details.

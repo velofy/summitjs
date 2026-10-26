@@ -14,7 +14,7 @@ element you clicked and inside `s-text` it is the element being filled.
 </div>
 ```
 
-Each expression sees its own `$el`. In the demo above `$el` is the button, so
+Each expression sees its own `$el`. In the first example above `$el` is the button, so
 writing to `$el.textContent` changes only the button.
 
 ## Reading from the element
@@ -33,5 +33,5 @@ for reading a property straight off the node instead of mirroring it in state.
 
 `$el` is always the nearest element, which is often deep inside a component. When
 you want the element that owns the `s-data` instead, use
-[$root](https://velofy.co/summitjs/magic-root/). To reach other named elements in the component, use
-[$refs](https://velofy.co/summitjs/magic-refs/).
+[$root](https://github.com/velofy/summitjs/blob/main/content/magic-root.md). To reach other named elements in the component, use
+[$refs](https://github.com/velofy/summitjs/blob/main/content/magic-refs.md).

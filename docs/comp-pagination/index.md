@@ -5,7 +5,7 @@
 Pagination splits a long list of results into numbered pages and gives people
 Prev and Next controls to move through them. One number of state, the current
 page, drives which button is active and when the ends disable. The number
-buttons themselves come straight out of a [s-for](https://velofy.co/summitjs/s-for/).
+buttons themselves come straight out of a [s-for](https://github.com/velofy/summitjs/blob/main/content/s-for.md).
 
 ## A live pager
 
@@ -15,18 +15,6 @@ greys them out there. Each numbered button sets `page` to its own value and ligh
 up through `:class` when it matches.
 
 ```summit
-<div s-data="{ page: 1, total: 5 }">
-  <div class="s-pagination">
-    <button @click="page = Math.max(1, page - 1)" :disabled="page === 1">Prev</button>
-    <template s-for="n in total" :key="n">
-      <button :class="{ 'is-active': page === n }" @click="page = n" s-text="n"></button>
-    </template>
-    <button @click="page = Math.min(total, page + 1)" :disabled="page === total">Next</button>
-  </div>
-</div>
-```
-
-```html
 <div s-data="{ page: 1, total: 5 }">
   <div class="s-pagination">
     <button @click="page = Math.max(1, page - 1)" :disabled="page === 1">Prev</button>
@@ -52,5 +40,5 @@ up through `:class` when it matches.
   data, or seed it from the URL to deep-link a page.
 
 To show where the current page sits in your site hierarchy instead, see
-[Breadcrumb](https://velofy.co/summitjs/comp-breadcrumb/). The whole set is on the
-[overview](https://velofy.co/summitjs/components/).
+[Breadcrumb](https://github.com/velofy/summitjs/blob/main/content/comp-breadcrumb.md). The whole set is on the
+[overview](https://github.com/velofy/summitjs/blob/main/content/components.md).

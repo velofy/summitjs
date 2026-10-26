@@ -54,7 +54,7 @@ compile.
 
 ```html
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
 
 <div s-data="{ count: 0 }" class="flex items-center gap-3 p-4">
   <button class="rounded bg-slate-900 px-3 py-1.5 text-white" @click="count++">Add</button>
@@ -70,6 +70,6 @@ classes, then load `summitjs` alongside your bundle exactly as above.
 - Summit reads only `s-`, `@`, and `:` attributes, so it never touches your
   `class` list except where you ask it to with `:class`.
 - Tailwind's classes are static strings, which is exactly what Summit's
-  [s-bind](../s-bind/) is best at toggling.
-- The [UI Library](../components/) and [Techniques](../techniques/) are optional:
+  [s-bind](s-bind.md) is best at toggling.
+- The [UI Library](components.md) and [Techniques](techniques.md) are optional:
   use them, use Tailwind, or mix both in the same page.

@@ -6,15 +6,15 @@ small, CSP-safe interpreter evaluates the expressions, so only a fixed,
 predictable vocabulary is allowed. This file tells you how to write Summit that
 runs correctly the first time.
 
-Docs: https://velofy.co/summitjs/
+Docs: https://github.com/velofy/summitjs/tree/main/content
 Full docs as one file: https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms-full.txt
 Index: https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms.txt
-Error codes: https://velofy.co/summitjs/errors/
+Error codes: https://github.com/velofy/summitjs/blob/main/content/errors.md
 
 ## Load it
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
 ```
 
 ## The model
@@ -50,10 +50,12 @@ Error codes: https://velofy.co/summitjs/errors/
 | `s-for` | | render a list; use `:key` |
 | `s-ref` | | name an element, read it via `$refs` |
 | `s-init` | | run an expression once on init |
+| `s-id` | | open an id group so `$id()` calls inside it pair up |
 | `s-effect` | | re-run an expression when its dependencies change |
 | `s-transition` | | animate enter and leave |
 | `s-teleport` | | move an element elsewhere in the DOM (dialogs, toasts) |
 | `s-intersect` | `s-intersect:leave` | run an expression when the element enters or leaves the viewport (`.once`, `.half`, `.full`) |
+| `s-resize` | | run an expression when the element changes size (`$width`, `$height`) |
 | `s-trap` | | keep keyboard focus inside an element while an expression is truthy |
 | `s-anchor` | | position next to a reference element, flipping to stay in view (`.top`, `.end`, `.offset.N`) |
 | `s-collapse` | | animate an element open and closed by height |
@@ -105,7 +107,7 @@ and more). Theme everything by overriding CSS variables like `--accent`.
 
 `components.css` reads base tokens such as `--accent`, `--text`, `--border` and
 `--surface` that it does not define; set them on `:root`. See
-https://velofy.co/summitjs/components/ for every component with examples and
+https://github.com/velofy/summitjs/blob/main/content/components.md for every component with examples and
 copy-paste markup.
 
 ## Sponsor: NodeMaven proxies

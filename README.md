@@ -5,19 +5,22 @@
   </picture></a>
 </p>
 
-<h1 align="center">Summit.js</h1>
-
 <p align="center">The open source, AI Agent Native JavaScript framework for composing behavior directly in your HTML.<br>Drop in one script and go. No build step, no virtual DOM, no <code>eval</code>.</p>
 
 <p align="center"><strong>Open Source. by Nature.</strong></p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/summitjs"><img alt="npm version" src="https://img.shields.io/npm/v/summitjs"></a>
-  <a href="https://github.com/velofy/summitjs/actions/workflows/ci.yml"><img alt="CI status" src="https://github.com/velofy/summitjs/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue"></a>
+  <a href="https://www.npmjs.com/package/summitjs"><img alt="npm" src="https://img.shields.io/npm/v/summitjs?label=npm&color=12130f"></a>
+  <a href="https://github.com/velofy/summitjs/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/velofy/summitjs/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/velofy/summitjs/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-12130f"></a>
 </p>
 
-**Documentation: https://velofy.co/summitjs/**
+<p align="center">
+  <a href="https://summitjs.velofy.co/">Project page</a> ·
+  <a href="https://github.com/velofy/summitjs/tree/main/content">Documentation</a> ·
+  <a href="https://github.com/velofy/summitjs/blob/main/CHANGELOG.md">Changelog</a> ·
+  <a href="https://github.com/velofy/summitjs/releases">Releases</a>
+</p>
 
 Started by [anishfyi](https://github.com/anishfyi), so that AI agents can make beautiful frontends.
 
@@ -54,7 +57,7 @@ Codes for Summit.js users: `SUMMITJS35` for 35% off mobile and residential proxi
 Zero-build, drop in a script (auto-starts, exposes `window.Summit`):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
 ```
 
 With a bundler:
@@ -69,12 +72,12 @@ import Summit from "summitjs";
 Summit.start();
 ```
 
-See [Installation](https://velofy.co/summitjs/installation/) for version pinning and Content-Security-Policy notes.
+See [Installation](https://github.com/velofy/summitjs/blob/main/content/installation.md) for version pinning and Content-Security-Policy notes.
 
 ## Minimal example
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
 
 <div s-data="{ open: false }">
   <button @click="open = !open">Toggle</button>
@@ -89,8 +92,8 @@ Summit is designed so that an AI agent can write a working, good-looking fronten
 - **HTML-first and local.** Behavior lives on the element it affects, so an agent edits one place and sees the result. No file graph to hold in context.
 - **Predictable vocabulary.** A small, closed set of `s-` directives and `$` magics. There is one obvious way to do most things, which is exactly what a model does best.
 - **Safe by construction.** Expressions are interpreted, never `eval`ed, so generated markup runs under a strict CSP and cannot reach outside its allowlist.
-- **A UI library, included.** Accessible, token-themed components an agent (or a person) drops in and themes with CSS variables. See the [UI Library](https://velofy.co/summitjs/components/).
-- **Built to be read by machines.** [`llms.txt`](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms.txt) indexes every docs page, [`llms-full.txt`](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms-full.txt) is the entire corpus as markdown, [`summit.json`](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/ai/summit.json) is a JSON manifest of the API, and [`AGENTS.md`](./AGENTS.md) is a drop-in brief you can hand to your own agent. Coded console diagnostics carry a docs link ([error codes](https://velofy.co/summitjs/errors/)).
+- **A UI library, included.** Accessible, token-themed components an agent (or a person) drops in and themes with CSS variables. See the [UI Library](https://github.com/velofy/summitjs/blob/main/content/components.md).
+- **Built to be read by machines.** [`llms.txt`](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms.txt) indexes every docs page, [`llms-full.txt`](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms-full.txt) is the entire corpus as markdown, [`summit.json`](https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/ai/summit.json) is a JSON manifest of the API, and [`AGENTS.md`](./AGENTS.md) is a drop-in brief you can hand to your own agent. Coded console diagnostics carry a docs link ([error codes](https://github.com/velofy/summitjs/blob/main/content/errors.md)).
 
 ## Why Summit
 
@@ -136,11 +139,11 @@ Prefix `s-`, with `@` shorthand for `s-on:` and `:` for `s-bind:`.
 | `s-cloak` | Hide until initialized; pair with `[s-cloak]{display:none}` |
 | `s-ignore` | Skip a subtree |
 
-Full reference: [directives](https://velofy.co/summitjs/s-data/).
+Full reference: [directives](https://github.com/velofy/summitjs/blob/main/content/s-data.md).
 
 ### Event modifiers
 
-`.prevent .stop .self .outside .once .capture .passive .window .document .debounce .throttle`, key filters (`.enter .escape .arrow-up ...`), system keys (`.shift .ctrl .alt .cmd`), and name transforms (`.camel .dot`).
+`.prevent .stop .self .outside .once .capture .passive .window .document .debounce .throttle`, key filters (`.enter .escape .arrow-up ...`), system keys (`.shift .ctrl .alt .cmd .meta`), and name transforms (`.camel .dot`).
 
 ### `s-model` modifiers
 
@@ -203,8 +206,8 @@ Summit.start();
 Or drop in a second script, no build step (it registers itself on the global):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit-net.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit-net.min.js" defer></script>
 ```
 
 ```html
@@ -234,17 +237,16 @@ const api = createClient({ baseURL: "/api" });
 const todo = await api.post("/todos", { title: "Ship it" }); // JSON in/out, throws on non-2xx
 ```
 
-See [Data Fetching](https://velofy.co/summitjs/advanced-data/).
+See [Data Fetching](https://github.com/velofy/summitjs/blob/main/content/advanced-data.md).
 
 ## Documentation
 
-- [Overview](https://velofy.co/summitjs/) and [Installation](https://velofy.co/summitjs/installation/)
-- [Getting Started](https://velofy.co/summitjs/start/) and [Reactivity and State](https://velofy.co/summitjs/reactivity-state/)
-- [Events](https://velofy.co/summitjs/events/), [Forms](https://velofy.co/summitjs/forms/), [Lifecycle](https://velofy.co/summitjs/lifecycle/)
-- [UI Library](https://velofy.co/summitjs/components/) and [Techniques](https://velofy.co/summitjs/techniques/)
-- Reference: [directives](https://velofy.co/summitjs/s-data/), [magics](https://velofy.co/summitjs/magic-el/), [global API](https://velofy.co/summitjs/globals-data/), [reactivity](https://velofy.co/summitjs/reactive-signal/), [error codes](https://velofy.co/summitjs/errors/)
-- [Migrating from Alpine](https://velofy.co/summitjs/advanced-migrating/) and [Changelog](https://velofy.co/summitjs/changelog/)
-- [Playground](https://velofy.co/summitjs/playground/)
+- [Docs index](https://github.com/velofy/summitjs/tree/main/content) and [Installation](https://github.com/velofy/summitjs/blob/main/content/installation.md)
+- [Getting Started](https://github.com/velofy/summitjs/blob/main/content/start.md) and [Reactivity and State](https://github.com/velofy/summitjs/blob/main/content/reactivity-state.md)
+- [Events](https://github.com/velofy/summitjs/blob/main/content/events.md), [Forms](https://github.com/velofy/summitjs/blob/main/content/forms.md), [Lifecycle](https://github.com/velofy/summitjs/blob/main/content/lifecycle.md)
+- [UI Library](https://github.com/velofy/summitjs/blob/main/content/components.md) and [Techniques](https://github.com/velofy/summitjs/blob/main/content/techniques.md)
+- Reference: [directives](https://github.com/velofy/summitjs/blob/main/content/s-data.md), [magics](https://github.com/velofy/summitjs/blob/main/content/magic-el.md), [global API](https://github.com/velofy/summitjs/blob/main/content/globals-data.md), [reactivity](https://github.com/velofy/summitjs/blob/main/content/reactive-signal.md), [error codes](https://github.com/velofy/summitjs/blob/main/content/errors.md)
+- [Migrating from Alpine](https://github.com/velofy/summitjs/blob/main/content/advanced-migrating.md) and [Changelog](https://github.com/velofy/summitjs/blob/main/CHANGELOG.md)
 
 ## Contributing
 
@@ -255,10 +257,10 @@ npm install
 npm run check   # typecheck + unit tests + build + size budget + bundle smoke + docs checks
 ```
 
-- `npm test` runs the Vitest suites (reactivity, evaluator, directives, net, plugins).
+- `npm test` runs the Vitest suites (reactivity, evaluator, directives, net, plugins, version, and the `release:npm` script).
 - `npm run build` produces ESM, CJS, IIFE, and `.d.ts` in `dist/`, and syncs the CDN bundles into `docs/`.
 - `npm run smoke` drives the shipped bundle end to end.
-- `npm run docs` regenerates the old GitHub Pages site in `docs/`: redirect pages to https://velofy.co/summitjs/, `llms.txt`, `llms-full.txt`, and `ai/summit.json`.
+- `npm run docs` writes the docs index `content/README.md` and regenerates the old GitHub Pages site in `docs/`: redirect pages to the matching page in `content/` on GitHub, `llms.txt`, `llms-full.txt`, and `ai/summit.json`.
 - `npm run verify` and `npm run verify:docs` check the redirects and run every live example in `content/` under the built bundle.
 
 The GitHub Pages site keeps serving `summit.min.js`, `summit-net.min.js`, and `assets/*.css` so existing script and stylesheet tags keep working.

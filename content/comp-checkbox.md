@@ -10,7 +10,7 @@ description: Accessible checkboxes and radio groups bound with s-model.
 Checkboxes and radios wrap a real `<input>` in a styled label, so you get a
 custom look without giving up native behavior. The input stays in the markup and
 carries the state; the `.s-box` next to it is only decoration. Bind any of them
-with [s-model](../s-model/) and the checked state flows both ways.
+with [s-model](s-model.md) and the checked state flows both ways.
 
 ## A single checkbox
 
@@ -137,5 +137,5 @@ checked state, and wrapping each control in its `<label>` means the visible text
 is the accessible name, so no extra ARIA is needed. Grouping related radios or
 checkboxes in a `<fieldset>` with a `<legend>` gives the set a shared label.
 
-For an on/off setting, reach for the [Switch](../comp-switch/) instead. See
-[Forms](../forms/) for how `s-model` handles every control type.
+For an on/off setting, reach for the [Switch](comp-switch.md) instead. See
+[Forms](forms.md) for how `s-model` handles every control type.

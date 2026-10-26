@@ -8,8 +8,8 @@ description: Register a custom magic property.
 ---
 
 `Summit.magic` adds a `$`-prefixed helper that every expression can reach, the
-same way the built-ins [$el](../magic-el/), [$refs](../magic-refs/), and
-[$store](../magic-store/) work. Use it to expose a value or a small function to
+same way the built-ins [$el](magic-el.md), [$refs](magic-refs.md), and
+[$store](magic-store.md) work. Use it to expose a value or a small function to
 your markup without threading it through component state.
 
 ## Registering a magic
@@ -59,6 +59,6 @@ disposable, so it is cleaned up when the element goes away.
 ## Timing
 
 Registration is timing-safe: register before or after
-[Summit.start](../globals-start/). Registering a magic with the name of a
+[Summit.start](globals-start.md). Registering a magic with the name of a
 built-in overrides it. For a broader guide, see
-[Writing directives and plugins](../advanced-extending/).
+[Writing directives and plugins](advanced-extending.md).
