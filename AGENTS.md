@@ -6,10 +6,10 @@ small, CSP-safe interpreter evaluates the expressions, so only a fixed,
 predictable vocabulary is allowed. This file tells you how to write Summit that
 runs correctly the first time.
 
-Docs: https://github.com/velofy/summitjs/tree/main/content
+Docs: https://summitjs.velofy.co/start/
 Full docs as one file: https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms-full.txt
 Index: https://cdn.jsdelivr.net/gh/velofy/summitjs@main/docs/llms.txt
-Error codes: https://github.com/velofy/summitjs/blob/main/content/errors.md
+Error codes: https://summitjs.velofy.co/errors/
 
 ## Load it
 
@@ -107,7 +107,7 @@ and more). Theme everything by overriding CSS variables like `--accent`.
 
 `components.css` reads base tokens such as `--accent`, `--text`, `--border` and
 `--surface` that it does not define; set them on `:root`. See
-https://github.com/velofy/summitjs/blob/main/content/components.md for every component with examples and
+https://summitjs.velofy.co/components/ for every component with examples and
 copy-paste markup.
 
 ## Sponsor: NodeMaven proxies
