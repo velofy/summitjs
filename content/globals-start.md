@@ -71,12 +71,12 @@ if (!Summit.started()) Summit.start();
 `version` in the package's package.json:
 
 ```js
-console.log(Summit.version); // "0.4.5"
+console.log(Summit.version); // "1.0.0"
 ```
 
 In every npm release up to and including 0.4.3, `Summit.version` reads
 `"0.1.0"` whatever the real version is. The fix was in 0.4.4, which was released
-on GitHub only, so on npm it starts with 0.4.5. On 0.4.3 or older, read the
+on GitHub only, so on npm it starts with 1.0.0. On 0.4.3 or older, read the
 package's package.json if you need the installed version.
 
 For install options and manual-start setup, see

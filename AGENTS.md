@@ -14,7 +14,7 @@ Error codes: https://github.com/velofy/summitjs/blob/main/content/errors.md
 ## Load it
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
 ```
 
 ## The model

@@ -28,8 +28,8 @@ Summit.start();
 Or drop in a second script after the core, no build step:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/summitjs@0.4/dist/summit-net.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/summitjs@1/dist/summit-net.min.js" defer></script>
 ```
 
 ## The resource pattern
